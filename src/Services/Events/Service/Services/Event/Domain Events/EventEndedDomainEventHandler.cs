@@ -19,8 +19,9 @@ namespace PingDong.Newmoon.Events.Service.DomainEvents
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task Handle(EventEndedDomainEvent domainEvent, CancellationToken cancellationToken)
+        public Task Handle(EventEndedDomainEvent domainEvent, CancellationToken cancellationToken)
         {
+            return Task.CompletedTask;
         }
     }
 }
