@@ -1,0 +1,4 @@
+http://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html
+
+Best Practices
+http://autofaccn.readthedocs.io/en/latest/best-practices/index.html
