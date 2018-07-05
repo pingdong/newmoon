@@ -1,10 +1,9 @@
 ﻿using Autofac.Extensions.DependencyInjection;
 using Serilog;
-using System;
 using System.IO;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace PingDong.Newmoon.Events
 {
@@ -20,33 +19,37 @@ namespace PingDong.Newmoon.Events
         public static void Main(string[] args)
         {
             // Serilog Initialize
-            //   It is only needed for logging WebHost initialisation
-            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            var configuration = new ConfigurationBuilder()
-                                    .SetBasePath(Directory.GetCurrentDirectory())
-                                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                                    .AddJsonFile($"appsettings.{env}.json", optional: true)
-                                    .Build();
-            Log.Logger = new LoggerConfiguration()
-                                .ReadFrom.Configuration(configuration)
-                                .CreateLogger();
+            //   It is only needed to support logging in the initialisation.
 
-            try
-            {
-                Log.Information("Starting web host for Event Services");
+            //var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            //var configuration = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //    .AddJsonFile($"appsettings.{env}.json", optional: true)
+            //    .Build();
+            //Log.Logger = new LoggerConfiguration()
+            //    .ReadFrom.Configuration(configuration)
+            //    .CreateLogger();
 
-                var webhost = BuildWebHost(args);
-                    
-                webhost.Run();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "'Event Service' Host terminated unexpectedly");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
+            //try
+            //{
+            //    Log.Information("Starting web host for Event Services");
+
+            //    var webhost = BuildWebHost(args).Build();
+
+            //    webhost.Run();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Log.Fatal(ex, "'Event Service' Host terminated unexpectedly");
+            //}
+            //finally
+            //{
+            //    Log.CloseAndFlush();
+            //}
+
+            var host = BuildWebHost(args).Build();
+            host.Run();
         }
 
         /// <summary>
@@ -54,33 +57,73 @@ namespace PingDong.Newmoon.Events
         /// </summary>
         /// <param name="args">args</param>
         /// <returns>Web host</returns>
-        public static IWebHost BuildWebHost(string[] args)
+        public static IWebHostBuilder BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                            // Application Configure
-                            .ConfigureAppConfiguration((builderContext, config) =>
-                            {
-                                var env = builderContext.HostingEnvironment;
+                // Application Configure
+                .ConfigureAppConfiguration((builderContext, config) =>
+                {
+                    var env = builderContext.HostingEnvironment;
 
-                                config.SetBasePath(env.ContentRootPath)
-                                    .AddEnvironmentVariables()
-                                    .AddJsonFile("appsettings.json",
-                                        optional: true,
-                                        reloadOnChange: true)
-                                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json",
-                                        optional: true);
-                            })
-                            // Autofac intialise
-                            .ConfigureServices(services => services.AddAutofac())
-                            // HealthChecks initialise
-                            .UseHealthChecks("/health")
-                            // Application Insights initialise
-                            .UseApplicationInsights()
-                            // Serilog initialise
-                            .UseSerilog((context, config) => { config.ReadFrom.Configuration(context.Configuration); })
-                            // Starting
-                            .UseStartup<Startup>()
-                            .Build();
+                    config.SetBasePath(Directory.GetCurrentDirectory());
+
+                    if (env.IsDevelopment())
+                    {
+                        // Some secrets that used in Development could save in UserSecrects
+                        //   For example: you probably don't want to share you database credential,
+                        //                if you want to share your codes.
+                        // https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets
+                        //     dotnet user-secrets set "Database:DbPassword" "pass123"
+                        //     dotnet user-secrets list
+                        //     dotnet user-secrets remove "Database:DbPassword"
+                        //     dotnet user-secrets clear
+                        config.AddUserSecrets<Startup>();
+                    }
+                        
+                    config
+                        // Application related setting
+                        //   for example: log setting
+                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                        // If the same settings in appsettings.json needs to be replaced in development environment, write here
+                        //   for example: different logging setting
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)     
+                        
+                        // Environment-aware settings
+                        //   for example: external service uri
+                        .AddCommandLine(args)
+                        .AddEnvironmentVariables();
+
+                    config.Build();
+
+                    // Secrets should save in vault in production environment
+                    //   config need to be built to retrieve Vault information
+                    //  
+                    //      DbConnectionString in production
+                    //
+                    //if (env.IsProduction())
+                    //{
+                    //    var vault = new ConfigurationBuilder();
+                    //    vault.AddAzureKeyVault(
+                    //        $"https://{config["AzureVault:VaultName"]}.vault.azure.net/",
+                    //        config["AzureVault:ClientId"],
+                    //        config["AzureVault:ClientSecret"]);
+
+                    //    var vaultConfig = vault.Build();
+
+                    //    config.AddConfiguration(vaultConfig);
+                    //}
+                })
+                // Autofac intialise
+                .ConfigureServices(services => services.AddAutofac())
+                // HealthChecks initialise
+                .UseHealthChecks("/health")
+                // Application Insights initialise
+                .UseApplicationInsights()
+                // Serilog initialise
+                .UseSerilog((context, config) => { config.ReadFrom.Configuration(context.Configuration); })
+                // Starting
+                .UseStartup<Startup>();
+                
         }
     }
 }

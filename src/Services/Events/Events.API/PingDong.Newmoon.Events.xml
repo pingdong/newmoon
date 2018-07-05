@@ -141,6 +141,11 @@
             Options of application
             </summary>
         </member>
+        <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.ApiVersion">
+            <summary>
+            Api Version
+            </summary>
+        </member>
         <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.Version">
             <summary>
             Version
@@ -151,6 +156,11 @@
             Application Title
             </summary>
         </member>
+        <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.BaseUri">
+            <summary>
+            Base Address
+            </summary>
+        </member>
         <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.ExternalServices">
             <summary>
             External Services
@@ -159,16 +169,6 @@
         <member name="T:PingDong.Newmoon.Events.Configuration.ExternalServices">
             <summary>
             Address of external services
-            </summary>
-        </member>
-        <member name="P:PingDong.Newmoon.Events.Configuration.ExternalServices.AppServer">
-            <summary>
-            AppServer
-            </summary>
-        </member>
-        <member name="P:PingDong.Newmoon.Events.Configuration.ExternalServices.IdentityServer">
-            <summary>
-            IdentityServer
             </summary>
         </member>
         <member name="T:PingDong.Newmoon.Events.Program">

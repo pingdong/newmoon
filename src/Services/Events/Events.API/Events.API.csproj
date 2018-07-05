@@ -6,6 +6,7 @@
     <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
     <AssemblyName>PingDong.Newmoon.Events</AssemblyName>
     <RootNamespace>PingDong.Newmoon.Events</RootNamespace>
+    <UserSecretsId>bc9eeb68-24fd-4619-b88c-4c627d1df284</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,7 +27,6 @@
     <PackageReference Include="MediatR" Version="5.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Redis" Version="0.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.HealthChecks" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.HealthChecks.AzureStorage" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.HealthChecks.SqlServer" Version="1.0.0" />

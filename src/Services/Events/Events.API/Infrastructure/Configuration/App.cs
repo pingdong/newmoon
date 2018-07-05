@@ -6,6 +6,10 @@
     public class AppSettings
     {
         /// <summary>
+        /// Api Version
+        /// </summary>
+        public string ApiVersion { get; set; }
+        /// <summary>
         /// Version
         /// </summary>
         public string Version { get; set; }
@@ -14,6 +18,11 @@
         /// Application Title
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Base Address
+        /// </summary>
+        public string BaseUri { get; set; }
 
         /// <summary>
         /// External Services

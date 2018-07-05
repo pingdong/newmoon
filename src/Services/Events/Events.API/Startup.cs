@@ -33,17 +33,12 @@ namespace PingDong.Newmoon.Events
     /// </summary>
     public class Startup
     {
-        #region Const
-
-        private const string ApiVersion = "v1";
-
-        #endregion
-
         #region Variable Declare
 
         private readonly IHostingEnvironment _env;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
+        private AppSettings _appSettings;
 
         #endregion
 
@@ -83,8 +78,8 @@ namespace PingDong.Newmoon.Events
 
             // Extract AppSettings and register into IoC
 
-            var app = _configuration.GetSection("App").Get<AppSettings>();
-            services.AddSingleton(app);
+            _appSettings = _configuration.GetSection("App").Get<AppSettings>();
+            services.AddSingleton(_appSettings);
 
             _logger.LogInformation(LoggingEvent.Success, "Configurations are loaded from Section: App");
 
@@ -110,11 +105,11 @@ namespace PingDong.Newmoon.Events
 
                 services.AddSwaggerGen(option =>
                     {
-                        option.SwaggerDoc(ApiVersion, new Info
+                        option.SwaggerDoc(_appSettings.ApiVersion, new Info
                             {
-                                Title = app.Title,
-                                Version = app.Version,
-                                Description = $"{app.Title} v{app.Version}"
+                                Title = _appSettings.Title,
+                                Version = _appSettings.Version,
+                                Description = $"{_appSettings.Title} v{_appSettings.Version}"
                             });
 
                         var basePath = PlatformServices.Default.Application.ApplicationBasePath;
@@ -190,7 +185,7 @@ namespace PingDong.Newmoon.Events
                     // this defines a CORS policy called "default"
                     options.AddPolicy("default", policy =>
                         {
-                            policy.WithOrigins(app.ExternalServices.AppServer)
+                            policy.WithOrigins(_appSettings.BaseUri)
                                     .AllowAnyHeader()
                                     .AllowAnyMethod()
                                     .AllowCredentials();
@@ -285,12 +280,10 @@ namespace PingDong.Newmoon.Events
                 app.UseDatabaseErrorPage(); 
 
                 // Swagger support
-                var apiUri = _configuration.GetValue<string>("App:ExternalServices:EventsApiServer");
-                
                 app.UseSwagger()
                    .UseSwaggerUI(option =>
                    {
-                       option.SwaggerEndpoint($"{apiUri}/swagger/{ApiVersion}/swagger.json", "Events.API V1");
+                       option.SwaggerEndpoint($"{_appSettings.BaseUri}/swagger/{_appSettings.ApiVersion}/swagger.json", $"{_appSettings.Title} {_appSettings.ApiVersion}");
                        option.DefaultModelsExpandDepth(-1); // Hide Models section
                    });
 
@@ -315,7 +308,7 @@ namespace PingDong.Newmoon.Events
                 {
                     routes.MapRoute(
                         name: "default",
-                        template: "api/" + ApiVersion + "/{controller=Ping}");
+                        template: "api/" + _appSettings.ApiVersion + "/{controller=Ping}");
                 });
 
             _logger.LogInformation(LoggingEvent.Success, "Web Access Handling");
