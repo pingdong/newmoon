@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PingDong.Newmoon.Events</name>
+    </assembly>
+    <members>
+        <member name="T:PingDong.Newmoon.Events.Controllers.EventsController">
+            <summary>
+            Ping Controller
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.#ctor(Microsoft.Extensions.Logging.ILogger{PingDong.Newmoon.Events.Controllers.EventsController},MediatR.IMediator,PingDong.Newmoon.Events.Service.Queries.IEventQuery)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="logger">logger</param>
+            <param name="mediator"></param>
+            <param name="query"></param>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.GetEvents">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.GetEvent(System.Int32)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.AddAttendee(System.String,PingDong.Newmoon.Events.Service.Commands.AddAttendeeCommand)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.RemoveAttendee(System.String,PingDong.Newmoon.Events.Service.Commands.RemoveAttendeeCommand)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.AddEvent(System.String,PingDong.Newmoon.Events.Service.Commands.CreateEventCommand)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.UpdateEvent(System.String,PingDong.Newmoon.Events.Service.Commands.UpdateEventCommand)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.CancelEvent(System.String,PingDong.Newmoon.Events.Service.Commands.CancelEventCommand)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.ConfirmEvent(System.String,PingDong.Newmoon.Events.Service.Commands.ConfirmEventCommand)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.StartEvent(System.String,PingDong.Newmoon.Events.Service.Commands.StartEventCommand)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.EndEvent(System.String,PingDong.Newmoon.Events.Service.Commands.EndEventCommand)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Controllers.EventsODataController">
+            <summary>
+            Ping Controller
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsODataController.#ctor(Microsoft.Extensions.Logging.ILogger{PingDong.Newmoon.Events.Controllers.EventsController},PingDong.Newmoon.Events.Service.Queries.IEventQuery)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="logger">logger</param>
+            <param name="query"></param>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Controllers.PingController">
+            <summary>
+            Ping Controller
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.PingController.#ctor(Microsoft.Extensions.Logging.ILogger{PingDong.Newmoon.Events.Controllers.PingController})">
+            <summary>
+            Initialize
+            </summary>
+            <param name="logger">logger</param>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.PingController.Get">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <response code="200"></response>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Controllers.PlacesController">
+            <summary>
+            Ping Controller
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.PlacesController.#ctor(Microsoft.Extensions.Logging.ILogger{PingDong.Newmoon.Events.Controllers.PlacesController},MediatR.IMediator,PingDong.Newmoon.Events.Service.Queries.IPlaceQuery)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="logger">logger</param>
+            <param name="mediator"></param>
+            <param name="query"></param>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.PlacesController.GetPlaces">
+            <summary>
+            Get all places
+            </summary>
+            <returns>Return all places</returns>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.PlacesController.CreatePlace(System.String,PingDong.Newmoon.Events.Service.Commands.CreatePlaceCommand)">
+            <summary>
+            Create a new place
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.PlacesController.UpdatePlace(System.String,PingDong.Newmoon.Events.Service.Commands.UpdatePlaceCommand)">
+            <summary>
+            Update specified place
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Controllers.PlacesODataController">
+            <summary>
+            Ping Controller
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.PlacesODataController.#ctor(Microsoft.Extensions.Logging.ILogger{PingDong.Newmoon.Events.Controllers.EventsController},PingDong.Newmoon.Events.Service.Queries.IPlaceQuery)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="logger">logger</param>
+            <param name="query"></param>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Configuration.AppSettings">
+            <summary>
+            Options of application
+            </summary>
+        </member>
+        <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.ApiVersion">
+            <summary>
+            Api Version
+            </summary>
+        </member>
+        <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.Version">
+            <summary>
+            Version
+            </summary>
+        </member>
+        <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.Title">
+            <summary>
+            Application Title
+            </summary>
+        </member>
+        <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.BaseUri">
+            <summary>
+            Base Address
+            </summary>
+        </member>
+        <member name="P:PingDong.Newmoon.Events.Configuration.AppSettings.ExternalServices">
+            <summary>
+            External Services
+            </summary>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Configuration.ExternalServices">
+            <summary>
+            Address of external services
+            </summary>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Program">
+            <summary>
+            Program
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Program.Main(System.String[])">
+            <summary>
+            Entry Point
+            </summary>
+            <param name="args">args</param>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Program.BuildWebHost(System.String[])">
+            <summary>
+            Web host building
+            </summary>
+            <param name="args">args</param>
+            <returns>Web host</returns>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Startup">
+            <summary>
+            Bootstrap code
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{PingDong.Newmoon.Events.Startup},Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Create and register services
+            </summary>
+            <param name="services">Services Collection</param>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+             <summary>
+             ConfigureContainer is where you can register things directly
+             with Autofac. This runs after ConfigureServices so the things
+             here will override registrations made in ConfigureServices.
+             Don't build the container; that gets done for you.
+             
+             http://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html
+            
+             DO NOT USE THIS WAY IN MULTIPLE TENANT SCENARIO.
+             </summary>
+             <param name="builder"></param>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Start
+            </summary>
+            <param name="app">App</param>
+            <param name="env">Hosting Environment</param>
+            <param name="loggerFactory"></param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>PingDong.Newmoon.Events.Service</AssemblyName>
+    <RootNamespace>PingDong.Newmoon.Events.Service</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="FluentValidation" Version="7.6.103" />
+    <PackageReference Include="MediatR" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Library\DomainDriven\Service\DomainDriven.Service.csproj" />
+    <ProjectReference Include="..\..\..\Library\Shared\Shared.csproj" />
+    <ProjectReference Include="..\Infrastructure\Events.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

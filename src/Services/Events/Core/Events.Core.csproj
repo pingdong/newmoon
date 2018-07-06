@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AssemblyName>PingDong.Newmoon.Events.Core</AssemblyName>
+    <RootNamespace>PingDong.Newmoon.Events.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Models\Address.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="7.6.103" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Library\DomainDriven\Core\DomainDriven.Core.csproj" />
+  </ItemGroup>
+
+</Project>
