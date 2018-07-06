@@ -41,7 +41,7 @@ namespace PingDong.Newmoon.Events.Controllers
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> GetEvents([FromHeader(Name = "x-requestid")] string requestId)
+        public async Task<IActionResult> GetEvents()
         {
             return await GetAllAsync(_query);
         }
