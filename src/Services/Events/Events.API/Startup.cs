@@ -24,6 +24,12 @@ using Autofac;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Formatter;
+using Microsoft.Net.Http.Headers;
+using Microsoft.OData.Edm;
+using PingDong.Newmoon.Events.Service.Queries;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace PingDong.Newmoon.Events
@@ -200,6 +206,8 @@ namespace PingDong.Newmoon.Events
 
             #region ASP.Net
 
+            services.AddOData();
+
             services.AddMvc(config =>
                         {
                             // Checking ModelState
@@ -215,7 +223,20 @@ namespace PingDong.Newmoon.Events
                     // https://www.strathweb.com/2016/03/the-subtle-perils-of-controller-dependency-injection-in-asp-net-core-mvc/
                     //.AddControllersAsServices()
                     ;
-            
+
+            // Workaround: https://github.com/OData/WebApi/issues/1177
+            services.AddMvcCore(options =>
+            {
+                foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                }
+                foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                }
+            });
+
             _logger.LogInformation(LoggingEvent.Success, "MVC is initialized");
 
             #endregion
@@ -305,10 +326,16 @@ namespace PingDong.Newmoon.Events
 
             // MVC
             app.UseMvc(routes =>
-                {
+                { 
+                    // Workaround: https://github.com/OData/WebApi/issues/1175
+                    routes.EnableDependencyInjection();
+
+                    var baseUri = $"api/{_appSettings.ApiVersion}";
+                    routes.MapODataServiceRoute(baseUri + "/{controller}/odata", baseUri + "/{controller}/odata", GetEdmModel());
+
                     routes.MapRoute(
                         name: "default",
-                        template: "api/" + _appSettings.ApiVersion + "/{controller=Ping}");
+                        template: baseUri + "/{controller=Ping}");
                 });
 
             _logger.LogInformation(LoggingEvent.Success, "Web Access Handling");
@@ -329,5 +356,17 @@ namespace PingDong.Newmoon.Events
         private List<Assembly> _referencedAssemblies = new List<Assembly>();
 
         #endregion
+
+        #region OData
+
+        private static IEdmModel GetEdmModel()
+        {
+            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            builder.EntitySet<EventSummary>("Events");
+            return builder.GetEdmModel();
+        }
+
+        #endregion
     }
+
 }

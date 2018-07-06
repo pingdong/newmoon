@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-A
 		..\docs\DataValidation.txt = ..\docs\DataValidation.txt
 		..\Docs\IoC.txt = ..\Docs\IoC.txt
 		..\Docs\Mapping.txt = ..\Docs\Mapping.txt
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ACC5BE90-3232-400A-9BEA-56887C7E905A}"

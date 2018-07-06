@@ -17,7 +17,7 @@
             <param name="mediator"></param>
             <param name="query"></param>
         </member>
-        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.GetEvents(System.String)">
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsController.GetEvents">
             <summary>
             
             </summary>
@@ -87,6 +87,18 @@
             <returns></returns>
             <response code="200"></response>
         </member>
+        <member name="T:PingDong.Newmoon.Events.Controllers.EventsODataController">
+            <summary>
+            Ping Controller
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.EventsODataController.#ctor(Microsoft.Extensions.Logging.ILogger{PingDong.Newmoon.Events.Controllers.EventsController},PingDong.Newmoon.Events.Service.Queries.IEventQuery)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="logger">logger</param>
+            <param name="query"></param>
+        </member>
         <member name="T:PingDong.Newmoon.Events.Controllers.PingController">
             <summary>
             Ping Controller
@@ -135,6 +147,18 @@
             Update specified place
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:PingDong.Newmoon.Events.Controllers.PlacesODataController">
+            <summary>
+            Ping Controller
+            </summary>
+        </member>
+        <member name="M:PingDong.Newmoon.Events.Controllers.PlacesODataController.#ctor(Microsoft.Extensions.Logging.ILogger{PingDong.Newmoon.Events.Controllers.EventsController},PingDong.Newmoon.Events.Service.Queries.IPlaceQuery)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="logger">logger</param>
+            <param name="query"></param>
         </member>
         <member name="T:PingDong.Newmoon.Events.Configuration.AppSettings">
             <summary>
