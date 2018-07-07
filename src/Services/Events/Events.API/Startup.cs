@@ -1,8 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
 
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Net.Http.Headers;
+using Microsoft.OData.Edm;
 
 using PingDong.Application.Dependency;
 using PingDong.Application.Logging;
@@ -19,17 +25,12 @@ using PingDong.Newmoon.Events.Configuration;
 using PingDong.Reflection;
 using PingDong.Web.Exceptions;
 using PingDong.Web.Validation;
+using PingDong.Service.OData;
 
 using Autofac;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
-using Microsoft.AspNet.OData.Builder;
-using Microsoft.AspNet.OData.Extensions;
-using Microsoft.AspNet.OData.Formatter;
-using Microsoft.Net.Http.Headers;
-using Microsoft.OData.Edm;
-using PingDong.Newmoon.Events.Service.Queries;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace PingDong.Newmoon.Events
@@ -331,7 +332,8 @@ namespace PingDong.Newmoon.Events
                     routes.EnableDependencyInjection();
 
                     var baseUri = $"api/{_appSettings.ApiVersion}";
-                    routes.MapODataServiceRoute(baseUri + "/{controller}/odata", baseUri + "/{controller}/odata", GetEdmModel());
+                    var odataUri = $"{baseUri}/odata";
+                    routes.MapODataServiceRoute(odataUri, odataUri, GetEdmModel(GetSearchingTargets()));
 
                     routes.MapRoute(
                         name: "default",
@@ -359,10 +361,21 @@ namespace PingDong.Newmoon.Events
 
         #region OData
 
-        private static IEdmModel GetEdmModel()
+        private static IEdmModel GetEdmModel(IEnumerable<Assembly> references)
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<EventSummary>("Events");
+
+            var types = references.FindAttribute<ODataEnableAttribute>(typeof(ODataEnableAttribute), attribute => attribute.Enabled);
+            foreach (var type in types)
+            {
+                var attribute = (ODataEnableAttribute)Attribute.GetCustomAttribute(type, typeof(ODataEnableAttribute));
+                var entityType = builder.AddEntityType(type);
+                builder.AddEntitySet(attribute.Name, entityType);
+            }
+
+            // In most cases, could use the below code to register entity
+            //builder.EntitySet<EventSummary>("Events");
+
             return builder.GetEdmModel();
         }
 

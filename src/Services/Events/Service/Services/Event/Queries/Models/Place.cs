@@ -1,5 +1,8 @@
-﻿namespace PingDong.Newmoon.Events.Service.Queries
+﻿using PingDong.Service.OData;
+
+namespace PingDong.Newmoon.Events.Service.Queries
 {
+    [ODataEnable("Places")]
     public class Place
     {
         public int id { get; set; }
