@@ -1,6 +1,7 @@
-#An ASP.Net Core microservice project.
+# **An ASP.Net Core microservice project.**
+---
 
-###The following libraries are used:
+## The following libraries are used:
 * Microsoft ASP.Net Core 2.1
 * Microsoft Entity Framework Core 2.1
 * Microsoft OData 7.0.0
@@ -12,7 +13,7 @@
 * Serilog.AspNetCore 2.1.1
 * Polly 6.0.1
 
-###The following design patterns are involved:
+## The following design patterns are involved:
 * Clean Architect
 * Mediator
 * CQRS
@@ -20,26 +21,36 @@
 * ValueObject
 * Repository
 
-###Other concepts are covered:
-* BDD (Bounded Context, Domain Event)
+## Other concepts are covered:
+* BDD 
+* Bounded Context 
+* Domain Event
+* Integration Event 
+  
 
-##Roadmap:
+> ## Roadmap
 
-###Done:
+### Done: 
+  
+* ~~Microservice Coding Practice~~
+* ~~Multiple Configuration Source, Sturcture Application Settings~~
+* ~~OData~~ 
 
-* Microservice Coding Practice
-* Multiple Configuration Source
-* OData 
-
-###Not yet:
-
-
-* Testing (Unit Testing/Functional Testing/Integration Testing/Load Testing)
+### Not yet:
+  
+* Testing  
+  * Unit Testing  
+  * Functional Testing  
+  * Integration Testing  
+  * Load Testing  
 * Integration Message
 * API Gateway
 * Docker & Kubernetes
 * NoSQL & Redis
 * Authentication & Authorize
 
-###Backlog 
-> [OData]Removing workaround of the compatibility with Swagger
+> ## Backlog 
+* [OData] The workaround of the compatibility with Swagger  
+* [ValueObject] EF Core doesn't support inject value object in EF 2.1  
+[Issue 12078] (https://github.com/aspnet/EntityFrameworkCore/issues/12078)  
+[Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148)
