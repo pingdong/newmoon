@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using PingDong.Service.OData;
 
 namespace PingDong.Newmoon.Events.Service.Queries
 {
+    [ODataEnable("Events")]
     public class EventSummary
     {
         public int id { get; set; }

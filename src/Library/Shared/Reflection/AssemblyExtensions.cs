@@ -27,6 +27,8 @@ namespace PingDong.Reflection
             return Path.GetDirectoryName(path);
         }
 
+        #region Find Reference Assembly
+
         public static List<Assembly> GetReferenceAssemblies(this Assembly assembly, string prefix = null, bool includeReference = true)
         {
             return GetReferenceAssemblies(assembly, new List<string> { prefix }, includeReference);
@@ -55,8 +57,7 @@ namespace PingDong.Reflection
 
             return assembiles;
         }
-
-
+        
         private static void LoadAssemblies(Assembly assembly, IList<Assembly> assemblies, IList<string> prefix = null)
         {
             var assembieNames = assembly.GetReferencedAssemblies();
@@ -78,6 +79,8 @@ namespace PingDong.Reflection
                     assemblies.Add(a);
             }
         }
+
+        #endregion
 
         #region Type Discovery
 
@@ -103,31 +106,6 @@ namespace PingDong.Reflection
         {
             return Find<TInterface>(assembly, isInterface: true);
         }
-        #endregion
-
-        #region Base class
-        /// <summary>
-        /// Find all instances of the specific Base class in current folder 
-        /// </summary>
-        /// <typeparam name="TBase">Specified Base class</typeparam>
-        /// <param name="assemblies">Target assemblies</param>
-        /// <returns>All type that implement the specified Base class</returns>
-        public static List<TBase> FindSubclasses<TBase>(this IEnumerable<Assembly> assemblies)
-        {
-            return Find<TBase>(assemblies, isInterface: false);
-        }
-
-        /// <summary>
-        /// Find all instances of the specific Base class in current folder 
-        /// </summary>
-        /// <typeparam name="TBase">Specified Base class</typeparam>
-        /// <param name="assembly">Target assembly</param>
-        /// <returns>All type that implement the specified Base class</returns>
-        public static List<TBase> FindSubclasses<TBase>(this Assembly assembly)
-        {
-            return Find<TBase>(assembly, isInterface: false);
-        }
-        #endregion
 
         #region Private
         private static List<TTarget> Find<TTarget>(IEnumerable<Assembly> assemblies, bool isInterface)
@@ -164,7 +142,7 @@ namespace PingDong.Reflection
         private static List<Type> FindTypes<TTarget>(Assembly assembly, bool isInterface)
         {
             var types = assembly.GetTypes()
-                            .Where(t => t.IsClass);
+                .Where(t => t.IsClass);
             if (isInterface)
             {
                 types = types.Where(t => !t.IsAbstract)
@@ -180,5 +158,87 @@ namespace PingDong.Reflection
         #endregion
 
         #endregion
+
+        #region Base class
+        /// <summary>
+        /// Find all instances of the specific Base class in current folder 
+        /// </summary>
+        /// <typeparam name="TBase">Specified Base class</typeparam>
+        /// <param name="assemblies">Target assemblies</param>
+        /// <returns>All type that implement the specified Base class</returns>
+        public static List<TBase> FindSubclasses<TBase>(this IEnumerable<Assembly> assemblies)
+        {
+            return Find<TBase>(assemblies, isInterface: false);
+        }
+
+        /// <summary>
+        /// Find all instances of the specific Base class in current folder 
+        /// </summary>
+        /// <typeparam name="TBase">Specified Base class</typeparam>
+        /// <param name="assembly">Target assembly</param>
+        /// <returns>All type that implement the specified Base class</returns>
+        public static List<TBase> FindSubclasses<TBase>(this Assembly assembly)
+        {
+            return Find<TBase>(assembly, isInterface: false);
+        }
+        #endregion
+
+        #region Attribute
+
+        /// <summary>
+        /// Find types that has specified attribute
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="assemblies"></param>
+        /// <param name="attribute"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public static List<Type> FindAttribute<T>(this IEnumerable<Assembly> assemblies, Type attribute, Func<T, bool> condition = null) where T : Attribute
+        {
+            var found = new List<Type>();
+
+            foreach (var assembly in assemblies)
+            {
+                var types = assembly.FindAttribute(attribute, condition);
+
+                found.AddRange(types);
+            }
+
+            return found;
+        }
+
+        /// <summary>
+        /// Find type that has specified attribute
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="assembly"></param>
+        /// <param name="attribute"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public static List<Type> FindAttribute<T>(this Assembly assembly, Type attribute, Func<T, bool> condition = null) where T : Attribute
+        {
+            var types = assembly.GetTypes().Where(t => t.IsClass);
+            types = types.Where(t =>
+            {
+                var att = Attribute.GetCustomAttribute(t, typeof(T));
+                if (att == null)
+                    return false;
+
+                if (condition != null)
+                {
+                    var target = (T)att;
+                    return condition(target);
+                }
+
+                return true;
+            });
+
+            return types.ToList();
+        }
+
+        #endregion
+
+        #endregion
     }
 }
+
