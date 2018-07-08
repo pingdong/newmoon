@@ -10,6 +10,9 @@ namespace PingDong.DomainDriven.Core.Validation
     {
         public static void Validate<T>(this IEnumerable<IValidator<T>> rules, T entity) where T : IAggregateRoot
         {
+            if (rules == null)
+                return;
+
             var validators = rules.ToList();
             if (validators.IsNullOrEmpty())
                 return;

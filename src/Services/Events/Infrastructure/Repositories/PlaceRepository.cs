@@ -25,6 +25,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
         public async Task<Place> FindByNameAsync(string name)
         {
             var place = await _context.Places.FirstOrDefaultAsync(p => p.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            // TODO: ValueObject is not supported by EF Core 2.1
             //if (place != null)
             //{
             //    await _context.Entry(place)
@@ -37,6 +38,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
         public async Task<Place> GetByIdAsync(int id)
         {
             var place = await _context.Places.FindAsync(id);
+            // TODO: ValueObject is not supported by EF Core 2.1
             //if (place != null)
             //{
             //    await _context.Entry(place)
@@ -56,10 +58,8 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
                                .Add(place)
                                .Entity;
             }
-            else
-            {
-                return place;
-            }
+
+            return place;
         }
     }
 }

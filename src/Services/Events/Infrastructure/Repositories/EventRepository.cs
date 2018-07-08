@@ -46,10 +46,8 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
                                .Add(evt)
                                .Entity;
             }
-            else
-            {
-                return evt;
-            }           
+
+            return evt;
         }
     }
 }

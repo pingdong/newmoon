@@ -26,18 +26,18 @@ namespace PingDong.Newmoon.Events
             var connectionString = configuration.GetConnectionString("DefaultDbConnection");
 
             services.AddEntityFrameworkSqlServer()
-                .AddDbContext<EventContext>(options =>
-                    {
-                        options.UseSqlServer(connectionString,
-                            sqlServerOptionsAction: sqlOptions =>
-                            {
-                                sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
-                            });
-                    }
-                    // , ServiceLifetime.Scoped
-                    // Default lifetime
-                    // Showing explicitly that the DbContext is shared across the HTTP request scope (graph of objects started in the HTTP request)
-                );
+                    .AddDbContext<EventContext>(options =>
+                        {
+                            options.UseSqlServer(connectionString,
+                                sqlServerOptionsAction: sqlOptions =>
+                                {
+                                    sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                                });
+                        }
+                        // , ServiceLifetime.Scoped
+                        // Default lifetime
+                        // Showing explicitly that the DbContext is shared across the HTTP request scope (graph of objects started in the HTTP request)
+                    );
         }
     }
 }
