@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using PingDong.DomainDriven.Infrastructure.Mediator;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Infrastructure.Repositories;
-using PingDong.QualityTools.Core;
 using Xunit;
 
 namespace PingDong.Newmoon.Events.Infrastructure.Test
@@ -12,7 +11,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Test
     // The purpose of this unit test is a demo on how to using InMemory SQL Provider
     //   for unit testing. Without InMemory DB, 
 
-    public class PlaceRepositoryTest : IDisposable
+    public class PlaceRepositoryTest
     {
         private const string DefaultName = "Place";
         private const string DefaultNo = "1";
@@ -61,24 +60,19 @@ namespace PingDong.Newmoon.Events.Infrastructure.Test
         private async void ExecuteTestCase(Func<IPlaceRepository, Task> action)
         {
             var options = new DbContextOptionsBuilder<EventContext>()
-                                .UseSqlServer(InMemoryTestHelper.DefaultConnectionString)
+                                // Randon db name for parallel testing
+                                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                                 .Options;
 
             using (var context = new EventContext(options, new EmptyMediator()))
             {
                 // It's VERY important.
-                await context.Database.EnsureDeletedAsync();
                 await context.Database.EnsureCreatedAsync();
 
                 var repository = new PlaceRepository(context, null);
 
                 await action(repository);
             }
-        }
-
-        public void Dispose()
-        {
-            // Clean up the test environment
         }
     }
 }

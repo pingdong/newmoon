@@ -24,7 +24,7 @@ namespace PingDong.Newmoon.Events.Service.Test
         private const string DefaultState = "akl";
         private const string DefaultCountry = "nz";
         private const string DefaultZipCode = "0910";
-
+        
         [Fact]
         public void Add_Then_Query()
         {
@@ -59,13 +59,12 @@ namespace PingDong.Newmoon.Events.Service.Test
         private async void ExecuteTestCase(Func<IPlaceRepository, string, Task> action)
         {
             var options = new DbContextOptionsBuilder<EventContext>()
-                                .UseSqlServer(InMemoryTestHelper.DefaultConnectionString)
+                                .UseSqlServer(InMemoryDbTestHelper.DefaultConnectionString)
                                 .Options;
 
             using (var context = new EventContext(options, new EmptyMediator()))
             {
                 // It's VERY important.
-                await context.Database.EnsureDeletedAsync();
                 await context.Database.EnsureCreatedAsync();
 
                 var repository = new PlaceRepository(context, null);
@@ -78,6 +77,9 @@ namespace PingDong.Newmoon.Events.Service.Test
         public void Dispose()
         {
             // Clean up the test environment
+
+            // Removing physic db file
+            InMemoryDbTestHelper.CleanUp();
         }
     }
 }

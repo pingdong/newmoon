@@ -227,18 +227,10 @@
             </summary>
             <param name="services">Services Collection</param>
         </member>
-        <member name="M:PingDong.Newmoon.Events.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
-             <summary>
-             ConfigureContainer is where you can register things directly
-             with Autofac. This runs after ConfigureServices so the things
-             here will override registrations made in ConfigureServices.
-             Don't build the container; that gets done for you.
-             
-             http://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html
-            
-             DO NOT USE THIS WAY IN MULTIPLE TENANT SCENARIO.
-             </summary>
-             <param name="builder"></param>
+        <member name="P:PingDong.Newmoon.Events.Startup.ApplicationContainer">
+            <summary>
+            Autofac Container
+            </summary>
         </member>
         <member name="M:PingDong.Newmoon.Events.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>

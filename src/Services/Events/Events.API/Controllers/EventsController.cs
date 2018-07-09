@@ -30,7 +30,7 @@ namespace PingDong.Newmoon.Events.Controllers
             _query = query;
         }
 
-        // GET api/events
+        // GET api/v1/events
         /// <summary>
         /// 
         /// </summary>
@@ -46,7 +46,7 @@ namespace PingDong.Newmoon.Events.Controllers
             return await GetAllAsync(_query);
         }
 
-        // GET api/events/id
+        // GET api/v1/events/id
         /// <summary>
         /// 
         /// </summary>
@@ -62,7 +62,7 @@ namespace PingDong.Newmoon.Events.Controllers
             return await GetByIdAsync(_query, id);
         }
 
-        // POST api/events/attendee
+        // POST api/v1/events/attendee
         /// <summary>
         /// 
         /// </summary>
@@ -78,7 +78,7 @@ namespace PingDong.Newmoon.Events.Controllers
             return await CommandDispatchAsync(requestId, command);
         }
 
-        // DELETE api/events/attendee
+        // DELETE api/v1/events/attendee
         /// <summary>
         /// 
         /// </summary>
@@ -95,7 +95,7 @@ namespace PingDong.Newmoon.Events.Controllers
 
         }
 
-        // POST api/events
+        // POST api/v1/events
         /// <summary>
         /// 
         /// </summary>
@@ -111,7 +111,7 @@ namespace PingDong.Newmoon.Events.Controllers
             return await CommandDispatchAsync(requestId, command);
         }
 
-        // PUT api/events
+        // PUT api/v1/events
         /// <summary>
         /// 
         /// </summary>
@@ -127,7 +127,7 @@ namespace PingDong.Newmoon.Events.Controllers
             return await CommandDispatchAsync(requestId, command);
         }
 
-        // POST api/events/cancel
+        // POST api/v1/events/cancel
         /// <summary>
         /// 
         /// </summary>
@@ -143,7 +143,7 @@ namespace PingDong.Newmoon.Events.Controllers
             return await CommandDispatchAsync(requestId, command);
         }
 
-        // POST api/events/confirm
+        // POST api/v1/events/confirm
         /// <summary>
         /// 
         /// </summary>
@@ -159,7 +159,7 @@ namespace PingDong.Newmoon.Events.Controllers
             return await CommandDispatchAsync(requestId, command);
         }
 
-        // POST api/events/start
+        // POST api/v1/events/start
         /// <summary>
         /// 
         /// </summary>
@@ -175,7 +175,7 @@ namespace PingDong.Newmoon.Events.Controllers
             return await CommandDispatchAsync(requestId, command);
         }
 
-        // POST api/events/end
+        // POST api/v1/events/end
         /// <summary>
         /// 
         /// </summary>

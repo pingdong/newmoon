@@ -52,18 +52,19 @@ On top of eShopContainers, I added some features that I believe they are importa
 * [x] OData  
 * [x] Testing  
   * [x] Unit Testing  
+  * [x] Integration Testing  
   * [ ] Functional Testing  
-  * [ ] Integration Testing  
   * [ ] Load Testing 
 
 ### Not yet:
   
  
+* [ ] Authentication & Authorize
 * [ ] API Gateway
-* [ ] NoSQL & Redis
 * [ ] Integration Message
 * [ ] Docker & Kubernetes
-* [ ] Authentication & Authorize
+* [ ] GraphQL
+* [ ] NoSQL & Redis
 * [ ] Client @ React
 * [ ] Client @ MVC
 
