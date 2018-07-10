@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace PingDong.Newmoon.Events.Api.IntegrationTest
+namespace PingDong.Newmoon.Events.Integration.Test
 {
     public class EventTestsStartup : Startup
     {

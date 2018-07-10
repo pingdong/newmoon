@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Api.IntegrationTest
+namespace PingDong.Newmoon.Events.Integration.Test
 {
     public class EventScenarios : EventScenarioBase
     {

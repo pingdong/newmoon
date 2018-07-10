@@ -10,7 +10,7 @@ using PingDong.Newmoon.Events.Infrastructure;
 using PingDong.QualityTools.Core;
 using PingDong.Web.AspNetCore.Hosting;
 
-namespace PingDong.Newmoon.Events.Api.IntegrationTest
+namespace PingDong.Newmoon.Events.Integration.Test
 { 
     public class EventScenarioBase : IDisposable
     {
