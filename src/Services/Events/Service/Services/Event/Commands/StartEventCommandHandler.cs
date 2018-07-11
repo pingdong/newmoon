@@ -20,10 +20,10 @@ namespace PingDong.Newmoon.Events.Service.Commands
         {
             var evt = await _eventRepository.GetByIdAsync(message.EventId);
 
-            if (evt.Name.Equals(message.EventName, StringComparison.InvariantCultureIgnoreCase))
+            if (!evt.Name.Equals(message.EventName, StringComparison.InvariantCultureIgnoreCase))
                 return false;
 
-            evt.Cancel();
+            evt.Start();
 
             return await _eventRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }

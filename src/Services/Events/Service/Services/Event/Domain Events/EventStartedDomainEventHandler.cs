@@ -10,18 +10,24 @@ namespace PingDong.Newmoon.Events.Service.DomainEvents
 {
     public class EventStartedDomainEventHandler : INotificationHandler<EventStartedDomainEvent>
     {
-        private readonly IEventRepository _repository;
+        private readonly IPlaceRepository _repository;
         private readonly ILoggerFactory _logger;
 
-        public EventStartedDomainEventHandler(IEventRepository repository, ILoggerFactory logger)
+        public EventStartedDomainEventHandler(IPlaceRepository repository, ILoggerFactory logger)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public Task Handle(EventStartedDomainEvent domainEvent, CancellationToken cancellationToken)
+        public async Task Handle(EventStartedDomainEvent domainEvent, CancellationToken cancellationToken)
         {
-            return Task.CompletedTask;
+            if (!domainEvent.Event.PlaceId.HasValue)
+                return;
+
+            var place = await _repository.GetByIdAsync(domainEvent.Event.PlaceId.Value);
+            place.Engage();
+
+            await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
     }
 }

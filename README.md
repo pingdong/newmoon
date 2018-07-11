@@ -47,26 +47,26 @@ On top of eShopContainers, I added some features that I believe they are importa
 
 ### Done: 
   
-* [x] Microservice Coding Practice  
-* [x] Multiple Configuration Source, Sturcture Application Settings  
-* [x] OData  
-* [x] Testing  
-  * [x] Unit Testing  
+* [x] Microservice Coding Practice 
+* [x] Multiple Configuration Source, Sturcture Application Settings 
+* [x] OData 
+* [x] Testing 
+  * [x] Unit Testing 
   * [x] Integration Testing  
-  * [ ] Functional Testing  
+  * [x] Functional Testing  
   * [ ] Load Testing 
 
 ### Not yet:
   
  
-* [ ] Authentication & Authorize
-* [ ] API Gateway
-* [ ] Integration Message
-* [ ] Docker & Kubernetes
-* [ ] GraphQL
-* [ ] NoSQL & Redis
-* [ ] Client @ React
-* [ ] Client @ MVC
+* [ ] Authentication & Authorize 
+* [ ] API Gateway 
+* [ ] Integration Message 
+* [ ] GraphQL 
+* [ ] NoSQL & Redis 
+* [ ] Docker & Kubernetes 
+* [ ] Client @ React 
+* [ ] Client @ MVC 
 
 
 > ## Backlog 

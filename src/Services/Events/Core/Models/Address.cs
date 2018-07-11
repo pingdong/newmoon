@@ -22,11 +22,6 @@ namespace PingDong.Newmoon.Events.Core
         public String State { get; }
         public String Country { get; }
         public String ZipCode { get; }
-
-        private Address()
-        {
-
-        }
         
         public Address(string no, string street, string city, string state, string country, string zipCode)
         {

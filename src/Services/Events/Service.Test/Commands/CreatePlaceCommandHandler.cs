@@ -37,7 +37,15 @@ namespace PingDong.Newmoon.Events.Service.Test
             var handler = new CreatePlaceCommandHandler(repositoryMock.Object, null);
             
             // Act
-            var msg = new CreatePlaceCommand(DefaultName, new AddressDTO(DefaultNo, DefaultStreet, DefaultCity, DefaultState, DefaultCountry, DefaultZipCode));
+            var msg = new CreatePlaceCommand(DefaultName, new AddressDTO
+                                                                {
+                                                                    No = DefaultNo,
+                                                                    Street = DefaultStreet,
+                                                                    City = DefaultCity,
+                                                                    State = DefaultState,
+                                                                    Country = DefaultCountry,
+                                                                    ZipCode = DefaultZipCode
+                                                                });
             var token = new CancellationToken();
             var result = await handler.Handle(msg, token);
 

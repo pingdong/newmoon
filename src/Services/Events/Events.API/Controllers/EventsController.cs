@@ -135,7 +135,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <response code="200"></response>
 
         [Route("cancel")]
-        [HttpPut]
+        [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> CancelEvent([FromHeader(Name = "x-requestid")] string requestId, [FromBody]CancelEventCommand command)
@@ -151,7 +151,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <response code="200"></response>
 
         [Route("confirm")]
-        [HttpPut]
+        [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> ConfirmEvent([FromHeader(Name = "x-requestid")] string requestId, [FromBody]ConfirmEventCommand command)

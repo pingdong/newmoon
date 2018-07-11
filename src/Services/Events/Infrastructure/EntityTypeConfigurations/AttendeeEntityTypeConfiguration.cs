@@ -18,7 +18,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
             // Columns
             cfg.Property(b => b.Id)
                 .HasColumnName("AttendeeId")
-                .ForSqlServerUseSequenceHiLo("attendeseq", EventContext.DefaultSchema);
+                .ForSqlServerUseSequenceHiLo("AttendeSeq", EventContext.DefaultSchema);
 
             cfg.Property(b => b.Identity)
                 .HasColumnName("AttendeeIdentity")

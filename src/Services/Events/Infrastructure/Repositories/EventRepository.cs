@@ -28,9 +28,6 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
             {
                 await _context.Entry(evt)
                               .Collection(i => i.Attendees).LoadAsync();
-
-                await _context.Entry(evt)
-                              .Reference(i => i.Status).LoadAsync();
             }
 
             return evt;

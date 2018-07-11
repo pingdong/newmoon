@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 {
-    public partial class EventsInitialCreate : Migration
+    public partial class EventsInitialise : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,12 +11,12 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                 name: "Events");
 
             migrationBuilder.CreateSequence(
-                name: "attendeseq",
+                name: "AttendeSeq",
                 schema: "Events",
                 incrementBy: 10);
 
             migrationBuilder.CreateSequence(
-                name: "buyerseq",
+                name: "EventSeq",
                 schema: "Events",
                 incrementBy: 10);
 
@@ -24,6 +24,24 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                 name: "PlaceSeq",
                 schema: "Events",
                 incrementBy: 10);
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                schema: "Events",
+                columns: table => new
+                {
+                    EventId = table.Column<int>(nullable: false),
+                    EventName = table.Column<string>(nullable: false),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    PlaceId = table.Column<int>(nullable: true),
+                    CreatedTime = table.Column<DateTime>(nullable: false),
+                    StatusId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.EventId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Places",
@@ -56,46 +74,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_requests", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Status",
-                schema: "Events",
-                columns: table => new
-                {
-                    StatusName = table.Column<string>(maxLength: 200, nullable: false),
-                    StatusId = table.Column<int>(nullable: false, defaultValue: 1)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Status", x => x.StatusId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Events",
-                schema: "Events",
-                columns: table => new
-                {
-                    EventId = table.Column<int>(nullable: false),
-                    EventName = table.Column<string>(nullable: false),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false),
-                    StatusId = table.Column<int>(nullable: true),
-                    CreatedTime = table.Column<DateTime>(nullable: false),
-                    PlaceId = table.Column<int>(type: "int", nullable: true),
-                    _statusId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Events", x => x.EventId);
-                    table.ForeignKey(
-                        name: "FK_Events_Status_StatusId",
-                        column: x => x.StatusId,
-                        principalSchema: "Events",
-                        principalTable: "Status",
-                        principalColumn: "StatusId",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Requests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,12 +112,6 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                 table: "Attendees",
                 column: "AttendeeId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Events_StatusId",
-                schema: "Events",
-                table: "Events",
-                column: "StatusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -152,23 +125,19 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                 schema: "Events");
 
             migrationBuilder.DropTable(
-                name: "requests",
+                name: "Requests",
                 schema: "Events");
 
             migrationBuilder.DropTable(
                 name: "Events",
                 schema: "Events");
 
-            migrationBuilder.DropTable(
-                name: "Status",
+            migrationBuilder.DropSequence(
+                name: "AttendeSeq",
                 schema: "Events");
 
             migrationBuilder.DropSequence(
-                name: "attendeseq",
-                schema: "Events");
-
-            migrationBuilder.DropSequence(
-                name: "buyerseq",
+                name: "EventSeq",
                 schema: "Events");
 
             migrationBuilder.DropSequence(

@@ -2,22 +2,12 @@
 {
     public class AddressDTO
     {
-        public string No { get; }
-        public string Street { get; }
-        public string City { get; }
-        public string State { get; }
-        public string Country { get; }
-        public string ZipCode { get; }
-
-        public AddressDTO(string no, string street, string city, string state, string country, string zipcode)
-        {
-            No = no;
-            Street = street;
-            City = city;
-            State = state;
-            Country = country;
-            ZipCode = zipcode;
-        }
+        public string No { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+        public string ZipCode { get; set; }
     }
 
     #region TODO: Value Object

@@ -18,7 +18,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
             // Columns
             cfg.Property(b => b.Id)
                 .HasColumnName("EventId")
-                .ForSqlServerUseSequenceHiLo("buyerseq", EventContext.DefaultSchema);
+                .ForSqlServerUseSequenceHiLo("EventSeq", EventContext.DefaultSchema);
 
             cfg.Property(b => b.Name)
                 .HasColumnName("EventName")
@@ -31,21 +31,17 @@ namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
                 .IsRequired();
 
             // Back field
-            cfg.Property("_placeId")
-                .HasColumnName("PlaceId")
-                .HasColumnType("int")
-                .IsRequired(false);
-
             cfg.Property("_createTime")
                 .HasColumnName("CreatedTime")
                 .IsRequired();
 
-            // Child Entity
             cfg.Property("_statusId")
+                .HasColumnName("StatusId")
                 .IsRequired();
-            cfg.HasOne(p => p.Status)
-                .WithMany()
-                .HasForeignKey("StatusId");
+
+            cfg.Property(b => b.PlaceId)
+                .HasColumnName("PlaceId")
+                .IsRequired(false);
 
             // Child Entities
             cfg.HasMany(b => b.Attendees)
@@ -56,6 +52,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
 
             // Ignore
+            cfg.Ignore(b => b.Status);
             cfg.Ignore(b => b.DomainEvents);
         }
     }
