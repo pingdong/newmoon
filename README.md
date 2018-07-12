@@ -54,7 +54,6 @@ On top of eShopContainers, I added some features that I believe they are importa
   * [x] Unit Testing 
   * [x] Integration Testing  
   * [x] Functional Testing  
-  * [ ] Load Testing 
 
 ### Not yet:
   
@@ -67,6 +66,7 @@ On top of eShopContainers, I added some features that I believe they are importa
 * [ ] Docker & Kubernetes 
 * [ ] Client @ React 
 * [ ] Client @ MVC 
+* [ ] Performance and Load Testing  
 
 
 > ## Backlog 
@@ -74,4 +74,3 @@ On top of eShopContainers, I added some features that I believe they are importa
 * [ValueObject] EF Core doesn't support inject value object in EF 2.1  
 [Issue 12078] (https://github.com/aspnet/EntityFrameworkCore/issues/12078)  
 [Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148)  
-* [Load Test] Load testing currently doesn't support .Net core

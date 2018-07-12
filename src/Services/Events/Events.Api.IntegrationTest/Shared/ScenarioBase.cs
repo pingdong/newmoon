@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -12,12 +11,10 @@ using PingDong.Web.AspNetCore.Hosting;
 
 namespace PingDong.Newmoon.Events.Integration.Test
 { 
-    public class EventScenarioBase : IDisposable
+    public class ScenarioBase : IDisposable
     {
-        public TestServer CreateServer()
+        public TestServer CreateServer(string baseDir)
         {
-            var baseDir = Directory.GetCurrentDirectory() + "\\..\\..\\..\\Events";
-
             var cfg = new ConfigurationBuilder()
                 .SetBasePath(baseDir)
                 .AddJsonFile("Settings.json")
@@ -27,7 +24,7 @@ namespace PingDong.Newmoon.Events.Integration.Test
                                         .UseContentRoot(baseDir)
                                         .UseEnvironment("Stagging")
                                         .UseConfiguration(cfg)
-                                        .UseStartup<EventTestsStartup>();
+                                        .UseStartup<TestsStartup>();
 
             var testServer = new TestServer(webHostBuilder);
 
@@ -44,28 +41,31 @@ namespace PingDong.Newmoon.Events.Integration.Test
             return testServer;
         }
 
-        public static class Get
+        public static class Events
         {
-            public static string All = "api/v1/events";
-
-            public static string ById(int id)
+            public static class Get
             {
-                return $"api/v1/events/{id}";
+                public static string All = "api/v1/events";
+
+                public static string ById(int id)
+                {
+                    return $"api/v1/events/{id}";
+                }
             }
-        }
 
-        public static class Put
-        {
-            public static string UpdateEvent = "api/v1/events";
-        }
+            public static class Put
+            {
+                public static string UpdateEvent = "api/v1/events";
+            }
 
-        public static class Post
-        {
-            public static string AddEvent = "api/v1/events";
-            public static string CancelEvent = "api/v1/events/cancel";
-            public static string ConfirmEvent = "api/v1/events/confirm";
-            public static string StartEvent = "api/v1/events/start";
-            public static string EndEvent = "api/v1/events/end";
+            public static class Post
+            {
+                public static string AddEvent = "api/v1/events";
+                public static string CancelEvent = "api/v1/events/cancel";
+                public static string ConfirmEvent = "api/v1/events/confirm";
+                public static string StartEvent = "api/v1/events/start";
+                public static string EndEvent = "api/v1/events/end";
+            }
         }
 
         public void Dispose()

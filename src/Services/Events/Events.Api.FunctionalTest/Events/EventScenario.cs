@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -12,18 +13,21 @@ using Xunit;
 
 namespace PingDong.Newmoon.Events.Functional.Test
 {
-    public class EventScenarios : EventScenarioBase
+    public class EventScenario : ScenarioBase
     {
         [Fact]
         public async Task Get_create_event_confirm_then_start()
         {
-            using (var server = CreateServer())
+            var baseDir = Directory.GetCurrentDirectory() + "\\..\\..\\..\\Events";
+
+            using (var server = CreateServer(baseDir))
             {
+                // Arrange
                 var http = server.CreateIdempotentClient();
 
                 // Act
                 var createCmd = BuildCreateCommand().CreateJsonContent();
-                await http.PostAsync(Post.AddEvent, createCmd);
+                await http.PostAsync(Events.Post.AddEvent, createCmd);
 
                 dynamic evt = await GetCreatedEvent(http);
 
@@ -32,11 +36,11 @@ namespace PingDong.Newmoon.Events.Functional.Test
 
                 var confirmCmd = BuildConfirmCommand(eventId, eventName).CreateJsonContent();
                 http.RefreshRequestId();
-                await http.PostAsync(Post.ConfirmEvent, confirmCmd);
+                await http.PostAsync(Events.Post.ConfirmEvent, confirmCmd);
 
                 var startCmd = BuildStartCommand(eventId, eventName).CreateJsonContent();
                 http.RefreshRequestId();
-                await http.PostAsync(Post.StartEvent, startCmd);
+                await http.PostAsync(Events.Post.StartEvent, startCmd);
 
                 var ev = await GetEvent(http, eventId);
                 dynamic place = await GetPlace(http);
@@ -53,7 +57,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
         private async Task<dynamic> GetCreatedEvent(HttpClient http)
         {
             http.RefreshRequestId();
-            var response = await http.GetStringAsync(Get.Events);
+            var response = await http.GetStringAsync(Events.Get.Events);
             dynamic result = JObject.Parse(response);
             return result.value[0];
         }
@@ -61,14 +65,14 @@ namespace PingDong.Newmoon.Events.Functional.Test
         private async Task<dynamic> GetEvent(HttpClient http, int eventId)
         {
             http.RefreshRequestId();
-            var response = await http.GetStringAsync(Get.EventById(eventId));
+            var response = await http.GetStringAsync(Events.Get.EventById(eventId));
             return JObject.Parse(response);
         }
 
         private async Task<dynamic> GetPlace(HttpClient http)
         {
             http.RefreshRequestId();
-            var response = await http.GetStringAsync(Get.Places);
+            var response = await http.GetStringAsync(Events.Get.Places);
             dynamic result = JObject.Parse(response);
 
             return result.value[0];

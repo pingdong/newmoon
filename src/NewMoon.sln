@@ -22,10 +22,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-AC79-4612-B26E-CD6261C0BCC9}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\DataValidation.txt = ..\docs\DataValidation.txt
-		EF core.txt = EF core.txt
+		..\docs\EF core.txt = ..\docs\EF core.txt
 		..\Docs\IoC.txt = ..\Docs\IoC.txt
 		..\Docs\Mapping.txt = ..\Docs\Mapping.txt
 		..\README.md = ..\README.md
+		..\docs\Testing.txt = ..\docs\Testing.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ACC5BE90-3232-400A-9BEA-56887C7E905A}"
@@ -40,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A6
 		Services\Events\Database\Status.sql = Services\Events\Database\Status.sql
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.API", "Services\Events\Events.API\Events.API.csproj", "{42EC73F9-32B2-46D7-BBAC-B79B6D6F84A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Api", "Services\Events\Events.API\Events.Api.csproj", "{42EC73F9-32B2-46D7-BBAC-B79B6D6F84A5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Service", "Services\Events\Service\Events.Service.csproj", "{7E8CA089-4B5B-4833-AB29-879DDFF06AAA}"
 EndProject
@@ -61,11 +62,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Infrastructure.Test", "Services\Events\Infrastructure.Test\Events.Infrastructure.Test.csproj", "{9EA42BF0-DD1F-4184-9E8D-39D9D7A89EB7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Service.Test", "Services\Events\Service.Test\Events.Service.Test.csproj", "{106C75E8-5DF3-4F15-80C6-2642E125A148}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{46441B39-9979-4932-A3BE-2C32BE9BCA22}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Api.IntegrationTest", "Services\Events\Events.Api.IntegrationTest\Events.Api.IntegrationTest.csproj", "{04FB22BA-12BC-49CE-AB52-99F0C080416F}"
 EndProject
@@ -172,7 +168,6 @@ Global
 		{4978DCCA-17A0-4FB1-B34C-6BA36BFE7CFE} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{9EA42BF0-DD1F-4184-9E8D-39D9D7A89EB7} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{106C75E8-5DF3-4F15-80C6-2642E125A148} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
-		{46441B39-9979-4932-A3BE-2C32BE9BCA22} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{04FB22BA-12BC-49CE-AB52-99F0C080416F} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{81D68115-7B49-4A89-A829-21BAA23E4430} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{906E4134-9C1D-4482-B188-B50CF16AE03C} = {F4D64E41-8A7A-4AAE-B24E-712D2C49EE09}

@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Library\QualityTools\Core\QualityTools.Core.csproj" />
-    <ProjectReference Include="..\Events.API\Events.API.csproj" />
+    <ProjectReference Include="..\Events.API\Events.Api.csproj" />
   </ItemGroup>
 
 </Project>

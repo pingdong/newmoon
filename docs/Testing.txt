@@ -1,0 +1,22 @@
+Prerequirements
+
+	Unit Testing:
+		None
+
+	Integration / Functional Test
+		SQL Server Express, likely installed with Visual Studio
+
+Run:
+	Run directly from Test Explorer
+
+Clean Up
+	Even Integration / Functional Testing use SQLServer express In Memory DB, a pair of DB files still are created under C:\Users\[Username]\. Those files could be manually deleted, if cleanup isn't executed.
+
+Notes:
+	1. Demo purpose only, therefore I haven't done a fully test.
+	2. Integration / Functional Testing 
+		2.1 All tests can have its own separate setting, in settings.json.
+		2.2 All tests run in Stagging environment.
+		2.3 Every test recreate database and remove it after testing, so every test won't pollute each other.
+		2.4 Since the using of SQLServer express, all tests have to run in serial manner. Otherwise data pollution is expected. 
+		2.5 As every setup has to setup the whole web host stack, database and every request is served through whole pipeline, a test likely runs a few seconds.

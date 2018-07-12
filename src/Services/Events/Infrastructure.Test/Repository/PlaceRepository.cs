@@ -9,7 +9,7 @@ using Xunit;
 namespace PingDong.Newmoon.Events.Infrastructure.Test
 {
     // The purpose of this unit test is a demo on how to using InMemory SQL Provider
-    //   for unit testing. Without InMemory DB, 
+    //   for unit testing, without SQLServer Express InMemory DB provider. 
 
     public class PlaceRepositoryTest
     {

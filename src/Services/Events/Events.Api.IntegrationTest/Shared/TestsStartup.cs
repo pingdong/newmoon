@@ -4,9 +4,10 @@ using Microsoft.Extensions.Logging;
 
 namespace PingDong.Newmoon.Events.Integration.Test
 {
-    public class EventTestsStartup : Startup
+    public class TestsStartup : Startup
     {
-        public EventTestsStartup(IConfiguration config, ILogger<Startup> logger, IHostingEnvironment env) : base(config, logger, env)
+        public TestsStartup(IConfiguration config, ILogger<Startup> logger, IHostingEnvironment env)
+            : base(config, logger, env)
         {
         }
     }

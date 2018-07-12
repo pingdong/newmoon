@@ -21,13 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Library\QualityTools\Core\QualityTools.Core.csproj" />
     <ProjectReference Include="..\..\..\Library\QualityTools\QualityTools.Web\QualityTools.Web.csproj" />
-    <ProjectReference Include="..\Events.API\Events.API.csproj" />
+    <ProjectReference Include="..\Events.API\Events.Api.csproj" />
     <ProjectReference Include="..\Service\Events.Service.csproj" />
   </ItemGroup>
 
