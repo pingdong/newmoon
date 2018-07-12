@@ -1,11 +1,10 @@
 # **Newmoon**
----
 
-For many reasons, I have seen many compromised designs/projects and have to work with them. Therefore I decided to implement an ideal solution as a template and maintain it to catch up with emerging technology and concepts in the future.
+For many reasons, I have seen many compromised designs/projects. Therefore I decided to implement an ideal solution as a template and maintain it to catch up with emerging technology and concepts in the future.
 
-The current version borrowed some codes and ideas from Microsoft eShopContainers project, Thanks.
+The current version borrowed some codes and idea from Microsoft eShopContainers project, Thanks.
 
-On top of eShopContainers, I added some features that I believe they are important and helpful in real life. For example, Extensions and Reflections are widely used here, I know it¡¯s controversial, to generate lean, modular and reusable code. This implementation may bring some difficulties to understand, especially to junior devs. But this is intent. Long-term maintainability, flexibility and simplicity is always crucial. In building industry, reading blueprints requires years training.
+On top of eShopContainers, I added some features that I believe they are important and helpful in real life. For example, Extensions and Reflections are widely used here, I know it's controversial, to generate lean, modular and reusable codes. This drawback is that may bring some difficulties to understand, especially to junior dev. To me, long-term maintainability, flexibility and simplicity is always crucial. 
 
 ## The following libraries are used:
 * Microsoft ASP.Net Core 2.1
@@ -27,7 +26,7 @@ On top of eShopContainers, I added some features that I believe they are importa
 * Mediator
 * CQRS
 * UnitOfWork
-* ValueObject
+* ValueObject (Poor support in EF Core Currently)
 * Repository
 * Specification 
 
@@ -37,10 +36,11 @@ On top of eShopContainers, I added some features that I believe they are importa
 * Bounded Context 
 * Domain Event
 * Integration Event 
-* Resilient 
+* Resiliency 
+* Idempotency 
 
-## Skills
-* Using InMemory Database for unit testing
+## Practices
+* Using InMemory Data Provider for testing
   
 
 > ## Roadmap
@@ -57,15 +57,14 @@ On top of eShopContainers, I added some features that I believe they are importa
 
 ### Not yet:
   
- 
-* [ ] Authentication & Authorize 
+* [ ] Authentication & Authorization 
 * [ ] API Gateway 
-* [ ] Integration Message 
 * [ ] GraphQL 
-* [ ] NoSQL & Redis 
+* [ ] Integration Message 
 * [ ] Docker & Kubernetes 
 * [ ] Client @ React 
 * [ ] Client @ MVC 
+* [ ] NoSQL & Redis 
 * [ ] Performance and Load Testing  
 
 
@@ -73,4 +72,4 @@ On top of eShopContainers, I added some features that I believe they are importa
 * [OData] The workaround of the compatibility with Swagger  
 * [ValueObject] EF Core doesn't support inject value object in EF 2.1  
 [Issue 12078] (https://github.com/aspnet/EntityFrameworkCore/issues/12078)  
-[Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148)  
+[Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148)
