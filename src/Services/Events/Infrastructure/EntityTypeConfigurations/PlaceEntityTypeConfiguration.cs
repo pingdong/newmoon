@@ -22,7 +22,6 @@ namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
 
             cfg.Property(o => o.Name)
                 .HasColumnName("PlaceName")
-                .HasColumnType("nvarchar")
                 .HasMaxLength(200)
                 .IsRequired();
 
@@ -31,32 +30,26 @@ namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
 
             cfg.Property(p => p.No)
                 .HasColumnName("AddressNo")
-                .HasColumnType("nvarchar")
                 .HasMaxLength(20);
 
             cfg.Property(s => s.Street)
                 .HasColumnName("AddressStreet")
-                .HasColumnType("nvarchar")
                 .HasMaxLength(100);
 
             cfg.Property(s => s.City)
                 .HasColumnName("AddressCity")
-                .HasColumnType("nvarchar")
                 .HasMaxLength(40);
 
             cfg.Property(s => s.State)
                 .HasColumnName("AddressState")
-                .HasColumnType("nvarchar")
                 .HasMaxLength(40);
 
             cfg.Property(s => s.Country)
                 .HasColumnName("AddressCountry")
-                .HasColumnType("nvarchar")
                 .HasMaxLength(40);
 
             cfg.Property(s => s.ZipCode)
                 .HasColumnName("AddressZipCode")
-                .HasColumnType("nvarchar")
                 .HasMaxLength(10);
 
             #region TODO: Value object
@@ -64,37 +57,31 @@ namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
             //{
             //    b.Property(p => p.No)
             //        .HasColumnName("AddressNo")
-            //        .HasColumnType("nvarchar")
             //        .HasMaxLength(20)
             //        .IsRequired();
 
             //    b.Property(s => s.Street)
             //        .HasColumnName("AddressStreet")
-            //        .HasColumnType("nvarchar")
             //        .HasMaxLength(100)
             //        .IsRequired();
 
             //    b.Property(s => s.City)
             //        .HasColumnName("AddressCity")
-            //        .HasColumnType("nvarchar")
             //        .HasMaxLength(40)
             //        .IsRequired();
 
             //    b.Property(s => s.State)
             //        .HasColumnName("AddressState")
-            //        .HasColumnType("nvarchar")
             //        .HasMaxLength(40)
             //        .IsRequired();
 
             //    b.Property(s => s.Country)
             //        .HasColumnName("AddressCountry")
-            //        .HasColumnType("nvarchar")
             //        .HasMaxLength(40)
             //        .IsRequired();
 
             //    b.Property(s => s.ZipCode)
             //        .HasColumnName("AddressZipCode")
-            //        .HasColumnType("nvarchar")
             //        .HasMaxLength(10)
             //        .IsRequired();
             //});

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>PingDong.QualityTools.DomainDriven.Core</AssemblyName>
+    <RootNamespace>PingDong.QualityTools.DomainDriven.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DomainDriven\Core\DomainDriven.Core.csproj" />
+  </ItemGroup>
+
+</Project>

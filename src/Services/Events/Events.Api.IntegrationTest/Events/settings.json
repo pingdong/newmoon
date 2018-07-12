@@ -1,0 +1,10 @@
+﻿{
+  "App": {
+    "Version": "1.0.0",
+    "ApiVersion": "v1",
+    "Title": "Event WebAPI"
+  },
+  "ConnectionStrings": {
+    "DefaultDbConnection": "Server=(localdb)\\mssqllocaldb;Database=Events.InMemory;Trusted_Connection=True;ConnectRetryCount=0"
+  }
+}

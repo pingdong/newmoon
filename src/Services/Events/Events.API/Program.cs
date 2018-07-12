@@ -4,6 +4,10 @@ using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using PingDong.Newmoon.Events.Infrastructure;
+using PingDong.Web.AspNetCore.Hosting;
 
 namespace PingDong.Newmoon.Events
 {
@@ -49,6 +53,16 @@ namespace PingDong.Newmoon.Events
             //}
 
             var host = BuildWebHost(args).Build();
+            host.MigrateDbContext<EventContext>((context, services) =>
+            {
+                    var logger = services.GetService<ILogger<EventContextSeed>>();
+
+                    new EventContextSeed()
+                            .SeedAsync(context, logger)
+                            .Wait();
+                });
+            // If seeing is not needed
+            //host.MigrateDbContext<EventContext>((_, __) => { });
             host.Run();
         }
 
@@ -77,6 +91,9 @@ namespace PingDong.Newmoon.Events
                         //     dotnet user-secrets list
                         //     dotnet user-secrets remove "Database:DbPassword"
                         //     dotnet user-secrets clear
+                        //
+                        // Or in Visual Studio
+                        // Right click on the target project, then click 'Manage User Secrets'
                         config.AddUserSecrets<Startup>();
                     }
                         

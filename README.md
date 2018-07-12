@@ -1,6 +1,13 @@
-#An ASP.Net Core microservice project.
+# **Newmoon**
+---
 
-###The following libraries are used:
+For many reasons, I have seen many compromised designs/projects and have to work with them. Therefore I decided to implement an ideal solution as a template and maintain it to catch up with emerging technology and concepts in the future.
+
+The current version borrowed some codes and ideas from Microsoft eShopContainers project, Thanks.
+
+On top of eShopContainers, I added some features that I believe they are important and helpful in real life. For example, Extensions and Reflections are widely used here, I know it¡¯s controversial, to generate lean, modular and reusable code. This implementation may bring some difficulties to understand, especially to junior devs. But this is intent. Long-term maintainability, flexibility and simplicity is always crucial. In building industry, reading blueprints requires years training.
+
+## The following libraries are used:
 * Microsoft ASP.Net Core 2.1
 * Microsoft Entity Framework Core 2.1
 * Microsoft OData 7.0.0
@@ -11,35 +18,59 @@
 * MediatR 5.0.1
 * Serilog.AspNetCore 2.1.1
 * Polly 6.0.1
+* Swashbuckle.AspNetCore 2.5.0
+* xUnit.net 2.3.1
+* Moq 4.8.3 
 
-###The following design patterns are involved:
+## The following design patterns are involved:
 * Clean Architect
 * Mediator
 * CQRS
 * UnitOfWork
 * ValueObject
 * Repository
+* Specification 
 
-###Other concepts are covered:
-* BDD (Bounded Context, Domain Event)
+## Other concepts are covered:
+* SoC 
+* BDD 
+* Bounded Context 
+* Domain Event
+* Integration Event 
+* Resilient 
 
-##Roadmap:
+## Skills
+* Using InMemory Database for unit testing
+  
 
-###Done:
+> ## Roadmap
 
-* Microservice Coding Practice
-* Multiple Configuration Source
-* OData 
+### Done: 
+  
+* [x] Microservice Coding Practice 
+* [x] Multiple Configuration Source, Sturcture Application Settings 
+* [x] OData 
+* [x] Testing 
+  * [x] Unit Testing 
+  * [x] Integration Testing  
+  * [x] Functional Testing  
 
-###Not yet:
+### Not yet:
+  
+ 
+* [ ] Authentication & Authorize 
+* [ ] API Gateway 
+* [ ] Integration Message 
+* [ ] GraphQL 
+* [ ] NoSQL & Redis 
+* [ ] Docker & Kubernetes 
+* [ ] Client @ React 
+* [ ] Client @ MVC 
+* [ ] Performance and Load Testing  
 
 
-* Testing (Unit Testing/Functional Testing/Integration Testing/Load Testing)
-* Integration Message
-* API Gateway
-* Docker & Kubernetes
-* NoSQL & Redis
-* Authentication & Authorize
-
-###Backlog 
-> [OData]Removing workaround of the compatibility with Swagger
+> ## Backlog 
+* [OData] The workaround of the compatibility with Swagger  
+* [ValueObject] EF Core doesn't support inject value object in EF 2.1  
+[Issue 12078] (https://github.com/aspnet/EntityFrameworkCore/issues/12078)  
+[Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148)  

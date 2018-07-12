@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AssemblyName>PingDong.Newmoon.Events.Infrastructure</AssemblyName>
     <RootNamespace>PingDong.Newmoon.Events.Infrastructure</RootNamespace>
@@ -14,13 +14,19 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Polly" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Library\DomainDriven\Infrastructure\DomainDriven.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Library\Shared\Shared.csproj" />
     <ProjectReference Include="..\Core\Events.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -80,15 +80,14 @@ namespace PingDong.Newmoon.Events.Core
         #region Place
         // Outside the Event Aggreate
         // Using PK to disable diect navigation to guarantee the consistency
-        public int? PlaceId => _placeId;
-        private int? _placeId;
+        public int? PlaceId { get; private set; }
 
         public void ChangePlace(int placeId)
         {
             if (placeId < 1)
                 throw new ArgumentException(nameof(placeId));
 
-            this._placeId = placeId;
+            PlaceId = placeId;
 
             AddDomainEvent(new PlaceBookedDomainEvent(placeId));
         }
@@ -96,10 +95,7 @@ namespace PingDong.Newmoon.Events.Core
 
         #region Status
         private int _statusId = EventStatus.Created.Id;
-        // Keep "Original" value
-        //   if return from EF, it has last saved value
-        //   So cannot remove 'private set;'
-        public EventStatus Status { get; private set; } = EventStatus.Created;
+        public EventStatus Status => EventStatus.From(_statusId);
 
         public void Confirm()
         {

@@ -9,8 +9,8 @@ namespace PingDong.Newmoon.Events.Service.Queries
         public string name { get; set; }
         public DateTime startTime { get; set; }
         public DateTime endTime { get; set; }
-        public string status { get; set; }
-        public string place { get; set; }
+        public int statusId { get; set; }
+        public int placeId { get; set; }
         public List<Attendee> attendees { get; set; }
     }
 }

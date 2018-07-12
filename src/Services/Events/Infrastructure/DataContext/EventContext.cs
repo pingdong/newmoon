@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using PingDong.DomainDriven.Core;
 using PingDong.DomainDriven.Infrastructure;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Infrastructure.EntityConfigurations;
@@ -13,7 +14,9 @@ namespace PingDong.Newmoon.Events.Infrastructure
         // Event
         public DbSet<Event> Events { get; set; }
         public DbSet<Attendee> Attendees { get; set; }
-        public DbSet<EventStatus> EventStatuses { get; set; }
+
+        // Requests
+        public DbSet<ClientRequest> Requests { get; set; }
 
         // Places
         public DbSet<Place> Places { get; set; }
@@ -29,7 +32,6 @@ namespace PingDong.Newmoon.Events.Infrastructure
             // Event
             modelBuilder.ApplyConfiguration(new EventEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AttendeeEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new EventStatusEntityTypeConfiguration());
             // Place
             modelBuilder.ApplyConfiguration(new PlaceEntityTypeConfiguration());
             // Request Manager

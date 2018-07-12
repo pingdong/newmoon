@@ -28,6 +28,7 @@ using PingDong.Web.Validation;
 using PingDong.Service.OData;
 
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -65,7 +66,7 @@ namespace PingDong.Newmoon.Events
         /// Create and register services
         /// </summary>
         /// <param name="services">Services Collection</param>
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             _logger.LogInformation(LoggingEvent.Entering, "ConfigureServices Starting");
 
@@ -108,6 +109,8 @@ namespace PingDong.Newmoon.Events
 
             if (_env.IsDevelopment())
             {
+                _logger.LogInformation(LoggingEvent.Entering, "Running in Development mode");
+
                 #region DevOps (Swagger)
 
                 services.AddSwaggerGen(option =>
@@ -132,8 +135,16 @@ namespace PingDong.Newmoon.Events
 
                 #endregion
             }
+            else if (_env.IsStaging())
+            {
+                _logger.LogInformation(LoggingEvent.Entering, "Running in Stagging mode");
+
+                // Skipping Swagger for Functional/Integration testing
+            }
             else
             {
+                _logger.LogInformation(LoggingEvent.Entering, "Running in Production mode");
+
                 #region Telemetry (Application Insights)
 
                 services.AddApplicationInsightsTelemetry(_configuration);
@@ -242,8 +253,51 @@ namespace PingDong.Newmoon.Events
 
             #endregion
 
+            #region Autofac
+
+            _logger.LogInformation(LoggingEvent.Entering, "Autofac is starting");
+
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+
+            var autofaceRegistrars = references.FindSubclasses<AutofacDependencyRegistrar>();
+            if (autofaceRegistrars.IsNullOrEmpty())
+            {
+                _logger.LogInformation(LoggingEvent.Success, "No autofac modules are found");
+            }
+            else
+            {
+                var modules = autofaceRegistrars.OrderBy(d => d.RegisterType);
+                foreach (var module in modules)
+                {
+                    module.Logger = _logger;
+                    module.Configuration = _configuration;
+
+                    builder.RegisterModule(module);
+
+                    _logger.LogInformation(LoggingEvent.Success, $"{module.GetType().FullName} is injected");
+                }
+            }
+
+            ApplicationContainer = builder.Build();
+
+            _logger.LogInformation(LoggingEvent.Success, "Autofac is initialized");
+
+            #endregion
+
             _logger.LogInformation(LoggingEvent.Success, "Calling ConfigureServices() returned success");
+
+            return new AutofacServiceProvider(ApplicationContainer);
         }
+
+        /// <summary>
+        /// Autofac Container
+        /// </summary>
+        public IContainer ApplicationContainer { get; private set; }
+
+        #region Autofac with ConfigureContainer
+
+        // TestServer, in Functional/Integration Test, doesn't support this way 
 
         /// <summary>
         /// ConfigureContainer is where you can register things directly
@@ -255,33 +309,34 @@ namespace PingDong.Newmoon.Events
         ///
         /// DO NOT USE THIS WAY IN MULTIPLE TENANT SCENARIO.
         /// </summary>
-        /// <param name="builder"></param>
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            _logger.LogInformation(LoggingEvent.Entering, "Autofac is starting");
+        /// <param name="builder">Container Builder</param>
+        //public void ConfigureContainer(ContainerBuilder builder)
+        //{
+        //    _logger.LogInformation(LoggingEvent.Entering, "Autofac is starting");
 
-            var references = GetSearchingTargets();
-            
-            var autofaceRegistrars = references.FindSubclasses<AutofacDependencyRegistrar>();
-            if (autofaceRegistrars.IsNullOrEmpty())
-            {
-                _logger.LogInformation(LoggingEvent.Success, "No autofac modules are found");
-                return;
-            }
+        //    var references = GetSearchingTargets();
 
-            var modules = autofaceRegistrars.OrderBy(d => d.RegisterType);
-            foreach (var module in modules)
-            {
-                module.Logger = _logger;
-                module.Configuration = _configuration;
+        //    var autofaceRegistrars = references.FindSubclasses<AutofacDependencyRegistrar>();
+        //    if (autofaceRegistrars.IsNullOrEmpty())
+        //    {
+        //        _logger.LogInformation(LoggingEvent.Success, "No autofac modules are found");
+        //        return;
+        //    }
 
-                builder.RegisterModule(module);
+        //    var modules = autofaceRegistrars.OrderBy(d => d.RegisterType);
+        //    foreach (var module in modules)
+        //    {
+        //        module.Logger = _logger;
+        //        module.Configuration = _configuration;
 
-                _logger.LogInformation(LoggingEvent.Success, $"{module.GetType().FullName} is injected");
-            }
+        //        builder.RegisterModule(module);
 
-            _logger.LogInformation(LoggingEvent.Success, "Autofac is initialized");
-        }
+        //        _logger.LogInformation(LoggingEvent.Success, $"{module.GetType().FullName} is injected");
+        //    }
+
+        //    _logger.LogInformation(LoggingEvent.Success, "Autofac is initialized");
+        //}
+        #endregion
 
         /// <summary>
         /// Start
@@ -310,6 +365,14 @@ namespace PingDong.Newmoon.Events
                    });
 
                 _logger.LogInformation(LoggingEvent.Success, "Swagger is running");
+            }
+            else if (env.IsStaging())
+            {
+                _logger.LogInformation(LoggingEvent.Success, "Running in Stagging environment");
+
+                // Error message
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
