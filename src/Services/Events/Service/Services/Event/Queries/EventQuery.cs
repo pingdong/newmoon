@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using PingDong.Core;
+using PingDong.Linq;
 
 namespace PingDong.Newmoon.Events.Service.Queries
 {
@@ -24,17 +25,24 @@ namespace PingDong.Newmoon.Events.Service.Queries
 			{
 				connection.Open();
 
-				var result = await connection.QueryAsync<dynamic>(
-					@"SELECT e.EventId As Id, EventName as [Name], StartTime, EndTime, PlaceId, e.StatusId,
-							a.AttendeeId, a.AttendeeFirstName, a.AttendeeLastName
-					  FROM  events.Events e
-							LEFT JOIN events.Attendees a
-								ON e.EventId = a.EventId
-					WHERE	e.EventId = @id"
-						, new { id }
-					);
+				var sql = @"SELECT e.EventId As Id, EventName as [Name], StartTime, EndTime, PlaceId, e.StatusId
+							  FROM events.Events e
+							 WHERE e.EventId = @id;
+							SELECT a.AttendeeId As Id, a.AttendeeFirstName as [FirstName], a.AttendeeLastName As [LastName] 
+							  FROM events.Events e
+					     LEFT JOIN events.Attendees a ON e.EventId = a.EventId
+							 WHERE e.EventId = @id";
 
-				return result.AsList().Count == 0 ? null : MapEvent(result);
+				var results = await connection.QueryMultipleAsync(sql, new { id });
+
+				var events = results.Read<Event>();
+				var attendees = results.Read<Attendee>().ToList();
+
+				var evt = events.FirstOrDefault();
+				if (evt != null && !attendees.IsNullOrEmpty())
+					evt.attendees = attendees;
+
+				return evt;
 			}
 		}
 
@@ -50,37 +58,6 @@ namespace PingDong.Newmoon.Events.Service.Queries
 
 				return result;
 			}
-		}
-
-		private Event MapEvent(dynamic result)
-		{
-			var evt = new Event
-			{
-				id = result[0].Id,
-				statusId = result[0].StatusId,
-				name = result[0].Name,
-				startTime = result[0].StartTime,
-				endTime = result[0].EndTime,
-				placeId = result[0].PlaceId,
-				attendees = new List<Attendee>()
-			};
-
-			foreach (dynamic attendee in result)
-			{
-				if (!DynamicHelper.HasField(attendee, "attendeeId"))
-					continue;
-
-				var att = new Attendee
-				{
-					id = attendee.AttendeeId,
-					firstname = attendee.AttendeeFirstName,
-					lastname = attendee.AttendeeLastName,
-				};
-
-				evt.attendees.Add(att);
-			}
-			
-			return evt;
 		}
 	}
 }
