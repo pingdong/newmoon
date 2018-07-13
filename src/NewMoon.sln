@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{5D7DBF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-AC79-4612-B26E-CD6261C0BCC9}"
 	ProjectSection(SolutionItems) = preProject
+		..\docs\Configuration.txt = ..\docs\Configuration.txt
 		..\docs\DataValidation.txt = ..\docs\DataValidation.txt
 		..\docs\EF core.txt = ..\docs\EF core.txt
 		..\Docs\IoC.txt = ..\Docs\IoC.txt

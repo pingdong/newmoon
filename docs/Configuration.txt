@@ -1,0 +1,20 @@
+Configuration Sources
+
+Settings need to be secured, like connection string, user credential
+	DEV:  User secrets
+	PROD: Vault
+
+Environment related settings, such as Identity Server's address
+	DEV:  Environment Variables / Command line arguments
+	PROD: Environment Variables
+
+Application specific settings, such as Log setting
+	DEV:  appsettings.development.json
+	PROD: appsettings.json
+
+Override order: Vault > Environment Variables > Commandline arguments > appsettings.development.json > appsettings.json > User Secrets
+
+
+In testing:
+	Functional / Integration testing
+	from settings.json under each test's folder
