@@ -23,7 +23,11 @@ namespace PingDong.Newmoon.Events.Service.Queries
 			{
 				connection.Open();
 
-				return await connection.QueryAsync<Place>("SELECT PlaceId As [Id], PlaceName As [Name], IsOccupied, AddressNo, AddressStreet, AddressCity, AddressState, AddressCountry, AddressZipCode FROM events.places");
+				var sql = "SELECT PlaceId As [Id], PlaceName As [Name], IsOccupied, AddressNo, " +
+						  "       AddressStreet, AddressCity, AddressState, AddressCountry, AddressZipCode " +
+						  "  FROM events.places";
+
+				return await connection.QueryAsync<Place>(sql);
 			}
 		}
 	}

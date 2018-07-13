@@ -57,14 +57,19 @@ On top of eShopContainers, I added some features that I believe they are importa
 
 ### Not yet:
   
-* [ ] Authentication & Authorization 
 * [ ] API Gateway 
 * [ ] GraphQL 
 * [ ] Integration Message 
+* [ ] NoSQL & Redis 
+
+* [ ] Authentication & Authorization 
 * [ ] Docker & Kubernetes 
+* [ ] Grafana or Kibana 
+* [ ] Prometheus 
+
 * [ ] Client @ React 
 * [ ] Client @ MVC 
-* [ ] NoSQL & Redis 
+
 * [ ] Performance and Load Testing  
 
 
