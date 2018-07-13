@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,11 +29,17 @@ namespace PingDong.Newmoon.Events
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<EventContext>(options =>
                         {
-                            options.UseSqlServer(connectionString,
-                                sqlServerOptionsAction: sqlOptions =>
-                                {
-                                    sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
-                                });
+                            var builder = options.UseSqlServer(connectionString,
+                                        sqlServerOptionsAction: sqlOptions =>
+                                            {
+                                                sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                                            });
+                            if (configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
+                            {
+                                builder.EnableSensitiveDataLogging()
+                                        // throw an exception when you are evaluating a query in-memory instead of in SQL, for performance
+                                        .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning));
+                            }
                         }
                         // , ServiceLifetime.Scoped
                         // Default lifetime
