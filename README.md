@@ -72,4 +72,5 @@ On top of eShopContainers, I added some features that I believe they are importa
 * [OData] The workaround of the compatibility with Swagger  
 * [ValueObject] EF Core doesn't support inject value object in EF 2.1  
 [Issue 12078] (https://github.com/aspnet/EntityFrameworkCore/issues/12078)  
-[Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148)
+[Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148) 
+* [TestHost] Have to manually reset the RequestId of the HttpClient before sending request 
