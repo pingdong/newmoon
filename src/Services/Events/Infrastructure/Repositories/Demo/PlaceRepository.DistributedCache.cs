@@ -8,7 +8,6 @@ using PingDong.Newmoon.Events.Core;
 using FluentValidation;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using PingDong.Linq;
 
 namespace PingDong.Newmoon.Events.Infrastructure.Repositories
 {
@@ -22,7 +21,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
         private readonly IEnumerable<IValidator<Place>> _validators;
         private readonly IDistributedCache _cache;
 
-        private const string CacheKey = "Place.InMemory";
+        private const string CacheKey = "Place.DistributedCache";
 
         public PlaceDistributedCacheRepository(IDistributedCache cache, IEnumerable<IValidator<Place>> validators)
         {
@@ -63,7 +62,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
 
             var places = JsonConvert.DeserializeObject<Dictionary<int, Place>>(cacheValue);
 
-            if (places.IsNullOrEmpty())
+            if (places == null)
             {
                 places = new Dictionary<int, Place>();
                 var saveValue = JsonConvert.SerializeObject(places);
@@ -75,9 +74,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
 
         private async Task TrySetValue(Place place)
         {
-            var cacheValue = await _cache.GetStringAsync(CacheKey);
-
-            var places = JsonConvert.DeserializeObject<Dictionary<int, Place>>(cacheValue);
+            var places = await TryGetValue();
 
             if (places.ContainsKey(place.Id))
                 places[place.Id] = place;

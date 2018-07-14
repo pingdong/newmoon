@@ -10,6 +10,7 @@ On top of eShopContainers, I added some features that I believe they are importa
 * Microsoft ASP.Net Core 2.1.1
 * Microsoft Entity Framework Core 2.1.1
 * Microsoft OData 7.0.0
+* StackExchange.Redis 1.2.6
 * Dapper 1.50.5
 * Autofac 4.8.1
 * AutoMapper 7.0.1
@@ -50,7 +51,7 @@ On top of eShopContainers, I added some features that I believe they are importa
 * [x] Microservice Coding Practice 
 * [x] Multiple Configuration Source, Sturcture Application Settings 
 * [x] OData
-* [x] Cache: In Memory Cache, Redis
+* [x] Cache: In-memory, Redis
 * [x] Testing 
   * [x] Unit Testing 
   * [x] Integration Testing  
