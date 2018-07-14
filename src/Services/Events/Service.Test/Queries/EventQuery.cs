@@ -17,6 +17,8 @@ namespace PingDong.Newmoon.Events.Service.Test
 
     public class EventQueryTest : IDisposable
     {
+        private readonly string _dbName = Guid.NewGuid().ToString();
+
         private const string DefaultName = "Place";
         private readonly DateTime DefaultStartTime = DateTime.Now;
         private readonly DateTime DefaultEndTime = DateTime.Now.AddHours(2);
@@ -70,12 +72,13 @@ namespace PingDong.Newmoon.Events.Service.Test
         private async void ExecuteTestCase(Func<IEventRepository, string, Task> action)
         {
             var options = new DbContextOptionsBuilder<EventContext>()
-                                .UseSqlServer(InMemoryDbTestHelper.DefaultConnectionString)
+                                .UseSqlServer(InMemoryDbTestHelper.BuildConnectionString(_dbName))
                                 .Options;
 
             using (var context = new EventContext(options, new EmptyMediator()))
             {
                 // It's VERY important.
+                await context.Database.EnsureDeletedAsync();
                 await context.Database.EnsureCreatedAsync();
 
                 var repository = new EventRepository(context, null);
@@ -90,7 +93,7 @@ namespace PingDong.Newmoon.Events.Service.Test
             // Clean up the test environment
 
             // Removing physic db file
-            InMemoryDbTestHelper.CleanUp();
+            InMemoryDbTestHelper.CleanUp(_dbName);
         }
     }
 }

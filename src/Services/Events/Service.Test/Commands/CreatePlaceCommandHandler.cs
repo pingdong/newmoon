@@ -29,7 +29,7 @@ namespace PingDong.Newmoon.Events.Service.Test
             Place savedPlace = null;
 
             repositoryMock.Setup(repository => repository.Add(It.IsAny<Place>()))
-                            .Returns<Place>(x => x)
+                            .Returns<Place>(x => Task.FromResult(x))
                             .Callback<Place>(r => savedPlace = r);
             repositoryMock.Setup(repository => repository.UnitOfWork.SaveEntitiesAsync(It.IsAny<CancellationToken>()))
                             .Returns(Task.FromResult(true));

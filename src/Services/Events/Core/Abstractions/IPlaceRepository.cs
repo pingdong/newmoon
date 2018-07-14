@@ -7,6 +7,6 @@ namespace PingDong.Newmoon.Events.Core
     {
         Task<Place> FindByNameAsync(string name);
         Task<Place> GetByIdAsync(int id);
-        Place Add(Place place);
+        Task<Place> Add(Place place);
     }
 }

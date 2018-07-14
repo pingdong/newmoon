@@ -154,6 +154,20 @@ namespace PingDong.Newmoon.Events
                 #endregion
             }
 
+            #region Caching (.Net In Memory / Redis)
+
+            services.AddMemoryCache();
+
+            var redisServer = _configuration["DistributedCache:Server"];
+            var redisInstance = _configuration["DistributedCache:Instance"];
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = redisServer;
+                option.InstanceName = redisInstance;
+            });
+
+            #endregion
+
             #region Service Injecting (ASP.Net Core IoC)
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();

@@ -35,7 +35,7 @@ namespace PingDong.Newmoon.Events.Service.Commands
                     message.Place.Address.City, message.Place.Address.State,
                     message.Place.Address.Country, message.Place.Address.ZipCode);
 
-                place = this._placeRepository.Add(updatePlace);
+                place = await this._placeRepository.Add(updatePlace);
             }
 
             // Create Event
