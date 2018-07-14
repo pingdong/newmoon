@@ -17,9 +17,9 @@ On top of eShopContainers, I added some features that I believe they are importa
 * MediatR 5.0.1
 * Serilog.AspNetCore 2.1.1
 * Polly 6.0.1
-* Swashbuckle.AspNetCore 2.5.0
+* Swashbuckle.AspNetCore 3.0.0
 * xUnit.net 2.3.1
-* Moq 4.8.3 
+* Moq 4.9 
 
 ## The following design patterns are involved:
 * Clean Architect
