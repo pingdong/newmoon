@@ -18,6 +18,7 @@ namespace PingDong.Newmoon.Events.Integration.Test
             var cfg = new ConfigurationBuilder()
                 .SetBasePath(baseDir)
                 .AddJsonFile("Settings.json")
+                .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_dbName))
                 .Build();
 
             var webHostBuilder = WebHost.CreateDefaultBuilder()
@@ -68,12 +69,14 @@ namespace PingDong.Newmoon.Events.Integration.Test
             }
         }
 
+        private readonly string _dbName = Guid.NewGuid().ToString();
+
         public void Dispose()
         {
             // Clean up the test environment
 
             // Removing physic db file
-            InMemoryDbTestHelper.CleanUp();
+            InMemoryDbTestHelper.CleanUp(_dbName);
         }
     }
 }

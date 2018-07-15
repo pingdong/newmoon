@@ -7,19 +7,20 @@ The current version borrowed some codes and idea from Microsoft eShopContainers 
 On top of eShopContainers, I added some features that I believe they are important and helpful in real life. For example, Extensions and Reflections are widely used here, I know it's controversial, to generate lean, modular and reusable codes. This drawback is that may bring some difficulties to understand, especially to junior dev. To me, long-term maintainability, flexibility and simplicity is always crucial. 
 
 ## The following libraries are used:
-* Microsoft ASP.Net Core 2.1
-* Microsoft Entity Framework Core 2.1
+* Microsoft ASP.Net Core 2.1.1
+* Microsoft Entity Framework Core 2.1.1
 * Microsoft OData 7.0.0
+* StackExchange.Redis 1.2.6
 * Dapper 1.50.5
 * Autofac 4.8.1
 * AutoMapper 7.0.1
-* FluentValidation 7.6
+* FluentValidation 7.6.104
 * MediatR 5.0.1
 * Serilog.AspNetCore 2.1.1
 * Polly 6.0.1
 * Swashbuckle.AspNetCore 3.0.0
 * xUnit.net 2.3.1
-* Moq 4.9 
+* Moq 4.9.0  
 
 ## The following design patterns are involved:
 * Clean Architect
@@ -49,7 +50,8 @@ On top of eShopContainers, I added some features that I believe they are importa
   
 * [x] Microservice Coding Practice 
 * [x] Multiple Configuration Source, Sturcture Application Settings 
-* [x] OData 
+* [x] OData
+* [x] Cache: In-memory, Redis
 * [x] Testing 
   * [x] Unit Testing 
   * [x] Integration Testing  
@@ -57,20 +59,21 @@ On top of eShopContainers, I added some features that I believe they are importa
 
 ### Not yet:
   
-* [ ] API Gateway 
-* [ ] GraphQL 
-* [ ] Integration Message 
-* [ ] NoSQL & Redis 
-
-* [ ] Authentication & Authorization 
-* [ ] Docker & Kubernetes 
-* [ ] Grafana or Kibana 
-* [ ] Prometheus 
-
-* [ ] Client @ React 
-* [ ] Client @ MVC 
-
-* [ ] Performance and Load Testing  
+* [ ] NoSQL
+* [ ] ElasticSearch
+* [ ] Integration Message
+* [ ] GraphQL
+* [ ] API Gateway
+ 
+* [ ] Authentication & Authorization
+* [ ] Docker & Kubernetes
+* [ ] Grafana or Kibana
+* [ ] Prometheus
+ 
+* [ ] Client @ React
+* [ ] Client @ MVC
+ 
+* [ ] Performance and Load Testing
 
 
 > ## Backlog 

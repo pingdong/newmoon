@@ -17,6 +17,8 @@ namespace PingDong.Newmoon.Events.Service.Test
 
     public class PlaceQueryTest : IDisposable
     {
+        private readonly string _dbName = Guid.NewGuid().ToString();
+
         private const string DefaultName = "Place";
         private const string DefaultNo = "1";
         private const string DefaultStreet = "st.";
@@ -35,7 +37,7 @@ namespace PingDong.Newmoon.Events.Service.Test
                     DefaultCity, DefaultState, DefaultCountry,
                     DefaultZipCode);
 
-                repository.Add(place);
+                await repository.Add(place);
                 await repository.UnitOfWork.SaveChangesAsync();
 
                 var query = new PlaceQuery(connectionString);
@@ -59,7 +61,7 @@ namespace PingDong.Newmoon.Events.Service.Test
         private async void ExecuteTestCase(Func<IPlaceRepository, string, Task> action)
         {
             var options = new DbContextOptionsBuilder<EventContext>()
-                                .UseSqlServer(InMemoryDbTestHelper.DefaultConnectionString)
+                                .UseSqlServer(InMemoryDbTestHelper.BuildConnectionString(_dbName))
                                 .Options;
 
             using (var context = new EventContext(options, new EmptyMediator()))
@@ -79,7 +81,7 @@ namespace PingDong.Newmoon.Events.Service.Test
             // Clean up the test environment
 
             // Removing physic db file
-            InMemoryDbTestHelper.CleanUp();
+            InMemoryDbTestHelper.CleanUp(_dbName);
         }
     }
 }

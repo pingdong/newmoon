@@ -33,6 +33,7 @@ using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Swashbuckle.AspNetCore.Swagger;
+using StackExchange.Redis;
 
 namespace PingDong.Newmoon.Events
 {
@@ -153,6 +154,34 @@ namespace PingDong.Newmoon.Events
 
                 #endregion
             }
+
+            #region Caching (In-memory / Distributed)
+
+            // InMemory
+            services.AddMemoryCache();
+
+            // Distributed Cache (Microsoft Redis implementation)
+            var redisServer = _configuration["DistributedCache:Server"];
+            var redisInstance = _configuration["DistributedCache:Instance"];
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = redisServer;
+                option.InstanceName = redisInstance;
+            });
+
+            // Redis (StackExchange)
+            // Making sure the service won't start until redis is ready.
+            services.AddSingleton<ConnectionMultiplexer>(sp =>
+            {
+                var redisConnectionString = _configuration["Redis:Connection"];
+                var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
+
+                configuration.ResolveDns = true;
+
+                return ConnectionMultiplexer.Connect(configuration);
+            });
+
+            #endregion
 
             #region Service Injecting (ASP.Net Core IoC)
 

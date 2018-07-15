@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using PingDong.DomainDriven.Infrastructure.Mediator;
+using Microsoft.Extensions.Caching.Memory;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Infrastructure.Repositories;
 using Xunit;
@@ -11,7 +10,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Test
     // The purpose of this unit test is a demo on how to using InMemory SQL Provider
     //   for unit testing, without SQLServer Express InMemory DB provider. 
 
-    public class PlaceRepositoryTest
+    public class PlaceInMemoryRepositoryTest
     {
         private const string DefaultName = "Place";
         private const string DefaultNo = "1";
@@ -22,7 +21,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Test
         private const string DefaultZipCode = "0910";
         
         [Fact]
-        public void Add_Then_Get()
+        public void Add_Then_Get_InMemory()
         {
             ExecuteTestCase(async repository =>
             {
@@ -59,20 +58,11 @@ namespace PingDong.Newmoon.Events.Infrastructure.Test
 
         private async void ExecuteTestCase(Func<IPlaceRepository, Task> action)
         {
-            var options = new DbContextOptionsBuilder<EventContext>()
-                                // Randon db name for parallel testing
-                                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                                .Options;
+            var option = new MemoryCacheOptions();
+            var cache = new MemoryCache(option);
+            var repository = new PlaceInMemoryRepository(cache, null);
 
-            using (var context = new EventContext(options, new EmptyMediator()))
-            {
-                // It's VERY important.
-                await context.Database.EnsureCreatedAsync();
-
-                var repository = new PlaceRepository(context, null);
-
-                await action(repository);
-            }
+            await action(repository);
         }
     }
 }

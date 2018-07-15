@@ -48,18 +48,18 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
             return place;
         }
 
-        public Place Add(Place place)
+        public Task<Place> Add(Place place)
         {
             this._validators.Validate(place);
 
             if (place.IsTransient())
             {
-                return _context.Places
-                               .Add(place)
-                               .Entity;
+                place = _context.Places
+                                .Add(place)
+                                .Entity;
             }
 
-            return place;
+            return Task.FromResult(place);
         }
     }
 }

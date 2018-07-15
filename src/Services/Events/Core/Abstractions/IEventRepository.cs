@@ -6,6 +6,6 @@ namespace PingDong.Newmoon.Events.Core
     public interface IEventRepository : IRepository<Event>
     {
         Task<Event> GetByIdAsync(int id);
-        Event Add(Event evt);
+        Task<Event> Add(Event evt);
     }
 }
