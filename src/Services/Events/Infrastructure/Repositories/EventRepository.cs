@@ -35,6 +35,9 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
 
         public Task<Event> Add(Event evt)
         {
+            if (evt == null)
+                throw new ArgumentNullException(nameof(evt));
+
             _validators.Validate(evt);
 
             if (evt.IsTransient())
