@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\PingD\Github\Newmoon\src\Services\Events\Events.API\PingDong.Newmoon.Events.xml</DocumentationFile>
-    <OutputPath>C:\Users\PingD\Github\Newmoon\drops\events\</OutputPath>
+    <DocumentationFile>..\..\..\..\drops\events\PingDong.Newmoon.Events.xml</DocumentationFile>
+    <OutputPath>..\..\..\..\drops\events\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
   </PropertyGroup>
 

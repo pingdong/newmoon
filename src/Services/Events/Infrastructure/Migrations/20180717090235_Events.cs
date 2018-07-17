@@ -3,31 +3,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 {
-    public partial class EventsInitialise : Migration
+    public partial class Events : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Events");
+                name: "events");
 
             migrationBuilder.CreateSequence(
                 name: "AttendeSeq",
-                schema: "Events",
+                schema: "events",
                 incrementBy: 10);
 
             migrationBuilder.CreateSequence(
                 name: "EventSeq",
-                schema: "Events",
+                schema: "events",
                 incrementBy: 10);
 
             migrationBuilder.CreateSequence(
                 name: "PlaceSeq",
-                schema: "Events",
+                schema: "events",
                 incrementBy: 10);
 
             migrationBuilder.CreateTable(
                 name: "Events",
-                schema: "Events",
+                schema: "events",
                 columns: table => new
                 {
                     EventId = table.Column<int>(nullable: false),
@@ -45,7 +45,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Places",
-                schema: "Events",
+                schema: "events",
                 columns: table => new
                 {
                     PlaceId = table.Column<int>(nullable: false),
@@ -65,7 +65,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Requests",
-                schema: "Events",
+                schema: "events",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -79,7 +79,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Attendees",
-                schema: "Events",
+                schema: "events",
                 columns: table => new
                 {
                     AttendeeId = table.Column<int>(nullable: false),
@@ -94,7 +94,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Attendees_Events_EventId",
                         column: x => x.EventId,
-                        principalSchema: "Events",
+                        principalSchema: "events",
                         principalTable: "Events",
                         principalColumn: "EventId",
                         onDelete: ReferentialAction.Cascade);
@@ -102,13 +102,13 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Attendees_EventId",
-                schema: "Events",
+                schema: "events",
                 table: "Attendees",
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
                 name: "Events_Attendee_Identity",
-                schema: "Events",
+                schema: "events",
                 table: "Attendees",
                 column: "AttendeeId",
                 unique: true);
@@ -118,31 +118,31 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Attendees",
-                schema: "Events");
+                schema: "events");
 
             migrationBuilder.DropTable(
                 name: "Places",
-                schema: "Events");
+                schema: "events");
 
             migrationBuilder.DropTable(
                 name: "Requests",
-                schema: "Events");
+                schema: "events");
 
             migrationBuilder.DropTable(
                 name: "Events",
-                schema: "Events");
+                schema: "events");
 
             migrationBuilder.DropSequence(
                 name: "AttendeSeq",
-                schema: "Events");
+                schema: "events");
 
             migrationBuilder.DropSequence(
                 name: "EventSeq",
-                schema: "Events");
+                schema: "events");
 
             migrationBuilder.DropSequence(
                 name: "PlaceSeq",
-                schema: "Events");
+                schema: "events");
         }
     }
 }

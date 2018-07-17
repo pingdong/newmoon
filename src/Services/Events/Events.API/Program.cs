@@ -54,7 +54,7 @@ namespace PingDong.Newmoon.Events
 
             var host = BuildWebHost(args).Build();
             host.MigrateDbContext<EventContext>((context, services) =>
-            {
+                {
                     var logger = services.GetService<ILogger<EventContextSeed>>();
 
                     new EventContextSeed()
@@ -71,9 +71,8 @@ namespace PingDong.Newmoon.Events
         /// </summary>
         /// <param name="args">args</param>
         /// <returns>Web host</returns>
-        public static IWebHostBuilder BuildWebHost(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
                 // Application Configure
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
@@ -140,7 +139,5 @@ namespace PingDong.Newmoon.Events
                 .UseSerilog((context, config) => { config.ReadFrom.Configuration(context.Configuration); })
                 // Starting
                 .UseStartup<Startup>();
-                
-        }
     }
 }

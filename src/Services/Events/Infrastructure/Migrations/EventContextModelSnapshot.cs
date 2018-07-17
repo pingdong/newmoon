@@ -17,9 +17,9 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("Relational:Sequence:Events.AttendeSeq", "'AttendeSeq', 'Events', '1', '10', '', '', 'Int64', 'False'")
-                .HasAnnotation("Relational:Sequence:Events.EventSeq", "'EventSeq', 'Events', '1', '10', '', '', 'Int64', 'False'")
-                .HasAnnotation("Relational:Sequence:Events.PlaceSeq", "'PlaceSeq', 'Events', '1', '10', '', '', 'Int64', 'False'")
+                .HasAnnotation("Relational:Sequence:events.AttendeSeq", "'AttendeSeq', 'events', '1', '10', '', '', 'Int64', 'False'")
+                .HasAnnotation("Relational:Sequence:events.EventSeq", "'EventSeq', 'events', '1', '10', '', '', 'Int64', 'False'")
+                .HasAnnotation("Relational:Sequence:events.PlaceSeq", "'PlaceSeq', 'events', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("PingDong.DomainDriven.Core.ClientRequest", b =>
@@ -34,7 +34,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Requests","Events");
+                    b.ToTable("Requests","events");
                 });
 
             modelBuilder.Entity("PingDong.Newmoon.Events.Core.Attendee", b =>
@@ -43,7 +43,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("AttendeeId")
                         .HasAnnotation("SqlServer:HiLoSequenceName", "AttendeSeq")
-                        .HasAnnotation("SqlServer:HiLoSequenceSchema", "Events")
+                        .HasAnnotation("SqlServer:HiLoSequenceSchema", "events")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<int?>("EventId");
@@ -71,7 +71,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                         .IsUnique()
                         .HasName("Events_Attendee_Identity");
 
-                    b.ToTable("Attendees","Events");
+                    b.ToTable("Attendees","events");
                 });
 
             modelBuilder.Entity("PingDong.Newmoon.Events.Core.Event", b =>
@@ -80,7 +80,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("EventId")
                         .HasAnnotation("SqlServer:HiLoSequenceName", "EventSeq")
-                        .HasAnnotation("SqlServer:HiLoSequenceSchema", "Events")
+                        .HasAnnotation("SqlServer:HiLoSequenceSchema", "events")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<DateTime>("EndTime");
@@ -102,7 +102,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events","Events");
+                    b.ToTable("Events","events");
                 });
 
             modelBuilder.Entity("PingDong.Newmoon.Events.Core.Place", b =>
@@ -111,7 +111,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("PlaceId")
                         .HasAnnotation("SqlServer:HiLoSequenceName", "PlaceSeq")
-                        .HasAnnotation("SqlServer:HiLoSequenceSchema", "Events")
+                        .HasAnnotation("SqlServer:HiLoSequenceSchema", "events")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<string>("City")
@@ -147,7 +147,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Places","Events");
+                    b.ToTable("Places","events");
                 });
 
             modelBuilder.Entity("PingDong.Newmoon.Events.Core.Attendee", b =>

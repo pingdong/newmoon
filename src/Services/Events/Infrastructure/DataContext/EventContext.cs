@@ -9,7 +9,7 @@ namespace PingDong.Newmoon.Events.Infrastructure
 {
     public class EventContext : DbContextBase
     {
-        public const string DefaultSchema = "Events";
+        public const string DefaultSchema = "events";
 
         // Event
         public DbSet<Event> Events { get; set; }
