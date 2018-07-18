@@ -19,6 +19,7 @@ namespace PingDong.Newmoon.IdentityServer
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
                 // Application Configure
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {

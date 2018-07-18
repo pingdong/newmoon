@@ -73,6 +73,7 @@ namespace PingDong.Newmoon.Events
         /// <returns>Web host</returns>
         public static IWebHostBuilder BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
                 // Application Configure
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
