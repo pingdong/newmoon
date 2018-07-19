@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace PingDong.Newmoon.Identity.Authentication
+namespace PingDong.Newmoon.IdentityServer.Authentication
 {
     public class ApplicationUser : IdentityUser
     {

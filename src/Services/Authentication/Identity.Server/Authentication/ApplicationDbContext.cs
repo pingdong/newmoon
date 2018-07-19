@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PingDong.Newmoon.Identity.Authentication;
 
-namespace PingDong.Newmoon.IdentityServer.Data
+namespace PingDong.Newmoon.IdentityServer.Authentication
 {
     public class ApplicationDbContext : IdentityDbContext
     {

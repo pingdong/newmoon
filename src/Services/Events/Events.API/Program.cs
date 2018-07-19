@@ -61,7 +61,7 @@ namespace PingDong.Newmoon.Events
                             .SeedAsync(context, logger)
                             .Wait();
                 });
-            // If seeing is not needed
+            // If seeding is not needed
             //host.MigrateDbContext<EventContext>((_, __) => { });
             host.Run();
         }

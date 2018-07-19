@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Identity.Server.data.Migrations.Users
+namespace PingDong.Newmoon.IdentityServer.Authentication
 {
     public partial class Users : Migration
     {

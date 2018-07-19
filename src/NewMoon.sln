@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-A
 		..\docs\Configuration.txt = ..\docs\Configuration.txt
 		..\docs\DataValidation.txt = ..\docs\DataValidation.txt
 		..\docs\EF core.txt = ..\docs\EF core.txt
+		..\docs\Installation.txt = ..\docs\Installation.txt
 		..\Docs\IoC.txt = ..\Docs\IoC.txt
 		..\Docs\Mapping.txt = ..\Docs\Mapping.txt
 		..\README.md = ..\README.md
@@ -32,16 +33,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-A
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ACC5BE90-3232-400A-9BEA-56887C7E905A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A6849C74-5CE3-47F6-88C6-D0BD72A55B95}"
-	ProjectSection(SolutionItems) = preProject
-		Services\Events\Database\Attendees.sql = Services\Events\Database\Attendees.sql
-		Services\Events\Database\Events.sql = Services\Events\Database\Events.sql
-		Services\Events\Database\Places.sql = Services\Events\Database\Places.sql
-		Services\Events\Database\Requests.sql = Services\Events\Database\Requests.sql
-		Services\Events\Database\Schema.sql = Services\Events\Database\Schema.sql
-		Services\Events\Database\Status.sql = Services\Events\Database\Status.sql
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Api", "Services\Events\Events.API\Events.Api.csproj", "{42EC73F9-32B2-46D7-BBAC-B79B6D6F84A5}"
 EndProject
@@ -70,6 +61,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Api.FunctionalTest", "Services\Events\Events.Api.FunctionalTest\Events.Api.FunctionalTest.csproj", "{81D68115-7B49-4A89-A829-21BAA23E4430}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.Web", "Library\QualityTools\QualityTools.Web\QualityTools.Web.csproj", "{906E4134-9C1D-4482-B188-B50CF16AE03C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{E69EF8A5-09AC-495A-992E-F64FACA18ED2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Server", "Services\Authentication\Identity.Server\Identity.Server.csproj", "{8823674D-F069-4716-BD3C-F16AC3A0C42A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +140,10 @@ Global
 		{906E4134-9C1D-4482-B188-B50CF16AE03C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{906E4134-9C1D-4482-B188-B50CF16AE03C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{906E4134-9C1D-4482-B188-B50CF16AE03C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8823674D-F069-4716-BD3C-F16AC3A0C42A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8823674D-F069-4716-BD3C-F16AC3A0C42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8823674D-F069-4716-BD3C-F16AC3A0C42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8823674D-F069-4716-BD3C-F16AC3A0C42A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,7 +157,6 @@ Global
 		{082F9FF2-E8E4-49FC-9A1C-A9F6F3A452BA} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{2FB8559C-79E6-4CA2-8FC9-598CA527797E} = {ACC5BE90-3232-400A-9BEA-56887C7E905A}
 		{5D7DBFB7-F33D-40AE-9235-77BAD452A25A} = {2FB8559C-79E6-4CA2-8FC9-598CA527797E}
-		{A6849C74-5CE3-47F6-88C6-D0BD72A55B95} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{42EC73F9-32B2-46D7-BBAC-B79B6D6F84A5} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{7E8CA089-4B5B-4833-AB29-879DDFF06AAA} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{AD99896C-71A9-4098-ABC1-CC2DF2F85E58} = {38770472-7650-4B85-A5B6-A9E999B84B47}
@@ -173,6 +171,8 @@ Global
 		{04FB22BA-12BC-49CE-AB52-99F0C080416F} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{81D68115-7B49-4A89-A829-21BAA23E4430} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{906E4134-9C1D-4482-B188-B50CF16AE03C} = {F4D64E41-8A7A-4AAE-B24E-712D2C49EE09}
+		{E69EF8A5-09AC-495A-992E-F64FACA18ED2} = {2FB8559C-79E6-4CA2-8FC9-598CA527797E}
+		{8823674D-F069-4716-BD3C-F16AC3A0C42A} = {E69EF8A5-09AC-495A-992E-F64FACA18ED2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D16100-61EC-41DC-A4E8-2DE984C5D2ED}
