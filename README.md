@@ -48,14 +48,15 @@ On top of eShopContainers, I added some features that I believe they are importa
 
 ### Done: 
   
-* [x] Microservice Coding Practice 
-* [x] Multiple Configuration Source, Sturcture Application Settings 
+* [x] Microservice Coding Practice
+* [x] Multiple Configuration Source, Sturcture Application Settings
 * [x] OData
 * [x] Cache: In-memory, Redis
-* [x] Testing 
-  * [x] Unit Testing 
-  * [x] Integration Testing  
-  * [x] Functional Testing  
+* [x] Testing
+  * [x] Unit Testing
+  * [x] Integration Testing
+  * [x] Functional Testing
+* [x] Authentication & Authorization
 
 ### Not yet:
   
@@ -65,13 +66,12 @@ On top of eShopContainers, I added some features that I believe they are importa
 * [ ] GraphQL
 * [ ] API Gateway
  
-* [ ] Authentication & Authorization
 * [ ] Docker & Kubernetes
 * [ ] Grafana or Kibana
 * [ ] Prometheus
  
 * [ ] Client @ React
-* [ ] Client @ MVC
+* [ ] Client @ Razor
  
 * [ ] Performance and Load Testing
 
@@ -82,3 +82,4 @@ On top of eShopContainers, I added some features that I believe they are importa
 [Issue 12078] (https://github.com/aspnet/EntityFrameworkCore/issues/12078)  
 [Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148) 
 * [TestHost] Have to manually reset the RequestId of the HttpClient before sending request 
+* [IdentityServer4] Need implement a Consent form, then set RequireConsent = true 

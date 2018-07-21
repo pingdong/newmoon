@@ -2,7 +2,11 @@
   "App": {
     "Version": "1.0.0",
     "ApiVersion": "v1",
-    "Title": "Event WebAPI"
+    "Title": "Event WebAPI",
+    "BypassAuth": true,
+    "ExternalServices": {
+      "AuthenticationService": "http://localhost:5001"
+    }
   },
   "ConnectionStrings": {
     "DefaultDbConnection": "Server=(localdb)\\mssqllocaldb;Database=Events.InMemory;Trusted_Connection=True;ConnectRetryCount=0"

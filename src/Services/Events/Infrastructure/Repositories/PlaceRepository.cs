@@ -24,7 +24,10 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
 
         public async Task<Place> FindByNameAsync(string name)
         {
-            var place = await _context.Places.FirstOrDefaultAsync(p => p.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            if (string.IsNullOrWhiteSpace(name))
+                return null;
+
+            var place = await _context.Places.FirstOrDefaultAsync(p => p.Name.ToLower() == name.ToLower());
             // TODO: ValueObject is not supported by EF Core 2.1
             //if (place != null)
             //{
@@ -50,6 +53,9 @@ namespace PingDong.Newmoon.Events.Infrastructure.Repositories
 
         public Task<Place> Add(Place place)
         {
+            if (null == place)
+                throw new ArgumentNullException(nameof(place));
+
             this._validators.Validate(place);
 
             if (place.IsTransient())

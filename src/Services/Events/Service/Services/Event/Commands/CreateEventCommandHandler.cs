@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using PingDong.DomainDriven.Service;
+using PingDong.Linq;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Service.Models;
 
@@ -28,7 +29,7 @@ namespace PingDong.Newmoon.Events.Service.Commands
             var evt = new Event(message.Name, message.StartTime, message.EndTime);
 
             // Set Place
-            var place = await this._placeRepository.FindByNameAsync(message.Place.Name);
+            var place = await this._placeRepository.FindByNameAsync(message.Place?.Name);
             if (place == null)
             {
                 // TODO: Value Object
@@ -40,13 +41,17 @@ namespace PingDong.Newmoon.Events.Service.Commands
 
                 place = await this._placeRepository.Add(newPlace);
             }
+
             evt.ChangePlace(place.Id);
 
             // Save attendee
-            foreach (var attendee in message.Attendees)
+            if (!message.Attendees.IsNullOrEmpty())
             {
-                var att = _mapper.Map<AttendeeDTO, Attendee>(attendee);
-                evt.AddAttendee(att);
+                foreach (var attendee in message.Attendees)
+                {
+                    var att = _mapper.Map<AttendeeDTO, Attendee>(attendee);
+                    evt.AddAttendee(att);
+                }
             }
 
             this._eventRepository.Add(evt);

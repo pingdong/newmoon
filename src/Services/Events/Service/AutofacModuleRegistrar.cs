@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using MediatR;
 using Microsoft.Extensions.Configuration;
-using Ordering.API.Infrastructure.Behaviors;
 using PingDong.Application.Dependency;
+using PingDong.Newmoon.Events.Service;
 using PingDong.Newmoon.Events.Service.Queries;
 
 namespace PingDong.Newmoon.Events.Services

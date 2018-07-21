@@ -5,5 +5,6 @@
     /// </summary>
     public class ExternalServices
     {
+        public string AuthenticationService { get; set; }
     }
 }

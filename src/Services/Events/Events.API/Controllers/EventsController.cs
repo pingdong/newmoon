@@ -36,7 +36,6 @@ namespace PingDong.Newmoon.Events.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200"></response>
-
         [Route("")]
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
