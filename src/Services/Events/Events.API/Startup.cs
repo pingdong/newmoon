@@ -50,9 +50,7 @@ namespace PingDong.Newmoon.Events
         #region Variable Declare
 
         private readonly IHostingEnvironment _env;
-        private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
-        private AppSettings _appSettings;
 
         #endregion
 
@@ -61,10 +59,23 @@ namespace PingDong.Newmoon.Events
         /// <inheritdoc />
         public Startup(IConfiguration config, ILogger<Startup> logger, IHostingEnvironment env)
         {
-            _configuration = config;
+            Configuration = config;
             _logger = logger;
             _env = env;
         }
+
+        #endregion
+
+        #region Configuration
+
+        /// <summary>
+        /// Configuration
+        /// </summary>
+        protected IConfiguration Configuration { get; }
+        /// <summary>
+        /// AppSettings
+        /// </summary>
+        protected AppSettings AppSettings { get; private set; }
 
         #endregion
 
@@ -92,8 +103,8 @@ namespace PingDong.Newmoon.Events
 
             // Extract AppSettings and register into IoC
 
-            _appSettings = _configuration.GetSection("App").Get<AppSettings>();
-            services.AddSingleton(_appSettings);
+            AppSettings = Configuration.GetSection("App").Get<AppSettings>();
+            services.AddSingleton(AppSettings);
 
             _logger.LogInformation(LoggingEvent.Success, "Configurations are loaded from Section: App");
 
@@ -105,8 +116,14 @@ namespace PingDong.Newmoon.Events
 
             services.AddHealthChecks(checks =>
             {
-                checks.AddSqlCheck("Database Connection", _configuration["ConnectionStrings:DefaultDbConnection"])
-                      .AddUrlCheck(_appSettings.ExternalServices.AuthenticationService, TimeSpan.FromMinutes(_appSettings.HealthCheckInterval));
+                int minutes = 5;
+                if (AppSettings.HealthCheckInterval != 0)
+                {
+                    minutes = AppSettings.HealthCheckInterval;
+                }
+
+                checks.AddSqlCheck("Database Connection", Configuration["ConnectionStrings:DefaultDbConnection"], TimeSpan.FromMinutes(minutes))
+                      .AddUrlCheck(AppSettings.ExternalServices.AuthenticationService, TimeSpan.FromMinutes(minutes));
 
                 // For isolated web service only, doesn't depend on any db or service
                 // checks.AddValueTaskCheck("HTTP Endpoint", () => new ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
@@ -120,16 +137,17 @@ namespace PingDong.Newmoon.Events
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc(_appSettings.ApiVersion, new Info
+                options.SwaggerDoc(AppSettings.ApiVersion, new Info
                     {
-                        Title = _appSettings.Title,
-                        Version = _appSettings.Version,
-                        Description = $"{_appSettings.Title} v{_appSettings.Version}"
+                        Title = AppSettings.Title,
+                        Version = AppSettings.Version,
+                        Description = $"{AppSettings.Title} v{AppSettings.Version}"
                     });
                 options.AddSecurityDefinition("oauth2", new OAuth2Scheme
                     {
                         Description = "OAuth2 Authentication using Identity.Server",
-                        AuthorizationUrl = $"{_appSettings.ExternalServices.AuthenticationService}/connect/authorize",
+                        AuthorizationUrl = $"{AppSettings.ExternalServices.AuthenticationService}/connect/authorize",
+                        TokenUrl = $"{AppSettings.ExternalServices.AuthenticationService}/connect/token",
                         Flow = "implicit",
                         Type = "oauth2",
                         Scopes = new Dictionary<string, string>
@@ -147,7 +165,10 @@ namespace PingDong.Newmoon.Events
                 var xmlPath = Path.Combine(basePath, $"{Assembly.GetEntryAssembly().GetName().Name}.xml");
                 _logger.LogInformation(LoggingEvent.Success, $"{xmlPath} is loading");
 
-                options.IncludeXmlComments(xmlPath);
+                if (!bool.TrueString.Equals(Configuration["isTest"], StringComparison.InvariantCultureIgnoreCase))
+                {
+                    options.IncludeXmlComments(xmlPath);
+                }
                 options.DescribeAllEnumsAsStrings();
             });
 
@@ -159,7 +180,7 @@ namespace PingDong.Newmoon.Events
 
             if (_env.IsProduction())
             {
-                services.AddApplicationInsightsTelemetry(_configuration);
+                services.AddApplicationInsightsTelemetry(Configuration);
 
                 _logger.LogInformation(LoggingEvent.Entering, "ApplicationInsights is initialized");
             }
@@ -174,8 +195,8 @@ namespace PingDong.Newmoon.Events
             services.AddMemoryCache();
 
             // Distributed Cache (Microsoft Redis implementation)
-            var redisServer = _configuration["DistributedCache:Server"];
-            var redisInstance = _configuration["DistributedCache:Instance"];
+            var redisServer = Configuration["DistributedCache:Server"];
+            var redisInstance = Configuration["DistributedCache:Instance"];
             services.AddDistributedRedisCache(option =>
                 {
                     option.Configuration = redisServer;
@@ -186,7 +207,7 @@ namespace PingDong.Newmoon.Events
             // Making sure the service won't start until redis is ready.
             services.AddSingleton(sp =>
                 {
-                    var redisConnectionString = _configuration["Redis:Connection"];
+                    var redisConnectionString = Configuration["Redis:Connection"];
                     var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
 
                     configuration.ResolveDns = true;
@@ -201,7 +222,7 @@ namespace PingDong.Newmoon.Events
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                     .AddIdentityServerAuthentication(options =>
                         {
-                            options.Authority = $"{_appSettings.ExternalServices.AuthenticationService}";
+                            options.Authority = $"{AppSettings.ExternalServices.AuthenticationService}";
                             options.ApiName = "Events Api";
                             options.ApiSecret = "events_api-client";
                             options.LegacyAudienceValidation = true; // It is required for 401 error ValidAudiences
@@ -252,7 +273,7 @@ namespace PingDong.Newmoon.Events
                             // this defines a CORS policy called "default"
                             options.AddPolicy("default", policy =>
                             {
-                                policy.WithOrigins(_appSettings.BaseUri)
+                                policy.WithOrigins(AppSettings.BaseUri)
                                     .AllowAnyHeader()
                                     .AllowAnyMethod()
                                     .AllowCredentials();
@@ -314,7 +335,7 @@ namespace PingDong.Newmoon.Events
                 var instances = dependecies.OrderBy(d => d.RegisterType);
                 foreach (var instance in instances)
                 {
-                    instance.Inject(services, _configuration, _logger);
+                    instance.Inject(services, Configuration, _logger);
                     _logger.LogDebug(LoggingEvent.Success, $"{instance.GetType().FullName} is injected");
                 }
             }
@@ -341,7 +362,7 @@ namespace PingDong.Newmoon.Events
                 foreach (var module in modules)
                 {
                     module.Logger = _logger;
-                    module.Configuration = _configuration;
+                    module.Configuration = Configuration;
 
                     builder.RegisterModule(module);
 
@@ -444,18 +465,18 @@ namespace PingDong.Newmoon.Events
             app.UseSwagger()
                .UseSwaggerUI(options =>
                     {
-                        options.SwaggerEndpoint($"{_appSettings.BaseUri}/swagger/{_appSettings.ApiVersion}/swagger.json", $"{_appSettings.Title} {_appSettings.ApiVersion}");
+                        options.SwaggerEndpoint($"{AppSettings.BaseUri}/swagger/{AppSettings.ApiVersion}/swagger.json", $"{AppSettings.Title} {AppSettings.ApiVersion}");
                         options.DefaultModelsExpandDepth(-1); // Hide Models section
                         // Authentication
                         options.OAuthAppName("Events Service");
                         options.OAuthClientId("swagger");
-                        options.OAuth2RedirectUrl($"{_appSettings.BaseUri}/swagger/oauth2-redirect.html");
+                        options.OAuth2RedirectUrl($"{AppSettings.BaseUri}/swagger/oauth2-redirect.html");
                     });
             _logger.LogInformation(LoggingEvent.Success, "Swagger is running");
 
             // Security
             app.UseCors("default");
-            app.UseAuthentication();
+            UseAuth(app);
             _logger.LogInformation(LoggingEvent.Success, "Handling Authentication");
 
             // MVC
@@ -464,7 +485,7 @@ namespace PingDong.Newmoon.Events
                         // Workaround: https://github.com/OData/WebApi/issues/1175
                         routes.EnableDependencyInjection();
 
-                        var baseUri = $"api/{_appSettings.ApiVersion}";
+                        var baseUri = $"api/{AppSettings.ApiVersion}";
                         var odataUri = $"{baseUri}/odata";
                         routes.MapODataServiceRoute(odataUri, odataUri, GetEdmModel(GetSearchingTargets()));
 
@@ -475,6 +496,19 @@ namespace PingDong.Newmoon.Events
 
             _logger.LogInformation(LoggingEvent.Success, "Web Access Handling");
         }
+
+        #region Test Support
+
+        /// <summary>
+        /// Config Authentication
+        /// </summary>
+        /// <param name="app"></param>
+        protected virtual void UseAuth(IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+        }
+
+        #endregion
 
         #region Private Methods
 

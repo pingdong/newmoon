@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -16,14 +17,18 @@ namespace PingDong.Newmoon.Events.Functional.Test
         public TestServer CreateServer(string baseDir)
         {
             var cfg = new ConfigurationBuilder()
-                .SetBasePath(baseDir)
-                .AddJsonFile("Settings.json")
-                .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_dbName))
-                .Build();
+                            .SetBasePath(baseDir)
+                            .AddJsonFile("Settings.json")
+                            .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_dbName))
+                            .AddInMemoryCollection(new Dictionary<string, string>
+                                {
+                                    { "isTest", "true" }
+                                })
+                            .Build();
 
             var webHostBuilder = WebHost.CreateDefaultBuilder()
                                         .UseContentRoot(baseDir)
-                                        .UseEnvironment("Stagging")
+                                        .UseEnvironment("Development")
                                         .UseConfiguration(cfg)
                                         .UseStartup<TestsStartup>();
 
