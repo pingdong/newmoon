@@ -1,10 +1,10 @@
-﻿namespace PingDong.Newmoon.Events.Configuration
+﻿namespace PingDong.Newmoon.IdentityServer.Infrastructure.Configuration
 {
     /// <summary>
     /// Address of external services
     /// </summary>
     public class ExternalServices
     {
-        public string AuthenticationService { get; set; }
+        public string EventsService { get; set; }
     }
 }

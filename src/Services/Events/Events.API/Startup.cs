@@ -10,6 +10,8 @@ using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,11 +28,14 @@ using PingDong.Reflection;
 using PingDong.Web.Exceptions;
 using PingDong.Web.Validation;
 using PingDong.Service.OData;
+using PingDong.Newmoon.Events.Infrastructure.Identity;
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using IdentityModel;
+using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Swashbuckle.AspNetCore.Swagger;
 using StackExchange.Redis;
@@ -98,7 +103,8 @@ namespace PingDong.Newmoon.Events
 
             services.AddHealthChecks(checks =>
             {
-                checks.AddSqlCheck("Database Connection", _configuration["ConnectionStrings:DefaultDbConnection"]);
+                checks.AddSqlCheck("Database Connection", _configuration["ConnectionStrings:DefaultDbConnection"])
+                      .AddUrlCheck(_appSettings.ExternalServices.AuthenticationService, TimeSpan.FromMinutes(_appSettings.HealthCheckInterval));
 
                 // For isolated web service only, doesn't depend on any db or service
                 // checks.AddValueTaskCheck("HTTP Endpoint", () => new ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
@@ -114,23 +120,35 @@ namespace PingDong.Newmoon.Events
 
                 #region DevOps (Swagger)
 
-                services.AddSwaggerGen(option =>
-                    {
-                        option.SwaggerDoc(_appSettings.ApiVersion, new Info
+                services.AddSwaggerGen(options =>
                             {
-                                Title = _appSettings.Title,
-                                Version = _appSettings.Version,
-                                Description = $"{_appSettings.Title} v{_appSettings.Version}"
+                                options.SwaggerDoc(_appSettings.ApiVersion, new Info
+                                            {
+                                                Title = _appSettings.Title,
+                                                Version = _appSettings.Version,
+                                                Description = $"{_appSettings.Title} v{_appSettings.Version}"
+                                            });
+                                options.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                                    {
+                                        Description = "OAuth2 Authentication using Identity.Server",
+                                        AuthorizationUrl = $"{_appSettings.ExternalServices.AuthenticationService}/connect/authorize",
+                                        Flow = "implicit",
+                                        Type = "oauth2",
+                                        Scopes = new Dictionary<string, string>
+                                                        {
+                                                            { "events.api", "api" }
+                                                        }
+                                    });
+                                // Send authorization token in header
+                                options.DocumentFilter<SecurityRequirementsDocumentFilter>();
+
+                                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                                var xmlPath = Path.Combine(basePath, $"{Assembly.GetEntryAssembly().GetName().Name}.xml");
+                                _logger.LogInformation(LoggingEvent.Success, $"{xmlPath} is loading");
+
+                                options.IncludeXmlComments(xmlPath);
+                                options.DescribeAllEnumsAsStrings();
                             });
-
-                        var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                        var xmlPath = Path.Combine(basePath, $"{Assembly.GetEntryAssembly().GetName().Name}.xml");
-                        _logger.LogInformation(LoggingEvent.Success, $"{xmlPath} is loading");
-
-                        option.IncludeXmlComments(xmlPath);
-                        option.DescribeAllEnumsAsStrings();
-                    });
-
 
                 _logger.LogInformation(LoggingEvent.Success, "Swagger is initialized");
 
@@ -164,30 +182,137 @@ namespace PingDong.Newmoon.Events
             var redisServer = _configuration["DistributedCache:Server"];
             var redisInstance = _configuration["DistributedCache:Instance"];
             services.AddDistributedRedisCache(option =>
-            {
-                option.Configuration = redisServer;
-                option.InstanceName = redisInstance;
-            });
+                {
+                    option.Configuration = redisServer;
+                    option.InstanceName = redisInstance;
+                });
 
             // Redis (StackExchange)
             // Making sure the service won't start until redis is ready.
             services.AddSingleton<ConnectionMultiplexer>(sp =>
-            {
-                var redisConnectionString = _configuration["Redis:Connection"];
-                var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
+                {
+                    var redisConnectionString = _configuration["Redis:Connection"];
+                    var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
 
-                configuration.ResolveDns = true;
+                    configuration.ResolveDns = true;
 
-                return ConnectionMultiplexer.Connect(configuration);
-            });
+                    return ConnectionMultiplexer.Connect(configuration);
+                });
 
             #endregion
 
-            #region Service Injecting (ASP.Net Core IoC)
+            #region Identity
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                    .AddIdentityServerAuthentication(options =>
+                        {
+                            options.Authority = $"{_appSettings.ExternalServices.AuthenticationService}";
+                            options.ApiName = "Events Api";
+                            options.ApiSecret = "events_api-client";
+                            options.LegacyAudienceValidation = true; // It is required for 401 error ValidAudiences
+                            options.RequireHttpsMetadata = _env.IsProduction();
+                        });
+
+            _logger.LogInformation(LoggingEvent.Success, "Identity Validation is initialized");
+
+            #endregion
+
+            #region ASP.Net
+
+            services.AddOData();
+
+            // What's different between AddMvc and AddMvcCore
+            // https://offering.solutions/blog/articles/2017/02/07/difference-between-addmvc-addmvcore/
+            services.AddMvcCore(options =>
+                        {
+                            // Checking authentication
+                            var policy = new AuthorizationPolicyBuilder()
+                                                    // User must be authenticated
+                                                    .RequireAuthenticatedUser()
+                                                    // User must have scope
+                                                    .RequireClaim(JwtClaimTypes.Scope, "events.api")
+                                                    .Build();
+                            options.Filters.Add(new AuthorizeFilter(policy));
+
+                            // Checking ModelState
+                            options.Filters.Add(new ModelStateValidationFilter(_logger));
+
+                            // Workaround: https://github.com/OData/WebApi/issues/1177
+                            foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                            {
+                                outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                            }
+                            foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                            {
+                                inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                            }
+                        })
+                    // Using FluentValidation to verify incoming requests
+                    .AddFluentValidation(fvc => { references.ForEach(v => fvc.RegisterValidatorsFromAssembly(v)); })
+                    // For swagger
+                    .AddApiExplorer()
+                    // Security
+                    .AddCors(options =>
+                        {
+                            // this defines a CORS policy called "default"
+                            options.AddPolicy("default", policy =>
+                            {
+                                policy.WithOrigins(_appSettings.BaseUri)
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .AllowCredentials();
+                            });
+                        })
+                    .AddAuthorization(options =>
+                        {
+                            // Define predefined policy, then it can be used in controller
+                            //    [Authorize(Policy = "RequireAdministratorRole")]
+                            //    public IActionResult Shutdown()
+                            options.AddPolicy("RequireAdministratorRole", policy =>
+                            {
+                                policy.RequireScope("admin");
+                            });
+                        })
+                    // Json
+                    .AddJsonFormatters()
+                    .AddJsonOptions(
+                            options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                        )
+                    // http://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html#controllers-as-services
+                    // https://www.strathweb.com/2016/03/the-subtle-perils-of-controller-dependency-injection-in-asp-net-core-mvc/
+                    //.AddControllersAsServices()
+                    ;
+
+            _logger.LogInformation(LoggingEvent.Success, "MVC is initialized");
+
+            #endregion
+
+            #region Service Injecting (ASP.Net Core / Autofac IoC)
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
-            
-            // Auto discovery and register
+
+            #region CQRS (MediatR)
+
+            // Have to be initialized after injecting all necessary library by ASP.Net Core IoC
+
+            services.AddMediatR(references);
+
+            _logger.LogInformation(LoggingEvent.Success, "MediatR is initialized");
+
+            #endregion
+
+            #region Object Mapping (AutoMapper)
+
+            // Register all mapping profiles into IoC
+
+            services.AddAutoMapper(references);
+
+            _logger.LogInformation(LoggingEvent.Success, "Objects Mapping are injected into IoC");
+
+            #endregion
+
+            #region Auto discovery and register
+
             var dependecies = references.FindInterfaces<IDepdencyRegistrar>();
             if (!dependecies.IsNullOrEmpty())
             {
@@ -200,85 +325,6 @@ namespace PingDong.Newmoon.Events
             }
 
             _logger.LogInformation(LoggingEvent.Success, "Services are injected");
-
-            #region Object Mapping (AutoMapper)
-
-            // Register all mapping profiles into IoC
-
-            services.AddAutoMapper(references);
-
-            _logger.LogInformation(LoggingEvent.Success, "Objects Mapping are injected into IoC");
-
-            #endregion
-
-            #endregion
-
-            #region CQRS (MediatR)
-
-            // Have to be initialized after injecting all necessary library by ASP.Net Core IoC
-
-            services.AddMediatR(references);
-
-            _logger.LogInformation(LoggingEvent.Success, "MediatR is initialized");
-
-            #endregion
-
-            #region Security
-
-            #region Security (ASP.Net Core)
-
-            services.AddCors(options =>
-                {
-                    // this defines a CORS policy called "default"
-                    options.AddPolicy("default", policy =>
-                        {
-                            policy.WithOrigins(_appSettings.BaseUri)
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod()
-                                    .AllowCredentials();
-                        });
-                });
-
-            _logger.LogInformation(LoggingEvent.Success, "Securities are initialized");
-
-            #endregion
-
-            #endregion
-
-            #region ASP.Net
-
-            services.AddOData();
-
-            services.AddMvc(config =>
-                        {
-                            // Checking ModelState
-                            config.Filters.Add(new ModelStateValidationFilter(_logger));
-                        })
-                    // Using FluentValidation to verify incoming requests
-                    .AddFluentValidation(fvc => { references.ForEach(v => fvc.RegisterValidatorsFromAssembly(v)); })
-                    // Customize Json
-                    .AddJsonOptions(
-                            options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                        )
-                    // http://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html#controllers-as-services
-                    // https://www.strathweb.com/2016/03/the-subtle-perils-of-controller-dependency-injection-in-asp-net-core-mvc/
-                    //.AddControllersAsServices()
-                    ;
-
-            // Workaround: https://github.com/OData/WebApi/issues/1177
-            services.AddMvcCore(options =>
-            {
-                foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
-                {
-                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-                }
-                foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
-                {
-                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-                }
-            });
-
-            _logger.LogInformation(LoggingEvent.Success, "MVC is initialized");
 
             #endregion
 
@@ -308,9 +354,12 @@ namespace PingDong.Newmoon.Events
                 }
             }
 
+            // Have to be run after registering all services
             ApplicationContainer = builder.Build();
 
             _logger.LogInformation(LoggingEvent.Success, "Autofac is initialized");
+
+            #endregion
 
             #endregion
 
@@ -328,17 +377,17 @@ namespace PingDong.Newmoon.Events
 
         // TestServer, in Functional/Integration Test, doesn't support this way 
 
-        /// <summary>
-        /// ConfigureContainer is where you can register things directly
-        /// with Autofac. This runs after ConfigureServices so the things
-        /// here will override registrations made in ConfigureServices.
-        /// Don't build the container; that gets done for you.
-        /// 
-        /// http://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html
-        ///
-        /// DO NOT USE THIS WAY IN MULTIPLE TENANT SCENARIO.
-        /// </summary>
-        /// <param name="builder">Container Builder</param>
+        ///// <summary>
+        ///// ConfigureContainer is where you can register things directly
+        ///// with Autofac. This runs after ConfigureServices so the things
+        ///// here will override registrations made in ConfigureServices.
+        ///// Don't build the container; that gets done for you.
+        ///// 
+        ///// http://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html
+        /////
+        ///// DO NOT USE THIS WAY IN MULTIPLE TENANT SCENARIO.
+        ///// </summary>
+        ///// <param name="builder">Container Builder</param>
         //public void ConfigureContainer(ContainerBuilder builder)
         //{
         //    _logger.LogInformation(LoggingEvent.Entering, "Autofac is starting");
@@ -365,6 +414,7 @@ namespace PingDong.Newmoon.Events
 
         //    _logger.LogInformation(LoggingEvent.Success, "Autofac is initialized");
         //}
+
         #endregion
 
         /// <summary>
@@ -387,10 +437,14 @@ namespace PingDong.Newmoon.Events
 
                 // Swagger support
                 app.UseSwagger()
-                   .UseSwaggerUI(option =>
+                   .UseSwaggerUI(options =>
                    {
-                       option.SwaggerEndpoint($"{_appSettings.BaseUri}/swagger/{_appSettings.ApiVersion}/swagger.json", $"{_appSettings.Title} {_appSettings.ApiVersion}");
-                       option.DefaultModelsExpandDepth(-1); // Hide Models section
+                       options.SwaggerEndpoint($"{_appSettings.BaseUri}/swagger/{_appSettings.ApiVersion}/swagger.json", $"{_appSettings.Title} {_appSettings.ApiVersion}");
+                       options.DefaultModelsExpandDepth(-1); // Hide Models section
+                       // Authentication
+                       options.OAuthAppName("Events Api");
+                       options.OAuthClientId("swagger");
+                       options.OAuth2RedirectUrl($"{_appSettings.BaseUri}/swagger/oauth2-redirect.html");
                    });
 
                 _logger.LogInformation(LoggingEvent.Success, "Swagger is running");
@@ -414,12 +468,12 @@ namespace PingDong.Newmoon.Events
             }
 
             app.UseCors("default");
+            app.UseAuthentication();
 
             _logger.LogInformation(LoggingEvent.Success, "Handling Authentication");
 
             // MVC
-            app.UseMvc(routes =>
-                { 
+            app.UseMvc(routes => {
                     // Workaround: https://github.com/OData/WebApi/issues/1175
                     routes.EnableDependencyInjection();
 

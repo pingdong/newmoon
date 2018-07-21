@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
+using PingDong.Newmoon.IdentityServer.Infrastructure.Configuration;
 
 namespace PingDong.Newmoon.IdentityServer.Identity
 {
     public class IdentityConfigurationSeed
     {
-        public async Task SeedAsync(ConfigurationDbContext context)
+        public async Task SeedAsync(ConfigurationDbContext context, AppSettings settings)
         {
             if (!context.ApiResources.Any())
             {
@@ -30,7 +31,7 @@ namespace PingDong.Newmoon.IdentityServer.Identity
 
             if (!context.Clients.Any())
             {
-                foreach (var client in IdentityServerConfig.GetClients())
+                foreach (var client in IdentityServerConfig.GetClients(settings))
                 {
                     context.Clients.Add(client.ToEntity());
                 }

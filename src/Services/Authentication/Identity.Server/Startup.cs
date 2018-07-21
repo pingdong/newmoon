@@ -28,6 +28,8 @@ namespace PingDong.Newmoon.IdentityServer
         private readonly ILogger _logger;
         private readonly IHostingEnvironment _env;
 
+        private AppSettings _appSettings;
+
         public Startup(IConfiguration config, ILogger<Startup> logger, IHostingEnvironment env)
         {
             _configuration = config;
@@ -40,7 +42,9 @@ namespace PingDong.Newmoon.IdentityServer
         {
             #region Settings
 
-            services.Configure<AppSettings>(_configuration);
+            // Extract AppSettings and register into IoC
+            _appSettings = _configuration.GetSection("App").Get<AppSettings>();
+            services.AddSingleton<AppSettings>(_appSettings);
 
             _logger.LogInformation(LoggingEvent.Success, "Configurations are loaded from Section: AppSettings");
 
@@ -130,7 +134,7 @@ namespace PingDong.Newmoon.IdentityServer
                 identityBuilder.AddDeveloperSigningCredential()
                                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
                                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-                               .AddInMemoryClients(IdentityServerConfig.GetClients());
+                               .AddInMemoryClients(IdentityServerConfig.GetClients(_appSettings));
             }
             else
             {
@@ -216,12 +220,12 @@ namespace PingDong.Newmoon.IdentityServer
                 using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
                 {
                     serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-
+                    
                     var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
                     context.Database.Migrate();
 
                     var seed = new IdentityConfigurationSeed();
-                    seed.SeedAsync(context).Wait();
+                    seed.SeedAsync(context, _appSettings).Wait();
                 }
 
                 app.UseExceptionHandler("/Error");
