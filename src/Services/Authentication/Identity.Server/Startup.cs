@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
-using IdentityServer4.EntityFramework.DbContexts;
-using IdentityServer4.Services;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +18,9 @@ using PingDong.Newmoon.IdentityServer.Identity;
 using PingDong.Newmoon.IdentityServer.Identity.Migrations;
 using PingDong.Newmoon.IdentityServer.Infrastructure.Configuration;
 using PingDong.Web.Exceptions;
+
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.Services;
 
 namespace PingDong.Newmoon.IdentityServer
 {
@@ -44,22 +46,9 @@ namespace PingDong.Newmoon.IdentityServer
 
             // Extract AppSettings and register into IoC
             _appSettings = _configuration.GetSection("App").Get<AppSettings>();
-            services.AddSingleton<AppSettings>(_appSettings);
+            services.AddSingleton(_appSettings);
 
             _logger.LogInformation(LoggingEvent.Success, "Configurations are loaded from Section: AppSettings");
-
-            #endregion
-
-            #region Web
-
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-            _logger.LogInformation(LoggingEvent.Success, "Web configuration are loaded");
 
             #endregion
 
@@ -76,7 +65,7 @@ namespace PingDong.Newmoon.IdentityServer
 
             #endregion
 
-            #region HealthCheck
+            #region HealthChecks
 
             services.AddHealthChecks(checks =>
             {
@@ -89,46 +78,71 @@ namespace PingDong.Newmoon.IdentityServer
 
             #endregion
 
-            #region Authentication
+            #region ASP.Net
+
+            #region Asp.Net Authentication
 
             var authConnectionString = _configuration.GetConnectionString("DefaultDbConnection");
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(authConnectionString,
-                            sqlServerOptionsAction: sqlOptions =>
-                            {
-                                sqlOptions.EnableRetryOnFailure(maxRetryCount: 10,
-                                    maxRetryDelay: TimeSpan.FromSeconds(30),
-                                    errorNumbersToAdd: null);
-                            }
-                        ));
+                options.UseSqlServer(authConnectionString,
+                    sqlServerOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure(maxRetryCount: 10,
+                            maxRetryDelay: TimeSpan.FromSeconds(30),
+                            errorNumbersToAdd: null);
+                    }
+                ));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-                        {
-                            options.Password.RequireDigit = false;
-                            options.Password.RequireNonAlphanumeric = false;
-                            options.Password.RequireUppercase = false;
-                        })
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultTokenProviders()
-                    // After extending IdentityUser, the below method has to be called to use default logon/register UI
-                    .AddDefaultUI();
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                // After extending IdentityUser, the below method has to be called to use default logon/register UI
+                .AddDefaultUI();
 
             _logger.LogInformation(LoggingEvent.Success, "Authentication Initialized");
 
             #endregion
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddMvc()
+                    .AddRazorPagesOptions(o => o.Conventions.AddAreaFolderRouteModelConvention("Identity", "/Account/", model =>
+                                                        {
+                                                            foreach (var selector in model.Selectors)
+                                                            {
+                                                                var attributeRouteModel = selector.AttributeRouteModel;
+                                                                attributeRouteModel.Order = -1;
+                                                                attributeRouteModel.Template = attributeRouteModel.Template.Remove(0, "Identity".Length);
+                                                            }
+                                                        }))
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            _logger.LogInformation(LoggingEvent.Success, "Web Service Initialized");
+
+            #endregion
+
             #region Identity Server 4
-            
+
+            // It¡¯s important when using ASP.NET Identity that IdentityServer be registered after
+            // ASP.NET Identity in the DI system because IdentityServer is overwriting some configuration from ASP.NET Identity.
+
             services.AddTransient<IProfileService, ProfileService>();
 
-            var identityBuilder = services.AddIdentityServer(options =>
-                                            {
-                                               
-                                            })
+            var identityBuilder = services.AddIdentityServer(options => { })
                                           .AddAspNetIdentity<ApplicationUser>()
                                           .AddProfileService<ProfileService>();
-            
+
             if (_env.IsDevelopment())
             {
                 identityBuilder.AddDeveloperSigningCredential()
@@ -146,13 +160,13 @@ namespace PingDong.Newmoon.IdentityServer
                                         options.DefaultSchema = IdentityDbContextConfig.DefaultSchema;
                                         options.ConfigureDbContext = builder => builder.UseSqlServer(identityConnectionString,
                                             sqlServerOptionsAction: sqlOptions =>
-                                                {
-                                                    sqlOptions.MigrationsAssembly(migrationsAssembly)
-                                                              .EnableRetryOnFailure(maxRetryCount: 15,
-                                                                                    maxRetryDelay: TimeSpan.FromSeconds(30),
-                                                                                errorNumbersToAdd: null);
+                                            {
+                                                sqlOptions.MigrationsAssembly(migrationsAssembly)
+                                                                              .EnableRetryOnFailure(maxRetryCount: 15,
+                                                                                                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                                                                                                errorNumbersToAdd: null);
 
-                                                });
+                                            });
                                     })
                                 .AddOperationalStore(options =>
                                     {
@@ -162,34 +176,17 @@ namespace PingDong.Newmoon.IdentityServer
                                         options.TokenCleanupInterval = 30;
                                         options.ConfigureDbContext = builder => builder.UseSqlServer(identityConnectionString,
                                             sqlServerOptionsAction: sqlOptions =>
-                                                {
-                                                    sqlOptions.MigrationsAssembly(migrationsAssembly)
+                                            {
+                                                sqlOptions.MigrationsAssembly(migrationsAssembly)
                                                               .EnableRetryOnFailure(maxRetryCount: 15,
                                                                                     maxRetryDelay: TimeSpan.FromSeconds(30),
                                                                                 errorNumbersToAdd: null);
-                                                });
+                                            });
                                     })
                                 .AddSigningCredential(CertificateHelp.Get());
             }
 
             _logger.LogInformation(LoggingEvent.Success, "Initialized IdentityServer4");
-
-            #endregion
-
-            #region ASP.Net
-
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-            services.AddMvc()
-                    .AddRazorPagesOptions(o => o.Conventions.AddAreaFolderRouteModelConvention("Identity", "/Account/", model => { foreach (var selector in model.Selectors) { var attributeRouteModel = selector.AttributeRouteModel; attributeRouteModel.Order = -1; attributeRouteModel.Template = attributeRouteModel.Template.Remove(0, "Identity".Length); } }))
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            _logger.LogInformation(LoggingEvent.Success, "Web Service Initialized");
 
             #endregion
 
@@ -208,10 +205,10 @@ namespace PingDong.Newmoon.IdentityServer
 
                 // Make work identity server redirections in Edge and lastest versions of browers. WARN: Not valid in a production environment.
                 app.Use(async (context, next) =>
-                {
-                    context.Response.Headers.Add("Content-Security-Policy", "script-src 'unsafe-inline'");
-                    await next();
-                });
+                    {
+                        context.Response.Headers.Add("Content-Security-Policy", "script-src 'unsafe-inline'");
+                        await next();
+                    });
 
                 _logger.LogInformation(LoggingEvent.Success, "In Development Environment");
             }
@@ -244,9 +241,6 @@ namespace PingDong.Newmoon.IdentityServer
             _logger.LogInformation(LoggingEvent.Success, "Handling Static Files");
 
             app.UseCookiePolicy();
-            // Have to be use in front of IdentityServer
-            // If a object is inherited from IdentityUser and DefaultUI is used.
-            app.UseAuthentication();
 
             app.UseIdentityServer();
             _logger.LogInformation(LoggingEvent.Success, "Handling Authentication");

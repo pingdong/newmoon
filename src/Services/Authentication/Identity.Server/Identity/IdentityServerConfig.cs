@@ -46,9 +46,9 @@ namespace PingDong.Newmoon.IdentityServer.Identity
                         RedirectUris = { $"{settings.ExternalServices.EventsService}" },
                         PostLogoutRedirectUris = { $"{settings.ExternalServices.EventsService}" },
                         AllowedScopes =
-                        {
-                            "events.api"
-                        }
+                            {
+                                "events.api"
+                            }
                     },
                     new Client
                     {
@@ -78,15 +78,17 @@ namespace PingDong.Newmoon.IdentityServer.Identity
                         ClientSecrets = { new Secret("events_api-seCrEt".Sha256()) },
                         AllowedGrantTypes = GrantTypes.Implicit,
                         AllowAccessTokensViaBrowser = true,
+                        // TODO: Enable consent
+                        RequireConsent = false,
                         RedirectUris = { $"{settings.ExternalServices.EventsService}/signin-oidc" },
                         PostLogoutRedirectUris = { $"{settings.ExternalServices.EventsService}/signout-callback-oidc" },
                         AllowedScopes =
-                        {
-                            "events.api",
-                            IdentityServerConstants.StandardScopes.OpenId,
-                            IdentityServerConstants.StandardScopes.Email,
-                            IdentityServerConstants.StandardScopes.Profile
-                        }
+                            {
+                                "events.api",
+                                IdentityServerConstants.StandardScopes.OpenId,
+                                IdentityServerConstants.StandardScopes.Email,
+                                IdentityServerConstants.StandardScopes.Profile
+                            }
                     }
                 };
         }

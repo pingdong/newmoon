@@ -98,7 +98,9 @@ namespace PingDong.Newmoon.Events
             _logger.LogInformation(LoggingEvent.Success, "Configurations are loaded from Section: App");
 
             #endregion
-            
+
+            #region DevOps
+
             #region Health (HealthChecks)
 
             services.AddHealthChecks(checks =>
@@ -114,64 +116,57 @@ namespace PingDong.Newmoon.Events
 
             #endregion
 
-            if (_env.IsDevelopment())
+            #region Swagger
+
+            services.AddSwaggerGen(options =>
             {
-                _logger.LogInformation(LoggingEvent.Entering, "Running in Development mode");
-
-                #region DevOps (Swagger)
-
-                services.AddSwaggerGen(options =>
+                options.SwaggerDoc(_appSettings.ApiVersion, new Info
+                    {
+                        Title = _appSettings.Title,
+                        Version = _appSettings.Version,
+                        Description = $"{_appSettings.Title} v{_appSettings.Version}"
+                    });
+                options.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                    {
+                        Description = "OAuth2 Authentication using Identity.Server",
+                        AuthorizationUrl = $"{_appSettings.ExternalServices.AuthenticationService}/connect/authorize",
+                        Flow = "implicit",
+                        Type = "oauth2",
+                        Scopes = new Dictionary<string, string>
                             {
-                                options.SwaggerDoc(_appSettings.ApiVersion, new Info
-                                            {
-                                                Title = _appSettings.Title,
-                                                Version = _appSettings.Version,
-                                                Description = $"{_appSettings.Title} v{_appSettings.Version}"
-                                            });
-                                options.AddSecurityDefinition("oauth2", new OAuth2Scheme
-                                    {
-                                        Description = "OAuth2 Authentication using Identity.Server",
-                                        AuthorizationUrl = $"{_appSettings.ExternalServices.AuthenticationService}/connect/authorize",
-                                        Flow = "implicit",
-                                        Type = "oauth2",
-                                        Scopes = new Dictionary<string, string>
-                                                        {
-                                                            { "events.api", "api" }
-                                                        }
-                                    });
-                                // Send authorization token in header
-                                options.DocumentFilter<SecurityRequirementsDocumentFilter>();
+                                { "events.api", "Api Scope"},
+                                { "openid", "OpenId" },
+                                { "email", "Email" },
+                                { "profile", "Profile" },
+                            }
+                    });
+                // Send authorization token in header
+                options.DocumentFilter<SecurityRequirementsDocumentFilter>();
 
-                                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                                var xmlPath = Path.Combine(basePath, $"{Assembly.GetEntryAssembly().GetName().Name}.xml");
-                                _logger.LogInformation(LoggingEvent.Success, $"{xmlPath} is loading");
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var xmlPath = Path.Combine(basePath, $"{Assembly.GetEntryAssembly().GetName().Name}.xml");
+                _logger.LogInformation(LoggingEvent.Success, $"{xmlPath} is loading");
 
-                                options.IncludeXmlComments(xmlPath);
-                                options.DescribeAllEnumsAsStrings();
-                            });
+                options.IncludeXmlComments(xmlPath);
+                options.DescribeAllEnumsAsStrings();
+            });
 
-                _logger.LogInformation(LoggingEvent.Success, "Swagger is initialized");
+            _logger.LogInformation(LoggingEvent.Success, "Swagger is initialized");
 
-                #endregion
-            }
-            else if (_env.IsStaging())
+            #endregion
+            
+            #region Telemetry (Application Insights)
+
+            if (_env.IsProduction())
             {
-                _logger.LogInformation(LoggingEvent.Entering, "Running in Stagging mode");
-
-                // Skipping Swagger for Functional/Integration testing
-            }
-            else
-            {
-                _logger.LogInformation(LoggingEvent.Entering, "Running in Production mode");
-
-                #region Telemetry (Application Insights)
-
                 services.AddApplicationInsightsTelemetry(_configuration);
 
                 _logger.LogInformation(LoggingEvent.Entering, "ApplicationInsights is initialized");
-
-                #endregion
             }
+
+            #endregion
+
+            #endregion
 
             #region Caching (In-memory / Distributed)
 
@@ -189,7 +184,7 @@ namespace PingDong.Newmoon.Events
 
             // Redis (StackExchange)
             // Making sure the service won't start until redis is ready.
-            services.AddSingleton<ConnectionMultiplexer>(sp =>
+            services.AddSingleton(sp =>
                 {
                     var redisConnectionString = _configuration["Redis:Connection"];
                     var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
@@ -434,28 +429,6 @@ namespace PingDong.Newmoon.Events
                 // Error message
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage(); 
-
-                // Swagger support
-                app.UseSwagger()
-                   .UseSwaggerUI(options =>
-                   {
-                       options.SwaggerEndpoint($"{_appSettings.BaseUri}/swagger/{_appSettings.ApiVersion}/swagger.json", $"{_appSettings.Title} {_appSettings.ApiVersion}");
-                       options.DefaultModelsExpandDepth(-1); // Hide Models section
-                       // Authentication
-                       options.OAuthAppName("Events Api");
-                       options.OAuthClientId("swagger");
-                       options.OAuth2RedirectUrl($"{_appSettings.BaseUri}/swagger/oauth2-redirect.html");
-                   });
-
-                _logger.LogInformation(LoggingEvent.Success, "Swagger is running");
-            }
-            else if (env.IsStaging())
-            {
-                _logger.LogInformation(LoggingEvent.Success, "Running in Stagging environment");
-
-                // Error message
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -466,25 +439,39 @@ namespace PingDong.Newmoon.Events
                 loggerFactory.AddAzureWebAppDiagnostics();
                 loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Trace);
             }
+            
+            // Swagger support
+            app.UseSwagger()
+               .UseSwaggerUI(options =>
+                    {
+                        options.SwaggerEndpoint($"{_appSettings.BaseUri}/swagger/{_appSettings.ApiVersion}/swagger.json", $"{_appSettings.Title} {_appSettings.ApiVersion}");
+                        options.DefaultModelsExpandDepth(-1); // Hide Models section
+                        // Authentication
+                        options.OAuthAppName("Events Service");
+                        options.OAuthClientId("swagger");
+                        options.OAuth2RedirectUrl($"{_appSettings.BaseUri}/swagger/oauth2-redirect.html");
+                    });
+            _logger.LogInformation(LoggingEvent.Success, "Swagger is running");
 
+            // Security
             app.UseCors("default");
             app.UseAuthentication();
-
             _logger.LogInformation(LoggingEvent.Success, "Handling Authentication");
 
             // MVC
-            app.UseMvc(routes => {
-                    // Workaround: https://github.com/OData/WebApi/issues/1175
-                    routes.EnableDependencyInjection();
+            app.UseMvc(routes => 
+                    {
+                        // Workaround: https://github.com/OData/WebApi/issues/1175
+                        routes.EnableDependencyInjection();
 
-                    var baseUri = $"api/{_appSettings.ApiVersion}";
-                    var odataUri = $"{baseUri}/odata";
-                    routes.MapODataServiceRoute(odataUri, odataUri, GetEdmModel(GetSearchingTargets()));
+                        var baseUri = $"api/{_appSettings.ApiVersion}";
+                        var odataUri = $"{baseUri}/odata";
+                        routes.MapODataServiceRoute(odataUri, odataUri, GetEdmModel(GetSearchingTargets()));
 
-                    routes.MapRoute(
-                        name: "default",
-                        template: baseUri + "/{controller=Ping}");
-                });
+                        routes.MapRoute(
+                            name: "default",
+                            template: baseUri + "/{controller=Ping}");
+                    });
 
             _logger.LogInformation(LoggingEvent.Success, "Web Access Handling");
         }
@@ -509,7 +496,7 @@ namespace PingDong.Newmoon.Events
 
         private static IEdmModel GetEdmModel(IEnumerable<Assembly> references)
         {
-            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            var builder = new ODataConventionModelBuilder();
 
             var types = references.FindAttribute<ODataEnableAttribute>(typeof(ODataEnableAttribute), attribute => attribute.Enabled);
             foreach (var type in types)
