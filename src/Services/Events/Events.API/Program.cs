@@ -72,7 +72,11 @@ namespace PingDong.Newmoon.Events
         /// <param name="args">args</param>
         /// <returns>Web host</returns>
         public static IWebHostBuilder BuildWebHost(string[] args) =>
+            // Details
+            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-2.1
+
             WebHost.CreateDefaultBuilder(args)
+                .CaptureStartupErrors(true)
                 .UseKestrel()
                 // Application Configure
                 .ConfigureAppConfiguration((builderContext, config) =>
