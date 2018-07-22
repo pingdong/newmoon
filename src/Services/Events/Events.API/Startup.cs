@@ -460,7 +460,9 @@ namespace PingDong.Newmoon.Events
                 loggerFactory.AddAzureWebAppDiagnostics();
                 loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Trace);
             }
-            
+
+            app.Map("/liveness", lapp => lapp.Run(async ctx => ctx.Response.StatusCode = 200));
+
             // Swagger support
             app.UseSwagger()
                .UseSwaggerUI(options =>

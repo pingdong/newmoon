@@ -51,6 +51,8 @@ namespace PingDong.Newmoon.Events.Integration.Test
         {
             public static class Get
             {
+                public static string Liveness = "liveness";
+
                 public static string All = "api/v1/events";
 
                 public static string ById(int id)
