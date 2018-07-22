@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -13,7 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.1.1" />
-    <PackageReference Include="Microsoft.DotNet.InternalAbstractions" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
@@ -26,12 +25,6 @@
     <ProjectReference Include="..\..\..\Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj" />
     <ProjectReference Include="..\Events.API\Events.Api.csproj" />
     <ProjectReference Include="..\Infrastructure\Events.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="settings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
