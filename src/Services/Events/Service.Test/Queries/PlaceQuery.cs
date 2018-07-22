@@ -7,7 +7,7 @@ using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Infrastructure;
 using PingDong.Newmoon.Events.Infrastructure.Repositories;
 using PingDong.Newmoon.Events.Service.Queries;
-using PingDong.QualityTools.Core;
+using PingDong.QualityTools.Infrastrucutre.SqlServer;
 using Xunit;
 
 namespace PingDong.Newmoon.Events.Service.Test

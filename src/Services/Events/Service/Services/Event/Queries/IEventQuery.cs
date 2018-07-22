@@ -1,4 +1,4 @@
-﻿using PingDong.Service;
+﻿using PingDong.DomainDriven.Service;
 
 namespace PingDong.Newmoon.Events.Service.Queries
 {

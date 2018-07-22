@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using Microsoft.AspNetCore.TestHost;
 
-namespace PingDong.QualityTools.Web
+namespace PingDong.QualityTools.AspNetCore
 {
     public static class HttpClientExtensions
     {

@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Logging;
+using PingDong.AspNetCore.Http;
 using PingDong.DomainDriven.Service;
-using PingDong.Service;
 
-namespace PingDong.Web.Http
+namespace PingDong.AspNetCore.Mvc
 {
     /// <summary>
     /// Base Web API Controller

@@ -1,6 +1,6 @@
 ﻿using Microsoft.CSharp.RuntimeBinder;
 
-namespace PingDong.Core
+namespace PingDong
 {
     public static class DynamicHelper
     {

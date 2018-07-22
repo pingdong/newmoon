@@ -25,10 +25,9 @@ using PingDong.Application.Logging;
 using PingDong.Linq;
 using PingDong.Newmoon.Events.Configuration;
 using PingDong.Reflection;
-using PingDong.Web.Exceptions;
-using PingDong.Web.Validation;
-using PingDong.Service.OData;
-using PingDong.Newmoon.Events.Infrastructure.Identity;
+using PingDong.AspNetCore.Http;
+using PingDong.AspNetCore.Mvc.Filters;
+using PingDong.DomainDriven.Service.OData;
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -37,6 +36,7 @@ using FluentValidation.AspNetCore;
 using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
+using PingDong.Newmoon.Events.Identity;
 using Swashbuckle.AspNetCore.Swagger;
 using StackExchange.Redis;
 

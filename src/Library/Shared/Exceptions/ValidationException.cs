@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using FluentValidation.Results;
 
-namespace PingDong.Validation
+namespace PingDong
 {
     /// <summary>
     /// Validation Exception

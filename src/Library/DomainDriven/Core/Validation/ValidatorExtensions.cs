@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace PingDong.Validation
+namespace PingDong.DomainDriven.Core.Validation
 {
     public static class ValidatorExtensions
     {

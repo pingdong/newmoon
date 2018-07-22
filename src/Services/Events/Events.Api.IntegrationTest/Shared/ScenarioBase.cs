@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PingDong.AspNetCore.Hosting;
 using PingDong.Newmoon.Events.Infrastructure;
-using PingDong.QualityTools.Core;
-using PingDong.Web.AspNetCore.Hosting;
+using PingDong.QualityTools.Infrastrucutre.SqlServer;
 
 namespace PingDong.Newmoon.Events.Integration.Test
 { 
@@ -36,13 +36,13 @@ namespace PingDong.Newmoon.Events.Integration.Test
 
             testServer.Host
                 .MigrateDbContext<EventContext>((context, services) =>
-                {
-                    var logger = services.GetService<ILogger<EventContextSeed>>();
+                    {
+                        var logger = services.GetService<ILogger<EventContextSeed>>();
 
-                    new EventContextSeed()
-                        .SeedAsync(context, logger)
-                        .Wait();
-                });
+                        new EventContextSeed()
+                            .SeedAsync(context, logger)
+                            .Wait();
+                    });
 
             return testServer;
         }

@@ -5,14 +5,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-using Newtonsoft.Json;
 using PingDong.Application.Logging;
 using PingDong.Data;
-using PingDong.Validation;
-using PingDong.Web.Http;
+
+using Newtonsoft.Json;
 using Polly.CircuitBreaker;
 
-namespace PingDong.Web.Exceptions
+namespace PingDong.AspNetCore.Http
 {
     /// <summary>
     /// Middleware for handling exception

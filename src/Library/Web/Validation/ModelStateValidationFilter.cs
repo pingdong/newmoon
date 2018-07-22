@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
 using PingDong.Application.Logging;
-using PingDong.Web.Http;
+using PingDong.AspNetCore.Http;
 
-namespace PingDong.Web.Validation
+namespace PingDong.AspNetCore.Mvc.Filters
 {
     public class ModelStateValidationFilter : ActionFilterAttribute
     {

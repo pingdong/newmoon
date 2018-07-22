@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace PingDong.Newmoon.Events.Infrastructure.Identity
+namespace PingDong.Newmoon.Events.Identity
 {
     public class SecurityRequirementsDocumentFilter : IDocumentFilter
     {

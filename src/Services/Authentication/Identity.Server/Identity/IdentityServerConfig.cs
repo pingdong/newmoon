@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdentityServer4;
 using IdentityServer4.Models;
-using PingDong.Newmoon.IdentityServer.Infrastructure.Configuration;
+using PingDong.Newmoon.IdentityServer.Configuration;
 
 namespace PingDong.Newmoon.IdentityServer.Identity
 {

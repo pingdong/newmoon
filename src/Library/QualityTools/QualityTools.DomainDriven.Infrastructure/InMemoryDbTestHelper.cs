@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace PingDong.QualityTools.Core
+namespace PingDong.QualityTools.Infrastrucutre.SqlServer
 {
     public class InMemoryDbTestHelper
     {

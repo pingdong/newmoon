@@ -13,11 +13,11 @@ using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 
 using PingDong.Application.Logging;
+using PingDong.AspNetCore.Http;
+using PingDong.Newmoon.IdentityServer.Configuration;
 using PingDong.Newmoon.IdentityServer.Authentication;
 using PingDong.Newmoon.IdentityServer.Identity;
 using PingDong.Newmoon.IdentityServer.Identity.Migrations;
-using PingDong.Newmoon.IdentityServer.Infrastructure.Configuration;
-using PingDong.Web.Exceptions;
 
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.Services;

@@ -8,7 +8,7 @@ using Polly;
 using System;
 using System.Data.SqlClient;
 
-namespace PingDong.Web.AspNetCore.Hosting
+namespace PingDong.AspNetCore.Hosting
 {
     public static class WebHostExtensions
     {

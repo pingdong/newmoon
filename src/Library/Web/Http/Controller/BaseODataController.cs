@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.OData;
 using Microsoft.Extensions.Logging;
-using PingDong.Service;
+using PingDong.DomainDriven.Service;
 
-namespace PingDong.Web.Http
+namespace PingDong.AspNetCore.Mvc
 {
     /// <summary>
     /// Base Web API Controller

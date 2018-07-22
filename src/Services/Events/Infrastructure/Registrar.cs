@@ -5,9 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Dependency;
-using PingDong.Newmoon.Events.Infrastructure;
 
-namespace PingDong.Newmoon.Events
+namespace PingDong.Newmoon.Events.Infrastructure
 {
     /// <summary>
     /// Register in ASP.Net Dependency Container

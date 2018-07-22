@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Library\QualityTools\Core\QualityTools.Core.csproj" />
+    <ProjectReference Include="..\..\..\Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj" />
     <ProjectReference Include="..\Infrastructure\Events.Infrastructure.csproj" />
     <ProjectReference Include="..\Service\Events.Service.csproj" />
   </ItemGroup>

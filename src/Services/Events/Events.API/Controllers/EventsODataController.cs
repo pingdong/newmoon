@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PingDong.AspNetCore.Mvc;
 using PingDong.Newmoon.Events.Service.Queries;
-using PingDong.Web.Http;
 
 namespace PingDong.Newmoon.Events.Controllers
 {

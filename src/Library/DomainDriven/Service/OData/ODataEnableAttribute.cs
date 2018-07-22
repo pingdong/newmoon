@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PingDong.Service.OData
+namespace PingDong.DomainDriven.Service.OData
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class ODataEnableAttribute : Attribute

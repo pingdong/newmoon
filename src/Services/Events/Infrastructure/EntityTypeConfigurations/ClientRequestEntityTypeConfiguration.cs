@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PingDong.DomainDriven.Core;
 
-namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
+namespace PingDong.Newmoon.Events.Infrastructure.Migrations.EntityConfigurations
 {
     class ClientRequestEntityTypeConfiguration : IEntityTypeConfiguration<ClientRequest>
     {

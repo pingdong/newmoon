@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using PingDong.AspNetCore.Hosting;
 using PingDong.Newmoon.IdentityServer.Authentication;
-using PingDong.Web.AspNetCore.Hosting;
 using Serilog;
 
 namespace PingDong.Newmoon.IdentityServer
