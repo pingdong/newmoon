@@ -12,9 +12,9 @@ namespace PingDong.Newmoon.Events.Controllers
     /// <summary>
     /// Ping Controller
     /// </summary>
-    [ApiController]
     [Route("api/v1/[controller]")]
     [Produces("application/json")]
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public class EventsController : BaseController
     {
         private readonly IEventQuery _query;

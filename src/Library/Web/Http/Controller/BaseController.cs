@@ -17,7 +17,8 @@ namespace PingDong.AspNetCore.Mvc
     /// <summary>
     /// Base Web API Controller
     /// </summary>
-    public class BaseController : Controller
+    [ApiController]
+    public class BaseController : ControllerBase
     {
         private readonly IMediator _mediator;
 

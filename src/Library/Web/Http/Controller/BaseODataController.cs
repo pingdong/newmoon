@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PingDong.DomainDriven.Service;
 
@@ -9,6 +10,7 @@ namespace PingDong.AspNetCore.Mvc
     /// <summary>
     /// Base Web API Controller
     /// </summary>
+    [ApiController]
     public class BaseODataController<TSummary> : ODataController
     {
         #region

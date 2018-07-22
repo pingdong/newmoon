@@ -307,6 +307,13 @@ namespace PingDong.Newmoon.Events
                     //.AddControllersAsServices()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                     ;
+            // Config A
+            services.Configure<ApiBehaviorOptions>(options =>
+                {
+                    //options.SuppressConsumesConstraintForFormFileParameters = true;
+                    //options.SuppressInferBindingSourcesForParameters = true;
+                    //options.SuppressModelStateInvalidFilter = true;
+                });
 
             _logger.LogInformation(LoggingEvent.Success, "MVC is initialized");
 

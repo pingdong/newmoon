@@ -11,6 +11,7 @@ namespace PingDong.Newmoon.Events.Controllers
     [ApiController]
     [Route("api/v1/[controller]")]
     [Produces("application/json")]
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public class PingController : Controller
     {
         private readonly ILogger _logger;
