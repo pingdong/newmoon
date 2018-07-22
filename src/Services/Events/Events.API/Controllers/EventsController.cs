@@ -12,6 +12,7 @@ namespace PingDong.Newmoon.Events.Controllers
     /// <summary>
     /// Ping Controller
     /// </summary>
+    [ApiController]
     [Route("api/v1/[controller]")]
     [Produces("application/json")]
     public class EventsController : BaseController

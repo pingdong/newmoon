@@ -8,6 +8,7 @@ namespace PingDong.Newmoon.Events.Controllers
     /// <summary>
     /// Ping Controller
     /// </summary>
+    [ApiController]
     [Route("api/v1/events/odata")]
     [Produces("application/json")]
     public class EventsODataController : BaseODataController<EventSummary>

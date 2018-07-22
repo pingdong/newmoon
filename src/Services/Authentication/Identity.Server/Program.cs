@@ -12,18 +12,18 @@ namespace PingDong.Newmoon.IdentityServer
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHost(args)
+            var host = CreateWebHostBuilder(args).Build()
                             // Asp.Net Core User Management
                             .MigrateDbContext<ApplicationDbContext>((context, services) => { });
 
             host.Run();
         }
 
-        public static IWebHost CreateWebHost(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                        .UseKestrel()
-                        // Application Configure
-                        .ConfigureAppConfiguration((builderContext, config) =>
+                    .UseKestrel()
+                    // Application Configure
+                    .ConfigureAppConfiguration((builderContext, config) =>
                         {
                             var env = builderContext.HostingEnvironment;
 
@@ -35,18 +35,17 @@ namespace PingDong.Newmoon.IdentityServer
                             }
 
                             config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                                  .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                                  .AddCommandLine(args)
-                                  .AddEnvironmentVariables();
+                                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                                .AddCommandLine(args)
+                                .AddEnvironmentVariables();
                         })
-                        .UseContentRoot(Directory.GetCurrentDirectory())
-                        // HealthChecks initialise
-                        .UseHealthChecks("/health")
-                        // Application Configure
-                        .UseSerilog((context, config) => { config.ReadFrom.Configuration(context.Configuration); })
-                        .UseApplicationInsights()
-                        .UseStartup<Startup>()
-                .UseUrls("http://localhost:5001")
-                        .Build();
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    // HealthChecks initialise
+                    .UseHealthChecks("/health")
+                    // Application Configure
+                    .UseSerilog((context, config) => { config.ReadFrom.Configuration(context.Configuration); })
+                    .UseApplicationInsights()
+                    .UseStartup<Startup>()
+                    .UseUrls("http://localhost:5001");
     }
 }

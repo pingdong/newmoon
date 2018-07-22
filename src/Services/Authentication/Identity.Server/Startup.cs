@@ -230,13 +230,14 @@ namespace PingDong.Newmoon.IdentityServer
 
                 // Using https
                 app.UseHsts();
-                app.UseHttpsRedirection();
 
                 loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Trace);
 
                 _logger.LogInformation(LoggingEvent.Success, "In Production Environment");
             }
-            
+
+            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
             _logger.LogInformation(LoggingEvent.Success, "Handling Static Files");
 
