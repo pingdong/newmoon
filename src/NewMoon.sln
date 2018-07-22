@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-A
 		..\docs\DataValidation.txt = ..\docs\DataValidation.txt
 		..\docs\EF core.txt = ..\docs\EF core.txt
 		..\docs\Get token in Postman.jpg = ..\docs\Get token in Postman.jpg
+		..\docs\HttpClient.txt = ..\docs\HttpClient.txt
 		..\docs\Identity.txt = ..\docs\Identity.txt
 		..\docs\Installation.txt = ..\docs\Installation.txt
 		..\Docs\IoC.txt = ..\Docs\IoC.txt
