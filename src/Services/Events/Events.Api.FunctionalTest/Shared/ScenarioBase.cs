@@ -28,7 +28,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
 
             var webHostBuilder = WebHost.CreateDefaultBuilder()
                                         .UseContentRoot(baseDir)
-                                        .UseEnvironment("Development")
+                                        .UseEnvironment(EnvironmentName.Development)
                                         .UseConfiguration(cfg)
                                         .UseStartup<TestsStartup>();
 
