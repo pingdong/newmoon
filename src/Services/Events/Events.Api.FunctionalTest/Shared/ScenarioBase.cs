@@ -81,7 +81,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
         {
             // Clean up the test environment
 
-            // Removing physic db file
+            // Removing physical db file
             InMemoryDbTestHelper.CleanUp(_dbName);
         }
     }

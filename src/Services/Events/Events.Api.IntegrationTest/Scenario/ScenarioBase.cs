@@ -53,7 +53,7 @@ namespace PingDong.Newmoon.Events.Integration.Test
         {
             // Clean up the test environment
 
-            // Removing physic db file
+            // Removing physical db file
             InMemoryDbTestHelper.CleanUp(_dbName);
         }
     }

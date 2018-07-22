@@ -22,7 +22,7 @@ namespace PingDong.Newmoon.Events.Integration.Test.Shared
         {
             var cfg = new ConfigurationBuilder()
                             .SetBasePath(Directory.GetCurrentDirectory())
-                            .AddJsonFile($"{Directory.GetCurrentDirectory()}\\Settings.json")
+                            .AddJsonFile($"{Directory.GetCurrentDirectory()}\\..\\..\\..\\Settings.json")
                             .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_databases))
                             .AddInMemoryCollection(new Dictionary<string, string>
                             {
@@ -64,7 +64,7 @@ namespace PingDong.Newmoon.Events.Integration.Test.Shared
         {
             // Clean up the test environment
 
-            // Removing physic db file
+            // Removing physical db file
             InMemoryDbTestHelper.CleanUp(_databases);
 
             base.Dispose(disposing);
