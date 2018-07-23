@@ -25,10 +25,9 @@ using PingDong.Application.Logging;
 using PingDong.Linq;
 using PingDong.Newmoon.Events.Configuration;
 using PingDong.Reflection;
-using PingDong.Web.Exceptions;
-using PingDong.Web.Validation;
-using PingDong.Service.OData;
-using PingDong.Newmoon.Events.Infrastructure.Identity;
+using PingDong.AspNetCore.Http;
+using PingDong.AspNetCore.Mvc.Filters;
+using PingDong.DomainDriven.Service.OData;
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -37,6 +36,8 @@ using FluentValidation.AspNetCore;
 using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using PingDong.Newmoon.Events.Identity;
 using Swashbuckle.AspNetCore.Swagger;
 using StackExchange.Redis;
 
@@ -237,6 +238,13 @@ namespace PingDong.Newmoon.Events
 
             services.AddOData();
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
+
             // What's different between AddMvc and AddMvcCore
             // https://offering.solutions/blog/articles/2017/02/07/difference-between-addmvc-addmvcore/
             services.AddMvcCore(options =>
@@ -297,7 +305,15 @@ namespace PingDong.Newmoon.Events
                     // http://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html#controllers-as-services
                     // https://www.strathweb.com/2016/03/the-subtle-perils-of-controller-dependency-injection-in-asp-net-core-mvc/
                     //.AddControllersAsServices()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                     ;
+            // Config A
+            services.Configure<ApiBehaviorOptions>(options =>
+                {
+                    //options.SuppressConsumesConstraintForFormFileParameters = true;
+                    //options.SuppressInferBindingSourcesForParameters = true;
+                    //options.SuppressModelStateInvalidFilter = true;
+                });
 
             _logger.LogInformation(LoggingEvent.Success, "MVC is initialized");
 
@@ -442,7 +458,9 @@ namespace PingDong.Newmoon.Events
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             _logger.LogInformation(LoggingEvent.Entering, "Configure Starting");
-            
+
+            app.Map("/liveness", lapp => lapp.Run(async ctx => ctx.Response.StatusCode = 200));
+
             if (env.IsDevelopment())
             {
                 _logger.LogInformation(LoggingEvent.Success, "Running in Development environment");
@@ -457,10 +475,15 @@ namespace PingDong.Newmoon.Events
 
                 app.UseGlobalExceptionHandle();
 
+                // Using https
+                app.UseHsts();
+
                 loggerFactory.AddAzureWebAppDiagnostics();
                 loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Trace);
             }
-            
+
+            app.UseHttpsRedirection();
+
             // Swagger support
             app.UseSwagger()
                .UseSwaggerUI(options =>
@@ -475,6 +498,7 @@ namespace PingDong.Newmoon.Events
             _logger.LogInformation(LoggingEvent.Success, "Swagger is running");
 
             // Security
+            app.UseCookiePolicy();
             app.UseCors("default");
             UseAuth(app);
             _logger.LogInformation(LoggingEvent.Success, "Handling Authentication");

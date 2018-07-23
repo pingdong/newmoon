@@ -4,7 +4,7 @@ For many reasons, I have seen many compromised designs/projects. Therefore I dec
 
 The current version borrowed some codes and idea from Microsoft eShopContainers project, Thanks.
 
-On top of eShopContainers, I added some features that I believe they are important and helpful in real life. For example, Extensions and Reflections are widely used here, I know it's controversial, to generate lean, modular and reusable codes. This drawback is that may bring some difficulties to understand, especially to junior dev. To me, long-term maintainability, flexibility and simplicity is always crucial. 
+I added some features that I believe they are important and helpful in real life. For example, Extensions and Reflections are widely used here, I know it's controversial, to generate lean, modular and reusable codes. The drawback is that may bring some difficulties to understand, especially to junior dev. But for me, long-term maintainability, flexibility and simplicity is always first priority. 
 
 ## The following libraries are used:
 * Microsoft ASP.Net Core 2.1.1
@@ -46,40 +46,52 @@ On top of eShopContainers, I added some features that I believe they are importa
 
 > ## Roadmap
 
-### Done: 
   
 * [x] Microservice Coding Practice
 * [x] Multiple Configuration Source, Sturcture Application Settings
-* [x] OData
-* [x] Cache: In-memory, Redis
-* [x] Testing
-  * [x] Unit Testing
-  * [x] Integration Testing
-  * [x] Functional Testing
 * [x] Authentication & Authorization
 
-### Not yet:
-  
+* [x] Cache: In-memory, Redis
+* [x] OData
 * [ ] NoSQL
-* [ ] ElasticSearch
-* [ ] Integration Message
+* [ ] ElasticSearch  
 * [ ] GraphQL
+  
 * [ ] API Gateway
- 
+* [ ] Integration Message
 * [ ] Docker & Kubernetes
 * [ ] Grafana or Kibana
 * [ ] Prometheus
  
 * [ ] Client @ React
 * [ ] Client @ Razor
- 
-* [ ] Performance and Load Testing
+
+* [x] Testing
+  * [x] Unit Testing
+  * [x] Integration Testing
+  * [x] Functional Testing
+  * [ ] Performance and Load Testing
 
 
-> ## Backlog 
-* [OData] The workaround of the compatibility with Swagger  
-* [ValueObject] EF Core doesn't support inject value object in EF 2.1  
-[Issue 12078] (https://github.com/aspnet/EntityFrameworkCore/issues/12078)  
-[Issue 9148] (https://github.com/aspnet/EntityFrameworkCore/issues/9148) 
-* [TestHost] Have to manually reset the RequestId of the HttpClient before sending request 
-* [IdentityServer4] Need implement a Consent form, then set RequireConsent = true 
+> ## Notes:
+
+### [Setup](./docs/Setup.md)  
+### [Backlog](./docs/Backlog.md)
+
+### Asp.Net Core   
+[Dependency Injection](./docs/IoC.md)  
+[Configuration](./docs/Configuration.md)  
+[Data Validation](./docs/DataValidation.md)  
+[Identity](./docs/Identity.md)    
+[HttpClient](./docs/HttpClient.md)
+
+### Data Management  
+[Cache](./docs/Cache.md)  
+[Mapping](./docs/Mapping.md)  
+[EF Core](./docs/EFCore.md)  
+
+### Testing  
+[Testing](./docs/Testing.md)  
+
+---
+[Markdown cheat sheet ](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)

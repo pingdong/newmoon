@@ -1,3 +1,10 @@
+[Back](../README.md)
+
+> ## Mapping 
+
+Using the below codes to define object mapping in its projects, Events service automatically discovers and registers mapping setting.
+
+```
 public class AutoMapperProfileConfiguration : Profile
 {
     public AutoMapperProfileConfiguration()
@@ -10,3 +17,4 @@ public class AutoMapperProfileConfiguration : Profile
         CreateMap<UserViewModel, User>();
     }
 }
+```

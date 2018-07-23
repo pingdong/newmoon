@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PingDong.DomainDriven.Core;
 using PingDong.DomainDriven.Infrastructure;
 using PingDong.Newmoon.Events.Core;
-using PingDong.Newmoon.Events.Infrastructure.EntityConfigurations;
+using PingDong.Newmoon.Events.Infrastructure.Migrations.EntityConfigurations;
 
 namespace PingDong.Newmoon.Events.Infrastructure
 {

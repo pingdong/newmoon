@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Validators;
 
-namespace PingDong.Validation
+namespace PingDong.DomainDriven.Core.Validation
 {
     public class EmailFromDomainValidator : PropertyValidator
     {

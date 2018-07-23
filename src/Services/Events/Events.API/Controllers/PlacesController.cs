@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PingDong.AspNetCore.Mvc;
 using PingDong.Newmoon.Events.Service.Commands;
 using PingDong.Newmoon.Events.Service.Queries;
-using PingDong.Web.Http;
 
 namespace PingDong.Newmoon.Events.Controllers
 {
@@ -14,6 +14,7 @@ namespace PingDong.Newmoon.Events.Controllers
     /// </summary>
     [Route("api/v1/[controller]")]
     [Produces("application/json")]
+    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public class PlacesController : BaseController
     {
         private readonly IPlaceQuery _query;

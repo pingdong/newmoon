@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
-using PingDong.Newmoon.IdentityServer.Infrastructure.Configuration;
+using PingDong.Newmoon.IdentityServer.Configuration;
 
 namespace PingDong.Newmoon.IdentityServer.Identity
 {

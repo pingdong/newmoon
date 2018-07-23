@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PingDong.AspNetCore.Hosting;
 using PingDong.Newmoon.Events.Infrastructure;
-using PingDong.QualityTools.Core;
-using PingDong.Web.AspNetCore.Hosting;
+using PingDong.QualityTools.Infrastrucutre.SqlServer;
 
 namespace PingDong.Newmoon.Events.Functional.Test
 { 
@@ -28,7 +28,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
 
             var webHostBuilder = WebHost.CreateDefaultBuilder()
                                         .UseContentRoot(baseDir)
-                                        .UseEnvironment("Development")
+                                        .UseEnvironment(EnvironmentName.Development)
                                         .UseConfiguration(cfg)
                                         .UseStartup<TestsStartup>();
 
@@ -81,7 +81,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
         {
             // Clean up the test environment
 
-            // Removing physic db file
+            // Removing physical db file
             InMemoryDbTestHelper.CleanUp(_dbName);
         }
     }

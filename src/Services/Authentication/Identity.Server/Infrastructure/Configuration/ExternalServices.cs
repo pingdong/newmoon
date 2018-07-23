@@ -1,4 +1,4 @@
-﻿namespace PingDong.Newmoon.IdentityServer.Infrastructure.Configuration
+﻿namespace PingDong.Newmoon.IdentityServer.Configuration
 {
     /// <summary>
     /// Address of external services

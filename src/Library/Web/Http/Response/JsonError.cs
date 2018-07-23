@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PingDong.Web.Http
+namespace PingDong.AspNetCore.Http
 {
     /// <summary>
     /// Error

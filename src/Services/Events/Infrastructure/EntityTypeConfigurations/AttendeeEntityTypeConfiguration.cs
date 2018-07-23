@@ -2,10 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PingDong.Newmoon.Events.Core;
 
-namespace PingDong.Newmoon.Events.Infrastructure.EntityConfigurations
-{
-    class AttendeeEntityTypeConfiguration
-        : IEntityTypeConfiguration<Attendee>
+namespace PingDong.Newmoon.Events.Infrastructure.Migrations.EntityConfigurations
+{ 
+    internal class AttendeeEntityTypeConfiguration : IEntityTypeConfiguration<Attendee>
     {
         public void Configure(EntityTypeBuilder<Attendee> cfg)
         {

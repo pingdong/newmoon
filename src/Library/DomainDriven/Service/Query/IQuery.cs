@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PingDong.Service
+namespace PingDong.DomainDriven.Service
 {
     public interface IQuery<T>
     {

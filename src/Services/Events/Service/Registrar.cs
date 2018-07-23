@@ -5,7 +5,7 @@ using PingDong.Application.Dependency;
 using PingDong.DomainDriven.Service;
 using PingDong.Newmoon.Events.Service;
 
-namespace PingDong.Newmoon.Events.Services
+namespace PingDong.Newmoon.Events.Service
 {
     /// <summary>
     /// Register in ASP.Net Dependency Container

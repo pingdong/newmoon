@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace PingDong.Service
+namespace PingDong.DomainDriven.Service
 {
     public interface ISingleQuery<T>
     {

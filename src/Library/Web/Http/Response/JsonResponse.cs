@@ -1,4 +1,4 @@
-﻿namespace PingDong.Web.Http
+﻿namespace PingDong.AspNetCore.Http
 {
     /// <summary>
     /// Response

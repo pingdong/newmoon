@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace PingDong.Web.Exceptions
+namespace PingDong.AspNetCore.Http
 {
     /// <summary>
     /// Extension for adding exception handling middleware

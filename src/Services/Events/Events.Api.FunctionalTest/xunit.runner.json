@@ -7,8 +7,5 @@
     "ExternalServices": {
       "AuthenticationService": "http://localhost:5001"
     }
-  },
-  "ConnectionStrings": {
-    "DefaultDbConnection": "Server=(localdb)\\mssqllocaldb;Database=Events.InMemory;Trusted_Connection=True;ConnectRetryCount=0"
   }
 }

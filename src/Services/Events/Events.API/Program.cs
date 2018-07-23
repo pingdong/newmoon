@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PingDong.AspNetCore.Hosting;
 using PingDong.Newmoon.Events.Infrastructure;
-using PingDong.Web.AspNetCore.Hosting;
 
 namespace PingDong.Newmoon.Events
 {
@@ -72,7 +72,11 @@ namespace PingDong.Newmoon.Events
         /// <param name="args">args</param>
         /// <returns>Web host</returns>
         public static IWebHostBuilder BuildWebHost(string[] args) =>
+            // Details
+            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-2.1
+
             WebHost.CreateDefaultBuilder(args)
+                .CaptureStartupErrors(true)
                 .UseKestrel()
                 // Application Configure
                 .ConfigureAppConfiguration((builderContext, config) =>
@@ -80,6 +84,19 @@ namespace PingDong.Newmoon.Events
                     var env = builderContext.HostingEnvironment;
 
                     config.SetBasePath(Directory.GetCurrentDirectory());
+                        
+                    config
+                        // Application related setting
+                        //   for example: log setting
+                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                        // If the same settings in appsettings.json needs to be replaced in development environment, write here
+                        //   for example: different logging setting
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)     
+                        
+                        // Environment-aware settings
+                        //   for example: external service uri
+                        .AddCommandLine(args)
+                        .AddEnvironmentVariables();
 
                     if (env.IsDevelopment())
                     {
@@ -96,28 +113,12 @@ namespace PingDong.Newmoon.Events
                         // Right click on the target project, then click 'Manage User Secrets'
                         config.AddUserSecrets<Startup>();
                     }
-                        
-                    config
-                        // Application related setting
-                        //   for example: log setting
-                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                        // If the same settings in appsettings.json needs to be replaced in development environment, write here
-                        //   for example: different logging setting
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)     
-                        
-                        // Environment-aware settings
-                        //   for example: external service uri
-                        .AddCommandLine(args)
-                        .AddEnvironmentVariables();
-
-                    config.Build();
-
                     // Secrets should save in vault in production environment
                     //   config need to be built to retrieve Vault information
                     //  
                     //      DbConnectionString in production
                     //
-                    //if (env.IsProduction())
+                    //else if (env.IsProduction())
                     //{
                     //    var vault = new ConfigurationBuilder();
                     //    vault.AddAzureKeyVault(
@@ -129,6 +130,8 @@ namespace PingDong.Newmoon.Events
 
                     //    config.AddConfiguration(vaultConfig);
                     //}
+
+                    config.Build();
                 })
                 // Autofac intialise
                 .ConfigureServices(services => services.AddAutofac())

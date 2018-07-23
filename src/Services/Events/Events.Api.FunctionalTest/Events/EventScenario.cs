@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Service.Commands;
 using PingDong.Newmoon.Events.Service.Models;
-using PingDong.QualityTools.Web;
+using PingDong.QualityTools.AspNetCore;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace PingDong.Newmoon.Events.Functional.Test
