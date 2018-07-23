@@ -21,18 +21,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{5D7DBF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-AC79-4612-B26E-CD6261C0BCC9}"
 	ProjectSection(SolutionItems) = preProject
-		..\docs\Cache.txt = ..\docs\Cache.txt
-		..\docs\Configuration.txt = ..\docs\Configuration.txt
-		..\docs\DataValidation.txt = ..\docs\DataValidation.txt
-		..\docs\EF core.txt = ..\docs\EF core.txt
-		..\docs\Get token in Postman.jpg = ..\docs\Get token in Postman.jpg
-		..\docs\HttpClient.txt = ..\docs\HttpClient.txt
-		..\docs\Identity.txt = ..\docs\Identity.txt
-		..\docs\Installation.txt = ..\docs\Installation.txt
-		..\Docs\IoC.txt = ..\Docs\IoC.txt
-		..\Docs\Mapping.txt = ..\Docs\Mapping.txt
+		..\docs\Backlog.md = ..\docs\Backlog.md
+		..\docs\Cache.md = ..\docs\Cache.md
+		..\docs\Configuration.md = ..\docs\Configuration.md
+		..\docs\DataValidation.md = ..\docs\DataValidation.md
+		..\docs\EFcore.md = ..\docs\EFcore.md
+		..\docs\HttpClient.md = ..\docs\HttpClient.md
+		..\docs\Identity.md = ..\docs\Identity.md
+		..\Docs\IoC.md = ..\Docs\IoC.md
+		..\Docs\Mapping.md = ..\Docs\Mapping.md
+		..\docs\GetTokenInPostman.jpg = ..\docs\GetTokenInPostman.jpg
 		..\README.md = ..\README.md
-		..\docs\Testing.txt = ..\docs\Testing.txt
+		..\docs\Setup.md = ..\docs\Setup.md
+		..\docs\Testing.md = ..\docs\Testing.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ACC5BE90-3232-400A-9BEA-56887C7E905A}"
@@ -69,7 +70,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Server", "Services\Authentication\Identity.Server\Identity.Server.csproj", "{8823674D-F069-4716-BD3C-F16AC3A0C42A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QualityTools.DomainDriven.Infrastructure", "Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj", "{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.DomainDriven.Infrastructure", "Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj", "{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
