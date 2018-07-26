@@ -2,16 +2,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Dependency;
-using PingDong.DomainDriven.Service;
 
-namespace PingDong.Newmoon.Events.Service
+namespace PingDong.EventBus
 {
     /// <summary>
     /// Register in ASP.Net Dependency Container
     /// </summary>
     public class Registrar : IDepdencyRegistrar
     {
-        public DependecyType RegisterType => DependecyType.Service;
+        public DependecyType RegisterType => DependecyType.Infrastructure;
 
         /// <summary>
         /// Inject into dependency container
@@ -21,8 +20,7 @@ namespace PingDong.Newmoon.Events.Service
         /// <param name="loggerFactory"></param>
         public void Inject(IServiceCollection services, IConfiguration configuration, ILogger loggerFactory)
         {
-            // Request Manager
-            services.AddTransient<IRequestManager, RequestManager>();
+            services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
         }
     }
 }

@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using PingDong.Application.Dependency;
-using PingDong.Newmoon.Events.Service;
 using PingDong.Newmoon.Events.Service.Queries;
 
 namespace PingDong.Newmoon.Events.Service

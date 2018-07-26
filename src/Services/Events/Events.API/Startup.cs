@@ -233,6 +233,7 @@ namespace PingDong.Newmoon.Events
             _logger.LogInformation(LoggingEvent.Success, "Identity Validation is initialized");
 
             #endregion
+            
 
             #region ASP.Net
 
@@ -319,7 +320,7 @@ namespace PingDong.Newmoon.Events
 
             #endregion
 
-            #region Service Injecting (ASP.Net Core / Autofac IoC)
+            #region Service Injecting (ASP.Net Core / Autofac IoC / EventBus)
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -540,8 +541,28 @@ namespace PingDong.Newmoon.Events
         {
             if (_referencedAssemblies.Any())
                 return _referencedAssemblies;
-
+            
             _referencedAssemblies = this.GetType().Assembly.GetReferenceAssemblies(prefix: "PingDong.Newmoon.Events");
+
+
+            if (Configuration.GetValue<bool>("EventBus:Enabled"))
+            {
+                var path = this.GetType().Assembly.GetDirectoryName();
+
+                _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.dll"));
+
+                switch (Configuration.GetValue<string>("EventBus:Provider").ToLower())
+                {
+                    case "azure":
+                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.ServiceBus.dll"));
+                        break;
+                    case "rabbitmq":
+                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.RabbitMQ.dll"));
+                        break;
+                    case "aws":
+                        break;
+                }
+            }
 
             return _referencedAssemblies;
         }
