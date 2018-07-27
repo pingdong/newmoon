@@ -9,17 +9,18 @@ namespace PingDong.Newmoon.Events.Core
     public class EventStatus : Enumeration
     {
         public static EventStatus Created = new EventStatus(1, nameof(Created).ToLowerInvariant());
-        public static EventStatus Confirmed = new EventStatus(2, nameof(Confirmed).ToLowerInvariant());
-        public static EventStatus Ongoing = new EventStatus(3, nameof(Ongoing).ToLowerInvariant());
-        public static EventStatus Ended = new EventStatus(4, nameof(Ended).ToLowerInvariant());
-        public static EventStatus Cancelled = new EventStatus(5, nameof(Cancelled).ToLowerInvariant());
+        public static EventStatus Approved = new EventStatus(2, nameof(Approved).ToLowerInvariant());
+        public static EventStatus Confirmed = new EventStatus(3, nameof(Confirmed).ToLowerInvariant());
+        public static EventStatus Ongoing = new EventStatus(4, nameof(Ongoing).ToLowerInvariant());
+        public static EventStatus Ended = new EventStatus(5, nameof(Ended).ToLowerInvariant());
+        public static EventStatus Cancelled = new EventStatus(6, nameof(Cancelled).ToLowerInvariant());
         
         public EventStatus(int id, string name)
             : base(id, name)
         {
         }
 
-        public static IEnumerable<EventStatus> List() => new[] { Created, Confirmed, Ongoing, Ended, Cancelled };
+        public static IEnumerable<EventStatus> List() => new[] { Created, Approved, Confirmed, Ongoing, Ended, Cancelled };
 
         public static EventStatus From(string name)
         {

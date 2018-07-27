@@ -23,31 +23,31 @@ namespace PingDong.EventBus.RabbitMQ
         /// <param name="loggerFactory"></param>
         public void Inject(IServiceCollection services, IConfiguration configuration, ILogger loggerFactory)
         {
-            var subscriptionClientName = configuration["EventBus:ClientName"];
+            var subscriptionClientName = configuration["App:EventBus:ClientName"];
 
             services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
             {
                 var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
 
-                var factory = new ConnectionFactory()
+                var factory = new ConnectionFactory
                 {
-                    HostName = configuration["EventBus:ConnectionString"]
+                    HostName = configuration["App:EventBus:ConnectionString"]
                 };
 
-                if (!string.IsNullOrEmpty(configuration["EventBus:RabbitMQ:UserName"]))
+                if (!string.IsNullOrEmpty(configuration["App:EventBus:RabbitMQ:UserName"]))
                 {
-                    factory.UserName = configuration["EventBus:RabbitMQ:UserName"];
+                    factory.UserName = configuration["App:EventBus:RabbitMQ:UserName"];
                 }
 
-                if (!string.IsNullOrEmpty(configuration["EventBus:RabbitMQ:Password"]))
+                if (!string.IsNullOrEmpty(configuration["App:EventBus:RabbitMQ:Password"]))
                 {
-                    factory.Password = configuration["EventBus:RabbitMQ:Password"];
+                    factory.Password = configuration["App:EventBus:RabbitMQ:Password"];
                 }
 
                 var retryCount = 5;
-                if (!string.IsNullOrEmpty(configuration["EventBus:RabbitMQ:RetryCount"]))
+                if (!string.IsNullOrEmpty(configuration["App:EventBus:RabbitMQ:RetryCount"]))
                 {
-                    retryCount = int.Parse(configuration["EventBus:RabbitMQ:RetryCount"]);
+                    retryCount = int.Parse(configuration["App:EventBus:RabbitMQ:RetryCount"]);
                 }
 
                 return new DefaultRabbitMQPersistentConnection(factory, logger, retryCount);

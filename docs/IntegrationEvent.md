@@ -8,17 +8,19 @@
     
     Adding the below section in configuration, prefer in UserSecrets (Development) or Vault (Production)  
 ```
-  "EventBus": {
-    "Enabled": "true",
-    "Provider": "Azure",
-    "ClientName": "", 
-    "ConnectionString": "",
-    "RabbitMQ": {
-      "UserName": "",
-      "Password": "",
-      "RetryCount":  "" 
-    } 
-  }
+  "App": {
+      "EventBus": {
+        "Enabled": "true",
+        "Provider": "Azure",
+        "ClientName": "", 
+        "ConnectionString": "",
+        "RabbitMQ": {
+          "UserName": "",
+          "Password": "",
+          "RetryCount":  "" 
+        }
+      }
+    }
 ```
 
 Parameters  

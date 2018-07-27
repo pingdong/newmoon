@@ -23,13 +23,13 @@ namespace PingDong.EventBus.ServiceBus
         /// <param name="loggerFactory"></param>
         public void Inject(IServiceCollection services, IConfiguration configuration, ILogger loggerFactory)
         {
-            var subscriptionClientName = configuration["EventBus:ClientName"];
+            var subscriptionClientName = configuration["App:EventBus:ClientName"];
 
             services.AddSingleton<IServiceBusPersisterConnection>(sp =>
             {
                 var logger = sp.GetRequiredService<ILogger<DefaultServiceBusPersisterConnection>>();
 
-                var serviceBusConnectionString = configuration["EventBus:ConnectionString"];
+                var serviceBusConnectionString = configuration["App:EventBus:ConnectionString"];
                 var serviceBusConnection = new ServiceBusConnectionStringBuilder(serviceBusConnectionString);
 
                 return new DefaultServiceBusPersisterConnection(serviceBusConnection, logger);
