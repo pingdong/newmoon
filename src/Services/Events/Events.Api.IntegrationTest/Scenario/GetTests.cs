@@ -12,7 +12,7 @@ namespace PingDong.Newmoon.Events.Integration.Test
         [InlineData("api/v1/places")]
         public async Task Get_get_all_events_and_response_ok_status_code(string url)
         {
-            var baseDir = Directory.GetCurrentDirectory() + "\\..\\..\\..\\";
+            var baseDir = Directory.GetCurrentDirectory() + "\\..\\..\\";
 
             using (var server = CreateServer(baseDir))
             {

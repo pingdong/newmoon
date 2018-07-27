@@ -18,7 +18,7 @@ namespace PingDong.Newmoon.Events.Integration.Test
         {
             var cfg = new ConfigurationBuilder()
                             .SetBasePath(baseDir)
-                            .AddJsonFile("Settings.json")
+                            .AddJsonFile($"{baseDir}settings.json", optional: false)
                             .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_dbName))
                             .AddInMemoryCollection(new Dictionary<string, string>
                                 {

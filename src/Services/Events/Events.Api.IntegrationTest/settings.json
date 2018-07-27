@@ -6,6 +6,10 @@
     "BypassAuth": true,
     "ExternalServices": {
       "AuthenticationService": "http://localhost:5001"
+    },
+    "EventBus": {
+      "Enabled": true,
+      "Provider": "Mock"
     }
   }
 }
