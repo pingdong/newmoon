@@ -1,14 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Dependency;
+using PingDong.EventBus.Services;
 
 namespace PingDong.EventBus
 {
     /// <summary>
     /// Register in ASP.Net Dependency Container
     /// </summary>
-    public class Registrar : IDepdencyRegistrar
+    public class EventBusRegistrar : IDepdencyRegistrar
     {
         public DependecyType RegisterType => DependecyType.Infrastructure;
 
@@ -20,6 +24,30 @@ namespace PingDong.EventBus
         /// <param name="loggerFactory"></param>
         public void Inject(IServiceCollection services, IConfiguration configuration, ILogger loggerFactory)
         {
+            var connectionString = configuration.GetConnectionString("DefaultDbConnection");
+
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<EventBusLogServiceDbContext>(options =>
+                    {
+                        var builder = options.UseSqlServer(connectionString,
+                            sqlServerOptionsAction: sqlOptions =>
+                            {
+                                sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                            });
+                        if (configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
+                        {
+                            builder.EnableSensitiveDataLogging()
+                                // throw an exception when you are evaluating a query in-memory instead of in SQL, for performance
+                                .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning));
+                        }
+                    }
+                    // , ServiceLifetime.Scoped
+                    // Default lifetime
+                    // Showing explicitly that the DbContext is shared across the HTTP request scope (graph of objects started in the HTTP request)
+                );
+            
+            services.AddTransient<IEventBusLogService, EventBusLogService>();
+
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
         }
     }
