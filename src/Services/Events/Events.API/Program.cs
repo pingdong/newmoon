@@ -50,7 +50,7 @@ namespace PingDong.Newmoon.Events
                             .Wait();
                     });
 
-                if (configuration.GetValue("App:EventBus:Enabled", false))
+                if (configuration.GetValue("EventBus:Enabled", false))
                 {
                     // Event Bus
                     host.MigrateDbContext<EventBusLogServiceDbContext>((_, __) => { });

@@ -23,7 +23,7 @@ namespace PingDong.EventBus.RabbitMQ
         /// <param name="loggerFactory"></param>
         public void Inject(IServiceCollection services, IConfiguration configuration, ILogger loggerFactory)
         {
-            var subscriptionClientName = configuration["App:EventBus:ClientName"];
+            var subscriptionClientName = configuration["EventBus:ClientName"];
 
             services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
             {
@@ -31,23 +31,23 @@ namespace PingDong.EventBus.RabbitMQ
 
                 var factory = new ConnectionFactory
                 {
-                    HostName = configuration["App:EventBus:ConnectionString"]
+                    HostName = configuration["EventBus:ConnectionString"]
                 };
 
-                if (!string.IsNullOrEmpty(configuration["App:EventBus:RabbitMQ:UserName"]))
+                if (!string.IsNullOrEmpty(configuration["EventBus:RabbitMQ:UserName"]))
                 {
-                    factory.UserName = configuration["App:EventBus:RabbitMQ:UserName"];
+                    factory.UserName = configuration["EventBus:RabbitMQ:UserName"];
                 }
 
-                if (!string.IsNullOrEmpty(configuration["App:EventBus:RabbitMQ:Password"]))
+                if (!string.IsNullOrEmpty(configuration["EventBus:RabbitMQ:Password"]))
                 {
-                    factory.Password = configuration["App:EventBus:RabbitMQ:Password"];
+                    factory.Password = configuration["EventBus:RabbitMQ:Password"];
                 }
 
                 var retryCount = 5;
-                if (!string.IsNullOrEmpty(configuration["App:EventBus:RabbitMQ:RetryCount"]))
+                if (!string.IsNullOrEmpty(configuration["EventBus:RabbitMQ:RetryCount"]))
                 {
-                    retryCount = int.Parse(configuration["App:EventBus:RabbitMQ:RetryCount"]);
+                    retryCount = int.Parse(configuration["EventBus:RabbitMQ:RetryCount"]);
                 }
 
                 return new DefaultRabbitMQPersistentConnection(factory, logger, retryCount);
@@ -61,9 +61,9 @@ namespace PingDong.EventBus.RabbitMQ
                 var eventBusSubcriptionsManager = sp.GetRequiredService<IEventBusSubscriptionsManager>();
 
                 var retryCount = 5;
-                if (!string.IsNullOrEmpty(configuration["EventBusRetryCount"]))
+                if (!string.IsNullOrEmpty(configuration["EventBus:RabbitMQ:RetryCount"]))
                 {
-                    retryCount = int.Parse(configuration["EventBusRetryCount"]);
+                    retryCount = int.Parse(configuration["EventBus:RabbitMQ:RetryCount"]);
                 }
 
                 return new EventBusRabbitMQ(rabbitMQPersistentConnection, logger, iLifetimeScope, eventBusSubcriptionsManager, subscriptionClientName, retryCount);

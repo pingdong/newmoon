@@ -565,13 +565,13 @@ namespace PingDong.Newmoon.Events
 
             // Dynamic inject all EventBus services
 
-            if (Configuration.GetValue("App:EventBus:Enabled", false))
+            if (Configuration.GetValue("EventBus:Enabled", false))
             {
                 var path = this.GetType().Assembly.GetDirectoryName();
                 
                 _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.dll"));
 
-                switch (Configuration["App:EventBus:Provider"].ToLower())
+                switch (Configuration["EventBus:Provider"].ToLower())
                 {
                     case "azure":
                         _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.ServiceBus.dll"));
