@@ -29,30 +29,48 @@ namespace PingDong.Reflection
 
         #region Find Reference Assembly
 
-        public static List<Assembly> GetReferenceAssemblies(this Assembly assembly, string prefix = null, bool includeReference = true)
+        /// <summary>
+        /// Load referenced assemblies of the specified assembly
+        /// </summary>
+        /// <param name="assembly">Target assembly</param>
+        /// <param name="prefix">Prefix</param>
+        /// <param name="includeIndirectReference">Whether including indirectly referenced assemblies</param>
+        /// <returns></returns>
+        public static List<Assembly> GetReferenceAssemblies(this Assembly assembly, string prefix = null, bool includeIndirectReference = true)
         {
-            return GetReferenceAssemblies(assembly, new List<string> { prefix }, includeReference);
+            return GetReferenceAssemblies(assembly, new List<string> { prefix }, includeIndirectReference);
         }
 
-        public static List<Assembly> GetReferenceAssemblies(this Assembly assembly, IList<string> prefix = null, bool includeReference = true)
+        /// <summary>
+        /// Load referenced assemblies of the specified assembly
+        /// </summary>
+        /// <param name="assembly">Target assembly</param>
+        /// <param name="prefix">Prefix</param>
+        /// <param name="includeIndirectReference">Whether including indirectly referenced assemblies</param>
+        public static List<Assembly> GetReferenceAssemblies(this Assembly assembly, IList<string> prefix = null, bool includeIndirectReference = true)
         {
-            var assembiles = new List<Assembly>();
+            var assembiles = new List<Assembly> { assembly };
 
-            var assembieNames = assembly.GetReferencedAssemblies();
-
-            var names = prefix.IsNullOrEmpty()
-                ? assembieNames
-                : assembieNames.Where(a => prefix.Any(p => a.Name.StartsWith(p, StringComparison.OrdinalIgnoreCase)));
-
-            foreach (var file in names)
+            if (!prefix.IsNullOrEmpty())
             {
-                var target = Assembly.Load(file);
+                var assembieNames = assembly.GetReferencedAssemblies();
 
-                if (includeReference)
-                    LoadAssemblies(target, assembiles, prefix);
-                
-                if (!assembiles.Contains(target))
-                    assembiles.Add(target);
+                var names = prefix.IsNullOrEmpty()
+                    ? assembieNames
+                    : assembieNames.Where(
+                        a => prefix.Any(p => a.Name.StartsWith(p, StringComparison.OrdinalIgnoreCase)));
+
+                foreach (var file in names)
+                {
+                    var target = Assembly.Load(file);
+
+                    // Loading all indirect referenced files
+                    if (includeIndirectReference)
+                        LoadAssemblies(target, assembiles, prefix);
+
+                    if (!assembiles.Contains(target))
+                        assembiles.Add(target);
+                }
             }
 
             return assembiles;

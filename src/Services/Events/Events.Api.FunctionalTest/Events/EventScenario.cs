@@ -20,7 +20,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
         [Fact]
         public async Task Get_create_event_confirm_then_start()
         {
-            var baseDir = Directory.GetCurrentDirectory() + "\\..\\..\\..\\Events";
+            var baseDir = Directory.GetCurrentDirectory() + "\\..\\..\\";
 
             using (var server = CreateServer(baseDir))
             {
@@ -34,7 +34,9 @@ namespace PingDong.Newmoon.Events.Functional.Test
                 int eventId = Convert.ToInt32(evt.id);
                 string eventName = evt.name.ToString();
 
-                // Event confirm
+                // Event approve and confirm
+                var approveCmd = BuildApproveCommand(eventId, eventName).CreateJsonContent();
+                await http.Reset().PostAsync(Events.Post.ApproveEvent, approveCmd);
                 var confirmCmd = BuildConfirmCommand(eventId, eventName).CreateJsonContent();
                 await http.Reset().PostAsync(Events.Post.ConfirmEvent, confirmCmd);
 
@@ -108,6 +110,13 @@ namespace PingDong.Newmoon.Events.Functional.Test
         private string BuildConfirmCommand(int eventId, string eventName)
         {
             var cmd = new ConfirmEventCommand(eventId, eventName);
+
+            return JsonConvert.SerializeObject(cmd);
+        }
+
+        private string BuildApproveCommand(int eventId, string eventName)
+        {
+            var cmd = new ApproveEventCommand(eventId, eventName);
 
             return JsonConvert.SerializeObject(cmd);
         }

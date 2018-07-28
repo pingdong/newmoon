@@ -15,7 +15,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Library\DomainDriven\Service\DomainDriven.Service.csproj" />
+    <ProjectReference Include="..\..\..\Library\EventBus\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\..\..\Library\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\..\Library\Web\Web.csproj" />
     <ProjectReference Include="..\Infrastructure\Events.Infrastructure.csproj" />
   </ItemGroup>
 

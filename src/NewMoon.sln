@@ -26,11 +26,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-A
 		..\docs\Configuration.md = ..\docs\Configuration.md
 		..\docs\DataValidation.md = ..\docs\DataValidation.md
 		..\docs\EFcore.md = ..\docs\EFcore.md
+		..\docs\GetTokenInPostman.jpg = ..\docs\GetTokenInPostman.jpg
 		..\docs\HttpClient.md = ..\docs\HttpClient.md
 		..\docs\Identity.md = ..\docs\Identity.md
+		..\docs\IntegrationEvent.md = ..\docs\IntegrationEvent.md
 		..\Docs\IoC.md = ..\Docs\IoC.md
 		..\Docs\Mapping.md = ..\Docs\Mapping.md
-		..\docs\GetTokenInPostman.jpg = ..\docs\GetTokenInPostman.jpg
 		..\README.md = ..\README.md
 		..\docs\Setup.md = ..\docs\Setup.md
 		..\docs\Testing.md = ..\docs\Testing.md
@@ -71,6 +72,20 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Server", "Services\Authentication\Identity.Server\Identity.Server.csproj", "{8823674D-F069-4716-BD3C-F16AC3A0C42A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.DomainDriven.Infrastructure", "Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj", "{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{E880E516-FD50-4B27-969C-B2BAF88C9D7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Tests", "Library\EventBus\EventBus.Tests\EventBus.Tests.csproj", "{D619DC2F-6BFF-4D38-AFA3-97F48937926E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.RabbitMQ", "Library\EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{B528A2B7-A26F-4A71-A67C-AD889671BEB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.ServiceBus", "Library\EventBus\EventBus.ServiceBus\EventBus.ServiceBus.csproj", "{9A66D0CB-CF3A-4F90-8A10-0516A5924431}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus", "Library\EventBus\EventBus\EventBus.csproj", "{8D972F76-09B8-42EC-B1A9-EC9F482CBECC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore", "Library\EntityFrameworkCore\EntityFrameworkCore.csproj", "{27D7D199-BAC0-4274-B3FC-9A072CB00B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Mock", "Library\EventBus\EventBus.Mock\EventBus.Mock.csproj", "{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -154,6 +169,30 @@ Global
 		{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D619DC2F-6BFF-4D38-AFA3-97F48937926E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D619DC2F-6BFF-4D38-AFA3-97F48937926E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D619DC2F-6BFF-4D38-AFA3-97F48937926E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D619DC2F-6BFF-4D38-AFA3-97F48937926E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B528A2B7-A26F-4A71-A67C-AD889671BEB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B528A2B7-A26F-4A71-A67C-AD889671BEB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B528A2B7-A26F-4A71-A67C-AD889671BEB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B528A2B7-A26F-4A71-A67C-AD889671BEB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A66D0CB-CF3A-4F90-8A10-0516A5924431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A66D0CB-CF3A-4F90-8A10-0516A5924431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A66D0CB-CF3A-4F90-8A10-0516A5924431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A66D0CB-CF3A-4F90-8A10-0516A5924431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D972F76-09B8-42EC-B1A9-EC9F482CBECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D972F76-09B8-42EC-B1A9-EC9F482CBECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D972F76-09B8-42EC-B1A9-EC9F482CBECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D972F76-09B8-42EC-B1A9-EC9F482CBECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27D7D199-BAC0-4274-B3FC-9A072CB00B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27D7D199-BAC0-4274-B3FC-9A072CB00B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27D7D199-BAC0-4274-B3FC-9A072CB00B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27D7D199-BAC0-4274-B3FC-9A072CB00B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -184,6 +223,13 @@ Global
 		{E69EF8A5-09AC-495A-992E-F64FACA18ED2} = {2FB8559C-79E6-4CA2-8FC9-598CA527797E}
 		{8823674D-F069-4716-BD3C-F16AC3A0C42A} = {E69EF8A5-09AC-495A-992E-F64FACA18ED2}
 		{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F} = {F4D64E41-8A7A-4AAE-B24E-712D2C49EE09}
+		{E880E516-FD50-4B27-969C-B2BAF88C9D7D} = {081BCAA4-7635-4FD2-AAA3-746CC2FD4824}
+		{D619DC2F-6BFF-4D38-AFA3-97F48937926E} = {E880E516-FD50-4B27-969C-B2BAF88C9D7D}
+		{B528A2B7-A26F-4A71-A67C-AD889671BEB8} = {E880E516-FD50-4B27-969C-B2BAF88C9D7D}
+		{9A66D0CB-CF3A-4F90-8A10-0516A5924431} = {E880E516-FD50-4B27-969C-B2BAF88C9D7D}
+		{8D972F76-09B8-42EC-B1A9-EC9F482CBECC} = {E880E516-FD50-4B27-969C-B2BAF88C9D7D}
+		{27D7D199-BAC0-4274-B3FC-9A072CB00B97} = {081BCAA4-7635-4FD2-AAA3-746CC2FD4824}
+		{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048} = {E880E516-FD50-4B27-969C-B2BAF88C9D7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D16100-61EC-41DC-A4E8-2DE984C5D2ED}

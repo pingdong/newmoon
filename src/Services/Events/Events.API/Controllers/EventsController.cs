@@ -127,6 +127,22 @@ namespace PingDong.Newmoon.Events.Controllers
             return await CommandDispatchAsync(requestId, command);
         }
 
+        // POST api/v1/events/approve
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200"></response>
+
+        [Route("approve")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> ApproveEvent([FromHeader(Name = "x-requestid")] string requestId, [FromBody]ApproveEventCommand command)
+        {
+            return await CommandDispatchAsync(requestId, command);
+        }
+
         // POST api/v1/events/cancel
         /// <summary>
         /// 

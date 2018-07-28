@@ -1,4 +1,5 @@
-﻿using Autofac.Extensions.DependencyInjection;
+﻿using System;
+using Autofac.Extensions.DependencyInjection;
 using Serilog;
 using System.IO;
 using Microsoft.AspNetCore;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.AspNetCore.Hosting;
+using PingDong.EventBus.Services;
 using PingDong.Newmoon.Events.Infrastructure;
 
 namespace PingDong.Newmoon.Events
@@ -22,48 +24,49 @@ namespace PingDong.Newmoon.Events
         /// <param name="args">args</param>
         public static void Main(string[] args)
         {
-            // Serilog Initialize
-            //   It is only needed to support logging in the initialisation.
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{env}.json", optional: true)
+                    .AddCommandLine(args)
+                    .AddEnvironmentVariables()
+                    .Build();
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
 
-            //var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            //var configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            //    .AddJsonFile($"appsettings.{env}.json", optional: true)
-            //    .Build();
-            //Log.Logger = new LoggerConfiguration()
-            //    .ReadFrom.Configuration(configuration)
-            //    .CreateLogger();
+            try
+            {
+                Log.Information("Starting web host for Event Services");
 
-            //try
-            //{
-            //    Log.Information("Starting web host for Event Services");
+                var host = BuildWebHost(args).Build();
+                host.MigrateDbContext<EventContext>((context, services) =>
+                    {
+                        var logger = services.GetService<ILogger<EventContextSeed>>();
 
-            //    var webhost = BuildWebHost(args).Build();
-
-            //    webhost.Run();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Fatal(ex, "'Event Service' Host terminated unexpectedly");
-            //}
-            //finally
-            //{
-            //    Log.CloseAndFlush();
-            //}
-
-            var host = BuildWebHost(args).Build();
-            host.MigrateDbContext<EventContext>((context, services) =>
-                {
-                    var logger = services.GetService<ILogger<EventContextSeed>>();
-
-                    new EventContextSeed()
+                        new EventContextSeed()
                             .SeedAsync(context, logger)
                             .Wait();
-                });
-            // If seeding is not needed
-            //host.MigrateDbContext<EventContext>((_, __) => { });
-            host.Run();
+                    });
+
+                if (configuration.GetValue("EventBus:Enabled", false))
+                {
+                    // Event Bus
+                    host.MigrateDbContext<EventBusLogServiceDbContext>((_, __) => { });
+                }
+
+                host.Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "'Event Service' Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+
         }
 
         /// <summary>

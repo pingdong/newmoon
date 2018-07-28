@@ -97,9 +97,18 @@ namespace PingDong.Newmoon.Events.Core
         private int _statusId = EventStatus.Created.Id;
         public EventStatus Status => EventStatus.From(_statusId);
 
-        public void Confirm()
+        public void Approve()
         {
             if (_statusId != EventStatus.Created.Id)
+                throw new EventDomainException("Can only approve a created event");
+
+            AddDomainEvent(new EventApprovedDomainEvent(this));
+            this._statusId = EventStatus.Approved.Id;
+        }
+
+        public void Confirm()
+        {
+            if (_statusId != EventStatus.Approved.Id)
                 throw new EventDomainException("Can only confirm an unconfirmed event");
 
             AddDomainEvent(new EventConfirmedDomainEvent(this));

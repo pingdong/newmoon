@@ -21,12 +21,69 @@ namespace PingDong.Newmoon.Events.Core.Test
         }
         #endregion
 
+        #region Approve
+        [TestMethod]
+        public void Status_Approve()
+        {
+            var evt = CreateDefaultEvent();
+            Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Created.Id);
+            evt.Approve();
+            Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Approved.Id);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(EventDomainException))]
+        public void Status_Appove_Confirmed()
+        {
+            var evt = CreateDefaultEvent();
+            evt.Approve();
+            evt.Confirm();
+            Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Confirmed.Id);
+            evt.Approve();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(EventDomainException))]
+        public void Status_Approve_Started()
+        {
+            var evt = CreateDefaultEvent();
+            evt.Approve();
+            evt.Confirm();
+            evt.Start();
+            Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Ongoing.Id);
+            evt.Approve();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(EventDomainException))]
+        public void Status_Approve_Ended()
+        {
+            var evt = CreateDefaultEvent();
+            evt.Approve();
+            evt.Confirm();
+            evt.Start();
+            evt.Finish();
+            Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Ended.Id);
+            evt.Approve();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(EventDomainException))]
+        public void Status_Approve_Cancelled()
+        {
+            var evt = CreateDefaultEvent();
+            Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Created.Id);
+            evt.Approve();
+            evt.Confirm();
+            evt.Cancel();
+            Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Cancelled.Id);
+            evt.Approve();
+        }
+        #endregion
+
         #region Confirm
         [TestMethod]
         public void Status_Confirm()
         {
             var evt = CreateDefaultEvent();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Created.Id);
+            evt.Approve();
             evt.Confirm();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Confirmed.Id);
         }
@@ -35,6 +92,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Confirm_Confirmed()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Confirmed.Id);
             evt.Confirm();
@@ -44,6 +102,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Confirm_Started()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Start();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Ongoing.Id);
@@ -54,6 +113,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Confirm_Ended()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Start();
             evt.Finish();
@@ -66,6 +126,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         {
             var evt = CreateDefaultEvent();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Created.Id);
+            evt.Approve();
             evt.Confirm();
             evt.Cancel();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Cancelled.Id);
@@ -86,6 +147,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Start()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Confirmed.Id);
             evt.Start();
@@ -96,6 +158,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Start_Started()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Start();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Ongoing.Id);
@@ -106,6 +169,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Start_Ended()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Start();
             evt.Finish();
@@ -117,6 +181,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Start_Cancelled()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Cancel();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Cancelled.Id);
@@ -138,6 +203,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_End_Confirmed()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Confirmed.Id);
             evt.Finish();
@@ -146,6 +212,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_End()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Start();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Ongoing.Id);
@@ -157,6 +224,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_End_Ended()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Start();
             evt.Finish();
@@ -188,6 +256,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Cancel_Confirmed()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Confirmed.Id);
             evt.Cancel();
@@ -198,6 +267,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Cancel_Started()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Start();
             Assert.AreEqual(evt.GetPrivateFieldValue<int>("_statusId"), EventStatus.Ongoing.Id);
@@ -208,6 +278,7 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_Cancel_Ended()
         {
             var evt = CreateDefaultEvent();
+            evt.Approve();
             evt.Confirm();
             evt.Start();
             evt.Finish();
@@ -230,6 +301,9 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_DomainEvent_Create_End()
         {
             var evt = CreateDefaultEvent();
+
+            evt.Approve();
+            Assert.IsTrue(evt.HasDomainEvent(typeof(EventApprovedDomainEvent)));
 
             evt.Confirm();
             Assert.IsTrue(evt.HasDomainEvent(typeof(EventConfirmedDomainEvent)));
@@ -254,6 +328,9 @@ namespace PingDong.Newmoon.Events.Core.Test
         public void Status_DomainEvent_Create_Cancel()
         {
             var evt = CreateDefaultEvent();
+
+            evt.Approve();
+            Assert.IsTrue(evt.HasDomainEvent(typeof(EventApprovedDomainEvent)));
 
             evt.Confirm();
             Assert.IsTrue(evt.HasDomainEvent(typeof(EventConfirmedDomainEvent)));

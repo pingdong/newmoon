@@ -37,6 +37,7 @@ using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PingDong.AspNetCore;
 using PingDong.Newmoon.Events.Identity;
 using Swashbuckle.AspNetCore.Swagger;
 using StackExchange.Redis;
@@ -319,7 +320,7 @@ namespace PingDong.Newmoon.Events
 
             #endregion
 
-            #region Service Injecting (ASP.Net Core / Autofac IoC)
+            #region Service Injecting (ASP.Net Core / Autofac IoC / EventBus)
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -335,9 +336,9 @@ namespace PingDong.Newmoon.Events
 
             #region Object Mapping (AutoMapper)
 
-            // Register all mapping profiles into IoC
+                // Register all mapping profiles into IoC
 
-            services.AddAutoMapper(references);
+                services.AddAutoMapper(references);
 
             _logger.LogInformation(LoggingEvent.Success, "Objects Mapping are injected into IoC");
 
@@ -519,6 +520,23 @@ namespace PingDong.Newmoon.Events
                     });
 
             _logger.LogInformation(LoggingEvent.Success, "Web Access Handling");
+
+            #region Post Config
+
+            var references = GetSearchingTargets();
+            var instances = references.FindInterfaces<IServiceConfigure>();
+            if (!instances.IsNullOrEmpty())
+            {
+                foreach (var instance in instances)
+                {
+                    instance.Config(app, env, loggerFactory);
+                    _logger.LogDebug(LoggingEvent.Success, $"{instance.GetType().FullName} is executed");
+                }
+            }
+
+            _logger.LogInformation(LoggingEvent.Success, "Post Config Tasks are executed");
+
+            #endregion
         }
 
         #region Test Support
@@ -540,8 +558,34 @@ namespace PingDong.Newmoon.Events
         {
             if (_referencedAssemblies.Any())
                 return _referencedAssemblies;
-
+            
             _referencedAssemblies = this.GetType().Assembly.GetReferenceAssemblies(prefix: "PingDong.Newmoon.Events");
+
+            #region Event Bus
+
+            // Dynamic inject all EventBus services
+
+            if (Configuration.GetValue("EventBus:Enabled", false))
+            {
+                var path = this.GetType().Assembly.GetDirectoryName();
+                
+                _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.dll"));
+
+                switch (Configuration["EventBus:Provider"].ToLower())
+                {
+                    case "azure":
+                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.ServiceBus.dll"));
+                        break;
+                    case "rabbitmq":
+                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.RabbitMQ.dll"));
+                        break;
+                    default:
+                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.Mock.dll"));
+                        break;
+                }
+            }
+
+            #endregion
 
             return _referencedAssemblies;
         }

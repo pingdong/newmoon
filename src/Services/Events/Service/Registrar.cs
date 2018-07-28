@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Dependency;
 using PingDong.DomainDriven.Service;
-using PingDong.Newmoon.Events.Service;
+using PingDong.Newmoon.Events.Service.IntegrationEvents;
 
 namespace PingDong.Newmoon.Events.Service
 {
@@ -24,6 +24,9 @@ namespace PingDong.Newmoon.Events.Service
         {
             // Request Manager
             services.AddTransient<IRequestManager, RequestManager>();
+
+            // Event Bus
+            services.AddTransient<IIntegrationEventService, IntegrationEventService>();
         }
     }
 }

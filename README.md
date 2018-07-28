@@ -1,6 +1,6 @@
 # **Newmoon**
 
-For many reasons, I have seen many compromised designs/projects. Therefore I decided to implement an ideal solution as a template and maintain it to catch up with emerging technology and concepts in the future.
+For many reasons, I have seen many compromised designs/projects. Therefore I decided to implement a proof-of-concept solution and update along with emerging technology.
 
 The current version borrowed some codes and idea from Microsoft eShopContainers project, Thanks.
 
@@ -58,7 +58,7 @@ I added some features that I believe they are important and helpful in real life
 * [ ] GraphQL
   
 * [ ] API Gateway
-* [ ] Integration Message
+* [*] Integration Event
 * [ ] Docker & Kubernetes
 * [ ] Grafana or Kibana
 * [ ] Prometheus
@@ -84,6 +84,7 @@ I added some features that I believe they are important and helpful in real life
 [Data Validation](./docs/DataValidation.md)  
 [Identity](./docs/Identity.md)    
 [HttpClient](./docs/HttpClient.md)
+[Integration Event](./docs/IntegrationEvent.md)
 
 ### Data Management  
 [Cache](./docs/Cache.md)  

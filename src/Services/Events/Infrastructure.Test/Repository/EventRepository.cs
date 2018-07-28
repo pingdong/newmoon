@@ -28,20 +28,22 @@ namespace PingDong.Newmoon.Events.Infrastructure.Test
         [Fact]
         public void Add_Then_Get()
         {
-            ExecuteTestCase(async repository =>
+            ExecuteTestCase(async (repository, context) =>
             {
                 // Arrange
                 var evt = new Event(EventName, _startTime, _endTime);
                 var attendee = new Attendee(AttendeeId, AttendeeFirstname, AttendeeLastname);
                 evt.AddAttendee(attendee);
                 evt.ChangePlace(PlaceId);
+                evt.Approve();
                 evt.Confirm();
                 
                 // Ack
                 var addResult = repository.Add(evt);
                 await repository.UnitOfWork.SaveChangesAsync();
 
-                var getResult = await repository.GetByIdAsync(addResult.Id);
+                var evtRead = await context.Events.FirstAsync();
+                var getResult = await repository.GetByIdAsync(evtRead.Id);
 
                 // Assert
                 Assert.Equal(getResult.Name, EventName);
@@ -56,11 +58,12 @@ namespace PingDong.Newmoon.Events.Infrastructure.Test
             });
         }
 
-        private async void ExecuteTestCase(Func<IEventRepository, Task> action)
+        private async void ExecuteTestCase(Func<IEventRepository, EventContext, Task> action)
         {
             var options = new DbContextOptionsBuilder<EventContext>()
                                 // Randon db name for parallel testing
                                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                                //.UseSqlServer("Server=.;Database=Newmoon;User Id=Newmoon;Password=newmoon;MultipleActiveResultSets=true")
                                 .Options;
 
             using (var context = new EventContext(options, new EmptyMediator()))
@@ -70,7 +73,7 @@ namespace PingDong.Newmoon.Events.Infrastructure.Test
 
                 var repository = new EventRepository(context, null);
 
-                await action(repository);
+                await action(repository, context);
             }
         }
     }
