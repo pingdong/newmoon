@@ -2,12 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
     <RootNamespace>PingDong.Newmoon.Events.Functional.Test</RootNamespace>
-
     <AssemblyName>PingDong.Newmoon.Events.Functional.Test</AssemblyName>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Library\EventBus\EventBus.Mock\EventBus.Mock.csproj" />
     <ProjectReference Include="..\..\..\Library\QualityTools\Core\QualityTools.Core.csproj" />
     <ProjectReference Include="..\..\..\Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Library\QualityTools\QualityTools.Web\QualityTools.Web.csproj" />

@@ -2,8 +2,9 @@
 
 > ## EF Core 
 
-More Migration information could be found [here](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/)
+## Migration
 
+More Migration information could be found [here](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/)
 
 __Precondition__
 * Only support .Net Core or .Net Framework project, .Net Standard project is not supported  
@@ -25,3 +26,8 @@ Revert
 
 Generating Scripts  
 	`dotnet ef migrations script`
+
+
+## Transaction
+
+Use of an EF Core resiliency strategy when using multiple DbContexts within an explicit BeginTransaction(): [here]( https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency)

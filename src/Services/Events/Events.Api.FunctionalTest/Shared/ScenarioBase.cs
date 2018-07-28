@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.AspNetCore.Hosting;
+using PingDong.EventBus.Services;
 using PingDong.Newmoon.Events.Infrastructure;
 using PingDong.QualityTools.Infrastrucutre.SqlServer;
 
@@ -18,8 +19,12 @@ namespace PingDong.Newmoon.Events.Functional.Test
         {
             var cfg = new ConfigurationBuilder()
                             .SetBasePath(baseDir)
-                            .AddJsonFile("Settings.json")
+                            .AddJsonFile($"{baseDir}Events\\settings.json")
                             .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_dbName))
+                            //.AddInMemoryCollection(new Dictionary<string, string>
+                            //{
+                            //    { "ConnectionStrings:DefaultDbConnection", "Server=.;Database=Newmoon;User Id=Newmoon;Password=newmoon;MultipleActiveResultSets=true" }
+                            //})
                             .AddInMemoryCollection(new Dictionary<string, string>
                                 {
                                     { "isTest", "true" }
@@ -42,7 +47,8 @@ namespace PingDong.Newmoon.Events.Functional.Test
                     new EventContextSeed()
                         .SeedAsync(context, logger)
                         .Wait();
-                });
+                })
+                .MigrateDbContext<EventBusLogServiceDbContext>((_, __) => { });
 
             return testServer;
         }
@@ -69,6 +75,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
             {
                 public static string AddEvent = "api/v1/events";
                 public static string CancelEvent = "api/v1/events/cancel";
+                public static string ApproveEvent = "api/v1/events/approve";
                 public static string ConfirmEvent = "api/v1/events/confirm";
                 public static string StartEvent = "api/v1/events/start";
                 public static string EndEvent = "api/v1/events/end";

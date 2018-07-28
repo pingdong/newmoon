@@ -1,6 +1,6 @@
 # **Newmoon**
 
-For many reasons, I have seen many compromised designs/projects. Therefore I decided to implement an ideal solution as a template and maintain it to catch up with emerging technology and concepts in the future.
+For many reasons, I have seen many compromised designs/projects. Therefore I decided to implement a proof-of-concept solution and update along with emerging technology.
 
 The current version borrowed some codes and idea from Microsoft eShopContainers project, Thanks.
 

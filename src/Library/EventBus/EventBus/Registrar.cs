@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -46,7 +47,7 @@ namespace PingDong.EventBus
                     // Showing explicitly that the DbContext is shared across the HTTP request scope (graph of objects started in the HTTP request)
                 );
             
-            services.AddTransient<IEventBusLogService, EventBusLogService>();
+            services.AddTransient<Func<DbConnection, IEventBusLogService>>(sp => (DbConnection c) => new EventBusLogService(c));
 
             services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
         }
