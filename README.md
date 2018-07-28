@@ -58,7 +58,7 @@ I added some features that I believe they are important and helpful in real life
 * [ ] GraphQL
   
 * [ ] API Gateway
-* [*] Integration Event
+* [x] Integration Event
 * [ ] Docker & Kubernetes
 * [ ] Grafana or Kibana
 * [ ] Prometheus
