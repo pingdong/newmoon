@@ -83,11 +83,11 @@ I added some features that I believe they are important and helpful in real life
 ### Asp.Net Core   
 [Dependency Injection](./docs/IoC.md)  
 [Configuration](./docs/Configuration.md)  
-[Data Validation](./docs/DataValidation.md)  
+[Data Validation](./docs/DataValidation.md)   
 [Identity](./docs/Identity.md)    
-[HttpClient](./docs/HttpClient.md)
-[Integration Event](./docs/IntegrationEvent.md)
-[Background Tasks](./docs/Background.md)
+[HttpClient](./docs/HttpClient.md)  
+[Integration Event](./docs/IntegrationEvent.md)  
+[Background Tasks](./docs/BackgroundTask.md)
 
 ### Data Management  
 [Cache](./docs/Cache.md)  
