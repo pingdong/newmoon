@@ -15,9 +15,10 @@ I added some features that I believe they are important and helpful in real life
 * Autofac 4.8.1
 * AutoMapper 7.0.1
 * FluentValidation 7.6.104
-* MediatR 5.0.1
+* MediatR 5.1.0
 * Serilog.AspNetCore 2.1.1
 * Polly 6.0.1
+* NCrontab 3.3.0
 * Swashbuckle.AspNetCore 3.0.0
 * xUnit.net 2.3.1
 * Moq 4.9.0  
@@ -50,6 +51,7 @@ I added some features that I believe they are important and helpful in real life
 * [x] Microservice Coding Practice
 * [x] Multiple Configuration Source, Sturcture Application Settings
 * [x] Authentication & Authorization
+* [x] Background Tasks  
 
 * [x] Cache: In-memory, Redis
 * [x] OData
@@ -85,6 +87,7 @@ I added some features that I believe they are important and helpful in real life
 [Identity](./docs/Identity.md)    
 [HttpClient](./docs/HttpClient.md)
 [Integration Event](./docs/IntegrationEvent.md)
+[Background Tasks](./docs/Background.md)
 
 ### Data Management  
 [Cache](./docs/Cache.md)  
