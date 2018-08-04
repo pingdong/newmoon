@@ -15,7 +15,7 @@ I added some features that I believe they are important and helpful in real life
 * Autofac 4.8.1
 * AutoMapper 7.0.1
 * FluentValidation 7.6.104
-* MediatR 5.0.1
+* MediatR 5.1.0
 * Serilog.AspNetCore 2.1.1
 * Polly 6.0.1
 * NCrontab 3.3.0
