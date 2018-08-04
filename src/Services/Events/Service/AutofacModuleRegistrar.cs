@@ -1,8 +1,10 @@
 ﻿using Autofac;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using PingDong.Application.Dependency;
 using PingDong.Newmoon.Events.Service.Queries;
+using PingDong.Newmoon.Events.Service.Tasks;
 
 namespace PingDong.Newmoon.Events.Service
 {
@@ -26,6 +28,8 @@ namespace PingDong.Newmoon.Events.Service
                 .As<IPlaceQuery>()
                 .InstancePerLifetimeScope();
 
+            // Background Tasks
+            builder.RegisterType<PastEventCleanUp>().As<IHostedService>().SingleInstance();
 
             builder.RegisterGeneric(typeof(LoggingBehavior<,>)).As(typeof(IPipelineBehavior<,>));
             // For demostration purpose only, request is validated in the ASP.Net pipeline before hitting controller.

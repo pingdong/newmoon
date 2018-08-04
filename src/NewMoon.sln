@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{5D7DBF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-AC79-4612-B26E-CD6261C0BCC9}"
 	ProjectSection(SolutionItems) = preProject
+		..\docs\BackgroundTask.md = ..\docs\BackgroundTask.md
 		..\docs\Backlog.md = ..\docs\Backlog.md
 		..\docs\Cache.md = ..\docs\Cache.md
 		..\docs\Configuration.md = ..\docs\Configuration.md
@@ -85,7 +86,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus", "Library\EventBu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore", "Library\EntityFrameworkCore\EntityFrameworkCore.csproj", "{27D7D199-BAC0-4274-B3FC-9A072CB00B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Mock", "Library\EventBus\EventBus.Mock\EventBus.Mock.csproj", "{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Mock", "Library\EventBus\EventBus.Mock\EventBus.Mock.csproj", "{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
