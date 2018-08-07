@@ -5,7 +5,7 @@
     <UserSecretsId>aspnet-PingDong.Newmoon.IdentityServer-EF571BEC-B0BC-43FA-A753-B5DA665DAC61</UserSecretsId>
     <AssemblyName>PingDong.Newmoon.IdentityServer</AssemblyName>
     <RootNamespace>PingDong.Newmoon.IdentityServer</RootNamespace>
-    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
