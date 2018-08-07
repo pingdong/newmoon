@@ -23,7 +23,7 @@ namespace PingDong.Newmoon.Events.Infrastructure
         /// <param name="loggerFactory"></param>
         public void Inject(IServiceCollection services, IConfiguration configuration, ILogger loggerFactory)
         {
-            var connectionString = configuration["SqlServer:ConnectionString"];
+            var connectionString = configuration["SqlServer_ConnectionString"];
 
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<EventContext>(options =>

@@ -124,7 +124,7 @@ namespace PingDong.Newmoon.Events
                     minutes = AppSettings.HealthCheckInterval;
                 }
 
-                checks.AddSqlCheck("Database Connection", Configuration["SqlServer:ConnectionString"], TimeSpan.FromMinutes(minutes))
+                checks.AddSqlCheck("Database Connection", Configuration["SqlServer_ConnectionString"], TimeSpan.FromMinutes(minutes))
                       .AddUrlCheck(Configuration["IdentityServiceUri"], TimeSpan.FromMinutes(minutes));
 
                 // For isolated web service only, doesn't depend on any db or service

@@ -13,7 +13,7 @@ namespace PingDong.QualityTools.Infrastrucutre.SqlServer
         {
             return new Dictionary<string, string>
                 {
-                    { "SqlServer:ConnectionString", BuildConnectionString(dbName) }
+                    { "SqlServer_ConnectionString", BuildConnectionString(dbName) }
                 };
         }
 

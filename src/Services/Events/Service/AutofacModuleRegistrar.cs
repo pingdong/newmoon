@@ -16,7 +16,7 @@ namespace PingDong.Newmoon.Events.Service
 
         protected override void Load(ContainerBuilder builder)
         {
-            var connectionString = base.Configuration["SqlServer:ConnectionString"];
+            var connectionString = base.Configuration["SqlServer_ConnectionString"];
 
             // Event
             builder.Register(c => new EventQuery(connectionString))

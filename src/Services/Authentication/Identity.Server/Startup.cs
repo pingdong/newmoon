@@ -56,7 +56,7 @@ namespace PingDong.Newmoon.IdentityServer
 
             services.AddHealthChecks(checks =>
             {
-                checks.AddSqlCheck("Database", _configuration["SqlServer:ConnectionString"]);
+                checks.AddSqlCheck("Database", _configuration["SqlServer_ConnectionString"]);
             });
 
             _logger.LogInformation(LoggingEvent.Success, "HealthCheck Initialized");
@@ -69,7 +69,7 @@ namespace PingDong.Newmoon.IdentityServer
 
             #region Asp.Net Authentication
 
-            var authConnectionString = _configuration["SqlServer:ConnectionString"];
+            var authConnectionString = _configuration["SqlServer_ConnectionString"];
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(authConnectionString,
@@ -139,7 +139,7 @@ namespace PingDong.Newmoon.IdentityServer
             }
             else
             {
-                var identityConnectionString = _configuration["SqlServer:ConnectionString"];
+                var identityConnectionString = _configuration["SqlServer_ConnectionString"];
                 var migrationsAssembly = GetType().GetTypeInfo().Assembly.GetName().Name;
 
                 identityBuilder.AddConfigurationStore(options =>
