@@ -8,27 +8,11 @@
 
 ## Note:
 
- 1. The following settings need to be provided, prefer in user secrects in Events.Api projects
+ The following settings need to be included in appsettings.Development.json or user secrects in Identity.Server
 
-```
-  "ConnectionStrings": {  
-	DefaultDbConnection": "Server=[server name];Database=[database name];User Id=[username];Password=[password];MultipleActiveResultSets=true"
-  },
-  "Redis": {
-	"Connection":  "" 
-  },
-  "DistributedCache": {
-	"Server": "",
-	"Instance":  "" 
-  } 
-```
-
-
- 2. The following settings need to be included in appsettings.Development.json or user secrects in Identity.Server
-
-```
-  "ConnectionStrings": {
-	"DefaultDbConnection": "Server=[server name];Database=[database name];User Id=[username];Password=[password];MultipleActiveResultSets=true"
-  }
+```  
+  "IdentityServiceUri": "http://localhost:5001",
+  "EventsServiceUri": "http://localhost:5005",
+  "DbConnectionString": "Server=;Database=;User Id=;Password=;MultipleActiveResultSets=true"
 ```
 

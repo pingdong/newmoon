@@ -124,8 +124,8 @@ namespace PingDong.Newmoon.Events
                     minutes = AppSettings.HealthCheckInterval;
                 }
 
-                checks.AddSqlCheck("Database Connection", Configuration["ConnectionStrings:DefaultDbConnection"], TimeSpan.FromMinutes(minutes))
-                      .AddUrlCheck(AppSettings.ExternalServices.AuthenticationService, TimeSpan.FromMinutes(minutes));
+                checks.AddSqlCheck("Database Connection", Configuration["SqlServer:ConnectionString"], TimeSpan.FromMinutes(minutes))
+                      .AddUrlCheck(Configuration["IdentityServiceUri"], TimeSpan.FromMinutes(minutes));
 
                 // For isolated web service only, doesn't depend on any db or service
                 // checks.AddValueTaskCheck("HTTP Endpoint", () => new ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
@@ -148,8 +148,8 @@ namespace PingDong.Newmoon.Events
                 options.AddSecurityDefinition("oauth2", new OAuth2Scheme
                     {
                         Description = "OAuth2 Authentication using Identity.Server",
-                        AuthorizationUrl = $"{AppSettings.ExternalServices.AuthenticationService}/connect/authorize",
-                        TokenUrl = $"{AppSettings.ExternalServices.AuthenticationService}/connect/token",
+                        AuthorizationUrl = $"{Configuration["IdentityServiceUri"]}/connect/authorize",
+                        TokenUrl = $"{Configuration["IdentityServiceUri"]}/connect/token",
                         Flow = "implicit",
                         Type = "oauth2",
                         Scopes = new Dictionary<string, string>
@@ -209,7 +209,7 @@ namespace PingDong.Newmoon.Events
             // Making sure the service won't start until redis is ready.
             services.AddSingleton(sp =>
                 {
-                    var redisConnectionString = Configuration["Redis:Connection"];
+                    var redisConnectionString = Configuration["Redis:ConnectionString"];
                     var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
 
                     configuration.ResolveDns = true;
@@ -224,7 +224,7 @@ namespace PingDong.Newmoon.Events
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                     .AddIdentityServerAuthentication(options =>
                         {
-                            options.Authority = $"{AppSettings.ExternalServices.AuthenticationService}";
+                            options.Authority = Configuration["IdentityServiceUri"];
                             options.ApiName = "Events Api";
                             options.ApiSecret = "events_api-client";
                             options.LegacyAudienceValidation = true; // It is required for 401 error ValidAudiences
@@ -282,7 +282,7 @@ namespace PingDong.Newmoon.Events
                             // this defines a CORS policy called "default"
                             options.AddPolicy("default", policy =>
                             {
-                                policy.WithOrigins(AppSettings.BaseUri)
+                                policy.WithOrigins(Configuration["EventsServiceUri"])
                                     .AllowAnyHeader()
                                     .AllowAnyMethod()
                                     .AllowCredentials();
@@ -489,12 +489,12 @@ namespace PingDong.Newmoon.Events
             app.UseSwagger()
                .UseSwaggerUI(options =>
                     {
-                        options.SwaggerEndpoint($"{AppSettings.BaseUri}/swagger/{AppSettings.ApiVersion}/swagger.json", $"{AppSettings.Title} {AppSettings.ApiVersion}");
+                        options.SwaggerEndpoint($"{Configuration["EventsServiceUri"]}/swagger/{AppSettings.ApiVersion}/swagger.json", $"{AppSettings.Title} {AppSettings.ApiVersion}");
                         options.DefaultModelsExpandDepth(-1); // Hide Models section
                         // Authentication
                         options.OAuthAppName("Events Service");
                         options.OAuthClientId("swagger");
-                        options.OAuth2RedirectUrl($"{AppSettings.BaseUri}/swagger/oauth2-redirect.html");
+                        options.OAuth2RedirectUrl($"{Configuration["EventsServiceUri"]}/swagger/oauth2-redirect.html");
                     });
             _logger.LogInformation(LoggingEvent.Success, "Swagger is running");
 
@@ -506,18 +506,18 @@ namespace PingDong.Newmoon.Events
 
             // MVC
             app.UseMvc(routes => 
-                    {
-                        // Workaround: https://github.com/OData/WebApi/issues/1175
-                        routes.EnableDependencyInjection();
+                {
+                    // Workaround: https://github.com/OData/WebApi/issues/1175
+                    routes.EnableDependencyInjection();
 
-                        var baseUri = $"api/{AppSettings.ApiVersion}";
-                        var odataUri = $"{baseUri}/odata";
-                        routes.MapODataServiceRoute(odataUri, odataUri, GetEdmModel(GetSearchingTargets()));
+                    var baseUri = $"api/{AppSettings.ApiVersion}";
+                    var odataUri = $"{baseUri}/odata";
+                    routes.MapODataServiceRoute(odataUri, odataUri, GetEdmModel(GetSearchingTargets()));
 
-                        routes.MapRoute(
-                            name: "default",
-                            template: baseUri + "/{controller=Ping}");
-                    });
+                    routes.MapRoute(
+                        name: "default",
+                        template: baseUri + "/{controller=Ping}");
+                });
 
             _logger.LogInformation(LoggingEvent.Success, "Web Access Handling");
 
@@ -573,7 +573,7 @@ namespace PingDong.Newmoon.Events
 
                 switch (Configuration["EventBus:Provider"].ToLower())
                 {
-                    case "azure":
+                    case "azureservicebus":
                         _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.ServiceBus.dll"));
                         break;
                     case "rabbitmq":

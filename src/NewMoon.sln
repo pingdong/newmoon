@@ -88,8 +88,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore", "Libr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Mock", "Library\EventBus\EventBus.Mock\EventBus.Mock.csproj", "{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AF3A913-446B-4CC9-8DC8-A7844873FC43}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{5DCBD62D-6839-4097-B4BE-F176E8EF2398}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{0B30A24D-2C53-40BC-9EBC-F60434E3CA8A}"

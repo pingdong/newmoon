@@ -38,9 +38,9 @@ namespace PingDong.Newmoon.IdentityServer
 
             if (env != "Development")
             {
-                var endpoint = Environment.GetEnvironmentVariable("Azure:Vault:Endpoint");
-                var clientId = Environment.GetEnvironmentVariable("Azure:Vault:ClientId");
-                var clientSecret = Environment.GetEnvironmentVariable("Azure:Vault:ClientSecret");
+                var endpoint = Environment.GetEnvironmentVariable("Azure_Vault_Endpoint");
+                var clientId = Environment.GetEnvironmentVariable("Azure_Vault_ClientId");
+                var clientSecret = Environment.GetEnvironmentVariable("Azure_Vault_ClientSecret");
 
                 if (!string.IsNullOrWhiteSpace(endpoint) && !string.IsNullOrWhiteSpace(clientId) && !string.IsNullOrWhiteSpace(clientSecret))
                 {
@@ -71,7 +71,7 @@ namespace PingDong.Newmoon.IdentityServer
                 var host = BuildWebHost(args, configuration).Build();
 
                 host.MigrateDbContext<ApplicationDbContext>((context, services) => { });
-
+                
                 host.Run();
             }
             catch (Exception ex)

@@ -49,9 +49,9 @@ namespace PingDong.Newmoon.Events
 
             if (env != "Development")
             {
-                var endpoint = Environment.GetEnvironmentVariable("Azure:Vault:Endpoint");
-                var clientId = Environment.GetEnvironmentVariable("Azure:Vault:ClientId");
-                var clientSecret = Environment.GetEnvironmentVariable("Azure:Vault:ClientSecret");
+                var endpoint = Environment.GetEnvironmentVariable("Azure_Vault_Endpoint");
+                var clientId = Environment.GetEnvironmentVariable("Azure_Vault_ClientId");
+                var clientSecret = Environment.GetEnvironmentVariable("Azure_Vault_ClientSecret");
 
                 // Secrets should save in vault in production environment
                 //   config need to be built to retrieve Vault information
@@ -64,7 +64,6 @@ namespace PingDong.Newmoon.Events
                         clientId,
                         clientSecret);
                 }
-
             }
 
             builder

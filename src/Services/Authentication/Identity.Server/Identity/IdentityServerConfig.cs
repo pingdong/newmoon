@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdentityServer4;
 using IdentityServer4.Models;
-using PingDong.Newmoon.IdentityServer.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace PingDong.Newmoon.IdentityServer.Identity
 {
@@ -29,7 +29,7 @@ namespace PingDong.Newmoon.IdentityServer.Identity
         }
 
         // http://docs.identityserver.io/en/release/reference/client.html
-        public static IEnumerable<Client> GetClients(AppSettings settings)
+        public static IEnumerable<Client> GetClients(IConfiguration config)
         {
             // client credentials client
             return new List<Client>
@@ -43,8 +43,8 @@ namespace PingDong.Newmoon.IdentityServer.Identity
                         AllowAccessTokensViaBrowser = true,
                         // TODO: Enable consent
                         RequireConsent = false,
-                        RedirectUris = { $"{settings.ExternalServices.EventsService}" },
-                        PostLogoutRedirectUris = { $"{settings.ExternalServices.EventsService}" },
+                        RedirectUris = { config["EventsServiceUri"] },
+                        PostLogoutRedirectUris = { config["EventsServiceUri"] },
                         AllowedScopes =
                             {
                                 "events.api"
@@ -60,9 +60,9 @@ namespace PingDong.Newmoon.IdentityServer.Identity
                         // TODO: Enable consent
                         RequireConsent = false,
                         EnableLocalLogin = true,
-                        RedirectUris = { $"{settings.ExternalServices.EventsService}/swagger/oauth2-redirect.html" },
-                        PostLogoutRedirectUris = { $"{settings.ExternalServices.EventsService}/swagger" },
-                        AllowedCorsOrigins = { $"{settings.ExternalServices.EventsService}" },
+                        RedirectUris = { $"{config["EventsServiceUri"]}/swagger/oauth2-redirect.html" },
+                        PostLogoutRedirectUris = { $"{config["EventsServiceUri"]}/swagger" },
+                        AllowedCorsOrigins = { config["EventsServiceUri"] },
                         AllowedScopes =
                             {
                                 "events.api",
@@ -80,8 +80,8 @@ namespace PingDong.Newmoon.IdentityServer.Identity
                         AllowAccessTokensViaBrowser = true,
                         // TODO: Enable consent
                         RequireConsent = false,
-                        RedirectUris = { $"{settings.ExternalServices.EventsService}/signin-oidc" },
-                        PostLogoutRedirectUris = { $"{settings.ExternalServices.EventsService}/signout-callback-oidc" },
+                        RedirectUris = { $"{config["EventsServiceUri"]}/signin-oidc" },
+                        PostLogoutRedirectUris = { $"{config["EventsServiceUri"]}/signout-callback-oidc" },
                         AllowedScopes =
                             {
                                 "events.api",

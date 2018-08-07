@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using PingDong.Application.Dependency;
 using PingDong.Newmoon.Events.Service.Queries;
@@ -17,7 +16,7 @@ namespace PingDong.Newmoon.Events.Service
 
         protected override void Load(ContainerBuilder builder)
         {
-            var connectionString = base.Configuration.GetConnectionString("DefaultDbConnection");
+            var connectionString = base.Configuration["SqlServer:ConnectionString"];
 
             // Event
             builder.Register(c => new EventQuery(connectionString))
