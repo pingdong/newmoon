@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  identity.server:
+    image: newmoon/identityserver
+    build:
+      context: .
+      dockerfile: Services\Authentication\Identity.Server\Dockerfile
+
+  events.api:
+    image: newmoon/eventsapi
+    build:
+      context: .
+      dockerfile: Services\Events\Events.API\Dockerfile
+    depends_on:
+      - identity.server

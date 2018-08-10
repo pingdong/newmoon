@@ -478,12 +478,11 @@ namespace PingDong.Newmoon.Events
 
                 // Using https
                 app.UseHsts();
+                app.UseHttpsRedirection();
 
                 loggerFactory.AddAzureWebAppDiagnostics();
                 loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Trace);
             }
-
-            app.UseHttpsRedirection();
 
             // Swagger support
             app.UseSwagger()

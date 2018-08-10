@@ -4,8 +4,16 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace PingDong.Newmoon.Events.Identity
 {
+    /// <summary>
+    /// Document Filter
+    /// </summary>
     public class SecurityRequirementsDocumentFilter : IDocumentFilter
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="context"></param>
         public void Apply(SwaggerDocument document, DocumentFilterContext context)
         {
             document.Security = new List<IDictionary<string, IEnumerable<string>>>()

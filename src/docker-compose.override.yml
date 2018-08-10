@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+
+  identity.server:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SqlServer_ConnectionString=${SqlServer_ConnectionString}
+      - EventsServiceUri=http://${Events_Service}
+    ports:
+      - "5001:80"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
+
+  events.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOCKER_OPTS=--debug
+      - SqlServer_ConnectionString=${SqlServer_ConnectionString}
+      - IdentityServiceUri=http://${Identity_Server}
+      - EventsServiceUri=http://${Events_Service}
+    ports:
+      - "5005:80"
+
+networks:
+  default:
+    external:
+      name: nat
+

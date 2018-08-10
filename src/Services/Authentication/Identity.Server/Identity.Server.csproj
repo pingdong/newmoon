@@ -6,10 +6,11 @@
     <AssemblyName>PingDong.Newmoon.IdentityServer</AssemblyName>
     <RootNamespace>PingDong.Newmoon.IdentityServer</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\..\..\drops\IdentityServer\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

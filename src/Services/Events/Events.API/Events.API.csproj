@@ -6,11 +6,12 @@
     <AssemblyName>PingDong.Newmoon.Events</AssemblyName>
     <RootNamespace>PingDong.Newmoon.Events</RootNamespace>
     <UserSecretsId>bc9eeb68-24fd-4619-b88c-4c627d1df284</UserSecretsId>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\..\..\..\drops\events\PingDong.Newmoon.Events.xml</DocumentationFile>
-    <OutputPath>..\..\..\..\drops\events\</OutputPath>
+    <DocumentationFile>bin\Debug\PingDong.Newmoon.Events.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
   </PropertyGroup>
 
