@@ -12,6 +12,9 @@ services:
     volumes:
       - ${APPDATA}/ASP.NET/Https:C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https:ro
       - ${APPDATA}/Microsoft/UserSecrets:C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets:ro
+    networks:
+      newmoon_external:
+        ipv4_address: 192.168.5.5
 
   events.api:
     environment:
@@ -22,9 +25,19 @@ services:
       - EventsServiceUri=http://${Events_Service}
     ports:
       - "5005:80"
+    networks:
+      newmoon_external:
+        ipv4_address: 192.168.5.10
+
+#networks:
+#  default:
+#    external:
+#      name: nat
 
 networks:
-  default:
-    external:
-      name: nat
-
+  newmoon_external:
+    driver: nat
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.5.0/24
