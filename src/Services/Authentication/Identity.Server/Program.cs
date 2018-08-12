@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,41 +13,93 @@ namespace PingDong.Newmoon.IdentityServer
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build()
-                            // Asp.Net Core User Management
-                            .MigrateDbContext<ApplicationDbContext>((context, services) => { });
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            host.Run();
+            var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    // Application related setting
+                    //   for example: log setting
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    // If the same settings in appsettings.json needs to be replaced in development environment, write here
+                    //   for example: different logging setting
+                    .AddJsonFile($"appsettings.{env}.json", optional: true)
+                    // Some secrets that used in Development could save in UserSecrects
+                    //   For example: you probably don't want to share you database credential,
+                    //                if you want to share your codes.
+                    // https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets
+                    //     dotnet user-secrets set "Database:DbPassword" "pass123"
+                    //     dotnet user-secrets list
+                    //     dotnet user-secrets remove "Database:DbPassword"
+                    //     dotnet user-secrets clear
+                    //
+                    // Or in Visual Studio
+                    // Right click on the target project, then click 'Manage User Secrets'
+                    .AddUserSecrets<Startup>();
+
+            if (env != "Development")
+            {
+                var endpoint = Environment.GetEnvironmentVariable("Azure_Vault_Endpoint");
+                var clientId = Environment.GetEnvironmentVariable("Azure_Vault_ClientId");
+                var clientSecret = Environment.GetEnvironmentVariable("Azure_Vault_ClientSecret");
+
+                if (!string.IsNullOrWhiteSpace(endpoint) && !string.IsNullOrWhiteSpace(clientId) && !string.IsNullOrWhiteSpace(clientSecret))
+                {
+                    builder.AddAzureKeyVault(
+                        $"https://{endpoint}.vault.azure.net/",
+                        clientId,
+                        clientSecret);
+                }
+
+            }
+
+            builder
+                    // Environment-aware settings
+                    //   for example: external service uri
+                    .AddCommandLine(args)
+                    .AddEnvironmentVariables();
+
+            var configuration = builder.Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
+
+            try
+            {
+                Log.Information("Starting web host for Event Services");
+
+                var host = BuildWebHost(args, configuration).Build();
+
+                host.MigrateDbContext<ApplicationDbContext>((context, services) => { });
+                
+                host.Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "'Event Service' Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHostBuilder BuildWebHost(string[] args, IConfiguration configuration) =>
             WebHost.CreateDefaultBuilder(args)
                     .CaptureStartupErrors(true)
                     .UseKestrel()
                     // Application Configure
                     .ConfigureAppConfiguration((builderContext, config) =>
                         {
-                            var env = builderContext.HostingEnvironment;
-
-                            config.SetBasePath(env.ContentRootPath);
-
-                            if (env.IsDevelopment())
-                            {
-                                config.AddUserSecrets<Startup>();
-                            }
-
-                            config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                                .AddCommandLine(args)
-                                .AddEnvironmentVariables();
+                            // Configuration Source
+                            config.AddConfiguration(configuration);
                         })
                     .UseContentRoot(Directory.GetCurrentDirectory())
                     // HealthChecks initialise
                     .UseHealthChecks("/health")
+                    .UseApplicationInsights()
                     // Application Configure
                     .UseSerilog((context, config) => { config.ReadFrom.Configuration(context.Configuration); })
-                    .UseApplicationInsights()
-                    .UseStartup<Startup>()
-                    .UseUrls("http://localhost:5001");
+                    .UseStartup<Startup>();
     }
 }

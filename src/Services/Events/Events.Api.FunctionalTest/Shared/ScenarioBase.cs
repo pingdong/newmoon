@@ -23,7 +23,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
                             .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_dbName))
                             //.AddInMemoryCollection(new Dictionary<string, string>
                             //{
-                            //    { "ConnectionStrings:DefaultDbConnection", "Server=.;Database=Newmoon;User Id=Newmoon;Password=newmoon;MultipleActiveResultSets=true" }
+                            //    { "SqlServer_ConnectionString", "Server=.;Database=Newmoon;User Id=Newmoon;Password=newmoon;MultipleActiveResultSets=true" }
                             //})
                             .AddInMemoryCollection(new Dictionary<string, string>
                                 {

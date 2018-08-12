@@ -8,27 +8,9 @@
 
 ## Note:
 
- 1. The following settings need to be provided, prefer in user secrects in Events.Api projects
+ The following settings need to be changed accroding your own settings in .env file
 
-```
-  "ConnectionStrings": {  
-	DefaultDbConnection": "Server=[server name];Database=[database name];User Id=[username];Password=[password];MultipleActiveResultSets=true"
-  },
-  "Redis": {
-	"Connection":  "" 
-  },
-  "DistributedCache": {
-	"Server": "",
-	"Instance":  "" 
-  } 
-```
-
-
- 2. The following settings need to be included in appsettings.Development.json or user secrects in Identity.Server
-
-```
-  "ConnectionStrings": {
-	"DefaultDbConnection": "Server=[server name];Database=[database name];User Id=[username];Password=[password];MultipleActiveResultSets=true"
-  }
+```  
+  SqlServer_ConnectionString=Server=192.168.5.1,1433;Database=Newmoon;User Id=Newmoon;Password=newmoon;MultipleActiveResultSets=true
 ```
 

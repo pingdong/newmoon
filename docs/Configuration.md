@@ -24,11 +24,11 @@ There are different kinds of configurations in one application, likely in a mult
 
 If the same setting is provided in all places listed above, up level of the setting overrides below level.
 
-`Vault / User Secrets` 
+`Environment Variables / Commandline arguments` 
 
 overrides 
 
-`Environment Variables / Commandline arguments` 
+`Vault / User Secrets` 
 
 overrides
 

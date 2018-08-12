@@ -12,10 +12,10 @@ namespace PingDong.Newmoon.Events.Service
     {
         public void Config(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            var eventBus = app.ApplicationServices.GetService<IEventBus>();
 
             // Register handler for all inbound integration events
-            eventBus.Subscribe<EventConfirmedIntegrationEvent, IIntegrationEventHandler<EventConfirmedIntegrationEvent>>();
+            eventBus?.Subscribe<EventConfirmedIntegrationEvent, IIntegrationEventHandler<EventConfirmedIntegrationEvent>>();
         }
     }
 }

@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 
 using PingDong.Application.Logging;
 using PingDong.AspNetCore.Http;
-using PingDong.Newmoon.IdentityServer.Configuration;
 using PingDong.Newmoon.IdentityServer.Authentication;
 using PingDong.Newmoon.IdentityServer.Identity;
 using PingDong.Newmoon.IdentityServer.Identity.Migrations;
@@ -30,8 +29,6 @@ namespace PingDong.Newmoon.IdentityServer
         private readonly ILogger _logger;
         private readonly IHostingEnvironment _env;
 
-        private AppSettings _appSettings;
-
         public Startup(IConfiguration config, ILogger<Startup> logger, IHostingEnvironment env)
         {
             _configuration = config;
@@ -42,16 +39,6 @@ namespace PingDong.Newmoon.IdentityServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            #region Settings
-
-            // Extract AppSettings and register into IoC
-            _appSettings = _configuration.GetSection("App").Get<AppSettings>();
-            services.AddSingleton(_appSettings);
-
-            _logger.LogInformation(LoggingEvent.Success, "Configurations are loaded from Section: AppSettings");
-
-            #endregion
-
             #region DevOps
 
             #region Telemetry (Application Insights)
@@ -69,7 +56,7 @@ namespace PingDong.Newmoon.IdentityServer
 
             services.AddHealthChecks(checks =>
             {
-                checks.AddSqlCheck("Database", _configuration.GetConnectionString("DefaultDbConnection"));
+                checks.AddSqlCheck("Database", _configuration["SqlServer_ConnectionString"]);
             });
 
             _logger.LogInformation(LoggingEvent.Success, "HealthCheck Initialized");
@@ -82,28 +69,28 @@ namespace PingDong.Newmoon.IdentityServer
 
             #region Asp.Net Authentication
 
-            var authConnectionString = _configuration.GetConnectionString("DefaultDbConnection");
+            var authConnectionString = _configuration["SqlServer_ConnectionString"];
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(authConnectionString,
                     sqlServerOptionsAction: sqlOptions =>
-                    {
-                        sqlOptions.EnableRetryOnFailure(maxRetryCount: 10,
-                            maxRetryDelay: TimeSpan.FromSeconds(30),
-                            errorNumbersToAdd: null);
-                    }
+                        {
+                            sqlOptions.EnableRetryOnFailure(maxRetryCount: 10,
+                                maxRetryDelay: TimeSpan.FromSeconds(30),
+                                errorNumbersToAdd: null);
+                        }
                 ));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-                {
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders()
-                // After extending IdentityUser, the below method has to be called to use default logon/register UI
-                .AddDefaultUI();
+                        {
+                            options.Password.RequireDigit = false;
+                            options.Password.RequireNonAlphanumeric = false;
+                            options.Password.RequireUppercase = false;
+                        })
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders()
+                    // After extending IdentityUser, the below method has to be called to use default logon/register UI
+                    .AddDefaultUI();
 
             _logger.LogInformation(LoggingEvent.Success, "Authentication Initialized");
 
@@ -148,11 +135,11 @@ namespace PingDong.Newmoon.IdentityServer
                 identityBuilder.AddDeveloperSigningCredential()
                                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
                                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-                               .AddInMemoryClients(IdentityServerConfig.GetClients(_appSettings));
+                               .AddInMemoryClients(IdentityServerConfig.GetClients(_configuration));
             }
             else
             {
-                var identityConnectionString = _configuration.GetConnectionString("DefaultDbConnection");
+                var identityConnectionString = _configuration["SqlServer_ConnectionString"];
                 var migrationsAssembly = GetType().GetTypeInfo().Assembly.GetName().Name;
 
                 identityBuilder.AddConfigurationStore(options =>
@@ -160,13 +147,13 @@ namespace PingDong.Newmoon.IdentityServer
                                         options.DefaultSchema = IdentityDbContextConfig.DefaultSchema;
                                         options.ConfigureDbContext = builder => builder.UseSqlServer(identityConnectionString,
                                             sqlServerOptionsAction: sqlOptions =>
-                                            {
-                                                sqlOptions.MigrationsAssembly(migrationsAssembly)
-                                                                              .EnableRetryOnFailure(maxRetryCount: 15,
-                                                                                                    maxRetryDelay: TimeSpan.FromSeconds(30),
-                                                                                                errorNumbersToAdd: null);
+                                                {
+                                                    sqlOptions.MigrationsAssembly(migrationsAssembly)
+                                                                                  .EnableRetryOnFailure(maxRetryCount: 15,
+                                                                                                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                                                                                                    errorNumbersToAdd: null);
 
-                                            });
+                                                });
                                     })
                                 .AddOperationalStore(options =>
                                     {
@@ -217,12 +204,12 @@ namespace PingDong.Newmoon.IdentityServer
                 using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
                 {
                     serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-                    
+
                     var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
                     context.Database.Migrate();
 
                     var seed = new IdentityConfigurationSeed();
-                    seed.SeedAsync(context, _appSettings).Wait();
+                    seed.SeedAsync(context, _configuration).Wait();
                 }
 
                 app.UseExceptionHandler("/Error");

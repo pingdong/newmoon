@@ -5,13 +5,8 @@ using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using PingDong.AspNetCore.Hosting;
-using PingDong.EventBus.Services;
-using PingDong.Newmoon.Events.Infrastructure;
 
-namespace PingDong.Newmoon.Events
+namespace PingDong.Newmoon.Events.BackgroundTasks
 {
     /// <summary>
     /// Program
@@ -84,21 +79,6 @@ namespace PingDong.Newmoon.Events
 
                 var host = BuildWebHost(args, configuration).Build();
 
-                host.MigrateDbContext<EventContext>((context, services) =>
-                    {
-                        var logger = services.GetService<ILogger<EventContextSeed>>();
-
-                        new EventContextSeed()
-                            .SeedAsync(context, logger)
-                            .Wait();
-                    });
-
-                if (configuration.GetValue("EventBus:Enabled", false))
-                {
-                    // Event Bus
-                    host.MigrateDbContext<EventBusLogServiceDbContext>((_, __) => { });
-                }
-
                 host.Run();
             }
             catch (Exception ex)
@@ -124,13 +104,11 @@ namespace PingDong.Newmoon.Events
 
             WebHost.CreateDefaultBuilder(args)
                     .CaptureStartupErrors(true)
-                    .UseKestrel()
                     // Application Configure
                     .ConfigureAppConfiguration((builderContext, config) =>
-                        {
-                            config.AddConfiguration(configuration);
-                        })
-                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    {
+                        config.AddConfiguration(configuration);
+                    })
                     // Autofac intialise
                     .ConfigureServices(services => services.AddAutofac())
                     // HealthChecks initialise
