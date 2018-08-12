@@ -17,7 +17,6 @@ using PingDong.Reflection;
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
 using MediatR;
 using PingDong.Newmoon.Events.BackgroundTasks.Configuration;
 
@@ -132,16 +131,6 @@ namespace PingDong.Newmoon.Events.BackgroundTasks
             services.AddMediatR(references);
 
             _logger.LogInformation(LoggingEvent.Success, "MediatR is initialized");
-
-            #endregion
-
-            #region Object Mapping (AutoMapper)
-
-            // Register all mapping profiles into IoC
-
-            services.AddAutoMapper(references);
-
-            _logger.LogInformation(LoggingEvent.Success, "Objects Mapping are injected into IoC");
 
             #endregion
 
