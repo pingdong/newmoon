@@ -14,7 +14,7 @@ I added some features that I believe they are important and helpful in real life
 * Dapper 1.50.5
 * Autofac 4.8.1
 * AutoMapper 7.0.1
-* FluentValidation 7.6.104
+* FluentValidation 7.6.105
 * MediatR 5.1.0
 * Serilog.AspNetCore 2.1.1
 * Polly 6.0.1
