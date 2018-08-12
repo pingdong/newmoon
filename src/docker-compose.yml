@@ -14,3 +14,10 @@ services:
       dockerfile: Services\Events\Events.API\Dockerfile
     depends_on:
       - identity.server
+
+  events.backgroundtasks:
+    image: newmoon/eventsbackgroundtasks
+    build:
+      context: .
+      dockerfile: Services\Events\Events.BackgroundTasks\Dockerfile
+

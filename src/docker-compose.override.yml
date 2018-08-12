@@ -19,7 +19,6 @@ services:
   events.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - DOCKER_OPTS=--debug
       - SqlServer_ConnectionString=${SqlServer_ConnectionString}
       - IdentityServiceUri=http://${Identity_Server}
       - EventsServiceUri=http://${Events_Service}
@@ -29,10 +28,13 @@ services:
       newmoon_external:
         ipv4_address: 192.168.5.10
 
-#networks:
-#  default:
-#    external:
-#      name: nat
+  events.backgroundtasks:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SqlServer_ConnectionString=${SqlServer_ConnectionString}
+    networks:
+      newmoon_external:
+        ipv4_address: 192.168.5.11
 
 networks:
   newmoon_external:

@@ -5,6 +5,8 @@
     <AssemblyName>PingDong.Newmoon.Events.BackgroundTasks</AssemblyName>
     <RootNamespace>PingDong.Newmoon.Events.BackgroundTasks</RootNamespace>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>ef525a56-fff7-40f5-bdb1-86bc190a39fe</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
