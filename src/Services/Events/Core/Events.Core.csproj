@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="7.6.104" />
+    <PackageReference Include="FluentValidation" Version="7.6.105" />
   </ItemGroup>
 
   <ItemGroup>
