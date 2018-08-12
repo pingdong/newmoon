@@ -8,11 +8,9 @@
 
 ## Note:
 
- The following settings need to be included in appsettings.Development.json or user secrects in Identity.Server
+ The following settings need to be changed accroding your own settings in .env file
 
 ```  
-  "IdentityServiceUri": "http://localhost:5001",
-  "EventsServiceUri": "http://localhost:5005",
-  "DbConnectionString": "Server=;Database=;User Id=;Password=;MultipleActiveResultSets=true"
+  SqlServer_ConnectionString=Server=192.168.5.1,1433;Database=Newmoon;User Id=Newmoon;Password=newmoon;MultipleActiveResultSets=true
 ```
 

@@ -48,25 +48,26 @@ I added some features that I believe they are important and helpful in real life
 > ## Roadmap
 
   
-* [x] Microservice Coding Practice
-* [x] Multiple Configuration Source, Sturcture Application Settings
-* [x] Authentication & Authorization
-* [x] Background Tasks  
+* [x] Microservice Coding Practice 
+* [x] Multiple Configuration Source, Sturcture Application Settings 
+* [x] Authentication & Authorization 
+* [x] Background Tasks 
+* [x] Integration Event
 
 * [x] Cache: In-memory, Redis
-* [x] OData
-* [ ] NoSQL
+* [ ] NoSQL 
 * [ ] ElasticSearch  
-* [ ] GraphQL
   
-* [ ] API Gateway
-* [x] Integration Event
-* [ ] Docker & Kubernetes
+* [x] OData  
+* [ ] GraphQL 
+* [ ] API Gateway 
+
+* [x] Docker 
+* [ ] Kubernetes  
 * [ ] Grafana or Kibana
 * [ ] Prometheus
  
 * [ ] Client @ React
-* [ ] Client @ Razor
 
 * [x] Testing
   * [x] Unit Testing
