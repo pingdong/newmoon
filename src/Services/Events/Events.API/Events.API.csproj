@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Library\EventBus\EventBus.AspNetCore\EventBus.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\Library\EventBus\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\..\..\Library\Shared\Shared.csproj" />
     <ProjectReference Include="..\..\..\Library\Web\Web.csproj" />

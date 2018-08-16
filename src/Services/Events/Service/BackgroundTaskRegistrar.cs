@@ -5,7 +5,7 @@ using PingDong.Newmoon.Events.Service.Tasks;
 
 namespace PingDong.Newmoon.Events.Service
 {
-    public class EventsBackgroundRegistrar : BackgroundTaskRegistrar
+    public class EventsBackgroundTaskRegistrar : BackgroundTaskRegistrar
     {
         protected override void Load(ContainerBuilder builder)
         {

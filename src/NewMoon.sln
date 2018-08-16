@@ -102,7 +102,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.env = .env
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.BackgroundTasks", "Services\Events\Events.BackgroundTasks\Events.BackgroundTasks.csproj", "{A8E3B227-9106-4E9D-8194-AD61CF6B5D6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.BackgroundTasks", "Services\Events\Events.BackgroundTasks\Events.BackgroundTasks.csproj", "{A8E3B227-9106-4E9D-8194-AD61CF6B5D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.AspNetCore", "Library\EventBus\EventBus.AspNetCore\EventBus.AspNetCore.csproj", "{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -218,6 +220,10 @@ Global
 		{A8E3B227-9106-4E9D-8194-AD61CF6B5D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8E3B227-9106-4E9D-8194-AD61CF6B5D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8E3B227-9106-4E9D-8194-AD61CF6B5D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -257,6 +263,7 @@ Global
 		{1EDAA0AF-D076-4F7C-ACFD-3A4459FA1048} = {E880E516-FD50-4B27-969C-B2BAF88C9D7D}
 		{0B30A24D-2C53-40BC-9EBC-F60434E3CA8A} = {5DCBD62D-6839-4097-B4BE-F176E8EF2398}
 		{A8E3B227-9106-4E9D-8194-AD61CF6B5D6A} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
+		{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531} = {E880E516-FD50-4B27-969C-B2BAF88C9D7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D16100-61EC-41DC-A4E8-2DE984C5D2ED}

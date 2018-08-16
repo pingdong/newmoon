@@ -9,6 +9,7 @@ COPY Services/Events/Core/Events.Core.csproj Services/Events/Core/
 COPY Library/DomainDriven/Core/DomainDriven.Core.csproj Library/DomainDriven/Core/
 COPY Library/Shared/Shared.csproj Library/Shared/
 COPY Library/EventBus/EventBus/EventBus.csproj Library/EventBus/EventBus/
+COPY Library/EventBus/EventBus.AspNetCore/EventBus.AspNetCore.csproj Library/EventBus/EventBus.AspNetCore/
 COPY Library/EntityFrameworkCore/EntityFrameworkCore.csproj Library/EntityFrameworkCore/
 COPY Services/Events/Service/Events.Service.csproj Services/Events/Service/
 COPY Services/Events/Infrastructure/Events.Infrastructure.csproj Services/Events/Infrastructure/
