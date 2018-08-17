@@ -43,7 +43,7 @@ namespace PingDong.DomainDriven.Service
 		/// <returns>Return value of inner command or default value if request same ID was found</returns>
 		public async Task<TResponse> Handle(IdentifiedCommand<TCommand, TResponse> message, CancellationToken cancellationToken)
 		{
-			var alreadyExists = await _requestManager.CheckExistAsync(message.Id);
+			var alreadyExists = await _requestManager.CheckExistAsync(message.Id).ConfigureAwait(false);
 			if (alreadyExists)
 				return CreateResultForDuplicateRequest();
 

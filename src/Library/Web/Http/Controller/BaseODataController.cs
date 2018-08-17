@@ -39,7 +39,7 @@ namespace PingDong.AspNetCore.Mvc
         [EnableQuery]
         public async Task<IQueryable<TSummary>> GetAsync()
         {
-            var result = await _query.GetAllAsync();
+            var result = await _query.GetAllAsync().ConfigureAwait(false);
 
             return result.AsQueryable();
         }

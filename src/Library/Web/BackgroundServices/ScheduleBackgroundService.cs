@@ -35,7 +35,7 @@ namespace PingDong.Web
             {
                 if (DateTime.Now > _nextRun)
                 {
-                    await ProcessAsync(stoppingToken);
+                    await ProcessAsync(stoppingToken).ConfigureAwait(false);
 
                     _nextRun = _schedule.GetNextOccurrence(DateTime.Now);
                 }

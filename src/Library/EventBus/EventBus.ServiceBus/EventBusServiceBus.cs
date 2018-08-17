@@ -129,7 +129,7 @@ namespace PingDong.EventBus.ServiceBus
                 {
                     var eventName = $"{message.Label}{INTEGRATION_EVENT_SUFIX}";
                     var messageData = Encoding.UTF8.GetString(message.Body);
-                    await ProcessEvent(eventName, messageData);
+                    await ProcessEvent(eventName, messageData).ConfigureAwait(false);
                     
                     // Complete the message so that it is not received again.
                     await _subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
@@ -161,7 +161,7 @@ namespace PingDong.EventBus.ServiceBus
                         {
                             var handler = scope.ResolveOptional(subscription.HandlerType) as IDynamicIntegrationEventHandler;
                             dynamic eventData = JObject.Parse(message);
-                            await handler.Handle(eventData);
+                            await handler.Handle(eventData).ConfigureAwait(false);
                         }
                         else
                         {

@@ -41,7 +41,7 @@ namespace PingDong.AspNetCore.Http
         {
             try
             {
-                await _next(context);
+                await _next(context).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace PingDong.AspNetCore.Http
                     throw;
                 }
 
-                await HandleExceptionAsync(context, ex);
+                await HandleExceptionAsync(context, ex).ConfigureAwait(false);
             }
         }
 

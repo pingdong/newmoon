@@ -186,7 +186,7 @@ namespace PingDong.EventBus.RabbitMQ
                 var eventName = ea.RoutingKey;
                 var message = Encoding.UTF8.GetString(ea.Body);
 
-                await ProcessEvent(eventName, message);
+                await ProcessEvent(eventName, message).ConfigureAwait(false);
 
                 channel.BasicAck(ea.DeliveryTag,multiple:false);
             };
@@ -217,7 +217,7 @@ namespace PingDong.EventBus.RabbitMQ
                         { 
                             var handler = scope.ResolveOptional(subscription.HandlerType) as IDynamicIntegrationEventHandler;
                             dynamic eventData = JObject.Parse(message);
-                            await handler.Handle(eventData);
+                            await handler.Handle(eventData).ConfigureAwait(false);
                         }
                         else
                         {

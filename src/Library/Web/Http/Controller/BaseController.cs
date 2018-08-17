@@ -43,7 +43,7 @@ namespace PingDong.AspNetCore.Mvc
         [NonAction]
         protected async Task<IActionResult> CommandDispatchAsync<TCommand, TResponse>(TCommand command) where TCommand : IRequest<TResponse>
         {
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(command).ConfigureAwait(false);
 
             return Ok(result);
         }
@@ -55,7 +55,7 @@ namespace PingDong.AspNetCore.Mvc
             if (Guid.TryParse(requestIdInString, out var requestId) && requestId != Guid.Empty)
             {
                 var identifiedCommand = new IdentifiedCommand<TCommand, bool>(requestId, command);
-                commandResult = await _mediator.Send(identifiedCommand);
+                commandResult = await _mediator.Send(identifiedCommand).ConfigureAwait(false);
             }
 
             return commandResult ? Ok() : BadRequest();
@@ -68,7 +68,7 @@ namespace PingDong.AspNetCore.Mvc
         [NonAction]
         protected async Task<IActionResult> GetAllAsync<T>(IQuery<T> query)
         {
-            var result = await query.GetAllAsync();
+            var result = await query.GetAllAsync().ConfigureAwait(false);
 
             return Success(result);
         }
@@ -76,7 +76,7 @@ namespace PingDong.AspNetCore.Mvc
         [NonAction]
         protected async Task<IActionResult> GetByIdAsync<T>(ISingleQuery<T> query, int id)
         {
-            var result = await query.GetByIdAsync(id);
+            var result = await query.GetByIdAsync(id).ConfigureAwait(false);
 
             return Success(result);
         }
