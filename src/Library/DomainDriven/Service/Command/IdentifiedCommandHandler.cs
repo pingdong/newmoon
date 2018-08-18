@@ -47,7 +47,7 @@ namespace PingDong.DomainDriven.Service
 			if (alreadyExists)
 				return CreateResultForDuplicateRequest();
 
-			await _requestManager.CreateRequestForCommandAsync<TCommand>(message.Id);
+			await _requestManager.CreateRequestRecordAsync<TCommand>(message.Id);
 
 			// Send the embeded business command to mediator so it runs its related CommandHandler 
 			var result = await _mediator.Send(message.Command, cancellationToken);

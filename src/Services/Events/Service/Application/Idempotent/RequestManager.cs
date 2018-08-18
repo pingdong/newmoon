@@ -23,7 +23,7 @@ namespace PingDong.Newmoon.Events.Service
             return request != null;
         }
 
-        public async Task CreateRequestForCommandAsync<T>(Guid id)
+        public async Task CreateRequestRecordAsync<T>(Guid id)
         { 
             var exists = await CheckExistAsync(id);
 
