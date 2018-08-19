@@ -459,10 +459,13 @@ namespace PingDong.Newmoon.Events
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             _logger.LogInformation(LoggingEvent.Entering, "Configure Starting");
-            
+
             // Initialize Events Bus
-            app.SubscribeIntegrationEvents(GetSearchingTargets());
-            _logger.LogInformation(LoggingEvent.Success, "EventBus registrars are executed");
+            if (Configuration.GetValue("EventBus:Enabled", false))
+            {
+                app.SubscribeIntegrationEvents(GetSearchingTargets());
+                _logger.LogInformation(LoggingEvent.Success, "EventBus registrars are executed");
+            }
 
             app.Map("/liveness", lapp => lapp.Run(async ctx => ctx.Response.StatusCode = 200));
 
