@@ -5,8 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using PingDong.Linq;
+using PingDong.Newmoon.Events.Service.Queries.Models;
 
-namespace PingDong.Newmoon.Events.Service.Queries
+namespace PingDong.Newmoon.Events.Service.Queries.Rest
 {
 	public class EventQuery : IEventQuery
 	{
@@ -40,7 +41,7 @@ namespace PingDong.Newmoon.Events.Service.Queries
 
 				var evt = events.FirstOrDefault();
 				if (evt != null && !attendees.IsNullOrEmpty())
-					evt.attendees = attendees;
+					evt.Attendees = attendees;
 
 				return evt;
 			}

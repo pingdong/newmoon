@@ -12,7 +12,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using PingDong.EventBus.Abstractions;
-using PingDong.EventBus.Events;
+using PingDong.EventBus.Subscription;
 
 namespace PingDong.EventBus.RabbitMQ
 {

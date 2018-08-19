@@ -6,14 +6,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Dependency;
-using PingDong.EventBus.Services;
+using PingDong.EventBus.Infrastrucutre;
+using PingDong.EventBus.Service;
+using PingDong.EventBus.Subscription;
 
 namespace PingDong.EventBus
 {
     /// <summary>
     /// Register in ASP.Net Dependency Container
     /// </summary>
-    public class EventBusRegistrar : IDepdencyRegistrar
+    public class Registrar : IDepdencyRegistrar
     {
         public DependecyType RegisterType => DependecyType.Infrastructure;
 
@@ -25,7 +27,7 @@ namespace PingDong.EventBus
         /// <param name="loggerFactory"></param>
         public void Inject(IServiceCollection services, IConfiguration configuration, ILogger loggerFactory)
         {
-            var connectionString = configuration.GetConnectionString("DefaultDbConnection");
+            var connectionString = configuration["SqlServer_ConnectionString"];
 
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<EventBusLogServiceDbContext>(options =>

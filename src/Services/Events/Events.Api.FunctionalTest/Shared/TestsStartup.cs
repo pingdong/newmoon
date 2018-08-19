@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using PingDong.Newmoon.Events.Functional.Test.Infrastructure;
+using PingDong.Newmoon.Events.Infrastructure;
 
-namespace PingDong.Newmoon.Events.Functional.Test
+namespace PingDong.Newmoon.Events.Shared
 {
     public class TestsStartup : Startup
     {
@@ -15,7 +16,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
 
         protected override void UseAuth(IApplicationBuilder app)
         {
-            if (Configuration["isTest"] == bool.TrueString.ToLowerInvariant())
+            if (Convert.ToBoolean(Configuration["isTest"]))
             {
                 app.UseMiddleware<AutoAuthorizeMiddleware>();
             }

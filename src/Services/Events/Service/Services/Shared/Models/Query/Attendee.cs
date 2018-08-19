@@ -1,10 +1,10 @@
 ﻿
-namespace PingDong.Newmoon.Events.Service.Queries
+namespace PingDong.Newmoon.Events.Service.Queries.Models
 {
     public class Attendee
     {
-        public string id { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
+        public string Id { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
     }
 }

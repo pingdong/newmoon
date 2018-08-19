@@ -10,7 +10,7 @@ using PingDong.AspNetCore.Hosting;
 using PingDong.Newmoon.Events.Infrastructure;
 using PingDong.QualityTools.Infrastrucutre.SqlServer;
 
-namespace PingDong.Newmoon.Events.Integration.Test
+namespace PingDong.Newmoon.Events.Shared
 { 
     public class ScenarioBase : IDisposable
     {
@@ -22,7 +22,9 @@ namespace PingDong.Newmoon.Events.Integration.Test
                             .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_dbName))
                             .AddInMemoryCollection(new Dictionary<string, string>
                                 {
-                                    { "isTest", "true" }
+                                    { "IdentityServiceUri", "192.168.5.5" },
+                                    { "EventBus:Enabled", "False" },
+                                    { "isTest", "True" }
                                 })
                             .Build();
 

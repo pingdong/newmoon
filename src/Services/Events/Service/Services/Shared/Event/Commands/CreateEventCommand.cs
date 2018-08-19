@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MediatR;
-using PingDong.Newmoon.Events.Service.Models;
+using PingDong.Newmoon.Events.Service.Commands.Models;
 
 namespace PingDong.Newmoon.Events.Service.Commands
 {

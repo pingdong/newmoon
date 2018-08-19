@@ -1,6 +1,6 @@
 ﻿using System;
 using MediatR;
-using PingDong.Newmoon.Events.Service.Models;
+using PingDong.Newmoon.Events.Service.Commands.Models;
 
 namespace PingDong.Newmoon.Events.Service.Commands
 {

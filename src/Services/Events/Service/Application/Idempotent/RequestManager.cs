@@ -5,7 +5,7 @@ using PingDong.DomainDriven.Service;
 using PingDong.Newmoon.Events.Core.Exceptions;
 using PingDong.Newmoon.Events.Infrastructure;
 
-namespace PingDong.Newmoon.Events.Service
+namespace PingDong.Newmoon.Events.Service.Commands.Idempotent
 {
     public class RequestManager : IRequestManager
     {

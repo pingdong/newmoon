@@ -4,11 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PingDong.DomainDriven.Infrastructure.Mediator;
 using PingDong.Newmoon.Events.Core;
-using PingDong.Newmoon.Events.Infrastructure.Repositories;
 using PingDong.QualityTools.Core;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Infrastructure.Test
+namespace PingDong.Newmoon.Events.Infrastructure.Repositories
 {
     // The purpose of this unit test is a demo on how to using InMemory SQL Provider
     //   for unit testing. Without InMemory DB, 

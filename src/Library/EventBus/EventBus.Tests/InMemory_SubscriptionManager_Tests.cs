@@ -1,9 +1,10 @@
 using System.Linq;
+using PingDong.EventBus.Subscription;
 using Xunit;
 
-namespace PingDong.EventBus.Tests
+namespace PingDong.EventBus.Service.Persistent
 {
-    public class InMemory_SubscriptionManager_Tests
+    public class InMemorySubscriptionManagerTests
     {
         [Fact]
         public void After_Creation_Should_Be_Empty()

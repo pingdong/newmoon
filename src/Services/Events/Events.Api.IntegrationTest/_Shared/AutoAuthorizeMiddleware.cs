@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace PingDong.Newmoon.Events.Integration.Test.Infrastructure
+namespace PingDong.Newmoon.Events.Infrastructure
 {
     public class AutoAuthorizeMiddleware
     {

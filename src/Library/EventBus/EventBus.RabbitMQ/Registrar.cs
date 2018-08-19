@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Dependency;
 using PingDong.EventBus.Abstractions;
+using PingDong.EventBus.Subscription;
 using RabbitMQ.Client;
 
 namespace PingDong.EventBus.RabbitMQ

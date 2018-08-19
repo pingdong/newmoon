@@ -1,8 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
-using PingDong.EventBus.Events;
 
-namespace PingDong.EventBus.Services
+namespace PingDong.EventBus.Models
 {
     public class EventLogEntity
     {

@@ -554,19 +554,16 @@ namespace PingDong.Newmoon.Events
             if (Configuration.GetValue("EventBus:Enabled", false))
             {
                 var path = this.GetType().Assembly.GetDirectoryName();
-                
+
                 _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.dll"));
 
                 switch (Configuration["EventBus:Provider"].ToLower())
                 {
                     case "azureservicebus":
-                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.ServiceBus.dll"));
+                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.AzureServiceBus.dll"));
                         break;
                     case "rabbitmq":
                         _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.RabbitMQ.dll"));
-                        break;
-                    default:
-                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.Mock.dll"));
                         break;
                 }
             }

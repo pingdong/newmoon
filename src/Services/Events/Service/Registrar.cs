@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Dependency;
 using PingDong.DomainDriven.Service;
+using PingDong.Newmoon.Events.Service.Commands.Idempotent;
 using PingDong.Newmoon.Events.Service.IntegrationEvents;
 
 namespace PingDong.Newmoon.Events.Service
@@ -26,7 +27,14 @@ namespace PingDong.Newmoon.Events.Service
             services.AddTransient<IRequestManager, RequestManager>();
 
             // Event Bus
-            services.AddTransient<IIntegrationEventService, IntegrationEventService>();
+            if (configuration.GetValue("EventBus:Enabled", false))
+            {
+                services.AddTransient<IIntegrationEventService, IntegrationEventService>();
+            }
+            else
+            {
+                services.AddTransient<IIntegrationEventService, EmptyIntegrationEventService>();
+            }
         }
     }
 }

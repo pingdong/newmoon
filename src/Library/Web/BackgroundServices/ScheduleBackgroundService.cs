@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using NCrontab;
 
-namespace PingDong.Web
+namespace PingDong.AspNetCore.Hosting
 {
     /// <summary>
     /// A schedule background service

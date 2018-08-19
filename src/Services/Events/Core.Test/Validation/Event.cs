@@ -1,9 +1,9 @@
 using System;
 using FluentValidation.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PingDong.Newmoon.Events.Core.Validation;
+using PingDong.Newmoon.Events.Core.Validations;
 
-namespace PingDong.Newmoon.Events.Core.Test
+namespace PingDong.Newmoon.Events.Core
 {
     [TestClass]
     public class EventValidationTest

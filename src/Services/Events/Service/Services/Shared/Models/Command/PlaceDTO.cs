@@ -1,5 +1,5 @@
 ﻿
-namespace PingDong.Newmoon.Events.Service.Models
+namespace PingDong.Newmoon.Events.Service.Commands.Models
 {
     public class PlaceDTO
     {

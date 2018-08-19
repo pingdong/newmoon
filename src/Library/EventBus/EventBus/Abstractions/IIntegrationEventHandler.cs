@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using PingDong.EventBus.Events;
 
 namespace PingDong.EventBus.Abstractions
 {

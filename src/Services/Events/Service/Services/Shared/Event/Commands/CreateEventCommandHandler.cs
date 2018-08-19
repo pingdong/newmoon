@@ -6,7 +6,7 @@ using AutoMapper;
 using PingDong.DomainDriven.Service;
 using PingDong.Linq;
 using PingDong.Newmoon.Events.Core;
-using PingDong.Newmoon.Events.Service.Models;
+using PingDong.Newmoon.Events.Service.Commands.Models;
 
 namespace PingDong.Newmoon.Events.Service.Commands
 {

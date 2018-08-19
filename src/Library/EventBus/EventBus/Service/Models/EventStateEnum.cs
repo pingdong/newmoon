@@ -1,4 +1,4 @@
-﻿namespace PingDong.EventBus.Services
+﻿namespace PingDong.EventBus.Models
 {
     public enum EventStateEnum
     {

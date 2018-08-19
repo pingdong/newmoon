@@ -2,10 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using PingDong.Newmoon.Events.Core;
-using PingDong.Newmoon.Events.Infrastructure.Repositories;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Infrastructure.Test
+namespace PingDong.Newmoon.Events.Infrastructure.Repositories
 {
     // The purpose of this unit test is a demo on how to using InMemory SQL Provider
     //   for unit testing, without SQLServer Express InMemory DB provider. 

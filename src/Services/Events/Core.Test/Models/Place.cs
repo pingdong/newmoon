@@ -3,7 +3,7 @@ using PingDong.Newmoon.Events.Core.Events;
 using PingDong.Newmoon.Events.Core.Exceptions;
 using PingDong.QualityTools.DomainDriven.Core;
 
-namespace PingDong.Newmoon.Events.Core.Test
+namespace PingDong.Newmoon.Events.Core
 {
     [TestClass]
     public class PlaceTest

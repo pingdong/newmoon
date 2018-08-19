@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using PingDong.EventBus.Abstractions;
 
-namespace PingDong.EventBus.Tests
+namespace PingDong.EventBus
 {
     public class TestIntegrationEventHandler : IIntegrationEventHandler<TestIntegrationEvent>
     {

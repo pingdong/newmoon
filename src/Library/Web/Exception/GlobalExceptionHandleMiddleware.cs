@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 using PingDong.Application.Logging;
 using PingDong.Data;
+using PingDong.Validations;
 
 using Newtonsoft.Json;
 using Polly.CircuitBreaker;

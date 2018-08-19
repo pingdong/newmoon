@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using PingDong.Newmoon.Events.Integration.Test.Infrastructure;
+using PingDong.Newmoon.Events.Infrastructure;
 
-namespace PingDong.Newmoon.Events.Integration.Test
+namespace PingDong.Newmoon.Events.Shared
 {
     public class TestStartup : Startup
     {

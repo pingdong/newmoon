@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentValidation;
 
-namespace PingDong.Newmoon.Events.Core.Validation
+namespace PingDong.Newmoon.Events.Core.Validations
 {
     public class EventValidator : AbstractValidator<Event>
     {

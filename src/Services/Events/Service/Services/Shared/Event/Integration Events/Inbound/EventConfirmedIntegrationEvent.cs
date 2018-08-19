@@ -1,4 +1,4 @@
-﻿using PingDong.EventBus.Events;
+﻿using PingDong.EventBus;
 
 namespace PingDong.Newmoon.Events.Service.IntegrationEvents
 {

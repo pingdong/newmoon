@@ -1,7 +1,8 @@
 ﻿using Autofac;
 using MediatR;
 using PingDong.Application.Dependency;
-using PingDong.Newmoon.Events.Service.Queries;
+using PingDong.Newmoon.Events.Service.Commands.Mediator;
+using PingDong.Newmoon.Events.Service.Queries.Rest;
 
 namespace PingDong.Newmoon.Events.Service
 {

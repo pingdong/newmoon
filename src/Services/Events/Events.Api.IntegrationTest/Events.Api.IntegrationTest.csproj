@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Library\EventBus\EventBus.Mock\EventBus.Mock.csproj" />
     <ProjectReference Include="..\..\..\Library\QualityTools\Core\QualityTools.Core.csproj" />
     <ProjectReference Include="..\..\..\Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj" />
     <ProjectReference Include="..\Events.API\Events.Api.csproj" />

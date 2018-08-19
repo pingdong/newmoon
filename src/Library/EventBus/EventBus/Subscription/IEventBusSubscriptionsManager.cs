@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using PingDong.EventBus.Abstractions;
-using PingDong.EventBus.Events;
 
-namespace PingDong.EventBus
+namespace PingDong.EventBus.Subscription
 {
     public interface IEventBusSubscriptionsManager
     {

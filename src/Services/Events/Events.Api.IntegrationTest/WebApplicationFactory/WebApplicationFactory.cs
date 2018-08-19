@@ -12,7 +12,7 @@ using PingDong.AspNetCore.Hosting;
 using PingDong.Newmoon.Events.Infrastructure;
 using PingDong.QualityTools.Infrastrucutre.SqlServer;
 
-namespace PingDong.Newmoon.Events.Integration.Test.Shared
+namespace PingDong.Newmoon.Events.Shared
 {
     public class EventsWebApplicationFactory : WebApplicationFactory<TestStartup>
     {
@@ -25,9 +25,10 @@ namespace PingDong.Newmoon.Events.Integration.Test.Shared
                             .AddJsonFile($"{Directory.GetCurrentDirectory()}\\..\\..\\settings.json", optional: false)
                             .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_databases))
                             .AddInMemoryCollection(new Dictionary<string, string>
-                            {
-                                { "isTest", "true" }
-                            })
+                                {
+                                    { "IdentityServiceUri", "192.168.5.5" },
+                                    { "isTest", "True" }
+                                })
                             .Build();
 
             return WebHost.CreateDefaultBuilder()

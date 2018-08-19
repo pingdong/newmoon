@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using PingDong.Newmoon.Events.Service.Commands;
 
-namespace PingDong.Newmoon.Events.Service.DomainEvents.Validation
+namespace PingDong.Newmoon.Events.Service.Commands.Validation
 {
     class AddAttendeeCommandValidation : AbstractValidator<AddAttendeeCommand>
     {

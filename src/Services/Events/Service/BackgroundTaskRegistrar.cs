@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Hosting;
 using PingDong.Application.Dependency;
-using PingDong.Newmoon.Events.Service.Tasks;
+using PingDong.Newmoon.Events.Service.BackgroundTasks;
 
 namespace PingDong.Newmoon.Events.Service
 {

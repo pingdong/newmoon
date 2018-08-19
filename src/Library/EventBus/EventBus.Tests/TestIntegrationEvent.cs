@@ -1,6 +1,5 @@
-﻿using PingDong.EventBus.Events;
-
-namespace PingDong.EventBus.Tests
+﻿
+namespace PingDong.EventBus
 {
     public class TestIntegrationEvent : IntegrationEvent
     {

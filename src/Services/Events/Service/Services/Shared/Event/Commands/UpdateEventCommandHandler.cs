@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using PingDong.DomainDriven.Service;
 using PingDong.Newmoon.Events.Core;
-using PingDong.Newmoon.Events.Service.Models;
 
 namespace PingDong.Newmoon.Events.Service.Commands
 {

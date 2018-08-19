@@ -25,7 +25,7 @@ namespace PingDong.EventBus
 
             if (assemblies == null || !assemblies.Any())
                 return;
-            var eventBusRegistrars = assemblies.FindInterfaces<IEventBusRegistrar>();
+            var eventBusRegistrars = assemblies.FindInterfaces<IEventBusSubscription>();
 
             eventBusRegistrars.ForEach(reg => reg.Subscribe(eventBus));
         }

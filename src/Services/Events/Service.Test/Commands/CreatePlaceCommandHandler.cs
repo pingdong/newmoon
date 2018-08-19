@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Moq;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Service.Commands;
-using PingDong.Newmoon.Events.Service.Models;
+using PingDong.Newmoon.Events.Service.Commands.Models;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Service.Test
+namespace PingDong.Newmoon.Events.Service.Commands
 {
     public class CreatePlaceCommandHandlerTest : IDisposable
     {

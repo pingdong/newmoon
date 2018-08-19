@@ -4,7 +4,7 @@ using PingDong.Newmoon.Events.Service.IntegrationEvents;
 
 namespace PingDong.Newmoon.Events.Service
 {
-    public class EventBusRegistrar : IEventBusRegistrar
+    public class EventBusRegistrar : IEventBusSubscription
     {
         public void Subscribe(IEventBus eventBus)
         {
