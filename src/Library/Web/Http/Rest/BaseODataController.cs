@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PingDong.DomainDriven.Service;
 
-namespace PingDong.AspNetCore.Mvc
+namespace PingDong.AspNetCore.Mvc.Rest
 {
     /// <summary>
     /// Base Web API Controller

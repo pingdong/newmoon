@@ -33,6 +33,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using GraphQL;
 using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
@@ -323,6 +324,12 @@ namespace PingDong.Newmoon.Events
             #region Service Injecting (ASP.Net Core / Autofac IoC)
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+
+            #region GraphQL
+
+            services.AddScoped<IDocumentExecuter, DocumentExecuter>();
+
+            #endregion
 
             #region CQRS (MediatR)
 

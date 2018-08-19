@@ -3,19 +3,19 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PingDong.AspNetCore.Mvc;
+using PingDong.AspNetCore.Mvc.Rest;
 using PingDong.Newmoon.Events.Service.Commands;
 using PingDong.Newmoon.Events.Service.Queries.Rest;
 
-namespace PingDong.Newmoon.Events.Controllers.Rest
+namespace PingDong.Newmoon.Events.Controllers
 {
     /// <summary>
     /// Ping Controller
     /// </summary>
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/events")]
     [Produces("application/json")]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-    public class EventsController : BaseController
+    public class EventsRestController : BaseRestController
     {
         private readonly IEventQuery _query;
 
@@ -25,7 +25,7 @@ namespace PingDong.Newmoon.Events.Controllers.Rest
         /// <param name="logger">logger</param>
         /// <param name="mediator"></param>
         /// <param name="query"></param>
-        public EventsController(ILogger<EventsController> logger, IMediator mediator, IEventQuery query) 
+        public EventsRestController(ILogger<EventsRestController> logger, IMediator mediator, IEventQuery query) 
             : base(logger, mediator)
         {
             _query = query;

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security;
-using System.Threading.Tasks;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using PingDong.Application.Logging;
 using PingDong.AspNetCore.Http;
-using PingDong.DomainDriven.Service;
 
 namespace PingDong.AspNetCore.Mvc
 {
@@ -20,65 +16,15 @@ namespace PingDong.AspNetCore.Mvc
     [ApiController]
     public class BaseController : ControllerBase
     {
-        private readonly IMediator _mediator;
-
         #region ctor
 
         /// <summary>
         /// ctor
        /// </summary>
         /// <param name="logger">logger</param>
-        /// <param name="mediator"></param>
-        public BaseController(ILogger logger, IMediator mediator)
+        public BaseController(ILogger logger)
         {
-            _mediator = mediator;
-
             Logger = logger;
-        }
-
-        #endregion
-
-        #region Command
-
-        [NonAction]
-        protected async Task<IActionResult> CommandDispatchAsync<TCommand, TResponse>(TCommand command) where TCommand : IRequest<TResponse>
-        {
-            var result = await _mediator.Send(command).ConfigureAwait(false);
-
-            return Ok(result);
-        }
-
-        [NonAction]
-        protected async Task<IActionResult> CommandDispatchAsync<TCommand>(string requestIdInString, TCommand command) where TCommand: IRequest<bool>
-        {
-            var commandResult = false;
-            if (Guid.TryParse(requestIdInString, out var requestId) && requestId != Guid.Empty)
-            {
-                var identifiedCommand = new IdentifiedCommand<TCommand, bool>(requestId, command);
-                commandResult = await _mediator.Send(identifiedCommand).ConfigureAwait(false);
-            }
-
-            return commandResult ? Ok() : BadRequest();
-        }
-
-        #endregion
-
-        #region Query
-
-        [NonAction]
-        protected async Task<IActionResult> GetAllAsync<T>(IQuery<T> query)
-        {
-            var result = await query.GetAllAsync().ConfigureAwait(false);
-
-            return Success(result);
-        }
-
-        [NonAction]
-        protected async Task<IActionResult> GetByIdAsync<T>(ISingleQuery<T> query, int id)
-        {
-            var result = await query.GetByIdAsync(id).ConfigureAwait(false);
-
-            return Success(result);
         }
 
         #endregion
