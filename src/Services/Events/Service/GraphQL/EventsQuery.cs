@@ -1,6 +1,6 @@
 ﻿using GraphQL.Types;
 using PingDong.Newmoon.Events.Service.GraphQL.Models;
-using PingDong.Newmoon.Events.Service.Queries.Rest;
+using PingDong.Newmoon.Events.Service.Queries;
 
 namespace PingDong.Newmoon.Events.Service.GraphQL.Queries
 {
@@ -22,6 +22,18 @@ namespace PingDong.Newmoon.Events.Service.GraphQL.Queries
                 resolve: async context => await eventQuery.GetAllAsync()
             );
 
+            // { "query": "{ event (id:51) { id name attendees { id } } }" }
+            FieldAsync<EventGraphType>(
+                "event",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }
+                ),
+                resolve: async context =>
+                {
+                    var id = context.GetArgument<int>("id");
+                    return await eventQuery.GetByIdAsync(id);
+                }
+            );
         }
     }
 }

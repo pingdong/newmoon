@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PingDong.AspNetCore.Mvc.Rest;
 using PingDong.Newmoon.Events.Service.Queries.Models;
-using PingDong.Newmoon.Events.Service.Queries.Rest;
+using PingDong.Newmoon.Events.Service.Queries;
 
 namespace PingDong.Newmoon.Events.Controllers.Rest
 {

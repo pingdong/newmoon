@@ -29,6 +29,8 @@ namespace PingDong.Newmoon.Events.Service
         public void Inject(IServiceCollection services, IConfiguration configuration, ILogger loggerFactory)
         {
             // GraphQL
+            services.AddTransient<AttendeeGraphType>();
+            services.AddTransient<EventGraphType>();
             services.AddTransient<PlaceGraphType>();
             services.AddTransient<EventSummaryGraphType>();
 

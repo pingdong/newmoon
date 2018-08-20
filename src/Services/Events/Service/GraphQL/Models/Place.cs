@@ -12,12 +12,12 @@ namespace PingDong.Newmoon.Events.Service.GraphQL.Models
             Field(i => i.Id);
             Field(i => i.Name);
             Field(i => i.IsOccupied);
-            Field(i => i.AddressNo);
-            Field(i => i.AddressStreet);
-            Field(i => i.AddressCity);
-            Field(i => i.AddressState);
-            Field(i => i.AddressCountry);
-            Field(i => i.AddressZipCode);
+            Field(i => i.AddressNo, nullable:true);
+            Field(i => i.AddressStreet, nullable: true);
+            Field(i => i.AddressCity, nullable: true);
+            Field(i => i.AddressState, nullable: true);
+            Field(i => i.AddressCountry, nullable: true);
+            Field(i => i.AddressZipCode, nullable: true);
         }
     }
 }

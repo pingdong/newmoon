@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Dapper;
 using PingDong.Newmoon.Events.Service.Queries.Models;
 
-namespace PingDong.Newmoon.Events.Service.Queries.Rest
+namespace PingDong.Newmoon.Events.Service.Queries
 {
 	public class PlaceQuery : IPlaceQuery
 	{

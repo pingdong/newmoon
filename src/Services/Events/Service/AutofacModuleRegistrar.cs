@@ -2,7 +2,7 @@
 using MediatR;
 using PingDong.Application.Dependency;
 using PingDong.Newmoon.Events.Service.Commands.Mediator;
-using PingDong.Newmoon.Events.Service.Queries.Rest;
+using PingDong.Newmoon.Events.Service.Queries;
 
 namespace PingDong.Newmoon.Events.Service
 {

@@ -5,7 +5,7 @@ using MediatR;
 using PingDong.AspNetCore.Hosting;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Service.Commands;
-using PingDong.Newmoon.Events.Service.Queries.Rest;
+using PingDong.Newmoon.Events.Service.Queries;
 
 namespace PingDong.Newmoon.Events.Service.BackgroundTasks
 {
