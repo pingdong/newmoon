@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using PingDong.Newmoon.Events.Integration.Test.Shared;
+using PingDong.Newmoon.Events.Shared;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Integration.Test
+namespace PingDong.Newmoon.Events
 {
     public class GetTestsWithWebAppFactory : IClassFixture<EventsWebApplicationFactory>
     {

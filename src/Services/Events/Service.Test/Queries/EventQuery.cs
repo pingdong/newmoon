@@ -6,11 +6,11 @@ using PingDong.DomainDriven.Infrastructure.Mediator;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Infrastructure;
 using PingDong.Newmoon.Events.Infrastructure.Repositories;
-using PingDong.Newmoon.Events.Service.Queries;
+using PingDong.Newmoon.Events.Service.Queries.Rest;
 using PingDong.QualityTools.Infrastrucutre.SqlServer;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Service.Test
+namespace PingDong.Newmoon.Events.Service.Queries.Rest
 {
     // The purpose of this unit test is a demo on how to using InMemory SQL Provider
     //   for unit testing. Without InMemory DB, 
@@ -42,30 +42,30 @@ namespace PingDong.Newmoon.Events.Service.Test
 
                 // Act
                 var queryResult = (await query.GetAllAsync()).ToList();
-                var eventId = queryResult[0].id;
+                var eventId = queryResult[0].Id;
                 var result = await query.GetByIdAsync(eventId);
 
                 // Assert
                 Assert.Single(queryResult);
 
-                Assert.Equal(DefaultName, queryResult[0].name);
-                Assert.Equal(DefaultStartTime, queryResult[0].startTime);
-                Assert.Equal(DefaultEndTime, queryResult[0].endTime);
-                Assert.Equal(EventStatus.Created.Id, queryResult[0].statusId);
+                Assert.Equal(DefaultName, queryResult[0].Name);
+                Assert.Equal(DefaultStartTime, queryResult[0].StartTime);
+                Assert.Equal(DefaultEndTime, queryResult[0].EndTime);
+                Assert.Equal(EventStatus.Created.Id, queryResult[0].StatusId);
 
-                Assert.Equal(DefaultName, result.name);
-                Assert.Equal(DefaultStartTime, result.startTime);
-                Assert.Equal(DefaultEndTime, result.endTime);
-                Assert.Equal(EventStatus.Created.Id, result.statusId);
-                Assert.Equal(DefaultPlaceId, result.placeId);
+                Assert.Equal(DefaultName, result.Name);
+                Assert.Equal(DefaultStartTime, result.StartTime);
+                Assert.Equal(DefaultEndTime, result.EndTime);
+                Assert.Equal(EventStatus.Created.Id, result.StatusId);
+                Assert.Equal(DefaultPlaceId, result.PlaceId);
 
-                Assert.Equal(2, result.attendees.Count);
-                Assert.Equal("1", result.attendees[0].id);
-                Assert.Equal("Suzy", result.attendees[0].firstname);
-                Assert.Equal("Sheep", result.attendees[0].lastname);
-                Assert.Equal("2", result.attendees[1].id);
-                Assert.Equal("Peppa", result.attendees[1].firstname);
-                Assert.Equal("Pig", result.attendees[1].lastname);
+                Assert.Equal(2, result.Attendees.Count);
+                Assert.Equal("1", result.Attendees[0].Id);
+                Assert.Equal("Suzy", result.Attendees[0].Firstname);
+                Assert.Equal("Sheep", result.Attendees[0].Lastname);
+                Assert.Equal("2", result.Attendees[1].Id);
+                Assert.Equal("Peppa", result.Attendees[1].Firstname);
+                Assert.Equal("Pig", result.Attendees[1].Lastname);
             });
         }
 

@@ -14,9 +14,9 @@ using Microsoft.Extensions.Logging;
 
 using PingDong.Application.Logging;
 using PingDong.AspNetCore.Http;
-using PingDong.Newmoon.IdentityServer.Authentication;
 using PingDong.Newmoon.IdentityServer.Identity;
-using PingDong.Newmoon.IdentityServer.Identity.Migrations;
+using PingDong.Newmoon.IdentityServer.Infrastructure;
+using PingDong.Newmoon.IdentityServer.Models;
 
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.Services;

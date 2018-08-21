@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using NCrontab;
 
-namespace PingDong.Web
+namespace PingDong.AspNetCore.Hosting
 {
     /// <summary>
     /// A schedule background service
@@ -35,7 +35,7 @@ namespace PingDong.Web
             {
                 if (DateTime.Now > _nextRun)
                 {
-                    await ProcessAsync(stoppingToken);
+                    await ProcessAsync(stoppingToken).ConfigureAwait(false);
 
                     _nextRun = _schedule.GetNextOccurrence(DateTime.Now);
                 }

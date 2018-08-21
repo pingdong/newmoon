@@ -33,11 +33,12 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using GraphQL;
 using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PingDong.AspNetCore;
+using PingDong.EventBus;
 using PingDong.Newmoon.Events.Identity;
 using Swashbuckle.AspNetCore.Swagger;
 using StackExchange.Redis;
@@ -207,7 +208,7 @@ namespace PingDong.Newmoon.Events
 
             // Redis (StackExchange)
             // Making sure the service won't start until redis is ready.
-            services.AddSingleton(sp =>
+            services.AddSingleton(_ =>
                 {
                     var redisConnectionString = Configuration["Redis:ConnectionString"];
                     var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
@@ -320,9 +321,15 @@ namespace PingDong.Newmoon.Events
 
             #endregion
 
-            #region Service Injecting (ASP.Net Core / Autofac IoC / EventBus)
+            #region Service Injecting (ASP.Net Core / Autofac IoC)
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+
+            #region GraphQL
+
+            services.AddScoped<IDocumentExecuter, DocumentExecuter>();
+
+            #endregion
 
             #region CQRS (MediatR)
 
@@ -460,6 +467,13 @@ namespace PingDong.Newmoon.Events
         {
             _logger.LogInformation(LoggingEvent.Entering, "Configure Starting");
 
+            // Initialize Events Bus
+            if (Configuration.GetValue("EventBus:Enabled", false))
+            {
+                app.SubscribeIntegrationEvents(GetSearchingTargets());
+                _logger.LogInformation(LoggingEvent.Success, "EventBus registrars are executed");
+            }
+
             app.Map("/liveness", lapp => lapp.Run(async ctx => ctx.Response.StatusCode = 200));
 
             if (env.IsDevelopment())
@@ -519,23 +533,6 @@ namespace PingDong.Newmoon.Events
                 });
 
             _logger.LogInformation(LoggingEvent.Success, "Web Access Handling");
-
-            #region Post Config
-
-            var references = GetSearchingTargets();
-            var instances = references.FindInterfaces<IServiceConfigure>();
-            if (!instances.IsNullOrEmpty())
-            {
-                foreach (var instance in instances)
-                {
-                    instance.Config(app, env, loggerFactory);
-                    _logger.LogDebug(LoggingEvent.Success, $"{instance.GetType().FullName} is executed");
-                }
-            }
-
-            _logger.LogInformation(LoggingEvent.Success, "Post Config Tasks are executed");
-
-            #endregion
         }
 
         #region Test Support
@@ -567,19 +564,16 @@ namespace PingDong.Newmoon.Events
             if (Configuration.GetValue("EventBus:Enabled", false))
             {
                 var path = this.GetType().Assembly.GetDirectoryName();
-                
+
                 _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.dll"));
 
                 switch (Configuration["EventBus:Provider"].ToLower())
                 {
                     case "azureservicebus":
-                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.ServiceBus.dll"));
+                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.AzureServiceBus.dll"));
                         break;
                     case "rabbitmq":
                         _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.RabbitMQ.dll"));
-                        break;
-                    default:
-                        _referencedAssemblies.Add(Assembly.LoadFrom($"{path}\\PingDong.EventBus.Mock.dll"));
                         break;
                 }
             }

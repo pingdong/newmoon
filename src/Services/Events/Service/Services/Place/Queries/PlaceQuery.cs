@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
+using PingDong.Newmoon.Events.Service.Queries.Models;
 
 namespace PingDong.Newmoon.Events.Service.Queries
 {

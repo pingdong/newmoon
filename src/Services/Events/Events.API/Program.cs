@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.AspNetCore.Hosting;
-using PingDong.EventBus.Services;
+using PingDong.EventBus.Infrastrucutre;
 using PingDong.Newmoon.Events.Infrastructure;
 
 namespace PingDong.Newmoon.Events

@@ -7,11 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PingDong.AspNetCore.Hosting;
-using PingDong.EventBus.Services;
 using PingDong.Newmoon.Events.Infrastructure;
 using PingDong.QualityTools.Infrastrucutre.SqlServer;
 
-namespace PingDong.Newmoon.Events.Functional.Test
+namespace PingDong.Newmoon.Events.Shared
 { 
     public class ScenarioBase : IDisposable
     {
@@ -21,13 +20,11 @@ namespace PingDong.Newmoon.Events.Functional.Test
                             .SetBasePath(baseDir)
                             .AddJsonFile($"{baseDir}Events\\settings.json")
                             .AddInMemoryCollection(InMemoryDbTestHelper.BuildDatabaseConnectionSetting(_dbName))
-                            //.AddInMemoryCollection(new Dictionary<string, string>
-                            //{
-                            //    { "SqlServer_ConnectionString", "Server=.;Database=Newmoon;User Id=Newmoon;Password=newmoon;MultipleActiveResultSets=true" }
-                            //})
                             .AddInMemoryCollection(new Dictionary<string, string>
                                 {
-                                    { "isTest", "true" }
+                                    { "IdentityServiceUri", "192.168.5.5" },
+                                    { "EventBus:Enabled", "False" },
+                                    { "isTest", "True" }
                                 })
                             .Build();
 
@@ -47,8 +44,7 @@ namespace PingDong.Newmoon.Events.Functional.Test
                     new EventContextSeed()
                         .SeedAsync(context, logger)
                         .Wait();
-                })
-                .MigrateDbContext<EventBusLogServiceDbContext>((_, __) => { });
+                });
 
             return testServer;
         }

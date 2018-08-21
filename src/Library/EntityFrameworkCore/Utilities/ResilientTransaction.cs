@@ -26,7 +26,7 @@ namespace PingDong.EntityFrameworkCore
 
                     transaction.Commit();
                 }
-            });
+            }).ConfigureAwait(false);
         }
     }
 }

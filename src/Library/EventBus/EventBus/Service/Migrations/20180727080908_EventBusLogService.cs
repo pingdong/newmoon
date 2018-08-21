@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PingDong.EventBus.Service.Migrations
+namespace PingDong.EventBus.Infrastrucutre.Migrations
 {
     public partial class EventBusLogService : Migration
     {

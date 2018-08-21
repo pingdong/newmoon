@@ -13,3 +13,8 @@ Data Validation happens in 3 places
 
 3. Before persisting data 
 	Data should be validate as DTO are very likely translated, reshaped into a new data for data persistent.
+
+> ## FluentValidation 8.0 Changelog
+
+
+[Here](https://fluentvalidation.net/upgrading-to-8.html)

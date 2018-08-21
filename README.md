@@ -10,11 +10,12 @@ I added some features that I believe they are important and helpful in real life
 * Microsoft ASP.Net Core 2.1.1
 * Microsoft Entity Framework Core 2.1.1
 * Microsoft OData 7.0.0
+* GraphQL 2.0.0
 * StackExchange.Redis 1.2.6
 * Dapper 1.50.5
 * Autofac 4.8.1
 * AutoMapper 7.0.1
-* FluentValidation 7.6.104
+* FluentValidation 8.0.0
 * MediatR 5.1.0
 * Serilog.AspNetCore 2.1.1
 * Polly 6.0.1
@@ -40,6 +41,7 @@ I added some features that I believe they are important and helpful in real life
 * Integration Event 
 * Resiliency 
 * Idempotency 
+* REST vs GraphQL
 
 ## Practices
 * Using InMemory Data Provider for testing
@@ -56,14 +58,15 @@ I added some features that I believe they are important and helpful in real life
 
 * [x] Cache: In-memory, Redis
 * [ ] NoSQL 
-* [ ] ElasticSearch  
   
 * [x] OData  
-* [ ] GraphQL 
+* [x] GraphQL 
 * [ ] API Gateway 
 
 * [x] Docker 
 * [ ] Kubernetes  
+
+* [ ] ElasticSearch  
 * [ ] Grafana or Kibana
 * [ ] Prometheus
  

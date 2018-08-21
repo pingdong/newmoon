@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PingDong.Newmoon.Events.Core.Exceptions;
 
-namespace PingDong.Newmoon.Events.Service
+namespace PingDong.Newmoon.Events.Service.Commands.Mediator
 {
     public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

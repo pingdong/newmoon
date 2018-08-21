@@ -7,6 +7,6 @@ namespace PingDong.DomainDriven.Service
     {
         Task<bool> CheckExistAsync(Guid id);
 
-        Task CreateRequestForCommandAsync<T>(Guid id);
+        Task CreateRequestRecordAsync<T>(Guid id);
     }
 }

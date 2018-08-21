@@ -1,5 +1,4 @@
-﻿using PingDong.EventBus.Events;
-
+﻿
 namespace PingDong.EventBus.Abstractions
 {
     public interface IEventBus

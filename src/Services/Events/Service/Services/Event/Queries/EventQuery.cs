@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using PingDong.Linq;
+using PingDong.Newmoon.Events.Service.Queries.Models;
 
 namespace PingDong.Newmoon.Events.Service.Queries
 {
@@ -28,9 +29,10 @@ namespace PingDong.Newmoon.Events.Service.Queries
 				var sql = @"SELECT e.EventId As Id, EventName as [Name], StartTime, EndTime, PlaceId, e.StatusId
 							  FROM events.Events e
 							 WHERE e.EventId = @id;
+
 							SELECT a.AttendeeId As Id, a.AttendeeFirstName as [FirstName], a.AttendeeLastName As [LastName] 
 							  FROM events.Events e
-					     LEFT JOIN events.Attendees a ON e.EventId = a.EventId
+					    INNER JOIN events.Attendees a ON e.EventId = a.EventId
 							 WHERE e.EventId = @id";
 
 				var results = await connection.QueryMultipleAsync(sql, new { id });
@@ -40,7 +42,7 @@ namespace PingDong.Newmoon.Events.Service.Queries
 
 				var evt = events.FirstOrDefault();
 				if (evt != null && !attendees.IsNullOrEmpty())
-					evt.attendees = attendees;
+					evt.Attendees = attendees;
 
 				return evt;
 			}

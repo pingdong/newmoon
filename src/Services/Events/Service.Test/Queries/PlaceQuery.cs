@@ -6,11 +6,11 @@ using PingDong.DomainDriven.Infrastructure.Mediator;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Infrastructure;
 using PingDong.Newmoon.Events.Infrastructure.Repositories;
-using PingDong.Newmoon.Events.Service.Queries;
+using PingDong.Newmoon.Events.Service.Queries.Rest;
 using PingDong.QualityTools.Infrastrucutre.SqlServer;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Service.Test
+namespace PingDong.Newmoon.Events.Service.Queries.Rest
 {
     // The purpose of this unit test is a demo on how to using InMemory SQL Provider
     //   for unit testing. Without InMemory DB, 
@@ -48,13 +48,13 @@ namespace PingDong.Newmoon.Events.Service.Test
                 // Assert
                 Assert.Single(queryResult);
 
-                Assert.Equal(DefaultName, queryResult[0].name);
-                Assert.Equal(DefaultNo, queryResult[0].addressNo);
-                Assert.Equal(DefaultStreet, queryResult[0].addressStreet);
-                Assert.Equal(DefaultCity, queryResult[0].addressCity);
-                Assert.Equal(DefaultState, queryResult[0].addressState);
-                Assert.Equal(DefaultCountry, queryResult[0].addressCountry);
-                Assert.Equal(DefaultZipCode, queryResult[0].addressZipCode);
+                Assert.Equal(DefaultName, queryResult[0].Name);
+                Assert.Equal(DefaultNo, queryResult[0].AddressNo);
+                Assert.Equal(DefaultStreet, queryResult[0].AddressStreet);
+                Assert.Equal(DefaultCity, queryResult[0].AddressCity);
+                Assert.Equal(DefaultState, queryResult[0].AddressState);
+                Assert.Equal(DefaultCountry, queryResult[0].AddressCountry);
+                Assert.Equal(DefaultZipCode, queryResult[0].AddressZipCode);
             });
         }
 

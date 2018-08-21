@@ -4,10 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PingDong.EventBus.Services;
 
-namespace PingDong.EventBus.Service.Migrations
+namespace PingDong.EventBus.Infrastrucutre.Migrations
 {
     [DbContext(typeof(EventBusLogServiceDbContext))]
     [Migration("20180727080908_EventBusLogService")]

@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using PingDong.Newmoon.Events.Shared;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Integration.Test
+namespace PingDong.Newmoon.Events
 {
     public class GetTests : ScenarioBase
     {

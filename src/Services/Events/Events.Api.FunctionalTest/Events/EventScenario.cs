@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Service.Commands;
-using PingDong.Newmoon.Events.Service.Models;
+using PingDong.Newmoon.Events.Service.Commands.Models;
+using PingDong.Newmoon.Events.Shared;
 using PingDong.QualityTools.AspNetCore;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace PingDong.Newmoon.Events.Functional.Test
+namespace PingDong.Newmoon.Events
 {
     public class EventScenario : ScenarioBase
     {
@@ -37,15 +38,18 @@ namespace PingDong.Newmoon.Events.Functional.Test
                 // Event approve and confirm
                 var approveCmd = BuildApproveCommand(eventId, eventName).CreateJsonContent();
                 await http.Reset().PostAsync(Events.Post.ApproveEvent, approveCmd);
+                var ev = await GetEvent(http, eventId);
+                Assert.Equal(Convert.ToInt32(ev.value.statusId), EventStatus.Approved.Id);
+
                 var confirmCmd = BuildConfirmCommand(eventId, eventName).CreateJsonContent();
                 await http.Reset().PostAsync(Events.Post.ConfirmEvent, confirmCmd);
+                ev = await GetEvent(http, eventId);
+                Assert.Equal(Convert.ToInt32(ev.value.statusId), EventStatus.Confirmed.Id);
 
                 // Event start
                 var startCmd = BuildStartCommand(eventId, eventName).CreateJsonContent();
                 await http.Reset().PostAsync(Events.Post.StartEvent, startCmd);
-
-                // Assert
-                var ev = await GetEvent(http, eventId);
+                ev = await GetEvent(http, eventId);
                 Assert.Equal(Convert.ToInt32(ev.value.statusId), EventStatus.Ongoing.Id);
 
                 dynamic place = await GetPlace(http);

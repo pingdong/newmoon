@@ -6,9 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 using PingDong.EntityFrameworkCore;
+using PingDong.EventBus;
 using PingDong.EventBus.Abstractions;
-using PingDong.EventBus.Events;
-using PingDong.EventBus.Services;
+using PingDong.EventBus.Infrastrucutre;
+using PingDong.EventBus.Service;
 
 namespace PingDong.Newmoon.Events.Service.IntegrationEvents
 {

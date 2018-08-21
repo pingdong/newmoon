@@ -2,12 +2,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using PingDong.AspNetCore.Hosting;
 using PingDong.Newmoon.Events.Core;
 using PingDong.Newmoon.Events.Service.Commands;
 using PingDong.Newmoon.Events.Service.Queries;
-using PingDong.Web;
 
-namespace PingDong.Newmoon.Events.Service.Tasks
+namespace PingDong.Newmoon.Events.Service.BackgroundTasks
 {
     /// <summary>
     /// Mark all overdue unconfirmed events finished
@@ -33,9 +33,9 @@ namespace PingDong.Newmoon.Events.Service.Tasks
             foreach (var evt in events)
             {
                 // Overdue and unapproved
-                if (evt.statusId == EventStatus.Created.Id && evt.startTime < DateTime.Now)
+                if (evt.StatusId == EventStatus.Created.Id && evt.StartTime < DateTime.Now)
                 {
-                    var cmd = new EndEventCommand(evt.id, evt.name);
+                    var cmd = new EndEventCommand(evt.Id, evt.Name);
 
                     await _mediator.Send(cmd, stoppingToken);
                 }

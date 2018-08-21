@@ -11,7 +11,7 @@ using IdentityServer4.Services;
 
 using Microsoft.AspNetCore.Identity;
 
-using PingDong.Newmoon.IdentityServer.Authentication;
+using PingDong.Newmoon.IdentityServer.Models;
 
 
 namespace PingDong.Newmoon.IdentityServer.Identity

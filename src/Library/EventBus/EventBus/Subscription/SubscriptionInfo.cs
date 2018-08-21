@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PingDong.EventBus
+namespace PingDong.EventBus.Subscription
 {
     public partial class InMemoryEventBusSubscriptionsManager : IEventBusSubscriptionsManager
     {
