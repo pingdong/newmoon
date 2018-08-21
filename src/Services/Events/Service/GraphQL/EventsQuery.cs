@@ -2,7 +2,7 @@
 using PingDong.Newmoon.Events.Service.GraphQL.Models;
 using PingDong.Newmoon.Events.Service.Queries;
 
-namespace PingDong.Newmoon.Events.Service.GraphQL.Queries
+namespace PingDong.Newmoon.Events.Service.GraphQL
 {
     public class EventsQuery : ObjectGraphType
     {

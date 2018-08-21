@@ -8,7 +8,6 @@ using PingDong.DomainDriven.Service;
 using PingDong.Newmoon.Events.Service.Commands.Idempotent;
 using PingDong.Newmoon.Events.Service.GraphQL;
 using PingDong.Newmoon.Events.Service.GraphQL.Models;
-using PingDong.Newmoon.Events.Service.GraphQL.Queries;
 using PingDong.Newmoon.Events.Service.IntegrationEvents;
 
 namespace PingDong.Newmoon.Events.Service

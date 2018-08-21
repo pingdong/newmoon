@@ -1,6 +1,5 @@
 ﻿using GraphQL;
 using GraphQL.Types;
-using PingDong.Newmoon.Events.Service.GraphQL.Queries;
 
 namespace PingDong.Newmoon.Events.Service.GraphQL
 {
