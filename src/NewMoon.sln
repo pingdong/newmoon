@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libraries", "libraries", "{081BCAA4-7635-4FD2-AAA3-746CC2FD4824}"
+	ProjectSection(SolutionItems) = preProject
+		Library\CommonAssemblyInfo.cs = Library\CommonAssemblyInfo.cs
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDriven.Core", "Library\DomainDriven\Core\DomainDriven.Core.csproj", "{AB44C96C-28BC-458E-A4AD-9393177FF161}"
 EndProject
@@ -16,6 +19,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Infrastructure", "Services\Events\Infrastructure\Events.Infrastructure.csproj", "{082F9FF2-E8E4-49FC-9A1C-A9F6F3A452BA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2FB8559C-79E6-4CA2-8FC9-598CA527797E}"
+	ProjectSection(SolutionItems) = preProject
+		Services\CommonAssemblyInfo.cs = Services\CommonAssemblyInfo.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{5D7DBFB7-F33D-40AE-9235-77BAD452A25A}"
 EndProject
