@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-A
 		..\docs\Backlog.md = ..\docs\Backlog.md
 		..\docs\Cache.md = ..\docs\Cache.md
 		..\docs\Configuration.md = ..\docs\Configuration.md
+		..\docs\CQRS.png = ..\docs\CQRS.png
 		..\docs\DataValidation.md = ..\docs\DataValidation.md
 		..\docs\EFcore.md = ..\docs\EFcore.md
 		..\docs\GetTokenInPostman.jpg = ..\docs\GetTokenInPostman.jpg

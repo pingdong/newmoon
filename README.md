@@ -1,51 +1,55 @@
 # **Newmoon**
 
-For many reasons, I have seen many compromised designs/projects. Therefore I decided to implement a proof-of-concept solution and update along with emerging technology.
+This is a technology proven project that is updated frequently and constantly to catch up all cutting-edge technology. The project not only covers all cutting-edge dev, but also includes testing and DevOp concepts, practices. 
+ 
+The current version borrowed some codes and idea from Microsoft [eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers) project, Thanks.
+ 
+The below image suggests the high-level data flow, and an idea of the connection between concepts: CQRS, Mediator, Domain Event, Integration Event, Event Source.
+![](./docs/CQRS.png)
+ 
+In this project, a few advance technology, e.g. Reflection, was used to comply with CoS concept. It may bring some difficulty to understand.
 
-The current version borrowed some codes and idea from Microsoft eShopContainers project, Thanks.
-
-I added some features that I believe they are important and helpful in real life. For example, Extensions and Reflections are widely used here, I know it's controversial, to generate lean, modular and reusable codes. The drawback is that may bring some difficulties to understand, especially to junior dev. But for me, long-term maintainability, flexibility and simplicity is always first priority. 
 
 ## The following libraries are used:
-* Microsoft ASP.Net Core 2.1.1
-* Microsoft Entity Framework Core 2.1.1
-* Microsoft OData 7.0.0
-* GraphQL 2.0.0
-* StackExchange.Redis 1.2.6
-* Dapper 1.50.5
-* Autofac 4.8.1
-* AutoMapper 7.0.1
-* FluentValidation 8.0.0
-* MediatR 5.1.0
-* Serilog.AspNetCore 2.1.1
-* Polly 6.0.1
-* NCrontab 3.3.0
-* Swashbuckle.AspNetCore 3.0.0
-* xUnit.net 2.3.1
-* Moq 4.9.0  
+* [Microsoft ASP.Net Core 2.1.1](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
+* [Microsoft OData 7.0.0](http://odata.github.io/)
+* [GraphQL .Net 2.0.0](https://graphql-dotnet.github.io/)
+* [StackExchange.Redis 1.2.6](https://github.com/StackExchange/StackExchange.Redis)
+* [Dapper 1.50.5](https://github.com/StackExchange/Dapper) ([Tutorial](http://dapper-tutorial.net/dapper))
+* [Microsoft Entity Framework Core 2.1.1](https://docs.microsoft.com/en-us/ef/#pivot=efcore)
+* [Autofac 4.8.1](https://autofac.org/)
+* [AutoMapper 7.0.1](https://automapper.org/)
+* [FluentValidation 8.0.0](https://fluentvalidation.net/)
+* [MediatR 5.1.0](https://github.com/jbogard/MediatR)
+* [Serilog.AspNetCore 2.1.1](https://serilog.net/)
+* [Polly 6.0.1](http://www.thepollyproject.org/)
+* [NCrontab 3.3.0](https://github.com/atifaziz/NCrontab)
+* [Swashbuckle.AspNetCore 3.0.0](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+* [xUnit.net 2.3.1](https://xunit.github.io/)
+* [Moq 4.9.0](https://github.com/moq/moq4)
+* [Docker 18.06.0](https://www.docker.com/)
 
 ## The following design patterns are involved:
-* Clean Architect
-* Mediator
-* CQRS
-* UnitOfWork
-* ValueObject (Poor support in EF Core Currently)
-* Repository
-* Specification 
+* Clean Architect (aka Onion Architect)
+* [Mediator](https://en.wikipedia.org/wiki/Mediator_pattern)
+* [CQRS](https://martinfowler.com/bliki/CQRS.html)
+* [BoundedContext](https://martinfowler.com/bliki/BoundedContext.html)
+* [ValueObject](https://martinfowler.com/bliki/ValueObject.html) (Poor support in EF Core Currently)
+* UnitOfWork & Repository
+
 
 ## Other concepts are covered:
 * SoC 
-* BDD 
-* Bounded Context 
+* Domain Driven Design 
 * Domain Event
 * Integration Event 
 * Resiliency 
 * Idempotency 
-* REST vs GraphQL
+* REST vs [GraphQL](http://graphql.github.io/)
 
 ## Practices
 * Using InMemory Data Provider for testing
-  
+*   
 
 > ## Roadmap
 
