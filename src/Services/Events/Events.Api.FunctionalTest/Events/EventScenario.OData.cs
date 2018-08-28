@@ -16,7 +16,7 @@ using Xunit;
 
 namespace PingDong.Newmoon.Events
 {
-    public class EventScenario : ScenarioBase
+    public class ODataEventScenario : ScenarioBase
     {
         [Fact]
         public async Task Get_create_event_confirm_then_start()
@@ -29,55 +29,53 @@ namespace PingDong.Newmoon.Events
 
                 // Create an event
                 var createCmd = BuildCreateCommand().CreateJsonContent();
-                await http.Reset().PostAsync(Events.Post.AddEvent, createCmd);
+                await http.Reset().PostAsync(Api.RESTful.Post.AddEvent, createCmd);
 
-                dynamic evt = await GetCreatedEvent(http);
-                int eventId = Convert.ToInt32(evt.id);
-                string eventName = evt.name.ToString();
+                JObject evt = await GetCreatedEvent(http);
+                int eventId = Convert.ToInt32(evt["value"][0]["Id"]);
+                string eventName = evt["value"][0]["Name"].ToString();
 
                 // Event approve and confirm
                 var approveCmd = BuildApproveCommand(eventId, eventName).CreateJsonContent();
-                await http.Reset().PostAsync(Events.Post.ApproveEvent, approveCmd);
+                await http.Reset().PostAsync(Api.RESTful.Post.ApproveEvent, approveCmd);
                 var ev = await GetEvent(http, eventId);
                 Assert.Equal(Convert.ToInt32(ev.value.statusId), EventStatus.Approved.Id);
 
                 var confirmCmd = BuildConfirmCommand(eventId, eventName).CreateJsonContent();
-                await http.Reset().PostAsync(Events.Post.ConfirmEvent, confirmCmd);
+                await http.Reset().PostAsync(Api.RESTful.Post.ConfirmEvent, confirmCmd);
                 ev = await GetEvent(http, eventId);
                 Assert.Equal(Convert.ToInt32(ev.value.statusId), EventStatus.Confirmed.Id);
 
                 // Event start
                 var startCmd = BuildStartCommand(eventId, eventName).CreateJsonContent();
-                await http.Reset().PostAsync(Events.Post.StartEvent, startCmd);
+                await http.Reset().PostAsync(Api.RESTful.Post.StartEvent, startCmd);
                 ev = await GetEvent(http, eventId);
                 Assert.Equal(Convert.ToInt32(ev.value.statusId), EventStatus.Ongoing.Id);
 
-                dynamic place = await GetPlace(http);
-                var isOccupied = Convert.ToBoolean(place.isOccupied);
+                JObject place = await GetPlace(http);
+                var isOccupied = Convert.ToBoolean(place["value"][0]["IsOccupied"]);
                 Assert.True(isOccupied);
             }
         }
 
         #region Response
 
-        private async Task<dynamic> GetCreatedEvent(HttpClient http)
+        private async Task<JObject> GetCreatedEvent(HttpClient http)
         {
-            var response = await http.GetStringAsync(Events.Get.Events);
-            dynamic result = JObject.Parse(response);
-            return result.value[0];
+            var response = await http.GetStringAsync(Api.OData.Get.Events);
+            return JObject.Parse(response);
         }
 
         private async Task<dynamic> GetEvent(HttpClient http, int eventId)
         {
-            var response = await http.GetStringAsync(Events.Get.EventById(eventId));
+            var response = await http.GetStringAsync(Api.RESTful.Get.EventById(eventId));
             return JObject.Parse(response);
         }
 
-        private async Task<dynamic> GetPlace(HttpClient http)
+        private async Task<JObject> GetPlace(HttpClient http)
         {
-            var response = await http.GetStringAsync(Events.Get.Places);
-            dynamic result = JObject.Parse(response);
-            return result.value[0];
+            var response = await http.GetStringAsync(Api.OData.Get.Places);
+            return JObject.Parse(response);
         }
 
         #endregion

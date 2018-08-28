@@ -11,12 +11,12 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 
 
 ## The following libraries are used:
-* [Microsoft ASP.Net Core 2.1.1](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
+* [Microsoft ASP.Net Core 2.1.3](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
 * [Microsoft OData 7.0.0](http://odata.github.io/)
 * [GraphQL .Net 2.0.0](https://graphql-dotnet.github.io/)
 * [StackExchange.Redis 1.2.6](https://github.com/StackExchange/StackExchange.Redis)
 * [Dapper 1.50.5](https://github.com/StackExchange/Dapper) ([Tutorial](http://dapper-tutorial.net/dapper))
-* [Microsoft Entity Framework Core 2.1.1](https://docs.microsoft.com/en-us/ef/#pivot=efcore)
+* [Microsoft Entity Framework Core 2.1.2](https://docs.microsoft.com/en-us/ef/#pivot=efcore)
 * [Autofac 4.8.1](https://autofac.org/)
 * [AutoMapper 7.0.1](https://automapper.org/)
 * [FluentValidation 8.0.0](https://fluentvalidation.net/)

@@ -49,32 +49,44 @@ namespace PingDong.Newmoon.Events.Shared
             return testServer;
         }
 
-        public class Events
+        public class Api
         {
-            public static class Get
+            public class RESTful
             {
-                public static string Events = "api/v1/events";
-                public static string Places = "api/v1/places";
-
-                public static string EventById(int id)
+                public static class Get
                 {
-                    return $"api/v1/events/{id}";
+                    public static string Events = "api/v1/events";
+                    public static string Places = "api/v1/places";
+
+                    public static string EventById(int id)
+                    {
+                        return $"api/v1/events/{id}";
+                    }
+                }
+
+                public static class Put
+                {
+                    public static string UpdateEvent = "api/v1/events";
+                }
+
+                public static class Post
+                {
+                    public static string AddEvent = "api/v1/events";
+                    public static string CancelEvent = "api/v1/events/cancel";
+                    public static string ApproveEvent = "api/v1/events/approve";
+                    public static string ConfirmEvent = "api/v1/events/confirm";
+                    public static string StartEvent = "api/v1/events/start";
+                    public static string EndEvent = "api/v1/events/end";
                 }
             }
-
-            public static class Put
+            
+            public class OData
             {
-                public static string UpdateEvent = "api/v1/events";
-            }
-
-            public static class Post
-            {
-                public static string AddEvent = "api/v1/events";
-                public static string CancelEvent = "api/v1/events/cancel";
-                public static string ApproveEvent = "api/v1/events/approve";
-                public static string ConfirmEvent = "api/v1/events/confirm";
-                public static string StartEvent = "api/v1/events/start";
-                public static string EndEvent = "api/v1/events/end";
+                public static class Get
+                {
+                    public static string Events = "api/v1/odata/events";
+                    public static string Places = "api/v1/odata/places";
+                }
             }
         }
 

@@ -238,6 +238,7 @@ namespace PingDong.Newmoon.Events
 
             #region ASP.Net
 
+            // OData
             services.AddOData();
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -524,9 +525,13 @@ namespace PingDong.Newmoon.Events
                     routes.EnableDependencyInjection();
 
                     var baseUri = $"api/{AppSettings.ApiVersion}";
-                    var odataUri = $"{baseUri}/odata";
-                    routes.MapODataServiceRoute(odataUri, odataUri, GetEdmModel(GetSearchingTargets()));
 
+                    // OData
+                    var model = GetEdmModel(GetSearchingTargets());
+                    routes.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
+                    routes.MapODataServiceRoute("odata", "api/v1/odata", model);
+                    
+                    // Default
                     routes.MapRoute(
                         name: "default",
                         template: baseUri + "/{controller=Ping}");
