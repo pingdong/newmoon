@@ -9,8 +9,8 @@ namespace PingDong.Newmoon.Events
     {
         [Theory]
         [InlineData("liveness")]
-        [InlineData("api/v1/events/odata")]
-        [InlineData("api/v1/places/odata")]
+        [InlineData("api/v1/odata/events")]
+        [InlineData("api/v1/odata/places")]
         public async Task Get_get_all_events_and_response_ok_status_code(string url)
         {
             var baseDir = Directory.GetCurrentDirectory() + "\\..\\..\\";
