@@ -5,7 +5,7 @@ using Xunit;
 
 namespace PingDong.Newmoon.Events
 {
-    public class GetTests : ScenarioBase
+    public class RESTfulGetTests : ScenarioBase
     {
         [Theory]
         [InlineData("liveness")]
