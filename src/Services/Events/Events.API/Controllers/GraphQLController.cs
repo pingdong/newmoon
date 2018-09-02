@@ -11,9 +11,9 @@ using PingDong.Web.Http.GraphQL;
 namespace PingDong.Newmoon.Events.Controllers.Rest
 {
     /// <summary>
-    /// Ping Controller
+    /// This GraphQL is implemented in Controller as an alternative way to support GraphQL
     /// </summary>
-    [Route("api/graphql")]
+    [Route("api-graphql")]
     [Produces("application/json")]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public class GraphQLController : BaseController

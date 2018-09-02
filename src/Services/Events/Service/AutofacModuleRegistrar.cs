@@ -1,4 +1,7 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac;
+using GraphQL;
+using GraphQL.Types;
 using MediatR;
 using PingDong.Application.Dependency;
 using PingDong.Newmoon.Events.Service.Commands.Mediator;
@@ -18,7 +21,7 @@ namespace PingDong.Newmoon.Events.Service
             var connectionString = base.Configuration["SqlServer_ConnectionString"];
 
             // Event
-            builder.Register(c => new EventQuery(connectionString))
+            builder.Register(c => new Queries.EventQuery(connectionString))
                     .As<IEventQuery>()
                     .InstancePerLifetimeScope();
             // Place
@@ -30,6 +33,22 @@ namespace PingDong.Newmoon.Events.Service
             // For demostration purpose only, request is validated in the ASP.Net pipeline before hitting controller.
             // MediatR behavior happens after call send in controller
             //builder.RegisterGeneric(typeof(ValidatorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
+
+            // GraphQL
+            var asm = Assembly.GetExecutingAssembly();
+            builder.RegisterAssemblyTypes(asm)
+                    .PublicOnly()
+                    .Where(t => t.Name.EndsWith("GraphType"))
+                    .AsSelf();
+            
+            builder.RegisterType<GraphQL.EventsQuery>().AsSelf();
+            builder.RegisterType<GraphQL.EventsSchema>().As<ISchema>();
+            
+            builder.Register<IDependencyResolver>(c =>
+            {
+                var context = c.Resolve<IComponentContext>();
+                return new FuncDependencyResolver(type => context.Resolve(type));
+            });
         }
     }
 }

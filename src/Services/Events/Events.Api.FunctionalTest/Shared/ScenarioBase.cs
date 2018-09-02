@@ -88,6 +88,11 @@ namespace PingDong.Newmoon.Events.Shared
                     public static string Places = "api/v1/odata/places";
                 }
             }
+
+            public class GraphQL
+            {
+                public static string Post = "api/graphql";
+            }
         }
 
         private readonly string _dbName = Guid.NewGuid().ToString();

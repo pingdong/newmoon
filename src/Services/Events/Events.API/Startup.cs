@@ -40,6 +40,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PingDong.EventBus;
 using PingDong.Newmoon.Events.Identity;
+using PingDong.Newmoon.Events.Middlewares.GraphQL;
 using Swashbuckle.AspNetCore.Swagger;
 using StackExchange.Redis;
 
@@ -517,6 +518,9 @@ namespace PingDong.Newmoon.Events
             app.UseCors("default");
             UseAuth(app);
             _logger.LogInformation(LoggingEvent.Success, "Handling Authentication");
+
+            // GraphQL
+            app.UseGraphQL();
 
             // MVC
             app.UseMvc(routes => 
