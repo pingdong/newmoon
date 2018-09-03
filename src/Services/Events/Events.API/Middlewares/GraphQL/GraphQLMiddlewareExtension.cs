@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace PingDong.Newmoon.Events.Middlewares.GraphQL
+namespace PingDong.Newmoon.Events.Middlewares
 {
-    internal static class GraphQlMiddlewareExtensions
+    internal static class GraphQLMiddlewareExtensions
     {
         public static IApplicationBuilder UseGraphQL(this IApplicationBuilder builder)
         {

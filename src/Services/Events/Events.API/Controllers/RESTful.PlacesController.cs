@@ -7,7 +7,7 @@ using PingDong.AspNetCore.Mvc.Rest;
 using PingDong.Newmoon.Events.Service.Commands;
 using PingDong.Newmoon.Events.Service.Queries;
 
-namespace PingDong.Newmoon.Events.Controllers.Rest
+namespace PingDong.Newmoon.Events.Controllers.RESTful
 {
     /// <summary>
     /// Ping Controller
@@ -15,7 +15,7 @@ namespace PingDong.Newmoon.Events.Controllers.Rest
     [Route("api/v1/places")]
     [Produces("application/json")]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-    public class PlacesRestController : BaseRestController
+    public class PlacesController : BaseRestController
     {
         private readonly IPlaceQuery _query;
 
@@ -25,7 +25,7 @@ namespace PingDong.Newmoon.Events.Controllers.Rest
         /// <param name="logger">logger</param>
         /// <param name="mediator"></param>
         /// <param name="query"></param>
-        public PlacesRestController(ILogger<PlacesRestController> logger, IMediator mediator, IPlaceQuery query) 
+        public PlacesController(ILogger<PlacesController> logger, IMediator mediator, IPlaceQuery query) 
             : base(logger, mediator)
         {
             _query = query;

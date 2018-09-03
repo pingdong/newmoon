@@ -32,8 +32,8 @@ namespace PingDong.Newmoon.Events
                 await http.Reset().PostAsync(Api.RESTful.Post.AddEvent, createCmd);
 
                 JObject evt = await GetCreatedEvent(http);
-                int eventId = Convert.ToInt32(evt["value"][0]["Id"]);
-                string eventName = evt["value"][0]["Name"].ToString();
+                int eventId = Convert.ToInt32(evt["value"][0]["id"]);
+                string eventName = evt["value"][0]["name"].ToString();
 
                 // Event approve and confirm
                 var approveCmd = BuildApproveCommand(eventId, eventName).CreateJsonContent();
@@ -53,7 +53,7 @@ namespace PingDong.Newmoon.Events
                 Assert.Equal(Convert.ToInt32(ev.value.statusId), EventStatus.Ongoing.Id);
 
                 JObject place = await GetPlace(http);
-                var isOccupied = Convert.ToBoolean(place["value"][0]["IsOccupied"]);
+                var isOccupied = Convert.ToBoolean(place["value"][0]["isOccupied"]);
                 Assert.True(isOccupied);
             }
         }
