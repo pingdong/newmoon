@@ -534,7 +534,7 @@ namespace PingDong.Newmoon.Events
                     var model = GetEdmModel(GetSearchingTargets());
                     routes.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
                     routes.MapODataServiceRoute("odata", "api/v1/odata", model);
-                    
+
                     // Default
                     routes.MapRoute(
                         name: "default",
