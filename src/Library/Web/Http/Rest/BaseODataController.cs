@@ -1,23 +1,19 @@
-﻿using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PingDong.DomainDriven.Service;
 
-namespace PingDong.AspNetCore.Mvc.Rest
+namespace PingDong.AspNetCore.Mvc.OData
 {
     /// <summary>
     /// Base Web API Controller
     /// </summary>
-    [ApiController]
-    public class BaseODataController<TSummary> : ODataController
+    public class BaseODataController : ODataController
     {
-        #region
-
-        private readonly IQuery<TSummary> _query;
-
-        #endregion
+        private readonly IMediator _mediator;
 
         #region ctor
 
@@ -25,23 +21,11 @@ namespace PingDong.AspNetCore.Mvc.Rest
         /// ctor
         /// </summary>
         /// <param name="logger">logger</param>
-        /// <param name="query"></param>
-        public BaseODataController(ILogger logger, IQuery<TSummary> query)
+        /// <param name="mediator"></param>
+        public BaseODataController(ILogger logger, IMediator mediator)
         {
+            _mediator = mediator;
             Logger = logger;
-
-            _query = query;
-        }
-
-        #endregion
-
-        #region Query
-        [EnableQuery]
-        public async Task<IQueryable<TSummary>> GetAsync()
-        {
-            var result = await _query.GetAllAsync().ConfigureAwait(false);
-
-            return result.AsQueryable();
         }
 
         #endregion
@@ -53,6 +37,31 @@ namespace PingDong.AspNetCore.Mvc.Rest
         protected ILogger Logger { get; }
 
         protected string LoggingPrefix { get; }
+        #endregion
+
+        #region Command
+
+        [NonAction]
+        protected async Task<IActionResult> CommandDispatchAsync<TCommand, TResponse>(TCommand command) where TCommand : IRequest<TResponse>
+        {
+            var result = await _mediator.Send(command).ConfigureAwait(false);
+
+            return Ok(result);
+        }
+
+        [NonAction]
+        protected async Task<IActionResult> CommandDispatchAsync<TCommand>(string requestIdInString, TCommand command) where TCommand : IRequest<bool>
+        {
+            var commandResult = false;
+            if (Guid.TryParse(requestIdInString, out var requestId) && requestId != Guid.Empty)
+            {
+                var identifiedCommand = new IdentifiedCommand<TCommand, bool>(requestId, command);
+                commandResult = await _mediator.Send(identifiedCommand).ConfigureAwait(false);
+            }
+
+            return commandResult ? (IActionResult) Ok() : BadRequest();
+        }
+
         #endregion
     }
 }

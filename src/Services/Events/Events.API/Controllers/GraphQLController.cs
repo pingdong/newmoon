@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using PingDong.AspNetCore.Mvc;
 using PingDong.Web.Http.GraphQL;
 
-namespace PingDong.Newmoon.Events.Controllers.Rest
+namespace PingDong.Newmoon.Events.Controllers.GraphQL
 {
     /// <summary>
     /// This GraphQL is implemented in Controller as an alternative way to support GraphQL

@@ -12,7 +12,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 
 ## The following libraries are used:
 * [Microsoft ASP.Net Core 2.1.3](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
-* [Microsoft OData 7.0.0](http://odata.github.io/)
+* [Microsoft OData 7.0.1](http://odata.github.io/)
 * [GraphQL .Net 2.0.0](https://graphql-dotnet.github.io/)
 * [StackExchange.Redis 1.2.6](https://github.com/StackExchange/StackExchange.Redis)
 * [Dapper 1.50.5](https://github.com/StackExchange/Dapper) ([Tutorial](http://dapper-tutorial.net/dapper))
@@ -96,6 +96,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 [HttpClient](./docs/HttpClient.md)  
 [Integration Event](./docs/IntegrationEvent.md)  
 [Background Tasks](./docs/BackgroundTask.md)
+[OData](./docs/odata.md)
 
 ### Data Management  
 [Cache](./docs/Cache.md)  

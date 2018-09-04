@@ -40,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-A
 		..\docs\IntegrationEvent.md = ..\docs\IntegrationEvent.md
 		..\Docs\IoC.md = ..\Docs\IoC.md
 		..\Docs\Mapping.md = ..\Docs\Mapping.md
+		..\docs\OData.md = ..\docs\OData.md
 		..\README.md = ..\README.md
 		..\docs\Setup.md = ..\docs\Setup.md
 		..\docs\Testing.md = ..\docs\Testing.md
