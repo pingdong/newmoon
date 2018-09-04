@@ -1,9 +1,11 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PingDong.AspNetCore.Mvc.Rest;
+using PingDong.AspNetCore.Mvc.OData;
 using PingDong.Newmoon.Events.Service.Commands;
 using PingDong.Newmoon.Events.Service.Queries;
 
@@ -12,54 +14,50 @@ namespace PingDong.Newmoon.Events.Controllers
     /// <summary>
     /// Ping Controller
     /// </summary>
-    [Route("api/v1/events")]
-    [Produces("application/json")]
-    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-    public class EventsRestController : BaseRestController
+    [ODataRoutePrefix("events")]
+    public class EventsODataController : BaseODataController
     {
-        private readonly IEventQuery _query;
+        private readonly IEventQuery _eventQuery;
 
         /// <summary>
         /// Initialize
         /// </summary>
         /// <param name="logger">logger</param>
         /// <param name="mediator"></param>
-        /// <param name="query"></param>
-        public EventsRestController(ILogger<EventsRestController> logger, IMediator mediator, IEventQuery query) 
+        /// <param name="eventQuery"></param>
+        public EventsODataController(ILogger<EventsODataController> logger, IMediator mediator, IEventQuery eventQuery)
             : base(logger, mediator)
         {
-            _query = query;
+            _eventQuery = eventQuery;
         }
 
-        // GET api/v1/events
         /// <summary>
-        /// 
+        /// Get Events
         /// </summary>
         /// <returns></returns>
-        /// <response code="200"></response>
-        [Route("")]
-        [HttpGet]
+        [EnableQuery]
+        [ODataRoute("")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetEvents()
         {
-            return await GetAllAsync(_query);
+            return Ok(await _eventQuery.GetAllAsync());
         }
 
-        // GET api/v1/events/id
         /// <summary>
-        /// 
+        /// Get specific event by its id
         /// </summary>
+        /// <param name="id">event id</param>
         /// <returns></returns>
-        /// <response code="200"></response>
-
-        [Route("{id:int}")]
-        [HttpGet]
+        [EnableQuery]
+        [ODataRoute("({id})")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> GetEvent(int id)
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> GetEvent([FromODataUri] int id)
         {
-            return await GetByIdAsync(_query, id);
+            var evt = await _eventQuery.GetByIdAsync(id);
+
+            return evt == null ? (IActionResult) NotFound() : Ok(evt);
         }
 
         // POST api/v1/events/attendee
@@ -69,7 +67,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("attendee")]
+        [Route("api/v1/odata/events/attendee")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -85,7 +83,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("attendee")]
+        [Route("api/v1/odata/events/attendee")]
         [HttpDelete]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -102,7 +100,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("")]
+        [Route("api/v1/odata/events")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -118,7 +116,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("")]
+        [Route("api/v1/odata/events")]
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -134,7 +132,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("approve")]
+        [Route("api/v1/odata/events/approve")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -150,7 +148,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("cancel")]
+        [Route("api/v1/odata/events/cancel")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -166,7 +164,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("confirm")]
+        [Route("api/v1/odata/events/confirm")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -182,7 +180,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("start")]
+        [Route("api/v1/odata/events/start")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -198,7 +196,7 @@ namespace PingDong.Newmoon.Events.Controllers
         /// <returns></returns>
         /// <response code="200"></response>
 
-        [Route("end")]
+        [Route("api/v1/odata/events/end")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]

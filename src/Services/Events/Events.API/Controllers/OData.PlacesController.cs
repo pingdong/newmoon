@@ -1,52 +1,49 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PingDong.AspNetCore.Mvc.Rest;
+using PingDong.AspNetCore.Mvc.OData;
 using PingDong.Newmoon.Events.Service.Commands;
 using PingDong.Newmoon.Events.Service.Queries;
 
-namespace PingDong.Newmoon.Events.Controllers.Rest
+namespace PingDong.Newmoon.Events.Controllers.OData
 {
     /// <summary>
     /// Ping Controller
     /// </summary>
-    [Route("api/v1/places")]
-    [Produces("application/json")]
-    [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-    public class PlacesRestController : BaseRestController
+    public class PlacesODataController : BaseODataController
     {
-        private readonly IPlaceQuery _query;
+        private readonly IPlaceQuery _placeQuery;
 
         /// <summary>
         /// Initialize
         /// </summary>
         /// <param name="logger">logger</param>
         /// <param name="mediator"></param>
-        /// <param name="query"></param>
-        public PlacesRestController(ILogger<PlacesRestController> logger, IMediator mediator, IPlaceQuery query) 
+        /// <param name="placeQuery"></param>
+        public PlacesODataController(ILogger<PlacesODataController> logger, IMediator mediator, IPlaceQuery placeQuery)
             : base(logger, mediator)
         {
-            _query = query;
+            _placeQuery = placeQuery;
         }
 
-        // GET api/places
         /// <summary>
-        /// Get all places
+        /// Get Places
         /// </summary>
-        /// <returns>Return all places</returns>
-
-        [Route("")]
-        [HttpGet]
+        /// <returns></returns>
+        [EnableQuery]
+        [ODataRoute("Places")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetPlaces()
         {
-            return await GetAllAsync(_query);
+            return Ok(await _placeQuery.GetAllAsync());
         }
 
-        // POST api/Places
+        // POST api/v1/odata/Places
         /// <summary>
         /// Create a new place
         /// </summary>
@@ -59,7 +56,7 @@ namespace PingDong.Newmoon.Events.Controllers.Rest
             return await CommandDispatchAsync(requestId, command);
         }
 
-        // PUT api/Places
+        // PUT api/v1/odata/Places
         /// <summary>
         /// Update specified place
         /// </summary>

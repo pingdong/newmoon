@@ -39,8 +39,8 @@ using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PingDong.EventBus;
-using PingDong.Newmoon.Events.Identity;
-using PingDong.Newmoon.Events.Middlewares.GraphQL;
+using PingDong.Newmoon.Events.Filters;
+using PingDong.Newmoon.Events.Middlewares;
 using Swashbuckle.AspNetCore.Swagger;
 using StackExchange.Redis;
 
@@ -534,7 +534,7 @@ namespace PingDong.Newmoon.Events
                     var model = GetEdmModel(GetSearchingTargets());
                     routes.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
                     routes.MapODataServiceRoute("odata", "api/v1/odata", model);
-                    
+
                     // Default
                     routes.MapRoute(
                         name: "default",
