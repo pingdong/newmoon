@@ -1,0 +1,25 @@
+<div class="topnav" id="myTopnav">
+
+    <a class="home" routerLink="">{{config.title}}</a>
+
+    <ng-container *ngIf="isLoggedIn" >
+        <a routerLink="user" routerLinkActive="active">User</a>
+    </ng-container>
+
+    <div *ngIf="isLoggedIn" class="right">
+
+        <a routerLink="/setting" routerLinkActive="active"><i class="fa fa-cog"></i></a>
+        <div class="dropdown">
+          <button class="dropbtn">User</button>
+          <div class="dropdown-content">
+            <a routerLink="/user-profile" routerLinkActive="active">Profile</a>
+            <a (click)="logout()">Logout</a>
+          </div>
+        </div>
+
+    </div>
+    <div *ngIf="!isLoggedIn" class="right">
+        <a (click)="login()">Login</a>
+    </div>
+
+</div>

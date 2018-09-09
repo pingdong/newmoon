@@ -1,0 +1,13 @@
+.npmignore
+.gitattributes
+.gitignore
+__build__
+node_modules
+coverage
+src
+tmp
+test
+index.ts
+npm-debug.log
+tsconfig.json
+tslint.json
