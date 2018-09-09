@@ -10,8 +10,8 @@ This is a technology proven project that is updated frequently and constantly to
 
 ## Notes:
 
-### [Setup](./docs/Setup.md)  
-### [Backlog](./docs/Backlog.md)
+### [Setup](./docs/setup.md)  
+### [Backlog](./docs/backlog.md)
 
 ---
 [Markdown cheat sheet ](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)

@@ -1,6 +1,6 @@
 [Back](../README.md)
 
-# ** Backend **
+## Backend
 
 The current version borrowed some codes and idea from Microsoft [eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers) project, Thanks.
  
@@ -10,7 +10,7 @@ The below image suggests the high-level data flow, and an idea of the connection
 In this project, a few advance technology, e.g. Reflection, was used to comply with CoS concept. It may bring some difficulty to understand.
 
 
-## The following libraries are used:
+### The following libraries are used:
 * [Microsoft ASP.Net Core 2.1.3](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
 * [Microsoft OData 7.0.1](http://odata.github.io/)
 * [GraphQL .Net 2.0.0](https://graphql-dotnet.github.io/)
@@ -37,7 +37,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 * [ValueObject](https://martinfowler.com/bliki/ValueObject.html) (Poor support in EF Core at present)
 * UnitOfWork & Repository
 
-## Concepts are covered:
+### Concepts are covered:
 * SoC 
 * Domain Driven Design 
 * Event Sourcing
@@ -47,13 +47,13 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 * Idempotency 
 * REST vs OData vs [GraphQL](http://graphql.github.io/)
 
-## Practices
+### Practices
 * Microservice Architect 
 * Multiple Configuration Source, Sturcture Application Settings
 * Authentication & Authorization 
 * Using InMemory Data Provider for testing
 
-## Roadmap  
+### Roadmap  
 * Application
   * [x] Background Tasks 
   * [x] Integration Event
@@ -83,19 +83,19 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
   
 
 ### Asp.Net Core   
-[Dependency Injection](./docs/IoC.md)  
-[Configuration](./docs/Configuration.md)  
-[Data Validation](./docs/DataValidation.md)   
-[Identity](./docs/Identity.md)    
-[HttpClient](./docs/HttpClient.md)  
-[Integration Event](./docs/IntegrationEvent.md)  
-[Background Tasks](./docs/BackgroundTask.md)
-[OData](./docs/odata.md)
+[Dependency Injection](./docs/backend/IoC.md)  
+[Configuration](./docs/backend/Configuration.md)  
+[Data Validation](./docs/backend/DataValidation.md)   
+[Identity](./docs/backend/Identity.md)    
+[HttpClient](./docs/backend/HttpClient.md)  
+[Integration Event](./docs/backend/IntegrationEvent.md)  
+[Background Tasks](./docs/backend/BackgroundTask.md)
+[OData](./docs/backend/odata.md)
 
 ### Data Management  
-[Cache](./docs/Cache.md)  
-[Mapping](./docs/Mapping.md)  
-[EF Core](./docs/EFCore.md)  
+[Cache](./docs/backend/Cache.md)  
+[Mapping](./docs/backend/Mapping.md)  
+[EF Core](./docs/backend/EFCore.md)  
 
 ### Testing  
-[Testing](./docs/Testing.md)
+[Testing](./docs/backend/Testing.md)
