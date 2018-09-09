@@ -1,6 +1,6 @@
 [Back](../README.md)
 
-> ## Setup 
+## Setup 
 
 ## Requirement:
 1. Visual Studio 2017
