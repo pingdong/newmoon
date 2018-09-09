@@ -8,6 +8,9 @@ This is a technology proven project that is updated frequently and constantly to
 ### Back-end
  [.Net Core](./docs/dotnet-backend.md)  
 
+High-level structure
+![](./docs/backend/CQRS.png)
+
 ## Notes:
 
 ### [Setup](./docs/setup.md)  
