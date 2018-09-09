@@ -1,6 +1,6 @@
-[Back](../docs/backend/dotnet-backend.md)
+[Back](../dotnet-backend.md)
 
-> ## Dependency Injection 
+## Dependency Injection 
 
 In Newmoon, classes are registed in `AutofacModuleRegistrar.cs` or `Registrar.cs`. All registrars are discovered and registered automatically, by Reflection under the hood.
 

@@ -5,7 +5,7 @@
 The current version borrowed some codes and idea from Microsoft [eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers) project, Thanks.
  
 The below image suggests the high-level data flow, and an idea of the connection between concepts: CQRS, Mediator, Domain Event, Integration Event, Event Source.
-![](./docs/backend/CQRS.png)
+![](./backend/CQRS.png)
  
 In this project, a few advance technology, e.g. Reflection, was used to comply with CoS concept. It may bring some difficulty to understand.
 
@@ -83,19 +83,19 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
   
 
 ### Asp.Net Core   
-[Dependency Injection](./docs/backend/IoC.md)  
-[Configuration](./docs/backend/Configuration.md)  
-[Data Validation](./docs/backend/DataValidation.md)   
-[Identity](./docs/backend/Identity.md)    
-[HttpClient](./docs/backend/HttpClient.md)  
-[Integration Event](./docs/backend/IntegrationEvent.md)  
-[Background Tasks](./docs/backend/BackgroundTask.md)
-[OData](./docs/backend/odata.md)
+[Dependency Injection](./backend/IoC.md)  
+[Configuration](./backend/Configuration.md)  
+[Data Validation](./backend/DataValidation.md)   
+[Identity](./backend/Identity.md)    
+[HttpClient](./backend/HttpClient.md)  
+[Integration Event](./backend/IntegrationEvent.md)  
+[Background Tasks](./backend/BackgroundTask.md)
+[OData](./backend/odata.md)
 
 ### Data Management  
-[Cache](./docs/backend/Cache.md)  
-[Mapping](./docs/backend/Mapping.md)  
-[EF Core](./docs/backend/EFCore.md)  
+[Cache](./backend/Cache.md)  
+[Mapping](./backend/Mapping.md)  
+[EF Core](./backend/EFCore.md)  
 
 ### Testing  
-[Testing](./docs/backend/Testing.md)
+[Testing](./backend/Testing.md)
