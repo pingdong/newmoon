@@ -1,6 +1,6 @@
-[Back](../docs/backend/dotnet-backend.md)
+[Back](../dotnet-backend.md)
 
-> ## EF Core 
+## EF Core 
 
 ## Migration
 

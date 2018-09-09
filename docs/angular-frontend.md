@@ -18,4 +18,4 @@ Chinese version: ng serve --configuration=zh
 * Module
   * [x] Lazy Loading 
   * [x] Pre-loading
-  * [x] [i18n](./docs/angular/i18n.md)
+  * [x] [i18n](./angular/i18n.md)

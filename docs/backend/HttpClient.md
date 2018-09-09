@@ -1,6 +1,6 @@
-[Back](../docs/backend/dotnet-backend.md)
+[Back](../dotnet-backend.md)
 
-> ## HttpClient 
+## HttpClient 
 
 Accessing external web service is a quite common demand, and likely need to be cooperate with a resilience library.
 

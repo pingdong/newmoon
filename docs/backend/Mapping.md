@@ -1,6 +1,5 @@
-[Back](../docs/backend/dotnet-backend.md)
-
-> ## Mapping 
+[Back](../dotnet-backend.md)
+## Mapping 
 
 Using the below codes to define object mapping in its projects, Events service automatically discovers and registers mapping setting.
 

@@ -1,6 +1,6 @@
-[Back](../docs/backend/dotnet-backend.md)
+[Back](../dotnet-backend.md)
 
-> ## Integration Event 
+## Integration Event 
 
 Using my own abstraction (borrowed from eShopOnContainer) is just a proof-of-concept. If advance features are required, the API and abstractions provided by a commerical service bus should be used.
 
