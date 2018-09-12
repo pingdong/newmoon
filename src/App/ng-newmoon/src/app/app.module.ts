@@ -3,6 +3,7 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './console';
 
@@ -10,6 +11,7 @@ import { ConsoleModule } from './console';
 import { CoreModule } from './core';
 import { ShareModule } from './share';
 import { SystemModule } from './system';
+import { MaterialModule } from './material';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -21,11 +23,13 @@ registerLocaleData(localeZh, 'zh-Hans', localeZhExtra);
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
 
     AppRoutingModule,
 
     CoreModule,
     ShareModule,
+    MaterialModule,
     SystemModule, // must be immidately before ConsoleModule
     ConsoleModule, // must be on the last
   ],
