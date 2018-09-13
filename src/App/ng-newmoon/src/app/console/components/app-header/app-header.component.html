@@ -1,25 +1,29 @@
-<div class="topnav" id="myTopnav">
+<mat-toolbar color="primary">
+    
+    <mat-toolbar-row>
 
-    <a class="home" routerLink="">{{config.title}}</a>
+      <!-- Left -->
+      <button mat-button class="logo" routerLink="">{{config.title}}</button>
+  
+      <span class="spacer"></span>
+     
+      <!-- Right -->
+      <mat-icon class="icon-button">help</mat-icon>
+  
+      <span *ngIf="!isLoggedIn">
+        <button mat-button (click)="login()">Login</button>
+      </span>
+        
+      <mat-icon class="icon-button" *ngIf="isLoggedIn">settings</mat-icon>
+      <mat-icon class="icon-button" *ngIf="isLoggedIn">mail</mat-icon>
+      <span *ngIf="isLoggedIn">
+        <button mat-button [matMenuTriggerFor]="menu">{{username}}</button>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">
+          <button mat-menu-item>profile</button>
+          <button mat-menu-item (click)="logout()">logout</button>
+        </mat-menu>
+      </span>
 
-    <ng-container *ngIf="isLoggedIn" >
-        <a routerLink="user" routerLinkActive="active">User</a>
-    </ng-container>
+    </mat-toolbar-row>
 
-    <div *ngIf="isLoggedIn" class="right">
-
-        <a routerLink="/setting" routerLinkActive="active"><i class="fa fa-cog"></i></a>
-        <div class="dropdown">
-          <button class="dropbtn">User</button>
-          <div class="dropdown-content">
-            <a routerLink="/user-profile" routerLinkActive="active">Profile</a>
-            <a (click)="logout()">Logout</a>
-          </div>
-        </div>
-
-    </div>
-    <div *ngIf="!isLoggedIn" class="right">
-        <a (click)="login()">Login</a>
-    </div>
-
-</div>
+  </mat-toolbar>

@@ -13,6 +13,7 @@ export class AppHeaderComponent implements OnInit {
 
   public isLoggedIn: boolean;
   public config: AppConfig;
+  public username: String;
 
   constructor(
     /** @internal */
@@ -24,7 +25,10 @@ export class AppHeaderComponent implements OnInit {
   public ngOnInit(): void {
 
     this.authService.isLoggedIn$
-          .subscribe((result) => this.isLoggedIn = result);
+          .subscribe((result) => {
+            this.isLoggedIn = result;
+            this.username = 'Ping Dong';
+          });
 
     this.configService.getConfig()
           .subscribe((data) => this.config = {...data} );

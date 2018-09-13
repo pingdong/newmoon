@@ -2,20 +2,25 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './main/app.component';
+import { MaterialModule } from '../material';
 
+import { AppComponent } from './main/app.component';
 import { AppReadyEvent } from './components/app-ready/app-ready.event';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppFooterComponent } from './components/app-footer/app-footer.component';
 
 @NgModule({
     declarations: [
       AppComponent,
 
       AppHeaderComponent,
+      AppFooterComponent,
     ],
     imports: [
       CommonModule,
       RouterModule,
+
+      MaterialModule,
     ],
     providers: [
       AppReadyEvent,

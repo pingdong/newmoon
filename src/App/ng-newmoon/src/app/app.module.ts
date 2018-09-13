@@ -11,7 +11,6 @@ import { ConsoleModule } from './console';
 import { CoreModule } from './core';
 import { ShareModule } from './share';
 import { SystemModule } from './system';
-import { MaterialModule } from './material';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -29,7 +28,6 @@ registerLocaleData(localeZh, 'zh-Hans', localeZhExtra);
 
     CoreModule,
     ShareModule,
-    MaterialModule,
     SystemModule, // must be immidately before ConsoleModule
     ConsoleModule, // must be on the last
   ],
