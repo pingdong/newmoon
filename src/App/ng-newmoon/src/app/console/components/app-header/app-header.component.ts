@@ -14,6 +14,7 @@ export class AppHeaderComponent implements OnInit {
   public isLoggedIn: boolean;
   public config: AppConfig;
   public username: String;
+  public messageCount: number;
 
   constructor(
     /** @internal */
@@ -32,6 +33,8 @@ export class AppHeaderComponent implements OnInit {
 
     this.configService.getConfig()
           .subscribe((data) => this.config = {...data} );
+
+    this.messageCount = 8;
   }
 
   public login(): void {
