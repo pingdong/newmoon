@@ -1,5 +1,5 @@
 .logo {
-  font-size: 25px; /* TODO: Right unit of the font-size */
+  font-size: 1.5em; /* TODO: Right unit of the font-size */
 }
 
 .spacer {
@@ -7,6 +7,6 @@
 }
 
 .icon-button {
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
