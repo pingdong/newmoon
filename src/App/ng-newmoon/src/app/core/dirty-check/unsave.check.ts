@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
 
 export interface UnsaveCheck {
-    isUnsave: () => Observable<boolean> | boolean;
+    isDirty: () => Observable<boolean> | Promise<boolean> | boolean;
 }
