@@ -8,7 +8,7 @@
       <span class="spacer"></span>
      
       <!-- Right -->        
-      <button mat-icon-button class="icon-button">
+      <button mat-icon-button class="icon-button" (click)="gotoHelper()">
         <mat-icon>help</mat-icon>
       </button>
   
@@ -16,16 +16,16 @@
         <button mat-button (click)="login()">Login</button>
       </span>        
       <span *ngIf="isLoggedIn">
-        <button mat-icon-button class="icon-button" *ngIf="isLoggedIn">
+        <button mat-icon-button class="icon-button" *ngIf="isLoggedIn" (click)="openAppSettings()">
           <mat-icon>settings</mat-icon>
         </button>
-        <button mat-icon-button  class="icon-button" *ngIf="isLoggedIn">
+        <button mat-icon-button  class="icon-button" *ngIf="isLoggedIn" (click)="gotoMessages()">
           <mat-icon matBadge="{{messageCount}}" matBadgePosition="after" matBadgeColor="accent">mail</mat-icon>
         </button>
     
         <button mat-button [matMenuTriggerFor]="menu">{{username}}</button>
         <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">
-          <button mat-menu-item>profile</button>
+          <button mat-menu-item (click)="openUserProfile()">profile</button>
           <button mat-menu-item (click)="logout()">logout</button>
         </mat-menu>
       </span>

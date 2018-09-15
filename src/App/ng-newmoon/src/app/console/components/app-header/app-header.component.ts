@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AppConfig, ConfigService,
          AuthService } from '../../../core';
 
+import {MatSnackBar} from '@angular/material';
+
 @Component({
   selector: 'app-header',
   styleUrls: ['./app-header.component.css'],
@@ -20,7 +22,8 @@ export class AppHeaderComponent implements OnInit {
     /** @internal */
     private authService: AuthService,
     private configService: ConfigService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) { }
 
   public ngOnInit(): void {
@@ -46,4 +49,27 @@ export class AppHeaderComponent implements OnInit {
 
     this.router.navigate(['/']);
   }
+
+  public gotoMessages(): void {
+    this.openSnackBar('Sorry, Message feature is not ready currently.');
+  }
+
+  public gotoHelper(): void {
+    this.openSnackBar('Sorry, Helper feature is not ready currently.');
+  }
+
+  public openAppSettings(): void {
+    this.openSnackBar('Sorry, Settings feature is not ready currently.');
+  }
+
+  public openUserProfile(): void {
+    this.openSnackBar('Sorry, User Profile feature is not ready currently.');
+  }
+
+  private openSnackBar(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 2000,
+    });
+  }
+
 }
