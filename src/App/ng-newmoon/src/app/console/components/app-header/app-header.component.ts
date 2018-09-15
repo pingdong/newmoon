@@ -59,11 +59,11 @@ export class AppHeaderComponent implements OnInit {
   }
 
   public openAppSettings(): void {
-    this.openSnackBar('Sorry, Settings feature is not ready currently.');
+    this.router.navigate(['/setting']);
   }
 
   public openUserProfile(): void {
-    this.openSnackBar('Sorry, User Profile feature is not ready currently.');
+    this.router.navigate(['/user-profile']);
   }
 
   private openSnackBar(message: string) {
