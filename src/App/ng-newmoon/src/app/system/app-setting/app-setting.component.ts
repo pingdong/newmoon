@@ -8,8 +8,19 @@ import { UnsaveCheck } from '../../core';
 })
 export class AppSettingComponent implements UnsaveCheck {
 
+  public inSaving = false;
+
+  private dirty = true;
+
   public isDirty(): boolean {
-    return true;
+    return this.dirty;
+  }
+
+  public save(): void {
+    this.inSaving = true;
+    this.dirty = false;
+
+    setTimeout(() => this.inSaving = false, 2000);
   }
 
 }
