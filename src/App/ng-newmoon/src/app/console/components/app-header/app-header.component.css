@@ -1,12 +1,18 @@
-.logo {
-  font-size: 1.5em; /* TODO: Right unit of the font-size */
+mat-toolbar-row {
+  /* layout */
+  display: flex;
+  flex-direction: row;
 }
 
-.spacer {
-  flex: 1 1 auto;
+.header__logo {
+  /* layout */
+  flex-grow: 1;
+
+  /* Element */
+  font-size: 2rem;  
 }
 
-.icon-button {
-  margin-right: 0.2rem;
-  margin-left: 0.2rem;
+.header__toolbar > * {
+  /* Element */
+  margin-right: 0.5rem; 
 }

@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* Clear all default settings
+   It's helpful on multiple browser enviornments.
+*/
+@import "reset.css";
+
 /* Material */
 /* available
     deeppurple-amber.css
@@ -8,9 +13,3 @@
     purple-green.css
 */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-}

@@ -1,16 +1,14 @@
-/* Footer sticks to bottom */
-
-article {
-  min-height: 100%;
+.app {
+  /* layout */
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  min-height: 100vh;
 }
 
 main {
-  flex-grow: 1;
-}
+  /* layout */
+  flex: 1 0 auto;
 
-header, main, footer {
-  flex-shrink: 0;
+  /* element */
+  margin: 5px;
 }

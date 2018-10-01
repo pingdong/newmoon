@@ -1,0 +1,30 @@
+.footer__root {  
+  /* Layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+
+  /* Element */
+  background-color: #3f51b5; /* TODO: Dynamic retrieve from Material Library */
+  height: 50px;
+}
+
+.footer__root > * {
+  margin: 10px;
+}
+
+.footer__copyright {
+  /* Layout */
+  order: 2;
+
+  /* Element */
+  color: white;
+}
+
+.footer__github {
+  /* Layout */
+  order: 1;
+  flex-grow: 1;
+
+  /* TODO: Center Github vertically */
+}

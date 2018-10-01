@@ -45,9 +45,12 @@ export class AppHeaderComponent implements OnInit {
   }
 
   public logout(): void {
-    this.authService.logout();
+    const result = this.router.navigate(['/']);
 
-    this.router.navigate(['/']);
+    // TODO: Doesn't work
+    if (result) {
+      this.authService.logout();
+    }
   }
 
   public gotoMessages(): void {
