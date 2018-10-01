@@ -23,10 +23,11 @@ Chinese version: ng serve --configuration=zh
   * [ ] Service Works
   * [ ] Server-side Rendering
 * Style
-  * [ ] Material UI
+  * [ ] [Material UI](./frontend/angular/material.md)
+  * [ ] [CSS 3](./frontend/general/css3.md)
 * Module
   * [x] Lazy Loading 
   * [x] Pre-loading
-  * [x] [i18n](./angular/i18n.md)
+  * [x] [i18n](./frontend/angular/i18n.md)
 * Http
   * [ ] Http Inerceptor for dev
