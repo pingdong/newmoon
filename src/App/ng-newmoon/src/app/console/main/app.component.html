@@ -2,13 +2,21 @@
   
   <!-- Header -->
   <header>
-    <app-header></app-header>
+    <app-header (sidenavToggled)="sidenavTrigger()"></app-header>
   </header>
 
-  <main>  
-    <!-- Main -->
-    <router-outlet></router-outlet>
-  </main>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" [(opened)]="isSidePanelOpened">
+      <app-side></app-side>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <main>
+        <!-- Main -->
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
   <!-- Footer -->
   <footer>

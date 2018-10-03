@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppConfig, ConfigService,
@@ -17,6 +17,9 @@ export class AppHeaderComponent implements OnInit {
   public config: AppConfig;
   public username: String;
   public messageCount: number;
+
+  @Output()
+  public sidenavToggled = new EventEmitter();
 
   constructor(
     /** @internal */
@@ -67,6 +70,10 @@ export class AppHeaderComponent implements OnInit {
 
   public openUserProfile(): void {
     this.router.navigate(['/user-profile']);
+  }
+
+  public sidenavClicked(): void {
+    this.sidenavToggled.emit();
   }
 
   private openSnackBar(message: string) {

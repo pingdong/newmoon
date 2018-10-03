@@ -8,6 +8,7 @@ import { AppComponent } from './main/app.component';
 import { AppReadyEvent } from './components/app-ready/app-ready.event';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
+import { AppSideComponent } from './components/app-side/app-side.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { AppFooterComponent } from './components/app-footer/app-footer.component
 
       AppHeaderComponent,
       AppFooterComponent,
+      AppSideComponent,
     ],
     imports: [
       CommonModule,

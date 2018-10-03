@@ -9,6 +9,8 @@ import { AppReadyEvent } from '../components/app-ready/app-ready.event';
 })
 export class AppComponent implements OnInit {
 
+  public isSidePanelOpened = true;
+
   constructor(
     /** @internal */
     private appReadyEvent: AppReadyEvent,
@@ -18,4 +20,7 @@ export class AppComponent implements OnInit {
     this.appReadyEvent.trigger();
   }
 
+  public sidenavTrigger() {
+    this.isSidePanelOpened = !this.isSidePanelOpened;
+  }
 }

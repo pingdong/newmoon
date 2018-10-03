@@ -2,6 +2,12 @@
     
     <mat-toolbar-row>
       
+      <div>
+        <button mat-icon-button (click)="sidenavClicked()">
+          <mat-icon>dehaze</mat-icon>
+        </button>
+      </div>
+
       <div class="header__logo">  
         <!-- Left -->
         <button mat-button class="header__logo" routerLink="">{{config.title}}</button>
@@ -31,7 +37,7 @@
             <button mat-menu-item (click)="openUserProfile()">profile</button>
             <button mat-menu-item (click)="logout()">logout</button>
           </mat-menu>
-        </span>
+        </span>        
       </div>  
 
     </mat-toolbar-row>

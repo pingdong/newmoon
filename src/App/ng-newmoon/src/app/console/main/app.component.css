@@ -5,10 +5,18 @@
   min-height: 100vh;
 }
 
-main {
+mat-sidenav-container {
   /* layout */
   flex: 1 0 auto;
 
   /* element */
   margin: 5px;
+}
+
+app-side {
+  padding: 5px;
+}
+
+main {
+  padding: 5px;
 }
