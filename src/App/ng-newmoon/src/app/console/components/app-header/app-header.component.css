@@ -7,7 +7,9 @@ mat-toolbar-row {
 .header__logo {
   /* layout */
   flex-grow: 1;
+}
 
+.header__logo__button {
   /* Element */
   font-size: 2rem;  
 }

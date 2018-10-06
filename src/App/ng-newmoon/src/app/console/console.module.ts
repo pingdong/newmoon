@@ -10,6 +10,7 @@ import { AppHeaderComponent } from './components/app-header/app-header.component
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import { AppSideNavComponent } from './components/app-sidenav/app-sidenav.component';
 import { AppSideNavItemComponent } from './components/app-sidenav/app-sidenav-item/app-sidenav-item.component';
+import { AppHeaderSearchComponent } from './components/app-header/app-header-search/app-header-search.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { AppSideNavItemComponent } from './components/app-sidenav/app-sidenav-it
       AppFooterComponent,
       AppSideNavComponent,
       AppSideNavItemComponent,
+      AppHeaderSearchComponent,
     ],
     imports: [
       CommonModule,

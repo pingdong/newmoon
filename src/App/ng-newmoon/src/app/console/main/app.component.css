@@ -13,8 +13,12 @@ mat-sidenav-container {
   margin: 5px;
 }
 
-app-side {
+app-sidenav {
   padding: 5px;
+}
+
+mat-sidenav {
+  width: 15vw;
 }
 
 main {

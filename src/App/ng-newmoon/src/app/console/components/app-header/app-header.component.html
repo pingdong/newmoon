@@ -10,20 +10,22 @@
 
       <div class="header__logo">  
         <!-- Left -->
-        <button mat-button class="header__logo" routerLink="">{{title}}</button>
+        <button mat-button class="header__logo__button" routerLink="">{{title}}</button>
       </div>
        
       <!-- Right -->   
       <div class="header__toolbar">
-        <button *ngIf="isLoggedIn" mat-icon-button class="header__button" (click)="openAppSettings()">
+        <app-header-search *ngIf="isLoggedIn"></app-header-search>
+
+        <button *ngIf="isLoggedIn" mat-icon-button (click)="openAppSettings()">
           <mat-icon>settings</mat-icon>
         </button>
         
-        <button *ngIf="isLoggedIn" mat-icon-button  class="header__button" (click)="gotoMessages()">
+        <button *ngIf="isLoggedIn" mat-icon-button (click)="gotoMessages()">
           <mat-icon matBadge="{{messageCount}}" matBadgePosition="after" matBadgeColor="accent">mail</mat-icon>
         </button>
 
-        <button mat-icon-button class="header__button" (click)="gotoHelper()">
+        <button mat-icon-button (click)="gotoHelper()">
           <mat-icon>help</mat-icon>
         </button>
     
