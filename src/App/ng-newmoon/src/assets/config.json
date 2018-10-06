@@ -1,3 +1,28 @@
 {
-    "title": "Newmoon"
+  "appTitle": "Newmoon",
+  
+  "modules": [
+    {
+      "title": "Dashboard",
+      "uri": "/dashboard"
+    },
+    {
+      "title": "Admin",
+      "modules": [
+        {
+          "title": "User",
+          "uri": "/users"
+        }
+      ]
+    },
+    {
+      "title": "System",
+      "modules": [
+        {
+          "title": "Configuration",
+          "uri": "/config"
+        }
+      ]
+    }
+  ]
 }

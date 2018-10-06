@@ -8,7 +8,8 @@ import { AppComponent } from './main/app.component';
 import { AppReadyEvent } from './components/app-ready/app-ready.event';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
-import { AppSideComponent } from './components/app-side/app-side.component';
+import { AppSideNavComponent } from './components/app-sidenav/app-sidenav.component';
+import { AppSideNavItemComponent } from './components/app-sidenav/app-sidenav-item/app-sidenav-item.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { AppSideComponent } from './components/app-side/app-side.component';
 
       AppHeaderComponent,
       AppFooterComponent,
-      AppSideComponent,
+      AppSideNavComponent,
+      AppSideNavItemComponent,
     ],
     imports: [
       CommonModule,
@@ -25,7 +27,7 @@ import { AppSideComponent } from './components/app-side/app-side.component';
       MaterialModule,
     ],
     providers: [
-      AppReadyEvent,
+      AppReadyEvent
     ]
   })
   export class ConsoleModule {

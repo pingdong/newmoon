@@ -14,6 +14,8 @@ import { SystemModule } from './system';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import './extension/string-extension.ts';
+
 import localeZhExtra from '@angular/common/locales/extra/zh-Hans';
 import localeZh from '@angular/common/locales/zh-Hans';
 registerLocaleData(localeZh, 'zh-Hans', localeZhExtra);

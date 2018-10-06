@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppSideComponent } from './app-side.component';
+import { AppSideNavItemComponent } from './app-sidenav-item.component';
 
-describe('AppSideComponent', () => {
-  let component: AppSideComponent;
-  let fixture: ComponentFixture<AppSideComponent>;
+describe('AppSideNavItemComponent', () => {
+  let component: AppSideNavItemComponent;
+  let fixture: ComponentFixture<AppSideNavItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppSideComponent ]
+      declarations: [ AppSideNavItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppSideComponent);
+    fixture = TestBed.createComponent(AppSideNavItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

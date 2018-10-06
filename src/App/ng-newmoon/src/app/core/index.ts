@@ -3,6 +3,7 @@ export { CoreModule } from './core.module';
 export { SelectivePreloadingStrategy } from './routing/selective-preloading-strategy';
 
 export { AppConfig } from './config/config.model';
+export { AppModule } from './config/config.module.model';
 export { ConfigService } from './config/config.service';
 
 export { UserProfile } from '../core/user-profile/user-profile.model';

@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppConfig, ConfigService,
-         AuthService } from '../../../core';
+import { ConfigService, AuthService } from '../../../core';
 
 import {MatSnackBar} from '@angular/material';
 
@@ -14,7 +13,7 @@ import {MatSnackBar} from '@angular/material';
 export class AppHeaderComponent implements OnInit {
 
   public isLoggedIn: boolean;
-  public config: AppConfig;
+  public title: string;
   public username: String;
   public messageCount: number;
 
@@ -38,7 +37,7 @@ export class AppHeaderComponent implements OnInit {
           });
 
     this.configService.getConfig()
-          .subscribe((data) => this.config = {...data} );
+          .subscribe((cfg) => this.title = cfg.appTitle );
 
     this.messageCount = 8;
   }
