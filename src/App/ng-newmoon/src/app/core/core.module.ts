@@ -19,17 +19,7 @@ import { UnsaveConfirmComponent } from './dirty-check/unsave-confirm/unsave-conf
     ],
     entryComponents: [
       UnsaveConfirmComponent
-    ],
-    providers: [
-      AuthService,
-      ConfigService,
-
-      UserProfileService,
-
-      AuthGuard,
-      UnsaveGuard,
-      ValidationGuard,
-    ],
+    ]
   })
   export class CoreModule {
 

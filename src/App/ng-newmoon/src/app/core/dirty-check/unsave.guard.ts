@@ -6,8 +6,11 @@ import { first } from 'rxjs/operators';
 
 import { UnsaveCheck } from './unsave.check';
 import { UnsaveConfirmComponent } from './unsave-confirm/unsave-confirm.component';
+import { CoreModule } from '../core.module';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class UnsaveGuard implements CanDeactivate<UnsaveCheck> {
 
   constructor(public dialog: MatDialog) {}

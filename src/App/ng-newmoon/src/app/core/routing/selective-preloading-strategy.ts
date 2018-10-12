@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PreloadingStrategy, Route } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { CoreModule } from '..';
 
 @Injectable()
 export class SelectivePreloadingStrategy implements PreloadingStrategy {
