@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ConfigService, AuthService } from '../../../core';
-
-import {MatSnackBar} from '@angular/material';
+import { ConfigService, AuthService, NotificationService } from '../../../core';
 
 @Component({
   selector: 'app-header',
@@ -24,8 +22,8 @@ export class AppHeaderComponent implements OnInit {
     /** @internal */
     private authService: AuthService,
     private configService: ConfigService,
+    private notificationService: NotificationService,
     private router: Router,
-    private snackBar: MatSnackBar,
   ) { }
 
   public ngOnInit(): void {
@@ -56,11 +54,11 @@ export class AppHeaderComponent implements OnInit {
   }
 
   public gotoMessages(): void {
-    this.openSnackBar('Sorry, Message feature is not ready currently.');
+    this.notificationService.sendText('Sorry, Message feature is not ready currently.');
   }
 
   public gotoHelper(): void {
-    this.openSnackBar('Sorry, Helper feature is not ready currently.');
+    this.notificationService.sendText('Sorry, Helper feature is not ready currently.');
   }
 
   public openAppSettings(): void {
@@ -73,12 +71,6 @@ export class AppHeaderComponent implements OnInit {
 
   public sidenavClicked(): void {
     this.sidenavToggled.emit();
-  }
-
-  private openSnackBar(message: string) {
-    this.snackBar.open(message, '', {
-      duration: 2000,
-    });
   }
 
 }

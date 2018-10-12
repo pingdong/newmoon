@@ -17,3 +17,6 @@ export { UnsaveGuard } from './dirty-check/unsave.guard';
 
 export { DataValidation } from './validation/data.validation';
 export { ValidationGuard } from './validation/validation.guard';
+
+export { NotificationMessage } from './notification/notification.message.model';
+export { NotificationService } from './notification/notification.service';
