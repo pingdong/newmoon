@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header-search',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppHeaderSearchComponent implements OnInit {
 
-  constructor() { }
+  public term: string;
+
+  private search$: Subject<string>;
+
+  constructor() {
+    this.search$ = new Subject();
+  }
 
   ngOnInit() {
+    this.search$.pipe(
+                    filter(text => text.length > 2),
+                    debounceTime(10),
+                    distinctUntilChanged()
+                  ).subscribe(x =>
+                    console.log(x)
+                  );
+  }
+
+  public onSearch() {
+    this.search$.next(this.term);
   }
 
 }
