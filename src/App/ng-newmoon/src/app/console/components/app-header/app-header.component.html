@@ -30,14 +30,14 @@
         </button>
     
         <span *ngIf="!isLoggedIn">
-          <button mat-button (click)="login()">Login</button>
+          <button mat-button (click)="login()" i18n="Login|Login@@AppHeader_Button_Login">Login</button>
         </span>
 
         <span *ngIf="isLoggedIn">
           <button mat-button [matMenuTriggerFor]="menu">{{username}}</button>
           <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">
-            <button mat-menu-item (click)="openUserProfile()">profile</button>
-            <button mat-menu-item (click)="logout()">logout</button>
+            <button mat-menu-item (click)="openUserProfile()" i18n="User Profile|User Profile@@AppHeader_Button_UserProfile">User Profile</button>
+            <button mat-menu-item (click)="logout()" i18n="Logout|Logout@@AppHeader_Button_Logout">Logout</button>
           </mat-menu>
         </span>        
       </div>  

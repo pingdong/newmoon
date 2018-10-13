@@ -1,19 +1,19 @@
-<h2>LOGIN</h2>
+<h2 i18n="LOGIN|Login@@Login_Title">Login</h2>
 
 <form [formGroup]="loginForm" (ngSubmit)="login()">  
-  <label>
+  <label i18n="User Name:|Username@@Login_Label_Username">
     User Name:
     <input type="text" formControlName="username">
   </label>
 
-  <label>
+  <label i18n="Password:|Password@@Login_Label_Password">
     Password:
     <input type="password" formControlName="password">
   </label>
 
-  <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+  <button type="submit" [disabled]="!loginForm.valid" i18n="Login|login@@Login_Button_LogIn">Login</button>
 
-  <button (click)="cancel()">Cancel</button>
+  <button (click)="cancel()" i18n="Cancel|Cancel@@Button_Cancel">Cancel</button>
 
-  <label *ngIf="isError">Invalid username or password</label>
+  <label *ngIf="isError" i18n="Invalid username or password|Login error message@@Login_Label_InvalidLogIn">Invalid username or password</label>
 </form>
