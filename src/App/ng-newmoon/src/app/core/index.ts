@@ -10,7 +10,7 @@ export { UserProfile } from '../core/user-profile/user-profile.model';
 export { UserProfileService } from '../core/user-profile/user-profile.service';
 
 export { AuthGuard } from './auth/auth.guard';
-export { AuthService} from './auth/auth.service';
+export { AuthService } from './auth/auth.service';
 
 export { UnsaveCheck } from './dirty-check/unsave.check';
 export { UnsaveGuard } from './dirty-check/unsave.guard';

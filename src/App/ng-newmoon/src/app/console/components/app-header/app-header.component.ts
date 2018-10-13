@@ -29,9 +29,19 @@ export class AppHeaderComponent implements OnInit {
   public ngOnInit(): void {
 
     this.authService.isLoggedIn$
-          .subscribe((result) => {
-            this.isLoggedIn = result;
-            this.username = 'Ping Dong';
+          .subscribe((isLoggedIn) => {
+            this.isLoggedIn = isLoggedIn;
+
+            if (isLoggedIn) {
+              this.username = 'Ping Dong';
+            }
+          });
+
+    this.authService.forceLogout$
+          .subscribe((force) => {
+            if (force) {
+              this.router.navigate(['/']);
+            }
           });
 
     this.configService.getConfig()
@@ -41,16 +51,13 @@ export class AppHeaderComponent implements OnInit {
   }
 
   public login(): void {
-    this.authService.login('admin', 'passw0rd');
+    this.authService.redirectUrl = this.router.url;
+
+    this.router.navigate(['/login']);
   }
 
   public logout(): void {
-    const result = this.router.navigate(['/']);
-
-    // TODO: Doesn't work
-    if (result) {
-      this.authService.logout();
-    }
+    this.authService.logout();
   }
 
   public gotoMessages(): void {

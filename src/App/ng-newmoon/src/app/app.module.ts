@@ -28,8 +28,8 @@ registerLocaleData(localeZh, 'zh-Hans', localeZhExtra);
 
     AppRoutingModule,
 
-    CoreModule,
     ShareModule,
+    CoreModule,
     SystemModule, // must be immidately before ConsoleModule
     ConsoleModule, // must be on the last
   ],

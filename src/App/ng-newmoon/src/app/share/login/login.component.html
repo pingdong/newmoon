@@ -1,5 +1,19 @@
 <h2>LOGIN</h2>
 
-<p>
-  <button (click)="login()">Login</button>
-</p>
+<form [formGroup]="loginForm" (ngSubmit)="login()">  
+  <label>
+    User Name:
+    <input type="text" formControlName="username">
+  </label>
+
+  <label>
+    Password:
+    <input type="password" formControlName="password">
+  </label>
+
+  <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+
+  <button (click)="cancel()">Cancel</button>
+
+  <label *ngIf="isError">Invalid username or password</label>
+</form>
