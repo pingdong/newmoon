@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AddressService {
     public readonly config: string = '/assets/config.json';
 }

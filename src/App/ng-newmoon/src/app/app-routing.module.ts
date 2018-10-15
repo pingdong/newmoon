@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SelectivePreloadingStrategy } from './core';
-import { LoginComponent, PageNotFoundComponent } from './share';
-import { AppSettingModule, DashboardComponent, UserProfileModule } from './system';
-
-import { AddressService } from './address.service';
+import { LoginComponent, PageNotFoundComponent } from './core';
+import { SelectivePreloadingStrategy } from './shared';
 
 const appRoutes: Routes = [
 
@@ -16,11 +13,11 @@ const appRoutes: Routes = [
 
   { path: 'login', component: LoginComponent },
 
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'setting', loadChildren: () => AppSettingModule, data: { preload: true }},
-  { path: 'user-profile', loadChildren: () => UserProfileModule},
+  // { path: 'dashboard', component: DashboardComponent },
+  // { path: 'setting', loadChildren: () => AppSettingModule, data: { preload: true }},
+  // { path: 'user-profile', loadChildren: () => UserProfileModule},
 
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -34,10 +31,6 @@ const appRoutes: Routes = [
         enableTracing: true, // <-- debugging purposes only
         preloadingStrategy: SelectivePreloadingStrategy,
       }),
-  ],
-  providers: [
-    SelectivePreloadingStrategy,
-    AddressService,
-  ],
+  ]
 })
 export class AppRoutingModule { }

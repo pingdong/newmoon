@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 
-import { CoreModule } from '../core.module';
 import { NotificationMessage } from './notification.message.model';
 
-@Injectable({
-  providedIn: CoreModule
-})
+@Injectable({providedIn: 'root'})
 export class NotificationService {
 
   private message$: Subject<NotificationMessage>;

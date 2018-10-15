@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { CoreModule } from '../core.module';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: CoreModule
-})
+@Injectable({providedIn: 'root'})
 export class AuthService {
 
   public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

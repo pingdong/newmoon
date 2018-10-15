@@ -1,4 +1,4 @@
-import { AppModule } from './config.module.model';
+import { AppModule } from './app.module.model';
 
 export interface AppConfig {
   appTitle: string;

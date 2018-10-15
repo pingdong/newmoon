@@ -1,28 +1,43 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '../material';
+import { MaterialModule } from '../shared';
 
-import { UnsaveConfirmComponent } from './dirty-check/unsave-confirm/unsave-confirm.component';
+import { AppComponent } from './console/app.component';
+
+import { LoginComponent } from './auth/component/login.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+import { AppFooterComponent } from './console/app-footer/app-footer.component';
+import { AppHeaderComponent } from './console/app-header/app-header.component';
+import { AppHeaderSearchComponent } from './console/app-header/app-header-search/app-header-search.component';
+import { AppSideNavComponent } from './console/app-sidenav/app-sidenav.component';
+import { AppSideNavItemComponent } from './console/app-sidenav/app-sidenav-item/app-sidenav-item.component';
 
 @NgModule({
     declarations: [
-      UnsaveConfirmComponent
+      PageNotFoundComponent,
+      LoginComponent,
+
+      AppComponent,
+      AppHeaderComponent,
+      AppHeaderSearchComponent,
+      AppFooterComponent,
+      AppSideNavComponent,
+      AppSideNavItemComponent,
     ],
     imports: [
+      CommonModule,
+      RouterModule,
+      FormsModule,
+      ReactiveFormsModule,
+
       MaterialModule,
-    ],
-    entryComponents: [
-      UnsaveConfirmComponent
     ]
   })
   export class CoreModule {
-
-    public static forRoot(): ModuleWithProviders {
-      return {
-        ngModule: CoreModule,
-        providers: [],
-      };
-    }
 
     constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
       if (parentModule) {
