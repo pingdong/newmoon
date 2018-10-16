@@ -30,6 +30,9 @@ import { SelectivePreloadingStrategy } from './routing/selective-preloading-stra
       AuthGuard,
       UnsaveGuard,
       ValidationGuard,
+    ],
+    entryComponents: [
+      UnsaveConfirmComponent
     ]
   })
   export class ShareModule {
