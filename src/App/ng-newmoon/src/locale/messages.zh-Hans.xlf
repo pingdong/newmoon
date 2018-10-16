@@ -2,11 +2,21 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="Unsave_Title" datatype="html">
+        <source>Unsaved data</source>
+        <target>未保存的数据</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/guards/dirty-check/component/unsave-confirm.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <note priority="1" from="description">Unsave title</note>
+        <note priority="1" from="meaning">Unsaved Data</note>
+      </trans-unit>
       <trans-unit id="Unsave_Message" datatype="html">
         <source>Data unsaved, do you want to continue?</source>
-        <target>数据未保存，是否继续？</target>
+        <target>数据未保存，是否继续?</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/core/dirty-check/unsave-confirm/unsave-confirm.component.html</context>
+          <context context-type="sourcefile">app/shared/guards/dirty-check/component/unsave-confirm.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
         <note priority="1" from="description">Unsave warning</note>
@@ -16,7 +26,7 @@
         <source>Yes</source>
         <target>是</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/core/dirty-check/unsave-confirm/unsave-confirm.component.html</context>
+          <context context-type="sourcefile">app/shared/guards/dirty-check/component/unsave-confirm.component.html</context>
           <context context-type="linenumber">8</context>
         </context-group>
         <note priority="1" from="description">Yes</note>
@@ -26,7 +36,7 @@
         <source>No</source>
         <target>否</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/core/dirty-check/unsave-confirm/unsave-confirm.component.html</context>
+          <context context-type="sourcefile">app/shared/guards/dirty-check/component/unsave-confirm.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
         <note priority="1" from="description">No</note>
@@ -36,7 +46,7 @@
         <source>Login</source>
         <target>登录</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/share/login/login.component.html</context>
+          <context context-type="sourcefile">app/core/auth/component/login.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
         <note priority="1" from="description">Login</note>
@@ -49,9 +59,10 @@
   </source>
         <target>
     用户名:
-    <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/></target>
+    <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+  </target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/share/login/login.component.html</context>
+          <context context-type="sourcefile">app/core/auth/component/login.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
         <note priority="1" from="description">Username</note>
@@ -64,9 +75,10 @@
   </source>
         <target>
     密码:
-    <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/></target>
+    <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+  </target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/share/login/login.component.html</context>
+          <context context-type="sourcefile">app/core/auth/component/login.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
         <note priority="1" from="description">Password</note>
@@ -76,7 +88,7 @@
         <source>Login</source>
         <target>登录</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/share/login/login.component.html</context>
+          <context context-type="sourcefile">app/core/auth/component/login.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
         <note priority="1" from="description">login</note>
@@ -86,7 +98,7 @@
         <source>Cancel</source>
         <target>取消</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/share/login/login.component.html</context>
+          <context context-type="sourcefile">app/core/auth/component/login.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
         <note priority="1" from="description">Cancel</note>
@@ -96,47 +108,17 @@
         <source>Invalid username or password</source>
         <target>无效的用户名或密码</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/share/login/login.component.html</context>
+          <context context-type="sourcefile">app/core/auth/component/login.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
         <note priority="1" from="description">Login error message</note>
         <note priority="1" from="meaning">Invalid username or password</note>
       </trans-unit>
-      <trans-unit id="Dashboard_Title" datatype="html">
-        <source>Preloaded Modules</source>
-        <target>已加载的预加载模块</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/system/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <note priority="1" from="description">Title of preloaded modules</note>
-        <note priority="1" from="meaning">Preloaded modules</note>
-      </trans-unit>
-      <trans-unit id="Dashboard_Label_LoadingTime" datatype="html">
-        <source>Loading:</source>
-        <target>加载于</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/system/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <note priority="1" from="description">Title</note>
-        <note priority="1" from="meaning">Loading</note>
-      </trans-unit>
-      <trans-unit id="Button_Save" datatype="html">
-        <source>Save</source>
-        <target>保存</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/system/app-setting/app-setting.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-        <note priority="1" from="description">Save</note>
-        <note priority="1" from="meaning">Save</note>
-      </trans-unit>
       <trans-unit id="AppHeader_Button_Login" datatype="html">
         <source>Login</source>
         <target>登录</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/console/components/app-header/app-header.component.html</context>
+          <context context-type="sourcefile">app/core/console/app-header/app-header.component.html</context>
           <context context-type="linenumber">33</context>
         </context-group>
         <note priority="1" from="description">Login</note>
@@ -146,7 +128,7 @@
         <source>User Profile</source>
         <target>用户设置</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/console/components/app-header/app-header.component.html</context>
+          <context context-type="sourcefile">app/core/console/app-header/app-header.component.html</context>
           <context context-type="linenumber">39</context>
         </context-group>
         <note priority="1" from="description">User Profile</note>
@@ -154,9 +136,9 @@
       </trans-unit>
       <trans-unit id="AppHeader_Button_Logout" datatype="html">
         <source>Logout</source>
-        <target>退出</target>
+        <target>注销</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/console/components/app-header/app-header.component.html</context>
+          <context context-type="sourcefile">app/core/console/app-header/app-header.component.html</context>
           <context context-type="linenumber">40</context>
         </context-group>
         <note priority="1" from="description">Logout</note>
@@ -166,11 +148,41 @@
         <source>Search</source>
         <target>查找</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/console/components/app-header/app-header-search/app-header-search.component.html</context>
+          <context context-type="sourcefile">app/core/console/app-header/app-header-search/app-header-search.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
         <note priority="1" from="description">Search</note>
         <note priority="1" from="meaning">Search</note>
+      </trans-unit>
+      <trans-unit id="Button_Save" datatype="html">
+        <source>Save</source>
+        <target>保存</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/app-setting/component/app-setting.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">Save</note>
+        <note priority="1" from="meaning">Save</note>
+      </trans-unit>
+      <trans-unit id="Dashboard_Title" datatype="html">
+        <source>Preloaded Modules</source>
+        <target>已加载模块</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/component/dashboard.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <note priority="1" from="description">Title of preloaded modules</note>
+        <note priority="1" from="meaning">Preloaded modules</note>
+      </trans-unit>
+      <trans-unit id="Dashboard_Label_LoadingTime" datatype="html">
+        <source>Loading:</source>
+        <target>加载于:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/component/dashboard.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">Title</note>
+        <note priority="1" from="meaning">Loading</note>
       </trans-unit>
     </body>
   </file>
