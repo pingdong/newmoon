@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class SelectivePreloadingStrategy implements PreloadingStrategy {
+
   public preloadedModules: string[] = [];
 
   public preload(route: Route, load: () => Observable<any>): Observable<any> {
@@ -15,4 +16,5 @@ export class SelectivePreloadingStrategy implements PreloadingStrategy {
         return of(null);
     }
   }
+
 }

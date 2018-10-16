@@ -30,8 +30,6 @@ import { SelectivePreloadingStrategy } from './routing/selective-preloading-stra
       AuthGuard,
       UnsaveGuard,
       ValidationGuard,
-
-      SelectivePreloadingStrategy,
     ]
   })
   export class ShareModule {
@@ -39,7 +37,9 @@ import { SelectivePreloadingStrategy } from './routing/selective-preloading-stra
     public static forRoot(): ModuleWithProviders {
       return {
         ngModule: ShareModule,
-        providers: [],
+        providers: [
+          SelectivePreloadingStrategy,
+        ],
       };
     }
 

@@ -9,6 +9,7 @@ import { CoreModule } from './core';
 
 import { AppComponent } from './core';
 import { AppRoutingModule } from './app-routing.module';
+import { ShareModule } from './shared';
 
 import './extensions/string-extension.ts';
 
@@ -21,6 +22,8 @@ registerLocaleData(localeZh, 'zh-Hans', localeZhExtra);
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+
+    ShareModule.forRoot(),
 
     AppRoutingModule,
     CoreModule,
