@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard, UnsaveGuard, ValidationGuard } from '../../shared';
 import { UserProfileComponent } from './component/user-profile.component';
