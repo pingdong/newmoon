@@ -1,36 +1,43 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AuthGuard } from './auth/auth.guard';
-import { AuthService } from './auth/auth.service';
-import { UnsaveGuard } from './dirty-check/unsave.guard';
-import { ValidationGuard } from './validation/validation.guard';
-import { ConfigService } from './config/config.service';
-import { UserProfileService } from './user-profile/user-profile.service';
+import { MaterialModule } from '../shared';
+
+import { AppComponent } from './console/app.component';
+
+import { LoginComponent } from './auth/component/login.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+import { AppFooterComponent } from './console/app-footer/app-footer.component';
+import { AppHeaderComponent } from './console/app-header/app-header.component';
+import { AppHeaderSearchComponent } from './console/app-header/app-header-search/app-header-search.component';
+import { AppSideNavComponent } from './console/app-sidenav/app-sidenav.component';
+import { AppSideNavItemComponent } from './console/app-sidenav/app-sidenav-item/app-sidenav-item.component';
 
 @NgModule({
     declarations: [
+      PageNotFoundComponent,
+      LoginComponent,
+
+      AppComponent,
+      AppHeaderComponent,
+      AppHeaderSearchComponent,
+      AppFooterComponent,
+      AppSideNavComponent,
+      AppSideNavItemComponent,
     ],
     imports: [
-    ],
-    providers: [
-      AuthService,
-      ConfigService,
+      CommonModule,
+      RouterModule,
+      FormsModule,
+      ReactiveFormsModule,
 
-      UserProfileService,
-
-      AuthGuard,
-      UnsaveGuard,
-      ValidationGuard,
-    ],
+      MaterialModule,
+    ]
   })
   export class CoreModule {
-
-    public static forRoot(): ModuleWithProviders {
-      return {
-        ngModule: CoreModule,
-        providers: [],
-      };
-    }
 
     constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
       if (parentModule) {

@@ -1,0 +1,26 @@
+.app {
+  /* layout */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+mat-sidenav-container {
+  /* layout */
+  flex: 1 0 auto;
+
+  /* element */
+  margin: 5px;
+}
+
+app-sidenav {
+  padding: 5px;
+}
+
+mat-sidenav {
+  width: 15vw;
+}
+
+main {
+  padding: 5px;
+}

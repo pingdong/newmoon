@@ -1,3 +1,6 @@
+import { AppModule } from './app.module.model';
+
 export interface AppConfig {
-    title: string;
+  appTitle: string;
+  modules: AppModule[];
 }

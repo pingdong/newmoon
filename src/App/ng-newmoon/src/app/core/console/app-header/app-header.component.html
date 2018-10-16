@@ -1,0 +1,47 @@
+<mat-toolbar color="primary">
+    
+    <mat-toolbar-row>
+      
+      <div>
+        <button mat-icon-button (click)="sidenavClicked()">
+          <mat-icon>dehaze</mat-icon>
+        </button>
+      </div>
+
+      <div class="header__logo">  
+        <!-- Left -->
+        <button mat-button class="header__logo__button" routerLink="">{{title}}</button>
+      </div>
+       
+      <!-- Right -->   
+      <div class="header__toolbar">
+        <app-header-search *ngIf="isLoggedIn"></app-header-search>
+
+        <button *ngIf="isLoggedIn" mat-icon-button (click)="openAppSettings()">
+          <mat-icon>settings</mat-icon>
+        </button>
+        
+        <button *ngIf="isLoggedIn" mat-icon-button (click)="gotoMessages()">
+          <mat-icon matBadge="{{messageCount}}" matBadgePosition="after" matBadgeColor="accent">mail</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="gotoHelper()">
+          <mat-icon>help</mat-icon>
+        </button>
+    
+        <span *ngIf="!isLoggedIn">
+          <button mat-button (click)="login()" i18n="Login|Login@@AppHeader_Button_Login">Login</button>
+        </span>
+
+        <span *ngIf="isLoggedIn">
+          <button mat-button [matMenuTriggerFor]="menu">{{username}}</button>
+          <mat-menu #menu="matMenu" [overlapTrigger]="false" xPosition="before">
+            <button mat-menu-item (click)="openUserProfile()" i18n="User Profile|User Profile@@AppHeader_Button_UserProfile">User Profile</button>
+            <button mat-menu-item (click)="logout()" i18n="Logout|Logout@@AppHeader_Button_Logout">Logout</button>
+          </mat-menu>
+        </span>        
+      </div>  
+
+    </mat-toolbar-row>
+
+  </mat-toolbar>

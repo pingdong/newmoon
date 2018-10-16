@@ -1,0 +1,20 @@
+mat-toolbar-row {
+  /* layout */
+  display: flex;
+  flex-direction: row;
+}
+
+.header__logo {
+  /* layout */
+  flex-grow: 1;
+}
+
+.header__logo__button {
+  /* Element */
+  font-size: 2rem;  
+}
+
+.header__toolbar > * {
+  /* Element */
+  margin-right: 0.5rem; 
+}

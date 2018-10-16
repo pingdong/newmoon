@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { UserProfile } from './user-profile.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class UserProfileService {
 
   public getProfile(): Observable<UserProfile> {

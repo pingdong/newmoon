@@ -1,18 +1,18 @@
 export { CoreModule } from './core.module';
 
-export { SelectivePreloadingStrategy } from './routing/selective-preloading-strategy';
+export { AuthService } from './auth/auth.service';
+export { LoginComponent } from './auth/component/login.component';
 
+export { AppModule  } from './config/app.module.model';
 export { AppConfig } from './config/config.model';
 export { ConfigService } from './config/config.service';
 
-export { UserProfile } from '../core/user-profile/user-profile.model';
-export { UserProfileService } from '../core/user-profile/user-profile.service';
+export { AppComponent } from './console/app.component';
 
-export { AuthGuard } from './auth/auth.guard';
-export { AuthService} from './auth/auth.service';
+export { NotificationMessage } from './notification/notification.message.model';
+export { NotificationService } from './notification/notification.service';
 
-export { UnsaveCheck } from './dirty-check/unsave.check';
-export { UnsaveGuard } from './dirty-check/unsave.guard';
+export { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-export { DataValidation } from './validation/data.validation';
-export { ValidationGuard } from './validation/validation.guard';
+export { UserProfile } from './user-profile/user-profile.model';
+export { UserProfileService } from './user-profile/user-profile.service';

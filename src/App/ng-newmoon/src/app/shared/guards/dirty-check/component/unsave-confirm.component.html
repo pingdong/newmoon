@@ -1,0 +1,10 @@
+<h1 mat-dialog-title i18n="Unsaved Data|Unsave title@@Unsave_Title">Unsaved data</h1>
+
+<div mat-dialog-content>
+  <p i18n="Data unsaved, do you want to continue?|Unsave warning@@Unsave_Message">Data unsaved, do you want to continue?</p>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="discard" (click)="onYesClick()" cdkFocusInitial i18n="Yes|Yes@@Button">Yes</button>
+  <button mat-button (click)="onNoClick()" i18n="No|No@@Button_No">No</button>
+</div>

@@ -1,18 +1,120 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <title>Newmoon</title>
-  <base href="/">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">  
+    <!-- reset all default browser styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
+    <base href="/">
 
-<body>
-  <app-root></app-root>
-</body>
+    <title>Newmoon by Ping Dong</title>
+  </head>
+
+  <body>
+
+    <div id="main-wrapper">
+      <app-root></app-root>
+    </div>
+
+    <div id="bootstrap-container">
+
+      <div id="loading-container">
+        <svg height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <title>Logo</title>
+          <defs></defs>
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="Logo">
+                  <path d="M12.400003,30C12.800004,30 13.1,30.300018 13.1,30.600006 13.1,31 12.900003,31.300018 12.500001,31.399994L7.2000052,32 7.0999991,32C6.7000052,32 6.4000021,31.700012 6.4000021,31.399994 6.4000021,31 6.5999991,30.700012 7.0000006,30.600006z M14.1,27.399994C14.500002,27.399994 14.800005,27.700012 14.800005,28 14.800005,28.399994 14.600001,28.700012 14.200006,28.800018L5.5000006,29.800018 5.4000021,29.800018C5.0000006,29.800018 4.7000052,29.5 4.7000052,29.200012 4.7000052,28.800018 4.9000021,28.5 5.3000037,28.399994z M14.1,25C14.500002,25 14.800005,25.300018 14.800005,25.600006 14.800005,26 14.600001,26.300018 14.200006,26.399994L5.5000006,27.399994 5.4000021,27.399994C5.0000006,27.399994 4.7000052,27.100006 4.7000052,26.800018 4.7000052,26.399994 4.9000021,26.100006 5.3000037,26z M9.5000011,2.5C5.8000037,2.5 2.9000017,5.5 2.9000014,9.1000061 2.9000017,9.5 3.2000047,9.8999939 3.700005,9.8999939 4.0999986,9.8999939 4.5000006,9.6000061 4.5000006,9.1000061 4.5000006,7.7000122 5.0999991,6.3999939 6.0000006,5.5 6.8000037,4.6000061 8.0000011,4 9.5000011,4 9.9000026,4 10.300004,3.7000122 10.300004,3.2000122 10.300004,2.7000122 9.9000026,2.5 9.5000011,2.5z M9.8000042,0C15.200007,0 19.600001,4.3999939 19.600001,9.7000122 19.600001,13.300018 16.300004,16.600006 16.300004,16.600006 15.500002,17.399994 14.800005,19.100006 14.800005,20.200012L14.800005,20.5C14.800005,21.700012,13.800004,22.600006,12.700006,22.600006L6.9000021,22.600006C5.7000052,22.600006,4.8000037,21.600006,4.8000037,20.5L4.8000037,20.200012C4.8000037,19 4.0999986,17.399994 3.300003,16.600006 3.3000032,16.600006 -1.4722355E-07,13.300018 0,9.7000122 -1.4722355E-07,4.3999939 4.4000017,0 9.8000042,0z"
+                      fill="#F96302" transform="rotate(0,64,64) translate(24.7999992370605,0) scale(4,4)  "  >
+                  </path>
+              </g>
+          </g>
+        </svg>
+      </div>
+
+      <script type="text/javascript">
+        // Listen for the "appready" event, which will be emitted by the application
+        // and bubble up (as far as we know) to the document root.
+        document.addEventListener('appready', handleAppReady);
+
+        function handleAppReady(event) {
+
+          // Add the class-name to initiate the transitions.
+          var preBootstrap = document.getElementById('loading-container');
+          preBootstrap.className = 'loaded';
+
+          //Fade in the application
+          setTimeout(function() {
+            var wrapper = document.getElementById('main-wrapper');
+            wrapper.className = 'loaded';
+          }, 200)
+
+          // Remove the bootstrap container after the transition has completed.
+          setTimeout(function removeLoadingScreen() {
+            var preBootstrapContainer = document.getElementById('bootstrap-container');
+
+            if (preBootstrapContainer) {
+              preBootstrapContainer.parentNode.removeChild(preBootstrapContainer);
+            }
+          }, 200);
+        }
+      </script>
+
+      <style>
+        #main-wrapper {
+          opacity: 0.0;
+          transition: all linear 300ms;
+          -webkit-transition: all linear 300ms;
+        }
+
+        #main-wrapper.loaded {
+          opacity: 1.0
+        }
+
+        #loading-container {
+          position: absolute;
+          width: 40px;
+          height: 70px;
+          top: calc(50% - 35px);
+          left: calc(50% - 20px);
+          opacity: 1.0;
+          transition: all linear 300ms;
+          -webkit-transition: all linear 300ms;
+        }
+
+        #loading-container.loaded {
+          opacity: 0.0;
+        }
+
+        #loading-container svg {
+          position: relative;
+          z-index: 10;
+          height: 32px;
+          animation: bounce 2s cubic-bezier(0.285, 0.035, 0.05, 0.985) infinite;
+          fill: #6c6;
+          transform: translateY(-15px);
+        }
+
+        @keyframes bounce {
+          0% {
+              transform: scale(1, 1) translateY(16px);
+          }
+          50% {
+              transform: scale(1, 1) translateY(0);
+          }
+          100% {
+              transform: scale(1, 1) translateY(16px);
+          }
+        }
+      </style>
+
+    </div>
+
+  </body>
 
 </html>

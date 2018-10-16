@@ -1,0 +1,26 @@
+<div class="app">
+  
+  <!-- Header -->
+  <header>
+    <app-header (sidenavToggled)="sidenavTrigger()"></app-header>
+  </header>
+
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" [(opened)]="isSidePanelOpened">
+      <app-sidenav></app-sidenav>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <main>
+        <!-- Main -->
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- Footer -->
+  <footer>
+    <app-footer></app-footer>
+  </footer>
+  
+</div>

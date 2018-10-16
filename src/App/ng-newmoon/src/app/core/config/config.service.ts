@@ -6,7 +6,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { AddressService } from '../../address.service';
 import { AppConfig } from './config.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ConfigService {
 
   constructor(

@@ -1,24 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SelectivePreloadingStrategy } from './core';
-import { LoginComponent, PageNotFoundComponent } from './share';
-import { AppSettingModule, DashboardComponent, UserProfileModule } from './system';
-
-import { AddressService } from './address.service';
+import { LoginComponent, PageNotFoundComponent } from './core';
+import { SelectivePreloadingStrategy, ShareModule } from './shared';
 
 const appRoutes: Routes = [
-
-  //  Preloading
-  //  { path: 'setting', loadChildren: () => AppSettingModule, data: { preload: true }},
-  //  Lazy loading
-  //  { path: 'setting', loadChildren: () => AppSettingModule, data: { preload: false }},
-
   { path: 'login', component: LoginComponent },
 
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'setting', loadChildren: () => AppSettingModule, data: { preload: true }},
-  { path: 'user-profile', loadChildren: () => UserProfileModule},
+  { path: 'dashboard', loadChildren: './features/dashboard/dashboard.module#DashboardModule'},
+  //  Preloading
+  //  { path: 'setting', loadChildren: './features/app-setting/app-setting.module#AppSettingModule', data: { preload: true }},
+  { path: 'setting', loadChildren: './features/app-setting/app-setting.module#AppSettingModule' },
+  { path: 'user-profile', loadChildren: './features/user-profile/user-profile.module#UserProfileModule' },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
@@ -29,15 +22,12 @@ const appRoutes: Routes = [
     RouterModule,
   ],
   imports: [
+    ShareModule,
     RouterModule.forRoot(appRoutes,
       {
         enableTracing: true, // <-- debugging purposes only
         preloadingStrategy: SelectivePreloadingStrategy,
       }),
-  ],
-  providers: [
-    SelectivePreloadingStrategy,
-    AddressService,
-  ],
+  ]
 })
 export class AppRoutingModule { }
