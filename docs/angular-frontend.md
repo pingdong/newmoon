@@ -17,13 +17,13 @@ Chinese version: ng serve --configuration=zh
 ### Roadmap  
 * Angular
   * [ ] Template-driven Form
-  * [ ] React Style Form
+  * [x] React Style Form
   * [ ] Dynamic Form
   * [ ] Elements
   * [ ] Service Works
   * [ ] Server-side Rendering
 * Style
-  * [ ] [Material UI](./frontend/angular/material.md)
+  * [x] [Material UI](./frontend/angular/material.md)
   * [ ] [CSS 3](./frontend/general/css3.md)
 * Module
   * [x] Lazy Loading 
