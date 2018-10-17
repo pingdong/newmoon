@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard, UnsaveGuard, ValidationGuard } from '../../shared';
 import { AppSettingComponent } from './component/app-setting.component';

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent, PageNotFoundComponent } from './core';
-import { SelectivePreloadingStrategy, ShareModule } from './shared';
+import { SelectivePreloadingStrategy, SharedModule } from './shared';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,7 +22,8 @@ const appRoutes: Routes = [
     RouterModule,
   ],
   imports: [
-    ShareModule,
+    SharedModule,
+
     RouterModule.forRoot(appRoutes,
       {
         enableTracing: true, // <-- debugging purposes only

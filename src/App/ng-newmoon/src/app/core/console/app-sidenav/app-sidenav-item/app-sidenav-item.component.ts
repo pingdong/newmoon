@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { AppModule } from '../../../config/app.module.model';
 
 @Component({

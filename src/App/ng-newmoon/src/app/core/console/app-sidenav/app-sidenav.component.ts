@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ConfigService } from '../../config/config.service';
 import { AppModule } from '../../config/app.module.model';
 
