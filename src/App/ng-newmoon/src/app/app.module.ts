@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, CoreModule } from './core';
-import { ShareModule } from './shared';
+import { SharedModule } from './shared';
 
 import './extensions/string-extension.ts';
 
@@ -20,10 +20,10 @@ registerLocaleData(localeZh, 'zh-Hans', localeZhExtra);
     BrowserAnimationsModule,
     HttpClientModule,
 
-    ShareModule.forRoot(),
+    CoreModule,
+    SharedModule.forRoot(),
 
     AppRoutingModule,
-    CoreModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'zh-Hans' },

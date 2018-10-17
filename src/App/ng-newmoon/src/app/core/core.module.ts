@@ -35,6 +35,14 @@ import { AppSideNavItemComponent } from './console/app-sidenav/app-sidenav-item/
       ReactiveFormsModule,
 
       MaterialModule,
+    ],
+    exports: [
+      CommonModule,
+      RouterModule,
+      FormsModule,
+      ReactiveFormsModule,
+
+      MaterialModule,
     ]
   })
   export class CoreModule {

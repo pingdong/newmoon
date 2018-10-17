@@ -1,7 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from './material.module';
 
@@ -19,11 +16,6 @@ import { SelectivePreloadingStrategy } from './routing/selective-preloading-stra
       UnsaveConfirmComponent,
     ],
     imports: [
-      CommonModule,
-      RouterModule,
-      FormsModule,
-      ReactiveFormsModule,
-
       MaterialModule,
     ],
     providers: [
@@ -35,11 +27,11 @@ import { SelectivePreloadingStrategy } from './routing/selective-preloading-stra
       UnsaveConfirmComponent
     ]
   })
-  export class ShareModule {
+  export class SharedModule {
 
     public static forRoot(): ModuleWithProviders {
       return {
-        ngModule: ShareModule,
+        ngModule: SharedModule,
         providers: [
           SelectivePreloadingStrategy,
         ],

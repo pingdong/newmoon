@@ -1,5 +1,5 @@
 export { MaterialModule } from './material.module';
-export { ShareModule } from './shared.module';
+export { SharedModule } from './shared.module';
 
 export { AuthGuard } from './guards/auth/auth.guard';
 export { UnsaveGuard } from './guards/dirty-check/unsave.guard';

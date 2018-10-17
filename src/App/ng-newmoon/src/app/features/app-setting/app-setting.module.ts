@@ -12,8 +12,8 @@ import { AppSettingComponent } from './component/app-setting.component';
   ],
   imports: [
     CommonModule,
-
     MaterialModule,
+
     AppSettingRoutingModule,
   ]
 })
