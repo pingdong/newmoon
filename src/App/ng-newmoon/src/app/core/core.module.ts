@@ -3,7 +3,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { MaterialModule } from '../shared';
+import { SharedModule } from '../shared';
 
 import { AppComponent } from './console/app.component';
 
@@ -34,7 +34,7 @@ import { AppSideNavItemComponent } from './console/app-sidenav/app-sidenav-item/
       FormsModule,
       ReactiveFormsModule,
 
-      MaterialModule,
+      SharedModule,
     ],
     exports: [
       CommonModule,
@@ -42,7 +42,7 @@ import { AppSideNavItemComponent } from './console/app-sidenav/app-sidenav-item/
       FormsModule,
       ReactiveFormsModule,
 
-      MaterialModule,
+      SharedModule,
     ]
   })
   export class CoreModule {

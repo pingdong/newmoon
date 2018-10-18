@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { MaterialModule } from '../../shared';
+import { SharedModule } from '../../shared';
 
 import { AppSettingRoutingModule } from './app-setting.routing';
 import { AppSettingComponent } from './component/app-setting.component';
@@ -12,7 +12,7 @@ import { AppSettingComponent } from './component/app-setting.component';
   ],
   imports: [
     CommonModule,
-    MaterialModule,
+    SharedModule,
 
     AppSettingRoutingModule,
   ]
