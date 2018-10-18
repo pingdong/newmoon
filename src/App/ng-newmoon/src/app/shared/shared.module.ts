@@ -19,9 +19,9 @@ import { SelectivePreloadingStrategy } from './routing/selective-preloading-stra
       MaterialModule,
     ],
     providers: [
-      AuthGuard,
-      UnsaveGuard,
-      ValidationGuard,
+    ],
+    exports: [
+      MaterialModule,
     ],
     entryComponents: [
       UnsaveConfirmComponent
@@ -33,6 +33,10 @@ import { SelectivePreloadingStrategy } from './routing/selective-preloading-stra
       return {
         ngModule: SharedModule,
         providers: [
+          AuthGuard,
+          UnsaveGuard,
+          ValidationGuard,
+
           SelectivePreloadingStrategy,
         ],
       };
