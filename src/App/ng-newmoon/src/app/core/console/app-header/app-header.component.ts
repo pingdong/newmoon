@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../../config/config.service';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { NotificationService } from '../../notification/notification.service';
 
 @Component({
@@ -36,12 +36,7 @@ export class AppHeaderComponent implements OnInit {
 
             if (isLoggedIn) {
               this.username = 'Ping Dong';
-            }
-          });
-
-    this.authService.forceLogout$
-          .subscribe((force) => {
-            if (force) {
+            } else {
               this.router.navigate(['/']);
             }
           });
