@@ -36,8 +36,6 @@ export class AppHeaderComponent implements OnInit {
 
             if (isLoggedIn) {
               this.username = 'Ping Dong';
-            } else {
-              this.router.navigate(['/']);
             }
           });
 
@@ -48,9 +46,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   public login(): void {
-    this.authService.redirectUrl = this.router.url;
-
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url }});
   }
 
   public logout(): void {

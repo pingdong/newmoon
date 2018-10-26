@@ -3,13 +3,10 @@ import { ActivatedRouteSnapshot,
          CanActivate, CanActivateChild, CanLoad,
          Route, Router, RouterStateSnapshot } from '@angular/router';
 
-import { AuthService } from '../../../core/auth/auth.service';
-
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-    constructor(private authService: AuthService,
-                private router: Router) {}
+    constructor(private router: Router) {}
 
     public canLoad(route: Route): boolean {
         const url = `/${route.path}`;
@@ -18,9 +15,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        const url: string = state.url;
-
-        return this.isLoggedIn(url);
+        return this.isLoggedIn(state.url);
     }
 
     public canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -28,13 +23,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     private isLoggedIn(url: string): boolean {
-        if (this.authService.isLoggedIn$.getValue()) {
+        if (localStorage.getItem('token')) {
             return true;
         }
 
-        this.authService.redirectUrl = url;
-
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], { queryParams: { returnUrl: url }});
 
         return false;
     }
