@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { UserProfileRoutingModule } from './user-profile.routing';
-import { UserProfileComponent } from './component/user-profile.component';
+import { UserProfileComponent } from './components/user-profile.component';
 
 @NgModule({
   declarations: [

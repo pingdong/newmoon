@@ -12,11 +12,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public isError: boolean;
   public loginForm = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
+
+  public isError: boolean;
 
   private returnUrl: string;
 

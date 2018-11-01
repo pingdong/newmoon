@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard, UnsaveGuard, ValidationGuard } from '../../shared';
-import { AppSettingComponent } from './component/app-setting.component';
+import { AppSettingComponent } from './components/app-setting.component';
 
 const routes: Routes = [
   {

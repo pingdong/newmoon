@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared';
 
 import { DashboardRoutingModule } from './dashboard.routing';
-import { DashboardComponent } from './component/dashboard.component';
+import { DashboardComponent } from './components/dashboard.component';
 
 @NgModule({
   declarations: [

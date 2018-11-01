@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { UnsaveCheck } from './unsave.check';
-import { UnsaveConfirmComponent } from './component/unsave-confirm.component';
+import { UnsaveConfirmComponent } from './components/unsave-confirm.component';
 
 @Injectable()
 export class UnsaveGuard implements CanDeactivate<UnsaveCheck> {
