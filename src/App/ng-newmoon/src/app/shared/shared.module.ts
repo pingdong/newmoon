@@ -6,7 +6,6 @@ import { MaterialModule } from './material.module';
 
 import { AuthGuard } from './guards/auth/auth.guard';
 import { UnsaveGuard } from './guards/dirty-check/unsave.guard';
-import { ValidationGuard } from './guards/validation/validation.guard';
 
 import { UnsaveConfirmComponent } from './guards/dirty-check/components/unsave-confirm.component';
 import { DynamicFormComponent } from './dynamic-forms/components/dynamic-form/dynamic-form.component';
@@ -49,7 +48,6 @@ import { DyanmicFormTranslateService } from './dynamic-forms/services/dynamic-fo
         providers: [
           AuthGuard,
           UnsaveGuard,
-          ValidationGuard,
 
           SelectivePreloadingStrategy,
         ],
