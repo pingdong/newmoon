@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard, UnsaveGuard, ValidationGuard } from '../../shared';
+import { UnsaveGuard } from '../../shared';
 import { UserProfileComponent } from './components/user-profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UserProfileComponent,
-    canActivate: [AuthGuard],
-    canDeactivate: [UnsaveGuard, ValidationGuard],
+    canDeactivate: [UnsaveGuard],
   },
 ];
 
