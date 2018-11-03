@@ -1,27 +1,21 @@
 import { Component } from '@angular/core';
 
-import { UnsaveCheck } from '../../../shared';
+import { SettingControlService } from '../services/setting.control.service';
 
 @Component({
   selector: 'app-setting',
-  styleUrls: ['./app-setting.component.css'],
   templateUrl: './app-setting.component.html',
+  styleUrls: ['./app-setting.component.css']
 })
-export class AppSettingComponent implements UnsaveCheck {
+export class AppSettingComponent {
 
-  public inSaving = false;
+  settings: any[];
 
-  private dirty = true;
-
-  public isDirty(): boolean {
-    return this.dirty;
+  constructor(private cs: SettingControlService) {
+    this.settings = cs.getDefinition();
   }
 
-  public save(): void {
-    this.inSaving = true;
-    this.dirty = false;
+  private onSave($event: any) {
 
-    setTimeout(() => this.inSaving = false, 2000);
   }
-
 }
