@@ -1,1 +1,1 @@
-<input [(ngModel)]="term" aria-label="Search..." i18n-placeholder="Search|Search@@Search_Placeholder" placeholder="Search" type="search" (keyup)="onSearch()">
+<input #searchBox aria-label="Search..." i18n-placeholder="Search|Search@@Search_Placeholder" placeholder="Search" type="search" (keyup)="onSearch(searchBox.value)">

@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../../config/config.service';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { NotificationService } from '../../notification/notification.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { NotificationService } from '../../notification/notification.service';
   styleUrls: ['./app-header.component.css'],
   templateUrl: './app-header.component.html',
 })
-export class AppHeaderComponent implements OnInit {
+export class AppHeaderComponent implements OnInit, OnDestroy {
 
   public isLoggedIn: boolean;
   public title: string;
@@ -29,7 +29,6 @@ export class AppHeaderComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-
     this.authService.isLoggedIn$
           .subscribe((isLoggedIn) => {
             this.isLoggedIn = isLoggedIn;
@@ -39,23 +38,18 @@ export class AppHeaderComponent implements OnInit {
             }
           });
 
-    this.authService.forceLogout$
-          .subscribe((force) => {
-            if (force) {
-              this.router.navigate(['/']);
-            }
-          });
-
     this.configService.getConfig()
           .subscribe((cfg) => this.title = cfg.appTitle );
 
     this.messageCount = 8;
   }
 
-  public login(): void {
-    this.authService.redirectUrl = this.router.url;
+  public ngOnDestroy(): void {
+    this.authService.isLoggedIn$.unsubscribe();
+  }
 
-    this.router.navigate(['/login']);
+  public login(): void {
+    this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url }});
   }
 
   public logout(): void {

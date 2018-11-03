@@ -1,0 +1,13 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+ 
+    <div *ngFor="let item of items" class="form-row">
+      <app-dynamic-form-item [item]="item" [form]="form"></app-dynamic-form-item>
+    </div>
+ 
+    <div class="form-row">
+      <button mat-button type="submit" [disabled]="!form.valid" i18n="Save|Save@@Button_Save">Save</button>
+    </div>
+  </form>
+
+</div>

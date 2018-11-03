@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header-search',
@@ -9,8 +9,6 @@ import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class AppHeaderSearchComponent implements OnInit {
 
-  public term: string;
-
   private search$: Subject<string>;
 
   constructor() {
@@ -18,17 +16,17 @@ export class AppHeaderSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.search$.pipe(
-                    filter(text => text.length > 2),
-                    debounceTime(10),
-                    distinctUntilChanged()
-                  ).subscribe(x =>
-                    console.log(x)
-                  );
+    this.search$
+      .pipe(
+        filter(text => text.length > 2),
+        debounceTime(10),
+        distinctUntilChanged()
+      )
+      .subscribe(result => console.log(result));
   }
 
-  public onSearch() {
-    this.search$.next(this.term);
+  public onSearch(term: string): void {
+    this.search$.next(term);
   }
 
 }

@@ -8,3 +8,7 @@ export { DataValidation } from './guards/validation/data.validation';
 export { UnsaveCheck } from './guards/dirty-check/unsave.check';
 
 export { SelectivePreloadingStrategy } from './routing/selective-preloading-strategy';
+
+export { DynamicItemBase } from './dynamic-forms/models/dynamic-item.base';
+export { SelectionItem } from './dynamic-forms/models/selection.item';
+export { TextItem } from './dynamic-forms/models/text.item';

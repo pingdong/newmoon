@@ -16,9 +16,8 @@ Chinese version: ng serve --configuration=zh
 
 ### Roadmap  
 * Angular
-  * [ ] Template-driven Form
   * [x] React Style Form
-  * [ ] Dynamic Form
+  * [x] [Dynamic Form](./frontend/angular/dynamic-forms.md)
   * [ ] Elements
   * [ ] Service Works
   * [ ] Server-side Rendering
