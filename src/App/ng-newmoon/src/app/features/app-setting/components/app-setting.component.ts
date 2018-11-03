@@ -23,6 +23,6 @@ export class AppSettingComponent implements UnsaveCheck {
   }
 
   private onSave($event: any) {
-
+    this.form.markPristine();
   }
 }

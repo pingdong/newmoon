@@ -23,7 +23,7 @@ export class UserProfileComponent implements UnsaveCheck {
   }
 
   private onSave($event: any) {
-
+    this.form.markPristine();
   }
 
 }

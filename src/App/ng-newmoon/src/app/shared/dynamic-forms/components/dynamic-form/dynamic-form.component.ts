@@ -32,4 +32,10 @@ export class DynamicFormComponent implements UnsaveCheck, OnInit {
     this.save.emit(this.form.value);
   }
 
+  public markPristine(): void {
+    Object.keys(this.form.controls).forEach(control => {
+      this.form.controls[control].markAsPristine();
+    });
+  }
+
 }
