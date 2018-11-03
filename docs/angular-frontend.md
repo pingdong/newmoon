@@ -6,7 +6,7 @@ English version: ng serve
 Chinese version: ng serve --configuration=zh
         
 ### The following libraries are used:
-* [Angular 6.0](https://angular.io)
+* [Angular 7.0](https://angular.io)
 
 ### Concepts are covered:
 * Module Lazy loading vs Pre-loading
