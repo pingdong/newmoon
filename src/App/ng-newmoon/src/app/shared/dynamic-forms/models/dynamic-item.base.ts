@@ -7,7 +7,7 @@ export class DynamicItemBase<T> {
     order: number;
     controlType: string;
 
-    constructor(options: {
+    constructor(option: {
         key?: string,
         value?: T,
         label?: string,
@@ -15,12 +15,12 @@ export class DynamicItemBase<T> {
         order?: number,
         controlType?: string
       } = {}) {
-      this.value = options.value;
-      this.key = options.key || '';
-      this.label = options.label || '';
-      this.required = !!options.required;
-      this.order = options.order === undefined ? 1 : options.order;
-      this.controlType = options.controlType || '';
+      this.value = option.value;
+      this.key = option.key || '';
+      this.label = option.label || '';
+      this.required = !!option.required;
+      this.order = option.order === undefined ? 1 : option.order;
+      this.controlType = option.controlType || '';
     }
 
 }
