@@ -25,7 +25,7 @@ export class AuthService {
 
   public logout(username: string): void {
 
-    if (username) {
+    if (!username.isNullOrWhitespace()) {
       const payload = {
         username: username
       };
