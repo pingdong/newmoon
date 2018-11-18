@@ -1,5 +1,6 @@
 export { SharedModule } from './shared.module';
 
+export { AuthService } from './services/auth.service';
 export { AuthGuard } from './guards/auth/auth.guard';
 export { UnsaveGuard } from './guards/dirty-check/unsave.guard';
 export { UnsaveCheck } from './guards/dirty-check/unsave.check';

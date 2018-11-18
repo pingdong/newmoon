@@ -5,10 +5,13 @@ import { HttpRequest, HttpErrorResponse,
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { AuthService } from 'src/app/shared';
+
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private authService: AuthService) {}
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -16,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         .pipe(
           catchError(response => {
               if (response instanceof HttpErrorResponse && response.status === 401) {
-                localStorage.removeItem('token');
+                this.authService.logout('');
 
                 this.router.navigateByUrl('/login');
               }

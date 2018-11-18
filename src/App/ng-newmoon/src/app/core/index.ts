@@ -1,6 +1,5 @@
 export { CoreModule } from './core.module';
 
-export { AuthService } from './auth/services/auth.service';
 export { LoginComponent } from './auth/components/login.component';
 
 export { AppModule  } from './config/app.module.model';
@@ -16,3 +15,5 @@ export { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 export { UserProfile } from './user-profile/user-profile.model';
 export { UserProfileService } from './user-profile/user-profile.service';
+
+export { AppState } from './store/app.states';

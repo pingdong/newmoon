@@ -13,7 +13,8 @@
 
   <button type="submit" [disabled]="!loginForm.valid" i18n="Login|login@@Login_Button_LogIn">Login</button>
 
-  <button (click)="cancel()" i18n="Cancel|Cancel@@Button_Cancel">Cancel</button>
-
-  <label *ngIf="isError" i18n="Invalid username or password|Login error message@@Login_Label_InvalidLogIn">Invalid username or password</label>
 </form>
+
+<button (click)="cancel()" i18n="Cancel|Cancel@@Button_Cancel">Cancel</button>
+
+<label *ngIf="errorMessage">{{errorMessage}}</label>

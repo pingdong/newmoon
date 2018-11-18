@@ -1,47 +1,54 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
+import * as fromStore from '../../store/app.states';
+import { LoginAction, LogoutAction } from '../store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
   styleUrls: ['./login.component.css'],
   templateUrl: './login.component.html',
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
   public loginForm = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
 
-  public isError: boolean;
+  public errorMessage: string;
 
+  private authState$: Observable<any>;
   private returnUrl: string;
 
   constructor(
     /** @internal */
-    private authService: AuthService,
+    private store: Store<fromStore.AppState>,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location,
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.authState$ = this.store.select(fromStore.authState$);
+  }
 
   public ngOnInit(): void {
-    this.authService.isLoggedIn$
-          .subscribe(newState => this.onStateChanged(newState));
-
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    this.isError = false;
-  }
+    this.authState$.subscribe(
+      state => {
+        if (state && state.errorMessage) {
+          this.errorMessage = state.errorMessage;
+        }
 
-  public ngOnDestroy(): void {
-    this.authService.isLoggedIn$.unsubscribe();
+        if (state && state.token) {
+          this.router.navigateByUrl(this.returnUrl);
+        }
+      }
+    );
   }
 
   public login(): void {
@@ -50,19 +57,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     const model = this.loginForm.value;
-    this.authService.login(model.username, model.password);
+    const payload = {
+      username: model.username,
+      password: model.password
+    };
+
+    this.store.dispatch(new LoginAction(payload));
   }
 
   public cancel(): void {
-    this.location.back();
-  }
+    // Have to send a LogoutAction to reset auth state
+    //   Otherwise, a failure login attempt stays in the store
+    //   an error message shows up
+    this.store.dispatch(new LogoutAction({}));
 
-  private onStateChanged(isLoggedIn: boolean) {
-    this.isError = !isLoggedIn;
-
-    if (isLoggedIn) {
-      this.router.navigate([this.returnUrl]);
-    }
+    this.router.navigateByUrl('/');
   }
 
 }

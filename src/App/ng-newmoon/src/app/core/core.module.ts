@@ -3,6 +3,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SharedModule } from '../shared';
 
@@ -17,11 +20,14 @@ import { AppHeaderSearchComponent } from './console/app-header/app-header-search
 import { AppSideNavComponent } from './console/app-sidenav/app-sidenav.component';
 import { AppSideNavItemComponent } from './console/app-sidenav/app-sidenav-item/app-sidenav-item.component';
 
-import { DefaultInterceptor } from './http/default.interceptor';
+import { TokenInterceptor } from './http/token.interceptor';
 import { DevCoreModule } from './dev.core.module';
 import { ErrorInterceptor } from './http/error.interceptor';
 
 import { environment } from 'src/environments/environment.prod';
+
+import { reducers } from './store/app.states';
+import { AuthEffects } from './auth/store/effects/auth.effects';
 
 @NgModule({
     declarations: [
@@ -42,10 +48,14 @@ import { environment } from 'src/environments/environment.prod';
 
       SharedModule,
 
+      StoreModule.forRoot(reducers, { }),
+      EffectsModule.forRoot([AuthEffects]),
+
+      !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
       !environment.production ? DevCoreModule.forRoot() : [],
     ],
     providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
     ],
     exports: [

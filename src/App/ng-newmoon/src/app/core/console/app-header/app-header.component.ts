@@ -1,16 +1,20 @@
-import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { ConfigService } from '../../config/config.service';
-import { AuthService } from '../../auth/services/auth.service';
 import { NotificationService } from '../../notification/notification.service';
+
+import * as fromStore from '../../store/app.states';
+import { LogoutAction, GetStatusAction } from '../../auth/store/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
   styleUrls: ['./app-header.component.css'],
   templateUrl: './app-header.component.html',
 })
-export class AppHeaderComponent implements OnInit, OnDestroy {
+export class AppHeaderComponent implements OnInit {
 
   public isLoggedIn: boolean;
   public title: string;
@@ -20,32 +24,43 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
   @Output()
   public sidenavToggled = new EventEmitter();
 
+  private authState$: Observable<any>;
+
   constructor(
     /** @internal */
-    private authService: AuthService,
     private configService: ConfigService,
     private notificationService: NotificationService,
     private router: Router,
-  ) { }
+    private store: Store<fromStore.AppState>
+  ) {
+    this.authState$ = this.store.select(fromStore.authState$);
+  }
+
+  // If token is required to be removed after closing browser, browser tab
+  //     or navigating to other site.
+  // @HostListener('window:beforeunload', ['$event'])
+  // handleUnload(event) {
+  //   this.logout();
+  // }
 
   public ngOnInit(): void {
-    this.authService.isLoggedIn$
-          .subscribe((isLoggedIn) => {
-            this.isLoggedIn = isLoggedIn;
-
-            if (isLoggedIn) {
-              this.username = 'Ping Dong';
-            }
-          });
-
     this.configService.getConfig()
           .subscribe((cfg) => this.title = cfg.appTitle );
 
-    this.messageCount = 8;
-  }
+    this.authState$.subscribe(
+      state => {
+        if (state && state.token) {
+          this.isLoggedIn = state.isAuthenticated;
+          this.username = state.username;
+        } else {
+          this.isLoggedIn = false;
+          this.username = '';
+        }
+      }
+    );
 
-  public ngOnDestroy(): void {
-    this.authService.isLoggedIn$.unsubscribe();
+    this.store.dispatch(new GetStatusAction());
+    this.messageCount = 8;
   }
 
   public login(): void {
@@ -53,7 +68,13 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
   }
 
   public logout(): void {
-    this.authService.logout();
+    const payload = {
+      username: this.username
+    };
+
+    this.store.dispatch(new LogoutAction(payload));
+
+    this.router.navigateByUrl('/');
   }
 
   public gotoMessages(): void {

@@ -41,17 +41,4 @@ import { DyanmicFormTranslateService } from './dynamic-forms/services/dynamic-fo
     ]
   })
   export class SharedModule {
-
-    public static forRoot(): ModuleWithProviders {
-      return {
-        ngModule: SharedModule,
-        providers: [
-          AuthGuard,
-          UnsaveGuard,
-
-          SelectivePreloadingStrategy,
-        ],
-      };
-    }
-
   }
