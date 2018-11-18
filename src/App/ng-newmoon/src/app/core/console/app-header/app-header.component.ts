@@ -73,6 +73,8 @@ export class AppHeaderComponent implements OnInit {
     };
 
     this.store.dispatch(new LogoutAction(payload));
+
+    this.router.navigateByUrl('/');
   }
 
   public gotoMessages(): void {
