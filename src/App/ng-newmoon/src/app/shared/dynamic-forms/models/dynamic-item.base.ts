@@ -1,7 +1,7 @@
 export class DynamicItemBase<T> {
 
     key: string;
-    value: T;
+    value?: T;
     label: string;
     required: boolean;
     order: number;
@@ -14,7 +14,7 @@ export class DynamicItemBase<T> {
         required?: boolean,
         order?: number,
         controlType?: string
-      } = {}) {
+      } = { }) {
       this.value = option.value;
       this.key = option.key || '';
       this.label = option.label || '';

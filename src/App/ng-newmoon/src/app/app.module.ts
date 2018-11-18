@@ -20,6 +20,12 @@ registerLocaleData(localeZh, 'zh-Hans', localeZhExtra);
     BrowserAnimationsModule,
     HttpClientModule,
 
+    // If the backend service uses different names for the XSRF token cookie or header
+    // HttpClientXsrfModule.withOptions({
+    //   cookieName: 'My-Xsrf-Cookie',
+    //   headerName: 'My-Xsrf-Header',
+    // }),
+
     CoreModule,
     SharedModule.forRoot(),
 

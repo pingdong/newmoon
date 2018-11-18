@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot,
          CanActivate, CanActivateChild, CanLoad,
          Route, Router, RouterStateSnapshot } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-    constructor(private router: Router) {}
+    constructor(private router: Router,
+                private authService: AuthService) {}
 
     public canLoad(route: Route): boolean {
         const url = `/${route.path}`;
@@ -19,11 +21,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     public canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        return this.canActivate(route, state);
+        return this.isLoggedIn(state.url);
     }
 
     private isLoggedIn(url: string): boolean {
-        if (localStorage.getItem('token')) {
+        if (this.authService.getToken()) {
             return true;
         }
 

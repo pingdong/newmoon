@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { AuthService } from '../auth/services/auth.service';
+import { AuthService } from '../../shared';
 
 @Injectable()
-export class DefaultInterceptor implements HttpInterceptor {
+export class TokenInterceptor implements HttpInterceptor {
 
-    constructor(public authService: AuthService) {}
+    constructor(private authService: AuthService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if (!request.url.endsWith('/login')) {
-            const token = localStorage.getItem('token');
+            const token = this.authService.getToken();
 
             if (token) {
                 request = request.clone({
