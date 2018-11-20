@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -11,6 +11,7 @@ import { LoginAction, LogoutAction } from '../store/actions/auth.actions';
   selector: 'app-login',
   styleUrls: ['./login.component.css'],
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
 

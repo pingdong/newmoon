@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { SelectivePreloadingStrategy } from '../../../shared';
 
@@ -6,6 +6,7 @@ import { SelectivePreloadingStrategy } from '../../../shared';
   selector: 'app-dashboard',
   styleUrls: ['./dashboard.component.css'],
   templateUrl: './dashboard.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
 

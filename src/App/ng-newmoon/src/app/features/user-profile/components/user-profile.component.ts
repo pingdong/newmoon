@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 import { UserProfileControlService } from '../services/user-profile.control.service';
 import { DynamicFormComponent, UnsaveCheck } from '../../../shared';
@@ -7,6 +7,7 @@ import { DynamicFormComponent, UnsaveCheck } from '../../../shared';
   selector: 'app-user-profile',
   styleUrls: ['./user-profile.component.css'],
   templateUrl: './user-profile.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserProfileComponent implements UnsaveCheck {
 

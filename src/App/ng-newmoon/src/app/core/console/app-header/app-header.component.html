@@ -10,7 +10,7 @@
 
       <div class="header__logo">  
         <!-- Left -->
-        <button mat-button class="header__logo__button" routerLink="">{{title}}</button>
+        <button mat-button class="header__logo__button" routerLink="">{{(config$ | async)?.appTitle}}</button>
       </div>
        
       <!-- Right -->   

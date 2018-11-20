@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 import { SettingControlService } from '../services/setting.control.service';
 import { DynamicFormComponent, UnsaveCheck } from '../../../shared';
@@ -6,7 +6,8 @@ import { DynamicFormComponent, UnsaveCheck } from '../../../shared';
 @Component({
   selector: 'app-setting',
   templateUrl: './app-setting.component.html',
-  styleUrls: ['./app-setting.component.css']
+  styleUrls: ['./app-setting.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppSettingComponent implements UnsaveCheck {
 
