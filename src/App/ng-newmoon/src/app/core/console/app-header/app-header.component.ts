@@ -78,7 +78,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   public gotoMessages(): void {
-    this.notificationService.sendText('Sorry, Message feature is not ready currently.');
+    this.router.navigate([{outlets: { popup: 'message' }}]);
   }
 
   public gotoHelper(): void {
