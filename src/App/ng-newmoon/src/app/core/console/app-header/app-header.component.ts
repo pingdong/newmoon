@@ -15,7 +15,7 @@ import { LogoutAction, GetStatusAction } from '../../auth/store/actions/auth.act
   templateUrl: './app-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppHeaderComponent implements OnInit, DoCheck {
+export class AppHeaderComponent implements OnInit {
 
   // Using async pipe to detect changes
   public config$: Observable<any>;
@@ -29,7 +29,6 @@ export class AppHeaderComponent implements OnInit, DoCheck {
   public sidenavToggled = new EventEmitter();
 
   private authState$: Observable<any>;
-  private changed = false;
 
   constructor(
     /** @internal */
@@ -62,7 +61,7 @@ export class AppHeaderComponent implements OnInit, DoCheck {
           this.username = '';
         }
 
-        this.changed = true;
+        this.changeDetectorRef.markForCheck();
       }
     );
 
@@ -104,11 +103,4 @@ export class AppHeaderComponent implements OnInit, DoCheck {
     this.sidenavToggled.emit();
   }
 
-  ngDoCheck() {
-    if (this.changed) {
-      this.changeDetectorRef.markForCheck();
-
-      this.changed = false;
-    }
-  }
 }
