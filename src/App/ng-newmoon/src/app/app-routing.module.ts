@@ -7,13 +7,16 @@ import { SelectivePreloadingStrategy, SharedModule, AuthGuard } from './shared';
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
 
-  { path: 'dashboard', loadChildren: './features/dashboard/dashboard.module#DashboardModule'},
   // Popup, second outlet
   { path: 'message', component: PopupMessageComponent, outlet: 'popup', canActivate: [AuthGuard] },
-  //  Preloading
-  //  { path: 'setting', loadChildren: './features/app-setting/app-setting.module#AppSettingModule', data: { preload: true }},
+
+  { path: 'dashboard', loadChildren: './features/dashboard/dashboard.module#DashboardModule'},
   { path: 'setting', loadChildren: './features/app-setting/app-setting.module#AppSettingModule', canLoad: [AuthGuard] },
-  { path: 'user-profile', loadChildren: './features/user-profile/user-profile.module#UserProfileModule', canLoad: [AuthGuard] },
+  { path: 'user-profile',
+    loadChildren: './features/user-profile/user-profile.module#UserProfileModule',
+    data: { preload: true },
+    canLoad: [AuthGuard]
+  },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },

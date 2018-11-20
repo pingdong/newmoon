@@ -4,4 +4,5 @@
   <li *ngFor = "let module of modules">{{ module }}</li>
 </ul>
 
-<p><span i18n="Loading|Title@@Dashboard_Label_LoadingTime">Loading:</span> {{ today | date:'full' }}</p>
+<p><span i18n="Loading|Title@@Dashboard_Label_LoadingTime">Loading:</span> {{ componenttime | date:'full' }} @ {{componenttime}}</p>
+<p><span i18n="Prefetch time|Prefetch time@@Dashboard_Label_PrefetchTime">Prefetch:</span> {{ preloadtime | date:'full' }} @ {{preloadtime}}</p>
