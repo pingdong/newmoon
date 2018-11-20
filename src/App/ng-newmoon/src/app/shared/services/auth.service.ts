@@ -23,18 +23,23 @@ export class AuthService {
       );
   }
 
-  public logout(username: string): void {
+  public logout(username: string): Observable<any> {
 
-    if (!username.isNullOrWhitespace()) {
-      const payload = {
-        username: username
-      };
-
-      this.http.post(this.logoutUrl, payload);
+    if (username.isNullOrWhitespace()) {
+      return of(true);
     }
 
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
+    const payload = {
+      username: username
+    };
+
+    return this.http.post(this.logoutUrl, payload)
+      .pipe(
+        tap(_ => {
+          localStorage.removeItem('username');
+          localStorage.removeItem('token');
+        })
+      );
   }
 
   public getToken(): string | null {

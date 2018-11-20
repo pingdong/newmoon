@@ -1,5 +1,6 @@
 import { All, ActionTypes, LoginSuccessAction,
-        LoginFailureAction, LogoutAction, GetStatusSuccessAction } from '../actions/auth.actions';
+        LoginFailureAction, LogoutSuccessAction,
+        GetStatusSuccessAction } from '../actions/auth.actions';
 
 export interface State {
   isAuthenticated: boolean;
@@ -24,8 +25,8 @@ export function reducer(state = initialState, action: All): State {
     case ActionTypes.LOGIN_FAILURE:
       return loginFailureHandler(state, action);
 
-    case ActionTypes.LOGOUT:
-      return logoutHandler(state, action);
+    case ActionTypes.LOGOUT_SUCCESS:
+      return logoutSuccessHandler(state, action);
 
     case ActionTypes.GETSTATUS_SUCCESS:
       return getStatusSuccessHandler(state, action);
@@ -51,9 +52,12 @@ function loginFailureHandler(state: State, action: LoginFailureAction) {
   };
 }
 
-function logoutHandler(state: State, action: LogoutAction) {
+function logoutSuccessHandler(state: State, action: LogoutSuccessAction) {
   return {
-    ...initialState
+    ...state,
+    isAuthenticated: false,
+    username: '',
+    token: ''
   };
 }
 
