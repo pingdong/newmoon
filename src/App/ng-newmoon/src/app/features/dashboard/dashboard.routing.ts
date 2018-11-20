@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './components/dashboard.component';
+import { DashboardResolverService } from './service/dashboard.resolver';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+    resolve: {
+      resolve: DashboardResolverService
+    }
   },
 ];
 

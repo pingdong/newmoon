@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -13,11 +13,15 @@ import { LogoutAction, GetStatusAction } from '../../auth/store/actions/auth.act
   selector: 'app-header',
   styleUrls: ['./app-header.component.css'],
   templateUrl: './app-header.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppHeaderComponent implements OnInit {
 
+  // Using async pipe to detect changes
+  public config$: Observable<any>;
+
+  // Explicitly detect changes by calling markForCheck
   public isLoggedIn: boolean;
-  public title: string;
   public username: String;
   public messageCount: number;
 
@@ -31,9 +35,11 @@ export class AppHeaderComponent implements OnInit {
     private configService: ConfigService,
     private notificationService: NotificationService,
     private router: Router,
-    private store: Store<fromStore.AppState>
+    private store: Store<fromStore.AppState>,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     this.authState$ = this.store.select(fromStore.authState$);
+    this.config$ = this.configService.getConfig();
   }
 
   // If token is required to be removed after closing browser, browser tab
@@ -44,8 +50,6 @@ export class AppHeaderComponent implements OnInit {
   // }
 
   public ngOnInit(): void {
-    this.configService.getConfig()
-          .subscribe((cfg) => this.title = cfg.appTitle );
 
     this.authState$.subscribe(
       state => {
@@ -56,6 +60,8 @@ export class AppHeaderComponent implements OnInit {
           this.isLoggedIn = false;
           this.username = '';
         }
+
+        this.changeDetectorRef.markForCheck();
       }
     );
 
@@ -78,7 +84,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   public gotoMessages(): void {
-    this.notificationService.sendText('Sorry, Message feature is not ready currently.');
+    this.router.navigate([{outlets: { popup: 'message' }}]);
   }
 
   public gotoHelper(): void {

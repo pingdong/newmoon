@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { DynamicItemBase } from '../../models/dynamic-item.base';
@@ -6,7 +6,8 @@ import { DynamicItemBase } from '../../models/dynamic-item.base';
 @Component({
   selector: 'app-dynamic-form-item',
   templateUrl: './dynamic-form-item.component.html',
-  styleUrls: ['./dynamic-form-item.component.css']
+  styleUrls: ['./dynamic-form-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicFormItemComponent {
 

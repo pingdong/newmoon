@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { DyanmicFormTranslateService } from '../../services/dynamic-form.translate.service';
@@ -9,6 +9,7 @@ import { UnsaveCheck } from '../../../guards/dirty-check/unsave.check';
   selector: 'app-dynamic-form',
   styleUrls: ['./dynamic-form.component.css'],
   templateUrl: './dynamic-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicFormComponent implements UnsaveCheck, OnInit {
 

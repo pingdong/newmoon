@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import { ConfigService } from '../../config/config.service';
 import { AppModule } from '../../config/app.module.model';
@@ -6,7 +6,8 @@ import { AppModule } from '../../config/app.module.model';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './app-sidenav.component.html',
-  styleUrls: ['./app-sidenav.component.css']
+  styleUrls: ['./app-sidenav.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppSideNavComponent implements OnInit {
 
@@ -14,12 +15,18 @@ export class AppSideNavComponent implements OnInit {
 
   constructor(
     /** @internal */
-    private configService: ConfigService
+    private configService: ConfigService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.configService.getConfig()
-          .subscribe((cfg) => this.modules = cfg.modules );
+          .subscribe((cfg) => {
+              this.modules = cfg.modules;
+
+              this.changeDetectorRef.markForCheck();
+            }
+          );
   }
 
 }

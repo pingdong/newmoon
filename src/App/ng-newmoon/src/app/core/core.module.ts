@@ -14,6 +14,8 @@ import { AppComponent } from './console/app.component';
 import { LoginComponent } from './auth/components/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { PopupMessageComponent } from './message/popup-message.component';
+
 import { AppFooterComponent } from './console/app-footer/app-footer.component';
 import { AppHeaderComponent } from './console/app-header/app-header.component';
 import { AppHeaderSearchComponent } from './console/app-header/app-header-search/app-header-search.component';
@@ -33,6 +35,8 @@ import { AuthEffects } from './auth/store/effects/auth.effects';
     declarations: [
       PageNotFoundComponent,
       LoginComponent,
+
+      PopupMessageComponent,
 
       AppComponent,
       AppHeaderComponent,

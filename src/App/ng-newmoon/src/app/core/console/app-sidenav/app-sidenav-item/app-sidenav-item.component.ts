@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { AppModule } from '../../../config/app.module.model';
 
 @Component({
   selector: 'app-sidenav-item',
   templateUrl: './app-sidenav-item.component.html',
-  styleUrls: ['./app-sidenav-item.component.css']
+  styleUrls: ['./app-sidenav-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppSideNavItemComponent implements OnInit {
 

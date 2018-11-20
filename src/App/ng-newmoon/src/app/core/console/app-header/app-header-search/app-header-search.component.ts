@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header-search',
   templateUrl: './app-header-search.component.html',
-  styleUrls: ['./app-header-search.component.css']
+  styleUrls: ['./app-header-search.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppHeaderSearchComponent implements OnInit {
 

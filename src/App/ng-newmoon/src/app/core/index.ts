@@ -13,6 +13,8 @@ export { NotificationService } from './notification/notification.service';
 
 export { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+export { PopupMessageComponent } from './message/popup-message.component';
+
 export { UserProfile } from './user-profile/user-profile.model';
 export { UserProfileService } from './user-profile/user-profile.service';
 

@@ -16,7 +16,7 @@ export class AuthEffects {
   ) {}
 
   @Effect()
-  login$: Observable<Action> = this.actions$.pipe(
+  Login$: Observable<Action> = this.actions$.pipe(
     ofType(auth.ActionTypes.LOGIN),
     map((action: auth.LoginAction) => action.payload),
     switchMap(payload => {
@@ -50,9 +50,19 @@ export class AuthEffects {
   Logout$: Observable<Action> = this.actions$.pipe(
     ofType(auth.ActionTypes.LOGOUT),
     map((action: auth.LogoutAction) => action.payload),
-    tap(payload => {
-      this.authService.logout(payload.username);
+    switchMap(payload => {
+      return this.authService.logout(payload.username)
+        .pipe(
+          map((result) => {
+            return new auth.LogoutSuccessAction();
+          })
+        );
     })
+  );
+
+  @Effect({ dispatch: false })
+  LogoutSuccess$: Observable<Action> = this.actions$.pipe(
+    ofType(auth.ActionTypes.LOGOUT_SUCCESS)
   );
 
   @Effect()
