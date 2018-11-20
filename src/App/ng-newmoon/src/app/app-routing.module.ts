@@ -12,8 +12,8 @@ const appRoutes: Routes = [
   { path: 'message', component: PopupMessageComponent, outlet: 'popup', canActivate: [AuthGuard] },
   //  Preloading
   //  { path: 'setting', loadChildren: './features/app-setting/app-setting.module#AppSettingModule', data: { preload: true }},
-  { path: 'setting', loadChildren: './features/app-setting/app-setting.module#AppSettingModule', canActivate: [AuthGuard] },
-  { path: 'user-profile', loadChildren: './features/user-profile/user-profile.module#UserProfileModule', canActivate: [AuthGuard] },
+  { path: 'setting', loadChildren: './features/app-setting/app-setting.module#AppSettingModule', canLoad: [AuthGuard] },
+  { path: 'user-profile', loadChildren: './features/user-profile/user-profile.module#UserProfileModule', canLoad: [AuthGuard] },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
