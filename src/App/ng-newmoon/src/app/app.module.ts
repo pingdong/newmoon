@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, CoreModule } from './core';
-import { SharedModule } from './shared';
 
 import './extensions/string-extension.ts';
 
