@@ -9,15 +9,17 @@ Chinese version: ng serve --configuration=zh
 * [Angular 7.0](https://angular.io)
 
 ### Concepts are covered:
-* Module Lazy loading vs Pre-loading
+* Module Lazy loading vs Eager-loading
 
 ### Practices
 * [Localisation](https://angular.io/guide/i18n)
+* [Debugging from VS Code](./frontend/general/vscode_debug.md)
 
 ### Roadmap  
 * Angular
   * [x] React Style Form
   * [x] [Dynamic Form](./frontend/angular/dynamic-forms.md)
+  * [x] ngrx/store
   * [ ] Elements
   * [ ] Service Works
   * [ ] Server-side Rendering
