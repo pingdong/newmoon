@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import * as fromStore from '../../store/app.states';
@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   public errorMessage: string;
 
-  private authState$: Observable<any>;
   private returnUrl: string;
 
   constructor(
@@ -31,25 +30,24 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
-  ) {
-    this.authState$ = this.store.select(fromStore.authState$);
-  }
+  ) { }
 
   public ngOnInit(): void {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    this.authState$.subscribe(
-      state => {
-        if (state && state.errorMessage) {
-          this.errorMessage = state.errorMessage;
-        }
+    this.store.pipe(select('auth'))
+        .subscribe(
+          state => {
+            if (state && state.errorMessage) {
+              this.errorMessage = state.errorMessage;
+            }
 
-        if (state && state.token) {
-          this.router.navigateByUrl(this.returnUrl);
-        }
-      }
-    );
+            if (state && state.token) {
+              this.router.navigateByUrl(this.returnUrl);
+            }
+          }
+        );
   }
 
   public login(): void {

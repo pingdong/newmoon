@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { ConfigService } from '../../config/config.service';
@@ -28,8 +28,6 @@ export class AppHeaderComponent implements OnInit {
   @Output()
   public sidenavToggled = new EventEmitter();
 
-  private authState$: Observable<any>;
-
   constructor(
     /** @internal */
     private configService: ConfigService,
@@ -38,7 +36,6 @@ export class AppHeaderComponent implements OnInit {
     private store: Store<fromStore.AppState>,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
-    this.authState$ = this.store.select(fromStore.authState$);
     this.config$ = this.configService.getConfig();
   }
 
@@ -51,19 +48,20 @@ export class AppHeaderComponent implements OnInit {
 
   public ngOnInit(): void {
 
-    this.authState$.subscribe(
-      state => {
-        if (state && state.token) {
-          this.isLoggedIn = state.isAuthenticated;
-          this.username = state.username;
-        } else {
-          this.isLoggedIn = false;
-          this.username = '';
-        }
+    this.store.pipe(select('auth'))
+              .subscribe(
+                state => {
+                  if (state && state.token) {
+                    this.isLoggedIn = state.isAuthenticated;
+                    this.username = state.username ? state.username : '';
+                  } else {
+                    this.isLoggedIn = false;
+                    this.username = '';
+                  }
 
-        this.changeDetectorRef.markForCheck();
-      }
-    );
+                  this.changeDetectorRef.markForCheck();
+                }
+              );
 
     this.store.dispatch(new GetStatusAction());
     this.messageCount = 8;
