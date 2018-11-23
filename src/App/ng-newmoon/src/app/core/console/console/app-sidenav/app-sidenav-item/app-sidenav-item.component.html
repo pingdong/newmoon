@@ -11,14 +11,14 @@
 
         <mat-icon *ngIf="isExpanded">keyboard_arrow_up</mat-icon>
         <mat-icon *ngIf="!isExpanded">keyboard_arrow_down</mat-icon>
-    </button>  
-    
+    </button>
+
     <div *ngIf="isExpanded">
-      <a *ngFor="let submodule of module.modules" [routerLink]="submodule.uri">
-        {{submodule.title}} 
+      <a *ngFor="let submodule of module.modules; trackBy:submodule?.title" [routerLink]="submodule.uri">
+        {{submodule.title}}
       </a>
     </div>
 
   </div>
-  
+
 </div>
