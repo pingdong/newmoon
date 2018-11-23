@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { UnsaveCheck } from '@app/shared/router';
+import { UnsaveCheck } from '@app/core/router';
 import { DynamicFormComponent, DynamicItemBase } from '@app/shared/forms';
 
 import { UserProfileControlService } from '../services/user-profile.control.service';

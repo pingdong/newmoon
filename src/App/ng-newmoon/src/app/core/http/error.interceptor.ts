@@ -5,7 +5,7 @@ import { HttpRequest, HttpErrorResponse,
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthService } from '@app/shared/auth';
+import { AuthService } from '@app/core/auth';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

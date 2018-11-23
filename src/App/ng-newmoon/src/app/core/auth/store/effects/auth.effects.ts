@@ -3,8 +3,8 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
-import { AuthService } from '@app/shared/auth';
 
+import { AuthService } from '../../service/auth.service';
 import * as auth from '../actions/auth.actions';
 
 @Injectable()

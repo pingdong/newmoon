@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import * as fromStore from '../../../store/app.states';
+import * as fromStore from '../../store/app.states';
 import { LoginAction, LogoutAction } from '../store/actions/auth.actions';
 
 @Component({

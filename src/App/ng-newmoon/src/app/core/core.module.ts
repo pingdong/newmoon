@@ -10,23 +10,24 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SharedModule } from '@app/shared';
 import { environment } from '@env/environment.prod';
 
-import { AppComponent } from './console/console/app.component';
-import { AppFooterComponent } from './console/console/app-footer/app-footer.component';
-import { AppHeaderComponent } from './console/console/app-header/app-header.component';
-import { AppHeaderSearchComponent } from './console/console/app-header/app-header-search/app-header-search.component';
-import { AppSideNavComponent } from './console/console/app-sidenav/app-sidenav.component';
-import { AppSideNavItemComponent } from './console/console/app-sidenav/app-sidenav-item/app-sidenav-item.component';
+import { AppComponent } from './console/app.component';
+import { AppFooterComponent } from './console/app-footer/app-footer.component';
+import { AppHeaderComponent } from './console/app-header/app-header.component';
+import { AppHeaderSearchComponent } from './console/app-header/app-header-search/app-header-search.component';
+import { AppSideNavComponent } from './console/app-sidenav/app-sidenav.component';
+import { AppSideNavItemComponent } from './console/app-sidenav/app-sidenav-item/app-sidenav-item.component';
 
-import { LoginComponent } from './console/auth/components/login.component';
-import { PageNotFoundComponent } from './console/page-not-found/page-not-found.component';
+import { LoginComponent } from './auth/components/login.component';
+import { PageNotFoundComponent } from './router/components/page-not-found.component';
+import { UnsaveConfirmComponent } from './router/guards/dirty-check/components/unsave-confirm.component';
 
-import { PopupMessageComponent } from './console/message/popup-message.component';
+import { PopupMessageComponent } from './message/popup-message.component';
 
 import { TokenInterceptor } from './http/token.interceptor';
 import { ErrorInterceptor } from './http/error.interceptor';
 
 import { reducers } from './store/app.states';
-import { AuthEffects } from './console/auth/store/effects/auth.effects';
+import { AuthEffects } from './auth/store/effects/auth.effects';
 
 import { DevCoreModule } from './dev.core.module';
 
@@ -34,6 +35,7 @@ import { DevCoreModule } from './dev.core.module';
     declarations: [
       PageNotFoundComponent,
       LoginComponent,
+      UnsaveConfirmComponent,
 
       PopupMessageComponent,
 
@@ -68,6 +70,9 @@ import { DevCoreModule } from './dev.core.module';
       ReactiveFormsModule,
 
       SharedModule,
+    ],
+    entryComponents: [
+      UnsaveConfirmComponent
     ]
   })
   export class CoreModule {

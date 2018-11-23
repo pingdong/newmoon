@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UnsaveGuard } from '@app/shared/router';
+import { UnsaveGuard } from '@app/core/router';
 
 import { UserProfileComponent } from './components/user-profile.component';
 
