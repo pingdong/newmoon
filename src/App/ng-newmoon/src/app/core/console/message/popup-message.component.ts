@@ -9,12 +9,14 @@ import { Router } from '@angular/router';
 })
 export class PopupMessageComponent {
 
+  private defaultPopupDelay = 1000;
+
   constructor(private router: Router) {}
 
   send() {
     setTimeout(() => {
       this.closePopup();
-    }, 1000);
+    }, this.defaultPopupDelay);
   }
 
   close() {

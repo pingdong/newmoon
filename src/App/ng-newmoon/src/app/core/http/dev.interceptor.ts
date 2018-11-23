@@ -7,6 +7,7 @@ import { mergeMap, materialize, delay, dematerialize } from 'rxjs/operators';
 export class DevInterceptor implements HttpInterceptor {
 
     private devToken: String = 'fake-jwt-token';
+    private defaultDelay = 500;
 
     constructor() {}
 
@@ -44,7 +45,7 @@ export class DevInterceptor implements HttpInterceptor {
                 return next.handle(request);
             }),
             materialize(),
-            delay(500),
+            delay(this.defaultDelay),
             dematerialize()
         );
     }

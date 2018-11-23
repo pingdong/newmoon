@@ -30,6 +30,7 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
   public sidenavToggled = new EventEmitter();
 
   private destoryed$ = new Subject();
+  private demoMessageCount = 9;
 
   constructor(
     /** @internal */
@@ -70,7 +71,7 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
               );
 
     this.store.dispatch(new GetStatusAction());
-    this.messageCount = 8;
+    this.messageCount = this.demoMessageCount;
   }
 
   public ngOnDestroy(): void {

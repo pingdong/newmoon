@@ -13,6 +13,9 @@ export class AppHeaderSearchComponent implements OnInit, OnDestroy {
   private search$: Subject<string>;
   private destoryed$ = new Subject();
 
+  private minimalTextLength = 2;
+  private dueTime = 10;
+
   constructor() {
     this.search$ = new Subject();
   }
@@ -20,8 +23,8 @@ export class AppHeaderSearchComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.search$
       .pipe(
-        filter(text => text.length > 2),
-        debounceTime(10),
+        filter(text => text.length > this.minimalTextLength),
+        debounceTime(this.dueTime),
         distinctUntilChanged(),
         takeUntil(this.destoryed$)
       )

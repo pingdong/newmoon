@@ -9,6 +9,8 @@ import { AppConfig } from './config.model';
 @Injectable({providedIn: 'root'})
 export class ConfigService {
 
+  private maxRetry = 3;
+
   constructor(
     private http: HttpClient,
     private address: AddressService
@@ -17,7 +19,7 @@ export class ConfigService {
   public getConfig() {
     return this.http.get<AppConfig>(this.address.config)
                     .pipe(
-                      retry(3),
+                      retry(this.maxRetry),
                       catchError(this.handleError),
                     );
   }

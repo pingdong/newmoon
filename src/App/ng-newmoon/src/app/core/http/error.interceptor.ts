@@ -10,6 +10,8 @@ import { AuthService } from '@app/shared/auth';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
+  private unauthorized = 401;
+
   constructor(private router: Router,
               private authService: AuthService) {}
 
@@ -18,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request)
         .pipe(
           catchError(response => {
-              if (response instanceof HttpErrorResponse && response.status === 401) {
+              if (response instanceof HttpErrorResponse && response.status === this.unauthorized) {
                 this.authService.logout('');
 
                 this.router.navigateByUrl('/login');
