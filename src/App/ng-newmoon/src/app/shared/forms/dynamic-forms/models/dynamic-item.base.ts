@@ -5,7 +5,7 @@ export class DynamicItemBase<T> {
     label: string;
     required: boolean;
     order: number;
-    controlType: string;
+    controlType: DynamicItemType;
 
     constructor(option: {
         key?: string,
@@ -13,14 +13,14 @@ export class DynamicItemBase<T> {
         label?: string,
         required?: boolean,
         order?: number,
-        controlType?: string
+        controlType?: DynamicItemType,
       } = { }) {
       this.value = option.value;
       this.key = option.key || '';
       this.label = option.label || '';
       this.required = !!option.required;
       this.order = option.order === undefined ? 1 : option.order;
-      this.controlType = option.controlType || '';
+      this.controlType = option.controlType || DynamicItemType.Textbox;
     }
 
 }

@@ -2,7 +2,7 @@ import { DynamicItemBase } from './dynamic-item.base';
 
 export class TextItem extends DynamicItemBase<string> {
 
-  controlType = 'textbox';
+  controlType = DynamicItemType.Textbox;
   content: string;
 
   constructor(options: {} = {}) {
