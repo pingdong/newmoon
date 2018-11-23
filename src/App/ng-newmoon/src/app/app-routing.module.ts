@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { LoginComponent, PageNotFoundComponent, PopupMessageComponent } from './core';
-import { SelectivePreloadingStrategy, SharedModule, AuthGuard } from './shared';
+import { LoginComponent, PageNotFoundComponent, PopupMessageComponent } from '@app/core/console';
+import { SharedModule } from '@app/shared';
+import { SelectivePreloadingStrategy, AuthGuard } from '@app/shared/router';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },

@@ -1,19 +1,12 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from './material.module';
 
-import { AuthGuard } from './guards/auth/auth.guard';
-import { UnsaveGuard } from './guards/dirty-check/unsave.guard';
-
-import { UnsaveConfirmComponent } from './guards/dirty-check/components/unsave-confirm.component';
-import { DynamicFormComponent } from './dynamic-forms/components/dynamic-form/dynamic-form.component';
-import { DynamicFormItemComponent } from './dynamic-forms/components/dynamic-form-item/dynamic-form-item.component';
-
-import { SelectivePreloadingStrategy } from './routing/selective-preloading-strategy';
-import { DyanmicFormTranslateService } from './dynamic-forms/services/dynamic-form.translate.service';
-
+import { UnsaveConfirmComponent } from './router/guards/dirty-check/components/unsave-confirm.component';
+import { DynamicFormComponent } from './forms/dynamic-forms/components/dynamic-form/dynamic-form.component';
+import { DynamicFormItemComponent } from './forms/dynamic-forms/components/dynamic-form-item/dynamic-form-item.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +22,6 @@ import { DyanmicFormTranslateService } from './dynamic-forms/services/dynamic-fo
       MaterialModule,
     ],
     providers: [
-      DyanmicFormTranslateService
     ],
     exports: [
       MaterialModule,

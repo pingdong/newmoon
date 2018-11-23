@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { DynamicItemBase, SelectionItem, TextItem } from '../../../shared';
+import { DynamicItemBase, TextItem } from '@app/shared/forms';
 
 @Injectable()
 export class UserProfileControlService {

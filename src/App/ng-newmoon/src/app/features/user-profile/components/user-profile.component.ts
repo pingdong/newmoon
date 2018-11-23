@@ -1,7 +1,8 @@
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { UnsaveCheck } from '@app/shared/router';
+import { DynamicFormComponent } from '@app/shared/forms';
 
 import { UserProfileControlService } from '../services/user-profile.control.service';
-import { DynamicFormComponent, UnsaveCheck } from '../../../shared';
 
 @Component({
   selector: 'app-user-profile',

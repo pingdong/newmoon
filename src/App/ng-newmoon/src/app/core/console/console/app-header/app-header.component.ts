@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { ConfigService } from '../../config/config.service';
-import { NotificationService } from '../../notification/notification.service';
+import { ConfigService } from '@app/core/config';
+import { NotificationService } from '@app/core/notification';
+import * as fromStore from '@app/core/store/app.states';
 
-import * as fromStore from '../../store/app.states';
 import { LogoutAction, GetStatusAction } from '../../auth/store/actions/auth.actions';
 
 @Component({

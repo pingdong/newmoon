@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
-import { SelectivePreloadingStrategy } from '../../../shared';
 import { ActivatedRoute } from '@angular/router';
+import { SelectivePreloadingStrategy } from '@app/shared/router';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
-import { ConfigService } from '../../config/config.service';
-import { AppModule } from '../../config/app.module.model';
+import { ConfigService, AppModule } from '@app/core/config';
 
 @Component({
   selector: 'app-sidenav',

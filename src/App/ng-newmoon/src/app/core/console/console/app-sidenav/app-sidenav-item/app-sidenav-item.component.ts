@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { AppModule } from '../../../config/app.module.model';
+import { AppModule } from '@app/core/config/app.module.model';
 
 @Component({
   selector: 'app-sidenav-item',

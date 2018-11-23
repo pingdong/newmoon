@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { AddressService } from '../../address.service';
+import { AddressService } from './address.service';
 import { AppConfig } from './config.model';
 
 @Injectable({providedIn: 'root'})

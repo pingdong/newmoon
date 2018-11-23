@@ -1,7 +1,8 @@
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { DynamicFormComponent } from '@app/shared/forms';
+import { UnsaveCheck } from '@app/shared/router';
 
 import { SettingControlService } from '../services/setting.control.service';
-import { DynamicFormComponent, UnsaveCheck } from '../../../shared';
 
 @Component({
   selector: 'app-setting',

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DynamicItemBase } from '../models/dynamic-item.base';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DyanmicFormTranslateService {
 
   // Build Form Group

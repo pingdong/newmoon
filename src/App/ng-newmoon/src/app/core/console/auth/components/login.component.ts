@@ -2,9 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
-import * as fromStore from '../../store/app.states';
+import * as fromStore from '../../../store/app.states';
 import { LoginAction, LogoutAction } from '../store/actions/auth.actions';
 
 @Component({

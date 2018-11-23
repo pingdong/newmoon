@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
+import { UnsaveCheck } from '@app/shared/router';
+
 import { DyanmicFormTranslateService } from '../../services/dynamic-form.translate.service';
 import { DynamicItemBase } from '../../models/dynamic-item.base';
-import { UnsaveCheck } from '../../../guards/dirty-check/unsave.check';
 
 @Component({
   selector: 'app-dynamic-form',

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header-search',
