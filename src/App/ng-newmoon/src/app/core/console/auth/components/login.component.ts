@@ -1,7 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import * as fromStore from '../../../store/app.states';
 import { LoginAction, LogoutAction } from '../store/actions/auth.actions';
@@ -12,7 +14,7 @@ import { LoginAction, LogoutAction } from '../store/actions/auth.actions';
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   public loginForm = this.fb.group({
     username: ['', Validators.required],
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
   public errorMessage: string;
 
   private returnUrl: string;
+  private destoryed$ = new Subject();
 
   constructor(
     /** @internal */
@@ -35,7 +38,11 @@ export class LoginComponent implements OnInit {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    this.store.pipe(select('auth'))
+    this.store
+        .pipe(
+          select('auth'),
+          takeUntil(this.destoryed$)
+        )
         .subscribe(
           state => {
             if (state && state.errorMessage) {
@@ -47,6 +54,10 @@ export class LoginComponent implements OnInit {
             }
           }
         );
+  }
+
+  public ngOnDestroy(): void {
+    this.destoryed$.next();
   }
 
   public login(): void {

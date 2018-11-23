@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy, DoCheck, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy, DoCheck, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { ConfigService } from '@app/core/config';
 import { NotificationService } from '@app/core/notification';
@@ -15,7 +16,7 @@ import { LogoutAction, GetStatusAction } from '../../auth/store/actions/auth.act
   templateUrl: './app-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppHeaderComponent implements OnInit {
+export class AppHeaderComponent implements OnInit, OnDestroy {
 
   // Using async pipe to detect changes
   public config$: Observable<any>;
@@ -27,6 +28,8 @@ export class AppHeaderComponent implements OnInit {
 
   @Output()
   public sidenavToggled = new EventEmitter();
+
+  private destoryed$ = new Subject();
 
   constructor(
     /** @internal */
@@ -48,7 +51,10 @@ export class AppHeaderComponent implements OnInit {
 
   public ngOnInit(): void {
 
-    this.store.pipe(select('auth'))
+    this.store.pipe(
+                select('auth'),
+                takeUntil(this.destoryed$)
+              )
               .subscribe(
                 state => {
                   if (state && state.token) {
@@ -65,6 +71,10 @@ export class AppHeaderComponent implements OnInit {
 
     this.store.dispatch(new GetStatusAction());
     this.messageCount = 8;
+  }
+
+  public ngOnDestroy(): void {
+    this.destoryed$.next();
   }
 
   public login(): void {

@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { filter, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header-search',
@@ -8,22 +8,28 @@ import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./app-header-search.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppHeaderSearchComponent implements OnInit {
+export class AppHeaderSearchComponent implements OnInit, OnDestroy {
 
   private search$: Subject<string>;
+  private destoryed$ = new Subject();
 
   constructor() {
     this.search$ = new Subject();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.search$
       .pipe(
         filter(text => text.length > 2),
         debounceTime(10),
-        distinctUntilChanged()
+        distinctUntilChanged(),
+        takeUntil(this.destoryed$)
       )
       .subscribe(result => console.log(result));
+  }
+
+  public ngOnDestroy(): void {
+    this.destoryed$.next();
   }
 
   public onSearch(term: string): void {
