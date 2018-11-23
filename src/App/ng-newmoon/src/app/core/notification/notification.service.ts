@@ -3,35 +3,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 
 import { NotificationMessage } from './notification.message.model';
-import { takeUntil } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
-export class NotificationService implements OnInit, OnDestroy {
+export class NotificationService {
 
-  private message$: Subject<NotificationMessage>;
-  private destoryed$ = new Subject();
+  private message$ = new Subject<NotificationMessage>();
 
   constructor(
     /** @internal */
     private snackBar: MatSnackBar,
-  ) { }
-
-  public ngOnInit() {
-    this.message$ = new Subject<NotificationMessage>();
-
+  ) {
     this.message$
-      .pipe(
-        takeUntil(this.destoryed$)
-      )
       .subscribe(msg =>
         this.snackBar.open(msg.message, '', {
           duration: 2000,
       })
     );
-  }
-
-  public ngOnDestroy(): void {
-    this.destoryed$.next();
   }
 
   public sendText(message: string): void {
