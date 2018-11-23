@@ -1,4 +1,4 @@
-enum DynamicItemType {
+const enum DynamicItemType {
   Textbox = 'textbox',
   Dropdown = 'dropdown',
 }
