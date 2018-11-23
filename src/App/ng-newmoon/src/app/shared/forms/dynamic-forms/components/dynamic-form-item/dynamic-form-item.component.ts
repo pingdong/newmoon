@@ -11,9 +11,10 @@ import { DynamicItemBase } from '../../models/dynamic-item.base';
 })
 export class DynamicFormItemComponent {
 
+  // tslint:disable-next-line no-any
   @Input() item: DynamicItemBase<any>;
   @Input() form: FormGroup;
 
-  get isValid() { return this.form.controls[this.item.key].valid; }
+  public get isValid() { return this.form.controls[this.item.key].valid; }
 
 }

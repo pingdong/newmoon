@@ -15,6 +15,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(private router: Router,
               private authService: AuthService) {}
 
+  // tslint:disable-next-line no-any
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(request)

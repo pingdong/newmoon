@@ -1,5 +1,11 @@
 import { Action } from '@ngrx/store';
 
+import { LoginPayload } from '../../models/login-payload.model';
+import { LoginFailurePayload } from '../../models/login-fail-payload.model';
+import { LoginSuccessPayload } from '../../models/login-success-payload.model';
+import { LogoutPayload } from '../../models/logout-payload.model';
+import { GetStatusSuccessPayload } from '../../models/get-status-success-payload.model';
+
 export enum ActionTypes {
   LOGIN = '[Auth] Login',
   LOGIN_SUCCESS = '[Auth] Login Success',
@@ -13,25 +19,25 @@ export enum ActionTypes {
 export class LoginAction implements Action {
   readonly type = ActionTypes.LOGIN;
 
-  constructor(public payload: any) { }
+  constructor(public payload: LoginPayload) { }
 }
 
 export class LoginSuccessAction implements Action {
   readonly type = ActionTypes.LOGIN_SUCCESS;
 
-  constructor(public payload: any) { }
+  constructor(public payload: LoginSuccessPayload) { }
 }
 
 export class LoginFailureAction implements Action {
   readonly type = ActionTypes.LOGIN_FAILURE;
 
-  constructor(public payload: any) { }
+  constructor(public payload: LoginFailurePayload) { }
 }
 
 export class LogoutAction implements Action {
   readonly type = ActionTypes.LOGOUT;
 
-  constructor(public payload: any) { }
+  constructor(public payload: LogoutPayload = { username: '' }) { }
 }
 
 export class LogoutSuccessAction implements Action {
@@ -45,7 +51,7 @@ export class GetStatusAction implements Action {
 export class GetStatusSuccessAction implements Action {
   readonly type = ActionTypes.GETSTATUS_SUCCESS;
 
-  constructor(public payload: any) { }
+  constructor(public payload: GetStatusSuccessPayload) { }
 }
 
 export type All =

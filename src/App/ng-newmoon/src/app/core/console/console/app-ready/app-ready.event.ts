@@ -45,13 +45,13 @@ export class AppReadyEvent {
     // we'll default to trying the "normal" event generation and then fallback to
     // using the IE version.
 
-    let customEvent: any;
+    let customEvent: CustomEvent;
 
     try {
       customEvent = new CustomEvent(eventType, { bubbles, cancelable });
     } catch ( error ) {
         customEvent = this.document.createEvent('CustomEvent');
-        customEvent.initCustomEvent( eventType, bubbles, cancelable );
+        customEvent.initCustomEvent( eventType, bubbles, cancelable, null);
     }
 
     return( customEvent );

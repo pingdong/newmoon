@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private store: Store<fromStore.AppState>,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
   public ngOnInit(): void {
@@ -52,6 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             if (state && state.token) {
               this.router.navigateByUrl(this.returnUrl);
             }
+
+            this.changeDetectorRef.markForCheck();
           }
         );
   }
@@ -78,7 +81,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Have to send a LogoutAction to reset auth state
     //   Otherwise, a failure login attempt stays in the store
     //   an error message shows up
-    this.store.dispatch(new LogoutAction({}));
+    this.store.dispatch(new LogoutAction());
 
     this.router.navigateByUrl('/');
   }

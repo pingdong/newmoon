@@ -1,6 +1,6 @@
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { UnsaveCheck } from '@app/shared/router';
-import { DynamicFormComponent } from '@app/shared/forms';
+import { DynamicFormComponent, DynamicItemBase } from '@app/shared/forms';
 
 import { UserProfileControlService } from '../services/user-profile.control.service';
 
@@ -12,7 +12,7 @@ import { UserProfileControlService } from '../services/user-profile.control.serv
 })
 export class UserProfileComponent implements UnsaveCheck {
 
-  public profile: any[];
+  public profile: DynamicItemBase<string>[];
 
   @ViewChild(DynamicFormComponent)  private form: DynamicFormComponent;
 
@@ -24,6 +24,7 @@ export class UserProfileComponent implements UnsaveCheck {
     return this.form.isDirty();
   }
 
+  // tslint:disable-next-line no-any
   private onSave($event: any) {
     this.form.markPristine();
   }

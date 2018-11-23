@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 import { DynamicItemBase } from '../models/dynamic-item.base';
 
@@ -7,9 +7,10 @@ import { DynamicItemBase } from '../models/dynamic-item.base';
 export class DyanmicFormTranslateService {
 
   // Build Form Group
+  // tslint:disable-next-line no-any
   public toFormGroup(settings: DynamicItemBase<any>[] ) {
 
-    const group: any = {};
+    const group: { [key: string]: AbstractControl; } = {};
     const sortedItems = settings.sort((a, b) => a.order - b.order);
 
     sortedItems.forEach(setting => {

@@ -6,9 +6,9 @@ import { DynamicItemBase, SelectionItem } from '@app/shared/forms';
 export class SettingControlService {
 
   // Form definition
-  public getDefinition(): DynamicItemBase<any>[] {
+  public getDefinition(): DynamicItemBase<string>[] {
 
-    const items: DynamicItemBase<any>[] = [
+    const items: DynamicItemBase<string>[] = [
 
       new SelectionItem({
         key: 'logLevel',

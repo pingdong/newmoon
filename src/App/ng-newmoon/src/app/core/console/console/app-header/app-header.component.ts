@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ConfigService } from '@app/core/config';
+import { ConfigService, AppConfig } from '@app/core/config';
 import { NotificationService } from '@app/core/notification';
 import * as fromStore from '@app/core/store/app.states';
 
@@ -19,11 +19,11 @@ import { LogoutAction, GetStatusAction } from '../../auth/store/actions/auth.act
 export class AppHeaderComponent implements OnInit, OnDestroy {
 
   // Using async pipe to detect changes
-  public config$: Observable<any>;
+  public config$: Observable<AppConfig>;
 
   // Explicitly detect changes by calling markForCheck
   public isLoggedIn: boolean;
-  public username: String;
+  public username: string;
   public messageCount: number;
 
   @Output()
@@ -40,7 +40,6 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
     private store: Store<fromStore.AppState>,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
-    this.config$ = this.configService.getConfig();
   }
 
   // If token is required to be removed after closing browser, browser tab
@@ -51,6 +50,8 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
   // }
 
   public ngOnInit(): void {
+
+    this.config$ = this.configService.getConfig();
 
     this.store.pipe(
                 select('auth'),
