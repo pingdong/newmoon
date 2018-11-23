@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "build:prod": "ng build --target production --build-optimizer --vendor-chunk",
+    "test": "ng test --browser ChromeHeadless --single-run",
+    "watch": "ng test --browser ChromeHeadless",
     "lint": "tslint --project tsconfig.json --config tslint.json \"src/**/*.ts\"",
     "e2e": "ng e2e"
   },
