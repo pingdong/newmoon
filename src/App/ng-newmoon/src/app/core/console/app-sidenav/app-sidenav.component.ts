@@ -39,4 +39,8 @@ export class AppSideNavComponent implements OnInit, OnDestroy {
     this.destoryed$.next();
   }
 
+  public trackByTitle(module: AppModule) {
+    return module.title;
+  }
+
 }

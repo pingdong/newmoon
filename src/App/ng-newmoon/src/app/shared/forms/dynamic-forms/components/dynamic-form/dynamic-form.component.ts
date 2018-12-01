@@ -20,7 +20,7 @@ export class DynamicFormComponent implements UnsaveCheck, OnInit {
   // tslint:disable-next-line no-any
   @Output() save = new EventEmitter<any>();
 
-  private form: FormGroup;
+  public form: FormGroup;
 
   constructor(private translate: DyanmicFormTranslateService) {  }
 
@@ -42,4 +42,7 @@ export class DynamicFormComponent implements UnsaveCheck, OnInit {
     });
   }
 
+  public trackByKey(item: DynamicItemBase<any>) {
+    return item.key;
+  }
 }

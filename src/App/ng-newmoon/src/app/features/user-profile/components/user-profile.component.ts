@@ -25,7 +25,7 @@ export class UserProfileComponent implements UnsaveCheck {
   }
 
   // tslint:disable-next-line no-any
-  private onSave($event: any) {
+  public onSave($event: any) {
     this.form.markPristine();
   }
 
