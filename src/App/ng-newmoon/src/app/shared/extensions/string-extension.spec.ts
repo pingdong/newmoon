@@ -1,29 +1,31 @@
 import './string-extension';
+import { isNullOrWhitespace } from './string-extension';
 
 describe('StringExtension', () => {
 
-  it('Non-Empty', () => {
+  it('Should return false to a string', () => {
     const target = 'ABC';
 
-    expect(target.isNullOrWhitespace()).toBeTruthy();
+    expect(target.isNullOrWhitespace()).toBeFalsy();
   });
 
-  it('Empty', () => {
+  it('Should return true with a empty string', () => {
     const target = '';
 
     expect(target.isNullOrWhitespace()).toBeTruthy();
   });
 
-  it('Whitespace', () => {
+  it('Should return true with whitespaces', () => {
     const target = '   ';
 
     expect(target.isNullOrWhitespace()).toBeTruthy();
   });
 
-  it('Null', () => {
-    const target = null;
+  it('Should return true with null', () => {
+    // tslint:disable-next-line:no-any
+    const target: any = null;
 
-    expect(target.isNullOrWhitespace()).toBeTruthy();
+    expect(isNullOrWhitespace(target)).toBeTruthy();
   });
 
 });

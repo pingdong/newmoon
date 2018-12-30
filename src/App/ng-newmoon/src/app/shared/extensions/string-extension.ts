@@ -5,17 +5,19 @@ declare global {
 }
 
 String.prototype.isNullOrWhitespace = function(): boolean {
-  const input = String(this);
+  return isNullOrWhitespace(this);
+};
+
+export function isNullOrWhitespace(input) {
+  if (typeof input === 'undefined' || input == null) {
+    return true;
+  }
 
   if (!input) {
     return true;
   }
 
-  if (this.trim()) {
-    return true;
-  } else {
-    return false;
-  }
-};
+  return !input.trim();
+}
 
 export {};
