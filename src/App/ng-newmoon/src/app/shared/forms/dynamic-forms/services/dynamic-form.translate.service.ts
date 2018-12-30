@@ -8,7 +8,11 @@ export class DyanmicFormTranslateService {
 
   // Build Form Group
   // tslint:disable-next-line no-any
-  public toFormGroup(settings: DynamicItemBase<any>[] ) {
+  public toFormGroup(settings: DynamicItemBase<any>[]): FormGroup {
+
+    if (!settings) {
+      throw Error('argument is null');
+    }
 
     const group: { [key: string]: AbstractControl; } = {};
     const sortedItems = settings.sort((a, b) => a.order - b.order);

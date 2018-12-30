@@ -1,3 +1,5 @@
+import { DynamicItemType } from './dynamic-item-type';
+
 export class DynamicItemBase<T> {
 
     key: string;
