@@ -8,13 +8,12 @@ describe('UserProfileService', () => {
     TestBed.configureTestingModule({ providers: [UserProfileService] });
   });
 
-  it('Should return default UserProfile', (done: DoneFn) => {
+  it('Should return default UserProfile', () => {
     const service = TestBed.get(UserProfileService);
 
     service.getProfile().subscribe(value => {
       expect(value).toEqual(new UserProfile());
-      done();
-    });
+    }, fail);
 
   });
 

@@ -24,7 +24,7 @@ describe('ConfigService', () => {
     httpSpy = TestBed.get(HttpClient);
   });
 
-  it('Should return default AppConfig', (done: DoneFn) => {
+  it('Should return default AppConfig', () => {
     const service = TestBed.get(ConfigService);
     const stubValue = {  'appTitle': 'Newmoon - NG', 'modules': [ { 'title': 'Dashboard', 'uri': '/dashboard' } ] };
 
@@ -32,10 +32,9 @@ describe('ConfigService', () => {
 
     service.getConfig().subscribe(value => {
       expect(value).toBe(stubValue);
-      expect(httpSpy.get.calls.count()).toBe(1, 'spy method was called more than once');
-
-      done();
     });
+
+    expect(httpSpy.get.calls.count()).toBe(1, 'spy method was called more than once');
   });
 
 });
