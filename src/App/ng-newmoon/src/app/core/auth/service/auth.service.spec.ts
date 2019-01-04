@@ -1,54 +1,56 @@
+import { TestBed } from '@angular/core/testing';
 import { HttpErrorResponse } from '@angular/common/http';
-import { of } from 'rxjs';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { AuthService } from './auth.service';
 
+let httpTestingController: HttpTestingController;
+
 describe('AuthService', () => {
 
-  // Clean up
-  afterEach(() => {
-    localStorage.removeItem('token');
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule ],
+      providers: [ AuthService ]
+    });
+
+    httpTestingController = TestBed.get(HttpTestingController);
   });
 
-  function setup() {
-    const httpSpy = jasmine.createSpyObj('Http', ['post']);
+  afterEach(() => {
+    // Clean up
+    localStorage.removeItem('token');
 
-    const stubValue = {
-                        'token': '01234',
-                        'username': 'user'
-                      };
-    const errorResponse = new HttpErrorResponse({
-                                                  error: 'test 401 error',
-                                                  status: 401,
-                                                  statusText: 'Unauthorized'
-                                                });
-
-    httpSpy.post.withArgs('/login', { 'username': 'user', 'password': 'pwd' }).and.returnValue(of(stubValue))
-                .and.returnValue(of(errorResponse));
-
-    const authService = new AuthService(httpSpy);
-
-    return { authService, httpSpy };
-  }
+    httpTestingController.verify();
+  });
 
   it('Should login success', () => {
-    const { authService, httpSpy } = setup();
+    const service = TestBed.get(AuthService);
 
-    authService.login('user', 'pwd').subscribe(value => {
-      expect(httpSpy.post.calls.count()).toBe(1, 'spy method was called more than once');
+    service.login('user', 'pwd').subscribe(() => {
+      expect(localStorage.getItem('token')).toBe('01234');
     }, fail);
 
-    expect(localStorage.getItem('token')).toBe('01234');
+    const req = httpTestingController.expectOne(request => request.url === '/login' && request.body.password === 'pwd');
+    expect(req.request.method).toEqual('POST');
+    req.flush({ 'token': '01234', 'username': 'user' });
   });
 
   it('Should login failed with wrong password', () => {
-    const { authService, httpSpy } = setup();
+    const service = TestBed.get(AuthService);
 
-    authService.login('user', 'abc').subscribe(value => {
-      expect(httpSpy.post.calls.count()).toBe(1, 'spy method was called more than once');
-    }, fail);
+    service.login('user', 'abc').subscribe(
+      () => fail('should have failed with the 401 error'),
+      (error: HttpErrorResponse) => {
+        // tslint:disable-next-line:no-magic-numbers
+        expect(error.status).toEqual(401, 'status');
+        expect(error.error).toEqual('Unauthorized', 'message');
+      }
+    );
 
-    expect(localStorage.getItem('token')).toBeNull();
+    const req = httpTestingController.expectOne('/login');
+    expect(req.request.method).toEqual('POST');
+    req.flush('Unauthorized', { status: 401, statusText: 'Not Found' });
   });
 
 });
