@@ -1,7 +1,8 @@
 import { LoginAction, LogoutAction, ActionTypes } from './auth.actions';
 
-describe('LoginAction', () => {
-  it('should create an action', () => {
+describe('Auth Action', () => {
+
+  it('should login', () => {
     const payload = {
       username: 'ping',
       password: 'pwd'
@@ -15,24 +16,14 @@ describe('LoginAction', () => {
       }
     );
   });
-});
 
-describe('LoginSuccessAction', () => {
-  it('should create an action', () => {});
-});
-
-describe('LoginFailureAction', () => {
-  it('should create an action', () => {});
-});
-
-describe('LogoutAction', () => {
-  it('should create an action', () => {
-    const payload = {username: 'ping'};
+  it('should logout', () => {
+    const payload = { username: 'ping' };
     const action = new LogoutAction(payload);
 
     expect({...action}).toEqual(
       {
-        type: ActionTypes.LOGIN,
+        type: ActionTypes.LOGOUT,
         payload
       }
     );
