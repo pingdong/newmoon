@@ -2,9 +2,9 @@ import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testi
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { SelectionItem, TextItem, DynamicFormComponent } from '../../..';
-import { DynamicFormItemComponent } from '../dynamic-form-item/dynamic-form-item.component';
-import { DyanmicFormTranslateService } from '../../services/dynamic-form.translate.service';
+import { SelectionItem, TextItem, DynamicFormComponent } from '../..';
+import { DynamicFormItemComponent } from './dynamic-form-item/dynamic-form-item.component';
+import { DyanmicFormTranslateService } from '../services/dynamic-form.translate.service';
 
 describe('DynamicForm', () => {
 
