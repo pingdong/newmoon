@@ -1,12 +1,23 @@
 <div>
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
-    <div *ngFor="let item of items; trackBy:trackByKey" class="form-row">
-      <app-dynamic-form-item [item]="item" [form]="form"></app-dynamic-form-item>
+  <form class="form" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+
+    <div *ngFor="let item of items; trackBy:trackByKey" class="form__row">
+      <app-dynamic-form-item
+        class="form__item"
+        [item]="item"
+        [parentFormGroup]="formGroup">
+      </app-dynamic-form-item>
     </div>
 
-    <div class="form-row">
-      <button mat-button type="submit" [disabled]="!form.valid" i18n="Save|Save@@Button_Save">Save</button>
+    <div class="form__row">
+      <button mat-button
+        i18n="Save|Save@@Button_Save"
+        class="form__submit"
+        type="submit"
+        [disabled]="!(formGroup.dirty && formGroup.valid)">
+        Save
+      </button>
     </div>
   </form>
 

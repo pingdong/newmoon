@@ -28,7 +28,7 @@ export class UserProfileControlService {
       new TextItem({
         key: 'emailAddress',
         label: 'Email',
-        type: 'email',
+        inputType: 'email',
         order: 3
       })
     ];

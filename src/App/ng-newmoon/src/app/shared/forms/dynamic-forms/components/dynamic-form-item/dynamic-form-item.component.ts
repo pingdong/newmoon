@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { DynamicItemBase } from '../../models/dynamic-item.base';
 
@@ -13,8 +13,24 @@ export class DynamicFormItemComponent {
 
   // tslint:disable-next-line no-any
   @Input() item: DynamicItemBase<any>;
-  @Input() form: FormGroup;
+  @Input() parentFormGroup: FormGroup;
 
-  public get isValid() { return this.form.controls[this.item.key].valid; }
+  public get isValid() { return this.getControl().valid; }
 
+  public get hasRequiredError(): boolean {
+    const error = this.getControl().errors;
+    if (error) {
+      if (error.required) {
+        return error.required;
+      }
+
+      return false;
+    }
+
+    return false;
+  }
+
+  private getControl(): AbstractControl {
+    return this.parentFormGroup.controls[this.item.key];
+  }
 }
