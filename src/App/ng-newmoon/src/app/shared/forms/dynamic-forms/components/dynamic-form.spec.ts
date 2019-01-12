@@ -6,7 +6,7 @@ import { SelectionItem, TextItem, DynamicFormComponent } from '../../..';
 import { DynamicFormItemComponent } from '../dynamic-form-item/dynamic-form-item.component';
 import { DyanmicFormTranslateService } from '../../services/dynamic-form.translate.service';
 
-describe('DynamicFormComponent', () => {
+describe('DynamicForm', () => {
 
   let component: DynamicFormComponent;
   let fixture: ComponentFixture<DynamicFormComponent>;
