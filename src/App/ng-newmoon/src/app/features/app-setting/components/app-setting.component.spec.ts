@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedModule } from '@app/shared';
+
 import { AppSettingComponent } from './app-setting.component';
+import { SettingControlService } from '../services/setting.control.service';
 
 describe('AppSettingComponent', () => {
   let component: AppSettingComponent;
@@ -8,7 +11,9 @@ describe('AppSettingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppSettingComponent ]
+      declarations: [ AppSettingComponent ],
+      imports: [ SharedModule ],
+      providers: [ SettingControlService ]
     })
     .compileComponents();
   }));
