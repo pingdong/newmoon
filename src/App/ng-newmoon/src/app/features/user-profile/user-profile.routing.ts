@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UnsaveGuard } from '@app/core/router';
 
-import { UnsaveGuard } from '../../shared';
 import { UserProfileComponent } from './components/user-profile.component';
 
 const routes: Routes = [

@@ -6,10 +6,12 @@ import { mergeMap, materialize, delay, dematerialize } from 'rxjs/operators';
 @Injectable()
 export class DevInterceptor implements HttpInterceptor {
 
-    private devToken: String = 'fake-jwt-token';
+    private devToken = 'fake-jwt-token';
+    private defaultDelay = 500;
 
     constructor() {}
 
+    // tslint:disable-next-line no-any
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         return of(null).pipe(
@@ -44,7 +46,7 @@ export class DevInterceptor implements HttpInterceptor {
                 return next.handle(request);
             }),
             materialize(),
-            delay(500),
+            delay(this.defaultDelay),
             dematerialize()
         );
     }

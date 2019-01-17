@@ -1,23 +1,25 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { AddressService } from '../../address.service';
+import { AddressService } from './address.service';
 import { AppConfig } from './config.model';
 
 @Injectable({providedIn: 'root'})
 export class ConfigService {
+
+  private maxRetry = 3;
 
   constructor(
     private http: HttpClient,
     private address: AddressService
   ) {}
 
-  public getConfig() {
+  public getConfig(): Observable<AppConfig> {
     return this.http.get<AppConfig>(this.address.config)
                     .pipe(
-                      retry(3),
+                      retry(this.maxRetry),
                       catchError(this.handleError),
                     );
   }

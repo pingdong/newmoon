@@ -3,13 +3,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from '@app/core';
 
+import { AppComponent } from './core/console/app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent, CoreModule } from './core';
-import { SharedModule } from './shared';
 
-import './extensions/string-extension.ts';
+// Loading extensions
+import '@app/shared/extensions/string-extension.ts';
 
+// Localisation
 import localeZhExtra from '@angular/common/locales/extra/zh-Hans';
 import localeZh from '@angular/common/locales/zh-Hans';
 registerLocaleData(localeZh, 'zh-Hans', localeZhExtra);

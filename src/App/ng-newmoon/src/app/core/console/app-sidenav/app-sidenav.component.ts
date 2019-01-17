@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { ConfigService } from '../../config/config.service';
-import { AppModule } from '../../config/app.module.model';
+import { ConfigService, AppModule } from '@app/core/config';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,9 +10,11 @@ import { AppModule } from '../../config/app.module.model';
   styleUrls: ['./app-sidenav.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppSideNavComponent implements OnInit {
+export class AppSideNavComponent implements OnInit, OnDestroy {
 
   public modules: AppModule[];
+
+  private destoryed$ = new Subject();
 
   constructor(
     /** @internal */
@@ -21,12 +24,23 @@ export class AppSideNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.configService.getConfig()
+          .pipe(
+            takeUntil(this.destoryed$)
+          )
           .subscribe((cfg) => {
               this.modules = cfg.modules;
 
               this.changeDetectorRef.markForCheck();
             }
           );
+  }
+
+  public ngOnDestroy(): void {
+    this.destoryed$.next();
+  }
+
+  public trackByTitle(module: AppModule) {
+    return module.title;
   }
 
 }

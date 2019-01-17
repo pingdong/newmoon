@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, catchError, tap } from 'rxjs/operators';
+import { map, switchMap, catchError } from 'rxjs/operators';
 
-import { AuthService } from '../../../../shared';
+import { AuthService } from '../../service/auth.service';
 import * as auth from '../actions/auth.actions';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class AuthEffects {
             if (result && result.token) {
               return new auth.LoginSuccessAction({ username: result.username, token: result.token });
             } else {
-              return new auth.LoginFailureAction({ error: result.errorMessage });
+              return new auth.LoginFailureAction({ errorMessage: result.errorMessage });
             }
           })
         );
@@ -37,12 +37,12 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  LogInSuccess$: Observable<any> = this.actions$.pipe(
+  LogInSuccess$: Observable<auth.LoginSuccessAction> = this.actions$.pipe(
     ofType(auth.ActionTypes.LOGIN_SUCCESS)
   );
 
   @Effect({ dispatch: false })
-  LoginFailure$: Observable<Action> = this.actions$.pipe(
+  LoginFailure$: Observable<auth.LoginFailureAction> = this.actions$.pipe(
     ofType(auth.ActionTypes.LOGIN_FAILURE)
   );
 
@@ -72,7 +72,7 @@ export class AuthEffects {
       return this.authService.loadLocalStatus()
         .pipe(
           catchError(error => {
-            return of({ });
+            return of({});
           }),
           map((result) => {
             return new auth.GetStatusSuccessAction({ ...result });

@@ -1,7 +1,8 @@
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { DynamicFormComponent, DynamicItemBase } from '@app/shared/forms';
+import { UnsaveCheck } from '@app/core/router';
 
 import { SettingControlService } from '../services/setting.control.service';
-import { DynamicFormComponent, UnsaveCheck } from '../../../shared';
 
 @Component({
   selector: 'app-setting',
@@ -11,7 +12,7 @@ import { DynamicFormComponent, UnsaveCheck } from '../../../shared';
 })
 export class AppSettingComponent implements UnsaveCheck {
 
-  public settings: any[];
+  public settings: DynamicItemBase<string>[];
 
   @ViewChild(DynamicFormComponent)  private form: DynamicFormComponent;
 
@@ -23,7 +24,7 @@ export class AppSettingComponent implements UnsaveCheck {
     return this.form.isDirty();
   }
 
-  private onSave($event: any) {
-    this.form.markPristine();
+  // tslint:disable-next-line no-any
+  public onSave($event: any) {
   }
 }

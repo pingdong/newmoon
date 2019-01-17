@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-
-import { DynamicItemBase, SelectionItem, TextItem } from '../../../shared';
+import { DynamicItemBase, TextItem } from '@app/shared/forms';
 
 @Injectable()
 export class UserProfileControlService {
 
   // Form definition
-  public getDefinition(): DynamicItemBase<any>[] {
+  public getDefinition(): DynamicItemBase<string>[] {
 
-    const items: DynamicItemBase<any>[] = [
+    const items: DynamicItemBase<string>[] = [
 
       new TextItem({
         key: 'lastName',
@@ -29,7 +28,7 @@ export class UserProfileControlService {
       new TextItem({
         key: 'emailAddress',
         label: 'Email',
-        type: 'email',
+        inputType: 'email',
         order: 3
       })
     ];

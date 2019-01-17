@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
-import { SharedModule } from '../../shared';
+import { SharedModule } from '@app/shared';
 
 import { DashboardRoutingModule } from './dashboard.routing';
 import { DashboardComponent } from './components/dashboard.component';

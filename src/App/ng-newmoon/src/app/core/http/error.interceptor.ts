@@ -5,20 +5,23 @@ import { HttpRequest, HttpErrorResponse,
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/shared';
+import { AuthService } from '@app/core/auth';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
+  private unauthorized = 401;
+
   constructor(private router: Router,
               private authService: AuthService) {}
 
+  // tslint:disable-next-line no-any
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(request)
         .pipe(
           catchError(response => {
-              if (response instanceof HttpErrorResponse && response.status === 401) {
+              if (response instanceof HttpErrorResponse && response.status === this.unauthorized) {
                 this.authService.logout('');
 
                 this.router.navigateByUrl('/login');

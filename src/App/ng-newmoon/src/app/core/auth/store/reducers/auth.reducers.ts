@@ -39,16 +39,19 @@ export function reducer(state = initialState, action: All): State {
 function loginSuccessHandler(state: State, action: LoginSuccessAction) {
   return {
     ...state,
+    ...action.payload,
     isAuthenticated: true,
-    username: action.payload.username,
-    token: action.payload.token,
+    errorMessage: '',
   };
 }
 
 function loginFailureHandler(state: State, action: LoginFailureAction) {
   return {
     ...state,
-    errorMessage: action.payload.error
+    ...action.payload,
+    isAuthenticated: false,
+    username: '',
+    token: '',
   };
 }
 
@@ -57,14 +60,16 @@ function logoutSuccessHandler(state: State, action: LogoutSuccessAction) {
     ...state,
     isAuthenticated: false,
     username: '',
-    token: ''
+    token: '',
+    errorMessage: '',
   };
 }
 
 function getStatusSuccessHandler(state: State, action: GetStatusSuccessAction) {
   return {
     ...state,
-    ...action.payload
+    ...action.payload,
+    errorMessage: '',
   };
 }
 

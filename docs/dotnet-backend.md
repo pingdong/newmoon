@@ -11,23 +11,24 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 
 
 ### The following libraries are used:
-* [Microsoft ASP.Net Core 2.1.3](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
-* [Microsoft OData 7.0.1](http://odata.github.io/)
-* [GraphQL .Net 2.0.0](https://graphql-dotnet.github.io/)
+* [Microsoft ASP.Net Core 2.1.6](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
+* [Microsoft OData 7.5.1](http://odata.github.io/)
+* [GraphQL .Net 2.4.0](https://graphql-dotnet.github.io/)
 * [StackExchange.Redis 1.2.6](https://github.com/StackExchange/StackExchange.Redis)
 * [Dapper 1.50.5](https://github.com/StackExchange/Dapper) ([Tutorial](http://dapper-tutorial.net/dapper))
 * [Microsoft Entity Framework Core 2.1.2](https://docs.microsoft.com/en-us/ef/#pivot=efcore)
 * [Autofac 4.8.1](https://autofac.org/)
-* [AutoMapper 7.0.1](https://automapper.org/)
+* [AutoMapper 8.0.0](https://automapper.org/)
 * [FluentValidation 8.0.0](https://fluentvalidation.net/)
 * [MediatR 5.1.0](https://github.com/jbogard/MediatR)
 * [Serilog.AspNetCore 2.1.1](https://serilog.net/)
-* [Polly 6.0.1](http://www.thepollyproject.org/)
+* [Polly 6.1.1](http://www.thepollyproject.org/)
 * [NCrontab 3.3.0](https://github.com/atifaziz/NCrontab)
-* [Swashbuckle.AspNetCore 3.0.0](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
-* [xUnit.net 2.3.1](https://xunit.github.io/)
+* [Swashbuckle.AspNetCore 4.0.1](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+* [xUnit.net 2.4.1](https://xunit.github.io/)
 * [Moq 4.9.0](https://github.com/moq/moq4)
 * [Docker 18.06.0](https://www.docker.com/)
+* [IdentityServer4 2.3.0](https://identityserver.io/)
 
 ## The following design patterns are involved:
 * Clean Architect (aka Onion Architect)

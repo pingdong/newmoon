@@ -1,3 +1,3 @@
-<nav>         
-  <app-sidenav-item *ngFor='let module of modules' [module]="module"></app-sidenav-item>
+<nav>
+  <app-sidenav-item *ngFor='let module of modules; trackBy:trackByTitle' [module]="module"></app-sidenav-item>
 </nav>

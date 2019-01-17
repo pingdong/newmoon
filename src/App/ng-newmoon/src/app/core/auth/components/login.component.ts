@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import * as fromStore from '../../store/app.states';
 import { LoginAction, LogoutAction } from '../store/actions/auth.actions';
@@ -13,7 +14,7 @@ import { LoginAction, LogoutAction } from '../store/actions/auth.actions';
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   public loginForm = this.fb.group({
     username: ['', Validators.required],
@@ -22,34 +23,44 @@ export class LoginComponent implements OnInit {
 
   public errorMessage: string;
 
-  private authState$: Observable<any>;
   private returnUrl: string;
+  private destoryed$ = new Subject();
 
   constructor(
     /** @internal */
     private store: Store<fromStore.AppState>,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
-  ) {
-    this.authState$ = this.store.select(fromStore.authState$);
-  }
+    private fb: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef,
+  ) { }
 
   public ngOnInit(): void {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    this.authState$.subscribe(
-      state => {
-        if (state && state.errorMessage) {
-          this.errorMessage = state.errorMessage;
-        }
+    this.store
+        .pipe(
+          select('auth'),
+          takeUntil(this.destoryed$)
+        )
+        .subscribe(
+          state => {
+            if (state && state.errorMessage) {
+              this.errorMessage = state.errorMessage;
+            }
 
-        if (state && state.token) {
-          this.router.navigateByUrl(this.returnUrl);
-        }
-      }
-    );
+            if (state && state.token) {
+              this.router.navigateByUrl(this.returnUrl);
+            }
+
+            this.changeDetectorRef.markForCheck();
+          }
+        );
+  }
+
+  public ngOnDestroy(): void {
+    this.destoryed$.next();
   }
 
   public login(): void {
@@ -70,7 +81,7 @@ export class LoginComponent implements OnInit {
     // Have to send a LogoutAction to reset auth state
     //   Otherwise, a failure login attempt stays in the store
     //   an error message shows up
-    this.store.dispatch(new LogoutAction({}));
+    this.store.dispatch(new LogoutAction());
 
     this.router.navigateByUrl('/');
   }

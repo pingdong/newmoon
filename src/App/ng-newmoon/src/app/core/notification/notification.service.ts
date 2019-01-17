@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 
@@ -7,14 +7,12 @@ import { NotificationMessage } from './notification.message.model';
 @Injectable({providedIn: 'root'})
 export class NotificationService {
 
-  private message$: Subject<NotificationMessage>;
+  private message$ = new Subject<NotificationMessage>();
 
   constructor(
     /** @internal */
     private snackBar: MatSnackBar,
   ) {
-    this.message$ = new Subject<NotificationMessage>();
-
     this.message$
       .subscribe(msg =>
         this.snackBar.open(msg.message, '', {

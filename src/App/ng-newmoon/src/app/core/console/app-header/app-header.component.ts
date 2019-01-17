@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy, DoCheck, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy, DoCheck, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { ConfigService } from '../../config/config.service';
-import { NotificationService } from '../../notification/notification.service';
+import { ConfigService, AppConfig } from '@app/core/config';
+import { NotificationService } from '@app/core/notification';
+import * as fromStore from '@app/core/store/app.states';
 
-import * as fromStore from '../../store/app.states';
 import { LogoutAction, GetStatusAction } from '../../auth/store/actions/auth.actions';
 
 @Component({
@@ -15,20 +16,21 @@ import { LogoutAction, GetStatusAction } from '../../auth/store/actions/auth.act
   templateUrl: './app-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppHeaderComponent implements OnInit {
+export class AppHeaderComponent implements OnInit, OnDestroy {
 
   // Using async pipe to detect changes
-  public config$: Observable<any>;
+  public config$: Observable<AppConfig>;
 
   // Explicitly detect changes by calling markForCheck
   public isLoggedIn: boolean;
-  public username: String;
+  public username: string;
   public messageCount: number;
 
   @Output()
   public sidenavToggled = new EventEmitter();
 
-  private authState$: Observable<any>;
+  private destoryed$ = new Subject();
+  private demoMessageCount = 9;
 
   constructor(
     /** @internal */
@@ -38,8 +40,6 @@ export class AppHeaderComponent implements OnInit {
     private store: Store<fromStore.AppState>,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
-    this.authState$ = this.store.select(fromStore.authState$);
-    this.config$ = this.configService.getConfig();
   }
 
   // If token is required to be removed after closing browser, browser tab
@@ -51,22 +51,32 @@ export class AppHeaderComponent implements OnInit {
 
   public ngOnInit(): void {
 
-    this.authState$.subscribe(
-      state => {
-        if (state && state.token) {
-          this.isLoggedIn = state.isAuthenticated;
-          this.username = state.username;
-        } else {
-          this.isLoggedIn = false;
-          this.username = '';
-        }
+    this.config$ = this.configService.getConfig();
 
-        this.changeDetectorRef.markForCheck();
-      }
-    );
+    this.store.pipe(
+                select('auth'),
+                takeUntil(this.destoryed$)
+              )
+              .subscribe(
+                state => {
+                  if (state && state.token) {
+                    this.isLoggedIn = state.isAuthenticated;
+                    this.username = state.username ? state.username : '';
+                  } else {
+                    this.isLoggedIn = false;
+                    this.username = '';
+                  }
+
+                  this.changeDetectorRef.markForCheck();
+                }
+              );
 
     this.store.dispatch(new GetStatusAction());
-    this.messageCount = 8;
+    this.messageCount = this.demoMessageCount;
+  }
+
+  public ngOnDestroy(): void {
+    this.destoryed$.next();
   }
 
   public login(): void {

@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+      "editorconfig.editorconfig",
+      "mikael.angular-beastcode",
+      "msjsdiag.debugger-for-chrome",
+      "eg2.tslint"
+  ]
+}

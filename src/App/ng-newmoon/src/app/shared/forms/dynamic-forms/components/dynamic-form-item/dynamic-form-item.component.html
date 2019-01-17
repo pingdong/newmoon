@@ -1,0 +1,30 @@
+<div [formGroup]="parentFormGroup">
+
+  <label class="form__label" [attr.for]="item.key">{{item.label}}</label>
+
+  <div [ngSwitch]="item.controlType">
+
+    <input *ngSwitchCase="'textbox'"
+          [formControlName]="item.key"
+          [id]="item.key"
+          [type]="item.inputType"
+          [value]="item.value"
+          class="form__textbox">
+
+    <select *ngSwitchCase="'dropdown'"
+            [formControlName]="item.key"
+            [id]="item.key"
+            [value]="item.value"
+            class="form__dropdown">
+      <option *ngFor="let opt of item.options; trackBy:opt?.key"
+              [value]="opt.value"
+              class="form__dropdown__item">
+        {{opt.text}}
+      </option>
+    </select>
+
+  </div>
+
+  <div class="form__error-message" *ngIf="hasRequiredError">{{item.label}} is required</div>
+
+</div>
