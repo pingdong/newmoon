@@ -36,6 +36,7 @@ describe('Popup Message', () => {
 
     expect(routerSpy.navigate.calls.count()).toEqual(0);
 
+    // tslint:disable-next-line:no-magic-numbers
     tick(1000);
     expect(routerSpy.navigate.calls.count()).toEqual(1);
   }));
