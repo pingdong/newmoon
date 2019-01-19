@@ -27,9 +27,11 @@ describe('Popup Message', () => {
     fixture.detectChanges();
   });
 
-  it('should call router in send() after 1ms', fakeAsync(() => {
+  afterEach(() => {
     routerSpy.navigate.calls.reset();
+  });
 
+  it('should call router in send() after 1ms', fakeAsync(() => {
     component.send();
 
     fixture.detectChanges();
@@ -42,8 +44,6 @@ describe('Popup Message', () => {
   }));
 
   it('should call router in Close()', () => {
-    routerSpy.navigate.calls.reset();
-
     component.close();
 
     fixture.detectChanges();
