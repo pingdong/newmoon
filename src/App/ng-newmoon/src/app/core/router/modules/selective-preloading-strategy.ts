@@ -12,6 +12,7 @@ export class SelectivePreloadingStrategy implements PreloadingStrategy {
     if (route.data && route.data['preload'] && route.path) {
         this.preloadedModules.push(route.path);
 
+        // Call the method that return the preloaded data
         return load();
     } else {
         return of(null);
