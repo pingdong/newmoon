@@ -29,11 +29,8 @@ export class AppReadyEvent {
     const bubbles = true;
     const cancelable = false;
 
-    const appReadyEvent = new CustomEvent('appready', {
-        bubbles,
-        cancelable,
-    });
-    this.document.dispatchEvent( this.createEvent('appready', bubbles, cancelable ) );
+    // const appReadyEvent = new CustomEvent('appready', { bubbles, cancelable });
+    this.document.dispatchEvent( this.createEvent('appready', bubbles, cancelable) );
     this.isAppReady = true;
   }
 
@@ -54,6 +51,6 @@ export class AppReadyEvent {
         customEvent.initCustomEvent( eventType, bubbles, cancelable, null);
     }
 
-    return( customEvent );
+    return (customEvent);
   }
 }
