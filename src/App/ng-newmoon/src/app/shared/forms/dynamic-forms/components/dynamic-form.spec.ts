@@ -52,56 +52,57 @@ describe('DynamicForm', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(DynamicFormComponent);
     component = fixture.componentInstance;
+
     // simulate the parent setting the input property with that hero
     component.items = expectedControls;
 
-    // trigger initial data binding
     fixture.detectChanges();
-  });
+  }));
 
   it('should create properly', fakeAsync(() => {
 
     // Forms
     //  IsDirty = false
-    expect(component.isDirty()).toBe(false);
-    expect(component.formGroup.dirty).toBe(false);
+    expect(component.isDirty()).toBe(false, 'IsDirty should be false');
+    expect(component.formGroup.dirty).toBe(false, 'dirty should be false');
     //  IsValid = true
-    expect(component.isValid()).toBe(true);
-    expect(component.formGroup.invalid).toBe(false);
-    expect(component.formGroup.status).toEqual('VALID');
+    expect(component.isValid()).toBe(true, 'isValid should be true');
+    expect(component.formGroup.invalid).toBe(false, 'form should be valid');
+    expect(component.formGroup.status).toEqual('VALID', 'status should be VALID');
     //  Error Message
     const errors = fixture.debugElement.queryAll(By.css('.form__error-message'));
-    expect(errors.length).toEqual(0);
+    // tslint:disable-next-line:no-magic-numbers
+    expect(errors.length).toEqual(0, 'Should not have any error');
 
     // Common
     //  Label for every item
     const labels = fixture.debugElement.queryAll(By.css('.form__label'));
-    expect(labels.length).toEqual(expectedControls.length);
+    expect(labels.length).toEqual(expectedControls.length, 'The number of controls doesn\'t match its expectation');
     for (let i = 0; i < expectedControls.length; i++) {
-      expect(labels[i].nativeElement.innerText).toEqual(expectedControls[i].label);
-      expect(labels[i].nativeElement.getAttribute('for')).toEqual(expectedControls[i].key);
+      expect(labels[i].nativeElement.innerText).toEqual(expectedControls[i].label, 'Label doesn\'t match its setting');
+      expect(labels[i].nativeElement.getAttribute('for')).toEqual(expectedControls[i].key, 'Label doesn\'t match its setting');
     }
 
     // Controls
     //  Textbox
-    const textbox = fixture.debugElement.query(By.css('.form__textbox')).nativeElement;
-    expect(textbox.getAttribute('type')).toEqual('text');
-    expect(textbox.getAttribute('id')).toEqual(expectedControls[1].key);
+    const textbox = fixture.nativeElement.querySelector('input');
+    expect(textbox.getAttribute('type')).toEqual('text', 'Expect a textbox here');
+    expect(textbox.getAttribute('id')).toEqual(expectedControls[1].key, 'Id doesn\'t match the expect id');
     //    Initial value
-    expect(textbox.value).toEqual(expectedControls[1].value);
+    expect(textbox.value).toEqual(expectedControls[1].value, 'Initial value doesn\'t match setting');
     //  Dropdown
-    const dropdown = fixture.debugElement.query(By.css('.form__dropdown')).nativeElement;
-    expect(dropdown.getAttribute('id')).toEqual(expectedControls[0].key);
+    const dropdown = fixture.nativeElement.querySelector('select');
+    expect(dropdown.getAttribute('id')).toEqual(expectedControls[0].key, 'Id doesn\'t match the expect id');
     //    Drop down options
-    expect(dropdown.options.length).toEqual(dropdownOptions.length);
+    expect(dropdown.options.length).toEqual(dropdownOptions.length, 'The number of the candidate value doesn\'t match setting');
     for (let i = 0; i < dropdownOptions.length; i++) {
-      expect(dropdown.options[i].value).toEqual(dropdownOptions[i].value);
+      expect(dropdown.options[i].value).toEqual(dropdownOptions[i].value, 'The option value doesn\'t match setting');
     }
     //    Initial value
-    expect(dropdown.value).toEqual(expectedControls[0].value);
+    expect(dropdown.value).toEqual(expectedControls[0].value, 'Initial value doesn\'t match setting');
 
   }));
 
@@ -116,28 +117,26 @@ describe('DynamicForm', () => {
     //  Dropdown
     component.formGroup.controls.logLevel.setValue(testSelection);
     //  Trigger event
-    const textbox = fixture.debugElement.query(By.css('.form__textbox')).nativeElement;
+    const textbox = fixture.nativeElement.querySelector('input');
     textbox.dispatchEvent(new Event('input'));
-
-    // trigger initial data binding
     fixture.detectChanges();
 
     // Textbox
-    expect(component.formGroup.controls.productName.value).toEqual(testString);
+    expect(component.formGroup.controls.productName.value).toEqual(testString, 'The value of control doesn\'t match the provided value');
     // Dropdown
-    expect(component.formGroup.controls.logLevel.value).toEqual(testSelection);
+    expect(component.formGroup.controls.logLevel.value).toEqual(testSelection, 'The value of control doesn\'t match the provided value');
 
     // Value
     expect(component.formGroup.value).toEqual({ logLevel: testSelection, productName: testString });
     // IsDirty = True
-    expect(component.isDirty()).toBe(true);
-    expect(component.formGroup.dirty).toBe(true);
+    expect(component.isDirty()).toBe(true, 'IsDirty should be true after updated');
+    expect(component.formGroup.dirty).toBe(true, 'Dirty should be true after updated');
     // IsValid = True
-    expect(component.isValid()).toBe(true);
-    expect(component.formGroup.status).toEqual('VALID');
+    expect(component.isValid()).toBe(true, 'IsValid should be true after updated');
+    expect(component.formGroup.status).toEqual('VALID', 'Status should be VALID after updated');
     // Error Message
     const errors = fixture.debugElement.queryAll(By.css('.form__error-message'));
-    expect(errors.length).toEqual(0);
+    expect(errors.length).toEqual(0, 'Should not have any error message');
 
   }));
 
@@ -146,28 +145,26 @@ describe('DynamicForm', () => {
     // Textbox
     component.formGroup.controls.productName.setValue('');
     //  Trigger event
-    const textbox = fixture.debugElement.query(By.css('.form__textbox')).nativeElement;
+    const textbox = fixture.nativeElement.querySelector('input');
     textbox.dispatchEvent(new Event('input'));
-
-    // trigger initial data binding
     fixture.detectChanges();
 
-    expect(component.formGroup.controls.productName.value).toEqual('');
-    expect(component.formGroup.controls.productName.errors).toEqual({ required: true });
-
-    // IsDirty = True
-    expect(component.isDirty()).toBe(true);
-    expect(component.formGroup.dirty).toBe(true);
-    // IsValid = True
-    expect(component.isValid()).toBe(false);
-    expect(component.formGroup.status).toEqual('INVALID');
-    // Error Message
+    // Evaluate
+    expect(component.formGroup.controls.productName.value).toEqual('', 'Value should be cleared');
+    expect(component.formGroup.controls.productName.errors).toEqual({ required: true }, 'Should have required error');
+    //  IsDirty = True
+    expect(component.isDirty()).toBe(true, 'IsDirty should be true after updated');
+    expect(component.formGroup.dirty).toBe(true, 'Dirty should be true after updated');
+    //  IsValid = True
+    expect(component.isValid()).toBe(false, 'IsValid should be false after updated');
+    expect(component.formGroup.status).toEqual('INVALID', 'Status should be INVALID after updated');
+    //  Error Message
     const errors = fixture.debugElement.queryAll(By.css('.form__error-message'));
-    expect(errors.length).toEqual(1);
+    expect(errors.length).toEqual(1, 'Should have an error message');
 
     // Save button
-    const btnSave = fixture.debugElement.query(By.css('.form__submit'));
-    expect(btnSave.nativeElement.disabled).toBe(true);
+    const btnSave = fixture.nativeElement.querySelector('button');
+    expect(btnSave.disabled).toBe(true, 'Can\'t save when value is invalid');
 
   }));
 
@@ -175,6 +172,7 @@ describe('DynamicForm', () => {
 
     // Setup
     let eventTriggered = false;
+
     component.save.subscribe((data) => {
       if (!data) {
         eventTriggered = false;
@@ -185,21 +183,19 @@ describe('DynamicForm', () => {
 
     // Update data
     component.formGroup.controls.productName.setValue('new value');
-    const textbox = fixture.debugElement.query(By.css('.form__textbox')).nativeElement;
+    const textbox = fixture.nativeElement.querySelector('input');
     textbox.dispatchEvent(new Event('input'));
 
     // Click Save
     fixture.debugElement.query(By.css('form')).triggerEventHandler('ngSubmit', null);
-
-    // trigger initial data binding
     fixture.detectChanges();
 
     // Check Save is triggered
-    expect(eventTriggered).toBe(true);
+    expect(eventTriggered).toBe(true, 'Save event should be triggered');
 
     // IsDirty = True
-    expect(component.isDirty()).toBe(false);
-    expect(component.formGroup.dirty).toBe(false);
+    expect(component.isDirty()).toBe(false, 'After saving, isDirty should be false');
+    expect(component.formGroup.dirty).toBe(false, 'After saving, dirty should be false');
 
   }));
 
