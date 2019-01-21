@@ -6,6 +6,7 @@ import { UserProfileComponent } from './user-profile.component';
 import { UserProfileControlService } from '../services/user-profile.control.service';
 
 describe('UserProfileComponent', () => {
+
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
 
@@ -18,13 +19,14 @@ describe('UserProfileComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
