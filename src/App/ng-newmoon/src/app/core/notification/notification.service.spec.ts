@@ -5,6 +5,8 @@ import { NotificationMessage } from './notification.message.model';
 
 describe('NotificationService', () => {
 
+  const defaultWaitingPeriod = 100;
+
   let service: NotificationService;
   const snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
 
@@ -21,7 +23,7 @@ describe('NotificationService', () => {
 
     service.sendText(msgText);
 
-    tick(100);
+    tick(defaultWaitingPeriod);
 
     expect(snackBar.open.calls.count()).toEqual(1);
   }));
@@ -31,7 +33,7 @@ describe('NotificationService', () => {
 
     service.sendMessage(msg);
 
-    tick(100);
+    tick(defaultWaitingPeriod);
 
     expect(snackBar.open.calls.count()).toEqual(1);
   }));
