@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { Subject } from 'rxjs';
 import { filter, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
+import { SearchService } from '../../../service/search.service';
+
 @Component({
   selector: 'app-header-search',
   templateUrl: './app-header-search.component.html',
@@ -16,7 +18,7 @@ export class AppHeaderSearchComponent implements OnInit, OnDestroy {
   private minimalTextLength = 2;
   private dueTime = 10;
 
-  constructor() {
+  constructor(private searchService: SearchService) {
     this.search$ = new Subject();
   }
 
@@ -28,7 +30,7 @@ export class AppHeaderSearchComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         takeUntil(this.destoryed$)
       )
-      .subscribe(result => console.log(result));
+      .subscribe(criteria => this.searchService.search(criteria));
   }
 
   public ngOnDestroy(): void {

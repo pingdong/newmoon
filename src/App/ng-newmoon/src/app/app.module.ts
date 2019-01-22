@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@app/core';
 
-import { AppComponent } from './core/console/app.component';
+import { AppComponent } from './core/console/components/app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 // Loading extensions
