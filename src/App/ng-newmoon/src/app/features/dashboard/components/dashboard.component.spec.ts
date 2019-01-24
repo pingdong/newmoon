@@ -1,3 +1,4 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -11,7 +12,8 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent ],
-      imports: [ RouterModule.forRoot([]) ]
+      imports: [ RouterModule.forRoot([]) ],
+      providers: [ { provide: APP_BASE_HREF, useValue : '/' } ]
     })
     .compileComponents();
   }));
