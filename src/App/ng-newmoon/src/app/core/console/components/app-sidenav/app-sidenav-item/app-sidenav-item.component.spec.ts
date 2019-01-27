@@ -7,6 +7,7 @@ import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core
 
 import { AppModule } from '@app/core/config/app.module.model';
 import { AppSideNavItemComponent } from './app-sidenav-item.component';
+import { click } from '@app/dev';
 
 describe('AppSideNavItemComponent', () => {
 
@@ -130,7 +131,7 @@ describe('AppSideNavItemComponent', () => {
     fixture.detectChanges();
 
     const button = fixture.nativeElement.querySelector('button');
-    button.click();
+    click(button);
     tick(pauseTime);
     fixture.detectChanges();
 
