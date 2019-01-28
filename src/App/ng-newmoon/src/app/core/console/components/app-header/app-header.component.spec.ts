@@ -105,6 +105,7 @@ describe('AppHeaderComponent', () => {
     expect(search.length).toBe(0);
 
     const buttons = fixture.debugElement.queryAll(By.css('button'));
+    // tslint:disable-next-line:no-magic-numbers
     expect(buttons.length).toBe(4);  // dehaze, logo, help, login
   }));
 
@@ -121,6 +122,7 @@ describe('AppHeaderComponent', () => {
     // Help
     //    Click
     const buttons = fixture.debugElement.queryAll(By.css('button'));
+    // tslint:disable-next-line:no-magic-numbers
     click(buttons[2]);
 
     expect(notificationServiceSpy.sendText.calls.count()).toBe(1);

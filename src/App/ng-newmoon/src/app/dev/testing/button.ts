@@ -7,6 +7,7 @@ export const ButtonClickEvents = {
 };
 
 /** Simulate element click. Defaults to mouse left-button click event. */
+// tslint:disable-next-line:no-any
 export function click(el: DebugElement | HTMLElement, eventObj: any = ButtonClickEvents.left): void {
   if (el instanceof HTMLElement) {
     el.click();

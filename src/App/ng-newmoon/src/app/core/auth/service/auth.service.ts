@@ -11,7 +11,6 @@ export class AuthService {
 
   constructor (private http: HttpClient) { }
 
-  // tslint:disable-next-line no-any
   public login(username: string, password: string): Observable<any> {
     return this.http.post(this.loginUrl, {username: username, password: password})
       .pipe(
@@ -50,7 +49,6 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  // tslint:disable-next-line no-any
   public loadLocalStatus(): Observable<any> {
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('token');

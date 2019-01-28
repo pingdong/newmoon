@@ -11,7 +11,6 @@ export class DevInterceptor implements HttpInterceptor {
 
     constructor() {}
 
-    // tslint:disable-next-line no-any
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         return of(null).pipe(

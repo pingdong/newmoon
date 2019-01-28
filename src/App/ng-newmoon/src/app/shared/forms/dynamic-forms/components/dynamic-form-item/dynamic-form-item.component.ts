@@ -11,7 +11,6 @@ import { DynamicItemBase } from '../../models/dynamic-item.base';
 })
 export class DynamicFormItemComponent {
 
-  // tslint:disable-next-line no-any
   @Input() item: DynamicItemBase<any>;
   @Input() parentFormGroup: FormGroup;
 

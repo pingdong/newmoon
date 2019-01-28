@@ -9,7 +9,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
     constructor(private authService: AuthService) {}
 
-    // tslint:disable-next-line no-any
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if (!request.url.endsWith('/login')) {

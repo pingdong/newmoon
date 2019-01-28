@@ -14,10 +14,8 @@ import { DynamicItemBase } from '../../models/dynamic-item.base';
 })
 export class DynamicFormComponent implements UnsaveCheck, OnInit {
 
-  // tslint:disable-next-line no-any
   @Input() items: DynamicItemBase<any>[] = [];
 
-  // tslint:disable-next-line no-any
   @Output() save = new EventEmitter<any>();
 
   public formGroup: FormGroup;
