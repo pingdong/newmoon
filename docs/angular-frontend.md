@@ -1,6 +1,6 @@
 [Back](../README.md)
 
-##  Angular 
+##  Angular
 
 English version: ng serve
 Chinese version: ng serve --configuration=zh
@@ -34,3 +34,6 @@ Chinese version: ng serve --configuration=zh
   * [x] [i18n](./frontend/angular/i18n.md)
 * Http
   * [x] Http Inerceptor for dev
+* Testing
+  * [x] [Jasmine](./frontend/angular/jasmine.md)
+  * [ ] Protractor

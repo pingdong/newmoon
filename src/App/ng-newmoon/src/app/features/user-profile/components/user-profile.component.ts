@@ -24,7 +24,6 @@ export class UserProfileComponent implements UnsaveCheck {
     return this.form.isDirty();
   }
 
-  // tslint:disable-next-line no-any
   public onSave($event: any) {
   }
 

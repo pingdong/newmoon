@@ -7,7 +7,6 @@ import { DynamicItemBase } from '../models/dynamic-item.base';
 export class DyanmicFormTranslateService {
 
   // Build Form Group
-  // tslint:disable-next-line no-any
   public toFormGroup(settings: DynamicItemBase<any>[]): FormGroup {
 
     if (!settings) {

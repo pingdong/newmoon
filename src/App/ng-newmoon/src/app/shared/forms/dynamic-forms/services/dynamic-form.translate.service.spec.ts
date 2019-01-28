@@ -1,24 +1,40 @@
+import { TestBed, async } from '@angular/core/testing';
+
 import { DyanmicFormTranslateService } from './dynamic-form.translate.service';
 import { SelectionItem } from '../models/selection.item';
 import { TextItem } from '../models/text.item';
+import { DynamicItemBase } from '../models/dynamic-item.base';
 
 describe('DyanmicFormTranslateService', () => {
 
   let service: DyanmicFormTranslateService;
 
-  beforeEach(() => { service = new DyanmicFormTranslateService(); });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        DyanmicFormTranslateService
+      ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(async(() => {
+    service = TestBed.get(DyanmicFormTranslateService);
+  }));
 
   it('Empty setting should return empty controls', () => {
-    const array  = [];
+    const array = [];
 
     const group = service.toFormGroup(array);
 
     // tslint:disable-next-line:no-magic-numbers
-    expect(Object.keys(group.controls).length).toEqual(0);
+    expect(Object.keys(group.controls).length).toEqual(0, 'Empty setting should return empty control list');
   });
 
   it('Null should throw an exception', () => {
-    expect(function() { service.toFormGroup(null); }).toThrowError('argument is null');
+    const array = null;
+
+    expect(function() { service.toFormGroup(array); }).toThrowError('argument is null');
   });
 
   it('Should return correct controls', () => {
@@ -30,7 +46,7 @@ describe('DyanmicFormTranslateService', () => {
     const group = service.toFormGroup(array);
 
     // tslint:disable-next-line:no-magic-numbers
-    expect(Object.keys(group.controls).length).toEqual(2);
+    expect(Object.keys(group.controls).length).toEqual(2, 'The number of controls doesn\'t match its setting');
 
     expect(group.controls['first'].value).toEqual('stringvalue1');
     expect(group.controls['second'].value).toEqual('stringvalue2');
@@ -47,8 +63,8 @@ describe('DyanmicFormTranslateService', () => {
     // tslint:disable-next-line:no-magic-numbers
     expect(Object.keys(group.controls).length).toEqual(2);
 
-    expect(group.controls[Object.keys(group.controls)[0]].value).toEqual('stringvalue2');
-    expect(group.controls[Object.keys(group.controls)[1]].value).toEqual('stringvalue1');
+    expect(group.controls[Object.keys(group.controls)[0]].value).toEqual('stringvalue2', 'It\'s not expected control');
+    expect(group.controls[Object.keys(group.controls)[1]].value).toEqual('stringvalue1', 'It\'s not expected control');
   });
 
   it('Should return controls with correct validators', () => {
@@ -60,10 +76,10 @@ describe('DyanmicFormTranslateService', () => {
     const group = service.toFormGroup(array);
 
     // tslint:disable-next-line:no-magic-numbers
-    expect(Object.keys(group.controls).length).toEqual(2);
+    expect(Object.keys(group.controls).length).toEqual(2, 'The number of controls doesn\'t match its setting');
 
-    expect(group.controls['first'].validator).toBeDefined();
-    expect(group.controls['second'].validator).toBeNull();
+    expect(group.controls['first'].validator).toBeDefined('Validator should be defined');
+    expect(group.controls['second'].validator).toBeNull('Validatior should not be created');
   });
 
   it('Should return empty string when no value provided', () => {
@@ -75,10 +91,10 @@ describe('DyanmicFormTranslateService', () => {
     const group = service.toFormGroup(array);
 
     // tslint:disable-next-line:no-magic-numbers
-    expect(Object.keys(group.controls).length).toEqual(2);
+    expect(Object.keys(group.controls).length).toEqual(2, 'The number of controls doesn\'t match its setting');
 
-    expect(group.controls['first'].value).toEqual('');
-    expect(group.controls['second'].value).toEqual('');
+    expect(group.controls['first'].value).toEqual('', 'Empty string is expected');
+    expect(group.controls['second'].value).toEqual('', 'Empty string is expected');
   });
 
 });

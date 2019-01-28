@@ -12,13 +12,13 @@ export class AppSideNavItemComponent implements OnInit {
 
   @Input() module: AppModule;
 
-  public isExpanded: boolean;
-  public hasSubmodules: boolean;
+  public isExpanded = false;
+  public hasSubmodules = false;
 
   constructor() { }
 
   ngOnInit() {
-    this.hasSubmodules = this.module.modules && this.module.modules.length > 0;
+    this.hasSubmodules = this.module && this.module.modules && this.module.modules.length > 0;
   }
 
   public toggle(): void {

@@ -10,6 +10,5 @@ export class AppFooterComponent {
 
   public currentYear = (new Date()).getFullYear();
 
-  constructor(
-  ) { }
+  constructor() { }
 }

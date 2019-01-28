@@ -10,12 +10,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SharedModule } from '@app/shared';
 import { environment } from '@env/environment.prod';
 
-import { AppComponent } from './console/app.component';
-import { AppFooterComponent } from './console/app-footer/app-footer.component';
-import { AppHeaderComponent } from './console/app-header/app-header.component';
-import { AppHeaderSearchComponent } from './console/app-header/app-header-search/app-header-search.component';
-import { AppSideNavComponent } from './console/app-sidenav/app-sidenav.component';
-import { AppSideNavItemComponent } from './console/app-sidenav/app-sidenav-item/app-sidenav-item.component';
+import { AppComponent } from './console/components/app.component';
+import { AppFooterComponent } from './console/components/app-footer/app-footer.component';
+import { AppHeaderComponent } from './console/components/app-header/app-header.component';
+import { AppHeaderSearchComponent } from './console/components/app-header/app-header-search/app-header-search.component';
+import { AppSideNavComponent } from './console/components/app-sidenav/app-sidenav.component';
+import { AppSideNavItemComponent } from './console/components/app-sidenav/app-sidenav-item/app-sidenav-item.component';
 
 import { LoginComponent } from './auth/components/login.component';
 import { PageNotFoundComponent } from './router/components/page-not-found.component';

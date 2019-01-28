@@ -11,10 +11,14 @@ mat-toolbar-row {
 
 .header__logo__button {
   /* Element */
-  font-size: 2rem;  
+  font-size: 2rem;
 }
 
 .header__toolbar > * {
   /* Element */
-  margin-right: 0.5rem; 
+  margin-right: 0.5rem;
+}
+
+.header__sidenav {
+
 }

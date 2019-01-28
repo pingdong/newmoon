@@ -1,11 +1,10 @@
 <div>
 
   <div *ngIf="!hasSubmodules">
-    <a routerLink="{{module.uri}}">{{module.title}}</a>
+    <a routerLink="{{module?.uri}}">{{module?.title}}</a>
   </div>
 
   <div *ngIf="hasSubmodules">
-
     <button (click)="toggle()">
         {{module.title}}
 
@@ -14,11 +13,11 @@
     </button>
 
     <div *ngIf="isExpanded">
-      <a *ngFor="let submodule of module.modules; trackBy:submodule?.title" [routerLink]="submodule.uri">
-        {{submodule.title}}
-      </a>
+      <a class="sidenav__submenu-item"
+          *ngFor="let submodule of module?.modules; trackBy:submodule?.title"
+          [routerLink]="submodule.uri"
+        >{{submodule.title}}</a>
     </div>
-
   </div>
 
 </div>

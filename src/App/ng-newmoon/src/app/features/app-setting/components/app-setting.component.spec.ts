@@ -6,6 +6,7 @@ import { AppSettingComponent } from './app-setting.component';
 import { SettingControlService } from '../services/setting.control.service';
 
 describe('AppSettingComponent', () => {
+
   let component: AppSettingComponent;
   let fixture: ComponentFixture<AppSettingComponent>;
 
@@ -27,4 +28,5 @@ describe('AppSettingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
