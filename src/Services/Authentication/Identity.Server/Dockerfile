@@ -1,8 +1,8 @@
-FROM microsoft/dotnet:2.1.3-aspnetcore-runtime-nanoserver-1803 AS base
+FROM microsoft/dotnet:2.2.1-aspnetcore-runtime-nanoserver-1809 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/dotnet:2.1.302-sdk-nanoserver-1803 AS build
+FROM microsoft/dotnet:2.2.103-sdk-nanoserver-1809 AS build
 WORKDIR /src
 COPY Services/Authentication/Identity.Server/Identity.Server.csproj Services/Authentication/Identity.Server/
 COPY Library/Shared/Shared.csproj Library/Shared/

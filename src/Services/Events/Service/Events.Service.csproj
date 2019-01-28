@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>PingDong.Newmoon.Events.Service</AssemblyName>
     <RootNamespace>PingDong.Newmoon.Events.Service</RootNamespace>
     <VersionPrefix>0.1.0</VersionPrefix>
@@ -24,9 +24,9 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="Dapper" Version="1.50.5" />
-    <PackageReference Include="FluentValidation" Version="8.0.100" />
+    <PackageReference Include="FluentValidation" Version="8.1.3" />
     <PackageReference Include="GraphQL" Version="2.4.0" />
-    <PackageReference Include="MediatR" Version="5.1.0" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
     <PackageReference Include="ncrontab" Version="3.3.0" />
   </ItemGroup>
 

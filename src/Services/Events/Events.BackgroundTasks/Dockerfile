@@ -1,7 +1,8 @@
-FROM microsoft/dotnet:2.1.2-aspnetcore-runtime-nanoserver-1803 AS base
+FROM microsoft/dotnet:2.2.1-aspnetcore-runtime-nanoserver-1809 AS base
 WORKDIR /app
+EXPOSE 80
 
-FROM microsoft/dotnet:2.1.302-sdk-nanoserver-1803 AS build
+FROM microsoft/dotnet:2.2.103-sdk-nanoserver-1809 AS build
 WORKDIR /src
 COPY Services/Events/Events.BackgroundTasks/Events.BackgroundTasks.csproj Services/Events/Events.BackgroundTasks/
 COPY Library/Shared/Shared.csproj Library/Shared/

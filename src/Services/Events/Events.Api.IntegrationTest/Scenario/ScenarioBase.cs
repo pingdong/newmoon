@@ -23,6 +23,7 @@ namespace PingDong.Newmoon.Events.Shared
                             .AddInMemoryCollection(new Dictionary<string, string>
                                 {
                                     { "IdentityServiceUri", "192.168.5.5" },
+                                    { "EventsServiceUri", "192.168.5.10" },
                                     { "EventBus:Enabled", "False" },
                                     { "isTest", "True" }
                                 })

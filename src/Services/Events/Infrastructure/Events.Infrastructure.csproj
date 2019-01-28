@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AssemblyName>PingDong.Newmoon.Events.Infrastructure</AssemblyName>
     <RootNamespace>PingDong.Newmoon.Events.Infrastructure</RootNamespace>
@@ -28,11 +28,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="5.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Polly" Version="6.1.1" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Polly" Version="6.1.2" />
     <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
   </ItemGroup>
 
