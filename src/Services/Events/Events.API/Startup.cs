@@ -337,7 +337,7 @@ namespace PingDong.Newmoon.Events
 
             // Have to be initialized after injecting all necessary library by ASP.Net Core IoC
 
-            services.AddMediatR(references);
+            services.AddMediatR(references.ToArray());
 
             _logger.LogInformation(LoggingEvent.Success, "MediatR is initialized");
 

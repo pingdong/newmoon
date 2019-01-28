@@ -11,6 +11,11 @@ namespace PingDong.DomainDriven.Infrastructure.Mediator
     /// </summary>
     public class EmptyMediator : IMediator
     {
+        public Task Publish(object notification, CancellationToken cancellationToken = new CancellationToken())
+        {
+            return Task.CompletedTask;
+        }
+
         public Task Publish<TNotification>(TNotification notification, CancellationToken cancellationToken = default(CancellationToken)) where TNotification : INotification
         {
             return Task.CompletedTask;

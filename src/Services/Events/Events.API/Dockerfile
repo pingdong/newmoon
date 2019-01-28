@@ -1,8 +1,8 @@
-FROM microsoft/dotnet:2.1.3-aspnetcore-runtime-nanoserver-1803 AS base
+FROM microsoft/dotnet:2.2.1-aspnetcore-runtime-nanoserver-1809 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/dotnet:2.1.302-sdk-nanoserver-1803 AS build
+FROM microsoft/dotnet:2.2.103-sdk-nanoserver-1809 AS build
 WORKDIR /src
 COPY Services/Events/Events.API/Events.Api.csproj Services/Events/Events.API/
 COPY Services/Events/Core/Events.Core.csproj Services/Events/Core/
