@@ -56,28 +56,28 @@ namespace PingDong.Newmoon.Events.Shared
             {
                 public static class Get
                 {
-                    public static string Events = "api/v1/rest/events";
-                    public static string Places = "api/v1/rest/places";
+                    public static string Events = "api/v1/restful/events";
+                    public static string Places = "api/v1/restful/places";
 
                     public static string EventById(int id)
                     {
-                        return $"api/v1/rest/events/{id}";
+                        return $"api/v1/restful/events/{id}";
                     }
                 }
 
                 public static class Put
                 {
-                    public static string UpdateEvent = "api/v1/rest/events";
+                    public static string UpdateEvent = "api/v1/restful/events";
                 }
 
                 public static class Post
                 {
-                    public static string AddEvent = "api/v1/rest/events";
-                    public static string CancelEvent = "api/v1/rest/events/cancel";
-                    public static string ApproveEvent = "api/v1/rest/events/approve";
-                    public static string ConfirmEvent = "api/v1/rest/events/confirm";
-                    public static string StartEvent = "api/v1/rest/events/start";
-                    public static string EndEvent = "api/v1/rest/events/end";
+                    public static string AddEvent = "api/v1/restful/events";
+                    public static string CancelEvent = "api/v1/restful/events/cancel";
+                    public static string ApproveEvent = "api/v1/restful/events/approve";
+                    public static string ConfirmEvent = "api/v1/restful/events/confirm";
+                    public static string StartEvent = "api/v1/restful/events/start";
+                    public static string EndEvent = "api/v1/restful/events/end";
                 }
             }
             
