@@ -14,6 +14,7 @@ namespace PingDong.Newmoon.Events.Controllers.OData
     /// <summary>
     /// Ping Controller
     /// </summary>
+    [Route("api/v1/odata/places")]
     public class PlacesODataController : BaseODataController
     {
         private readonly IPlaceQuery _placeQuery;
@@ -35,7 +36,7 @@ namespace PingDong.Newmoon.Events.Controllers.OData
         /// </summary>
         /// <returns></returns>
         [EnableQuery]
-        [ODataRoute("Places")]
+        [ODataRoute("places")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetPlaces()
@@ -43,7 +44,7 @@ namespace PingDong.Newmoon.Events.Controllers.OData
             return Ok(await _placeQuery.GetAllAsync());
         }
 
-        // POST api/v1/odata/Places
+        // POST api/v1/odata/places
         /// <summary>
         /// Create a new place
         /// </summary>
@@ -56,7 +57,7 @@ namespace PingDong.Newmoon.Events.Controllers.OData
             return await CommandDispatchAsync(requestId, command);
         }
 
-        // PUT api/v1/odata/Places
+        // PUT api/v1/odata/places
         /// <summary>
         /// Update specified place
         /// </summary>
