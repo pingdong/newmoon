@@ -496,7 +496,6 @@ namespace PingDong.Newmoon.Events
                 app.UseHsts();
                 app.UseHttpsRedirection();
 
-                loggerFactory.AddAzureWebAppDiagnostics();
                 loggerFactory.AddApplicationInsights(app.ApplicationServices, LogLevel.Trace);
             }
 
