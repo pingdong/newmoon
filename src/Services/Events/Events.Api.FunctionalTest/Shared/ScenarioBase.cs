@@ -93,16 +93,6 @@ namespace PingDong.Newmoon.Events.Shared
                         return $"api/v1/odata/events(id={id})";
                     }
                 }
-
-                public static class Post
-                {
-                    public static string AddEvent = "api/v1/odata/events";
-                    public static string CancelEvent = "api/v1/odata/events/cancel";
-                    public static string ApproveEvent = "api/v1/odata/events/approve";
-                    public static string ConfirmEvent = "api/v1/odata/events/confirm";
-                    public static string StartEvent = "api/v1/odata/events/start";
-                    public static string EndEvent = "api/v1/odata/events/end";
-                }
             }
 
             public class GraphQL
