@@ -34,13 +34,14 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using GraphQL;
+using GraphQL.Http;
 using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PingDong.EventBus;
 using PingDong.Newmoon.Events.Filters;
-using PingDong.Newmoon.Events.Middlewares;
+using PingDong.Newmoon.Events.GraphQL;
 using Swashbuckle.AspNetCore.Swagger;
 using StackExchange.Redis;
 
@@ -329,7 +330,8 @@ namespace PingDong.Newmoon.Events
 
             #region GraphQL
 
-            services.AddScoped<IDocumentExecuter, DocumentExecuter>();
+            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
+            services.AddSingleton<IDocumentWriter, DocumentWriter>();
 
             #endregion
 
@@ -481,6 +483,8 @@ namespace PingDong.Newmoon.Events
             if (env.IsDevelopment())
             {
                 _logger.LogInformation(LoggingEvent.Success, "Running in Development environment");
+
+                app.UseStaticFiles();
 
                 // Error message
                 app.UseDeveloperExceptionPage();
