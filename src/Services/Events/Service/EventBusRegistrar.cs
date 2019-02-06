@@ -1,5 +1,4 @@
-﻿using PingDong.EventBus;
-using PingDong.EventBus.Abstractions;
+﻿using PingDong.EventBus.Abstractions;
 using PingDong.Newmoon.Events.Service.IntegrationEvents;
 
 namespace PingDong.Newmoon.Events.Service
