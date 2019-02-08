@@ -33,6 +33,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using GraphiQl;
 using GraphQL;
 using GraphQL.Http;
 using IdentityModel;
@@ -483,9 +484,7 @@ namespace PingDong.Newmoon.Events
             if (env.IsDevelopment())
             {
                 _logger.LogInformation(LoggingEvent.Success, "Running in Development environment");
-
-                app.UseStaticFiles();
-
+                
                 // Error message
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage(); 
@@ -524,6 +523,10 @@ namespace PingDong.Newmoon.Events
 
             // GraphQL
             app.UseGraphQL();
+            if (env.IsDevelopment())
+            {
+                app.UseGraphiQl("/graphiql", new GraphQLSettings().Path);
+            }
 
             // MVC
             app.UseMvc(routes => 

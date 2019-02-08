@@ -14,6 +14,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 * [Microsoft ASP.Net Core 2.2.1](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
 * [Microsoft OData 7.1.0](http://odata.github.io/)
 * [GraphQL .Net 2.4.0](https://graphql-dotnet.github.io/)
+* [GraphiQL 1.2.0](https://github.com/JosephWoodward/graphiql-dotnet)
 * [StackExchange.Redis 1.2.6](https://github.com/StackExchange/StackExchange.Redis)
 * [Dapper 1.50.5](https://github.com/StackExchange/Dapper) ([Tutorial](http://dapper-tutorial.net/dapper))
 * [Microsoft Entity Framework Core 2.2.1](https://docs.microsoft.com/en-us/ef/#pivot=efcore)
@@ -46,7 +47,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
   * Integration Event 
 * Resiliency 
 * Idempotency 
-* REST vs OData vs [GraphQL](http://graphql.github.io/)
+* REST vs OData vs [GraphQL](https://graphql-dotnet.github.io)
 
 ### Practices
 * Microservice Architect 
@@ -72,7 +73,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 * WebAPI
   * [x] RESTful  
   * [x] OData  
-  * [x] GraphQL 
+  * [x] [GraphQL](./backend/graphql.md)
 * Testing
   * [x] Unit Testing
   * [x] Integration Testing
