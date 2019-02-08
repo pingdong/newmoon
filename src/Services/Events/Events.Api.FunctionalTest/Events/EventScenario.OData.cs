@@ -29,7 +29,7 @@ namespace PingDong.Newmoon.Events
 
                 // Create an event
                 var createCmd = BuildCreateCommand().CreateJsonContent();
-                await http.Reset().PostAsync(Api.OData.Post.AddEvent, createCmd);
+                await http.Reset().PostAsync(Api.RESTful.Post.AddEvent, createCmd);
 
                 JObject evt = await GetCreatedEvent(http);
                 int eventId = Convert.ToInt32(evt["value"][0]["Id"]);
@@ -37,18 +37,18 @@ namespace PingDong.Newmoon.Events
 
                 // Event approve and confirm
                 var approveCmd = BuildApproveCommand(eventId, eventName).CreateJsonContent();
-                await http.Reset().PostAsync(Api.OData.Post.ApproveEvent, approveCmd);
+                await http.Reset().PostAsync(Api.RESTful.Post.ApproveEvent, approveCmd);
                 var ev = await GetEvent(http, eventId);
                 Assert.Equal(Convert.ToInt32(ev.statusId), EventStatus.Approved.Id);
 
                 var confirmCmd = BuildConfirmCommand(eventId, eventName).CreateJsonContent();
-                await http.Reset().PostAsync(Api.OData.Post.ConfirmEvent, confirmCmd);
+                await http.Reset().PostAsync(Api.RESTful.Post.ConfirmEvent, confirmCmd);
                 ev = await GetEvent(http, eventId);
                 Assert.Equal(Convert.ToInt32(ev.statusId), EventStatus.Confirmed.Id);
 
                 // Event start
                 var startCmd = BuildStartCommand(eventId, eventName).CreateJsonContent();
-                await http.Reset().PostAsync(Api.OData.Post.StartEvent, startCmd);
+                await http.Reset().PostAsync(Api.RESTful.Post.StartEvent, startCmd);
                 ev = await GetEvent(http, eventId);
                 Assert.Equal(Convert.ToInt32(ev.statusId), EventStatus.Ongoing.Id);
 

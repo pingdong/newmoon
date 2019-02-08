@@ -1,9 +1,11 @@
 ﻿using GraphQL.Types;
+using PingDong.DomainDriven.Service.GraphQL;
 using PingDong.Newmoon.Events.Service.GraphQL.Models;
 using PingDong.Newmoon.Events.Service.Queries;
 
 namespace PingDong.Newmoon.Events.Service.GraphQL
 {
+    [GraphType]
     public class EventsQuery : ObjectGraphType
     {
         public EventsQuery(IPlaceQuery placeQuery, IEventQuery eventQuery)

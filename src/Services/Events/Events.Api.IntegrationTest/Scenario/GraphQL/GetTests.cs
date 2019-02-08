@@ -9,7 +9,6 @@ namespace PingDong.Newmoon.Events
     public class GraphQLGetTests : ScenarioBase
     {
         [Theory]
-        [InlineData("api-graphql")]
         [InlineData("api/graphql")]
         public async Task Get_get_all_events_and_response_ok_status_code(string url)
         {

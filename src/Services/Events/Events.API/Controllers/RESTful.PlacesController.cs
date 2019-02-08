@@ -12,7 +12,7 @@ namespace PingDong.Newmoon.Events.Controllers
     /// <summary>
     /// Ping Controller
     /// </summary>
-    [Route("api/v1/rest/places")]
+    [Route("api/v1/restful/places")]
     [Produces("application/json")]
     [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
     public class PlacesRESTfulController : BaseRestController
