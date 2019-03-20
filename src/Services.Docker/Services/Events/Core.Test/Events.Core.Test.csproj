@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AssemblyName>PingDong.DomainDriven.Infrastructure</AssemblyName>
-    <RootNamespace>PingDong.DomainDriven.Infrastructure</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <AssemblyName>PingDong.Newmoon.Events.Core.Test</AssemblyName>
+    <RootNamespace>PingDong.Newmoon.Events.Core.Test</RootNamespace>
     <VersionPrefix>0.1.0</VersionPrefix>
     <Authors>Ping Dong</Authors>
-    <PackageId>DomainDriven.Infrastructure</PackageId>
-    <PackageTags>Library DDD</PackageTags>
+    <PackageId>Events.Core.Test</PackageId>
+    <PackageTags>Events</PackageTags>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -23,12 +24,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="6.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\DomainDriven.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\QualityTools\Core\QualityTools.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\QualityTools\DomainDriven.Core\QualityTools.DomainDriven.Core.csproj" />
+    <ProjectReference Include="..\Core\Events.Core.csproj" />
   </ItemGroup>
 
 </Project>
