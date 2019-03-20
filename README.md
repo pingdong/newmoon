@@ -11,7 +11,7 @@ This is a technology proven project that is updated frequently and constantly to
  ### [Azure](./docs/backend/azure.md)
 
 The below image demostrats the high level structure for each service.
-![High-level structure](./docs/backend/general/CQRS.png)
+![High-level structure](./docs/backend/dotnet_core/CQRS.png)
 
 ## Notes:
 
