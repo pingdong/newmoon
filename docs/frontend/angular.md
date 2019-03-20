@@ -14,7 +14,7 @@ Chinese version: ng serve --configuration=zh
 ### Practices
 * [Structure and Best Practices] (./angular/module.md)
 * [Localisation](https://angular.io/guide/i18n)
-* [Debugging from VS Code](./general/vscode_debug.md)
+* [Debugging from VS Code](./angular/vscode_debug.md)
 * [Build](./angular/build.md)
 
 ### Roadmap  
@@ -27,7 +27,6 @@ Chinese version: ng serve --configuration=zh
   * [ ] Server-side Rendering
 * Style
   * [x] [Material UI](./angular/material.md)
-  * [ ] [CSS 3](./general/css3.md)
 * Module
   * [x] Lazy Loading 
   * [x] Pre-loading
