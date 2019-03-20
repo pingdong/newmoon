@@ -27,10 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{5D7DBF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{7CCF8951-AC79-4612-B26E-CD6261C0BCC9}"
 	ProjectSection(SolutionItems) = preProject
-		..\docs\angular-frontend.md = ..\docs\angular-frontend.md
-		..\docs\backlog.md = ..\docs\backlog.md
-		..\docs\dotnet-backend.md = ..\docs\dotnet-backend.md
-		..\docs\setup.md = ..\docs\setup.md
+		..\..\docs\backlog.md = ..\..\docs\backlog.md
+		..\..\docs\setup.md = ..\..\docs\setup.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ACC5BE90-3232-400A-9BEA-56887C7E905A}"
@@ -99,24 +97,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.BackgroundTasks", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.AspNetCore", "..\Library\EventBus\EventBus.AspNetCore\EventBus.AspNetCore.csproj", "{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{252F9B21-D0C6-4D55-8DA6-1795DC79120D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{3B21A5DD-F51A-4448-83B0-7DC67A8AB839}"
 	ProjectSection(SolutionItems) = preProject
-		..\docs\backend\BackgroundTask.md = ..\docs\backend\BackgroundTask.md
-		..\docs\backend\Cache.md = ..\docs\backend\Cache.md
-		..\docs\backend\Configuration.md = ..\docs\backend\Configuration.md
-		..\docs\backend\CQRS.png = ..\docs\backend\CQRS.png
-		..\docs\backend\DataValidation.md = ..\docs\backend\DataValidation.md
-		..\docs\backend\EFcore.md = ..\docs\backend\EFcore.md
-		..\docs\backend\Flow Chart.grl = ..\docs\backend\Flow Chart.grl
-		..\docs\backend\GetTokenInPostman.jpg = ..\docs\backend\GetTokenInPostman.jpg
-		..\docs\backend\HttpClient.md = ..\docs\backend\HttpClient.md
-		..\docs\backend\Identity.md = ..\docs\backend\Identity.md
-		..\docs\backend\IntegrationEvent.md = ..\docs\backend\IntegrationEvent.md
-		..\docs\backend\IoC.md = ..\docs\backend\IoC.md
-		..\docs\backend\Mapping.md = ..\docs\backend\Mapping.md
-		..\docs\backend\OData.md = ..\docs\backend\OData.md
-		..\docs\backend\Testing.md = ..\docs\backend\Testing.md
+		..\..\docs\backend\azure.md = ..\..\docs\backend\azure.md
+		..\..\docs\backend\general.md = ..\..\docs\backend\general.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "general", "general", "{8898B275-6656-41E8-8841-000A9F5E0A96}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\docs\backend\General\BackgroundTask.md = ..\..\docs\backend\General\BackgroundTask.md
+		..\..\docs\backend\General\Cache.md = ..\..\docs\backend\General\Cache.md
+		..\..\docs\backend\General\Configuration.md = ..\..\docs\backend\General\Configuration.md
+		..\..\docs\backend\General\CQRS.png = ..\..\docs\backend\General\CQRS.png
+		..\..\docs\backend\General\DataValidation.md = ..\..\docs\backend\General\DataValidation.md
+		..\..\docs\backend\General\EFcore.md = ..\..\docs\backend\General\EFcore.md
+		..\..\docs\backend\General\Flow Chart.grl = ..\..\docs\backend\General\Flow Chart.grl
+		..\..\docs\backend\General\GetTokenInPostman.jpg = ..\..\docs\backend\General\GetTokenInPostman.jpg
+		..\..\docs\backend\General\GraphQL.md = ..\..\docs\backend\General\GraphQL.md
+		..\..\docs\backend\General\HttpClient.md = ..\..\docs\backend\General\HttpClient.md
+		..\..\docs\backend\General\Identity.md = ..\..\docs\backend\General\Identity.md
+		..\..\docs\backend\General\IntegrationEvent.md = ..\..\docs\backend\General\IntegrationEvent.md
+		..\..\docs\backend\General\IoC.md = ..\..\docs\backend\General\IoC.md
+		..\..\docs\backend\General\Mapping.md = ..\..\docs\backend\General\Mapping.md
+		..\..\docs\backend\General\OData.md = ..\..\docs\backend\General\OData.md
+		..\..\docs\backend\General\Testing.md = ..\..\docs\backend\General\Testing.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure", "azure", "{BE5A1B1A-1329-44B2-AF7B-1D4BDCF215C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -271,7 +278,9 @@ Global
 		{0B30A24D-2C53-40BC-9EBC-F60434E3CA8A} = {5DCBD62D-6839-4097-B4BE-F176E8EF2398}
 		{A8E3B227-9106-4E9D-8194-AD61CF6B5D6A} = {5D7DBFB7-F33D-40AE-9235-77BAD452A25A}
 		{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531} = {E880E516-FD50-4B27-969C-B2BAF88C9D7D}
-		{252F9B21-D0C6-4D55-8DA6-1795DC79120D} = {7CCF8951-AC79-4612-B26E-CD6261C0BCC9}
+		{3B21A5DD-F51A-4448-83B0-7DC67A8AB839} = {7CCF8951-AC79-4612-B26E-CD6261C0BCC9}
+		{8898B275-6656-41E8-8841-000A9F5E0A96} = {3B21A5DD-F51A-4448-83B0-7DC67A8AB839}
+		{BE5A1B1A-1329-44B2-AF7B-1D4BDCF215C4} = {3B21A5DD-F51A-4448-83B0-7DC67A8AB839}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D16100-61EC-41DC-A4E8-2DE984C5D2ED}
