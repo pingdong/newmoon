@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <IsPackable>false</IsPackable>
-    <AssemblyName>PingDong.Newmoon.Events.Infrastructure.Test</AssemblyName>
-    <RootNamespace>PingDong.Newmoon.Events.Infrastructure.Test</RootNamespace>
+    <RootNamespace>PingDong.Newmoon.Events.Functional.Test</RootNamespace>
+    <AssemblyName>PingDong.Newmoon.Events.Functional.Test</AssemblyName>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <VersionPrefix>0.1.0</VersionPrefix>
     <Authors>Ping Dong</Authors>
-    <PackageId>Events.Infrastructure.Test</PackageId>
+    <PackageId>Events.Api.FunctionalTest</PackageId>
     <PackageTags>Events</PackageTags>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
@@ -23,14 +23,11 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>bin\Debug\</OutputPath>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.3" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -40,8 +37,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Library\QualityTools\Core\QualityTools.Core.csproj" />
-    <ProjectReference Include="..\Infrastructure\Events.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\QualityTools\Core\QualityTools.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\QualityTools\QualityTools.Web\QualityTools.Web.csproj" />
+    <ProjectReference Include="..\Events.API\Events.Api.csproj" />
+    <ProjectReference Include="..\Service\Events.Service.csproj" />
   </ItemGroup>
 
 </Project>

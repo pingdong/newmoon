@@ -8,11 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libraries", "libraries", "{
 		Library\CommonAssemblyInfo.cs = Library\CommonAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDriven.Core", "Library\DomainDriven\Core\DomainDriven.Core.csproj", "{AB44C96C-28BC-458E-A4AD-9393177FF161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDriven.Core", "..\Library\DomainDriven\Core\DomainDriven.Core.csproj", "{AB44C96C-28BC-458E-A4AD-9393177FF161}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDriven.Infrastructure", "Library\DomainDriven\Infrastructure\DomainDriven.Infrastructure.csproj", "{8C5CD0FE-3D21-493B-97AA-A1B579142930}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDriven.Infrastructure", "..\Library\DomainDriven\Infrastructure\DomainDriven.Infrastructure.csproj", "{8C5CD0FE-3D21-493B-97AA-A1B579142930}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Library\Shared\Shared.csproj", "{FABA584F-4CD2-4E98-8741-75DD96D54BAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "..\Library\Shared\Shared.csproj", "{FABA584F-4CD2-4E98-8741-75DD96D54BAE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Core", "Services\Events\Core\Events.Core.csproj", "{DCAF702C-B22F-43A7-9B94-B50161518250}"
 EndProject
@@ -39,17 +39,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Api", "Services\Even
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Service", "Services\Events\Service\Events.Service.csproj", "{7E8CA089-4B5B-4833-AB29-879DDFF06AAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDriven.Service", "Library\DomainDriven\Service\DomainDriven.Service.csproj", "{AD99896C-71A9-4098-ABC1-CC2DF2F85E58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDriven.Service", "..\Library\DomainDriven\Service\DomainDriven.Service.csproj", "{AD99896C-71A9-4098-ABC1-CC2DF2F85E58}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainDriven", "DomainDriven", "{38770472-7650-4B85-A5B6-A9E999B84B47}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Library\Web\Web.csproj", "{1E2E8CCD-B9DE-4E7D-936D-8D103CB1A04A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "..\Library\Web\Web.csproj", "{1E2E8CCD-B9DE-4E7D-936D-8D103CB1A04A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QualityTools", "QualityTools", "{F4D64E41-8A7A-4AAE-B24E-712D2C49EE09}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.Core", "Library\QualityTools\Core\QualityTools.Core.csproj", "{A0FEA47F-F811-4F5B-B8C9-585DD8766B9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.Core", "..\Library\QualityTools\Core\QualityTools.Core.csproj", "{A0FEA47F-F811-4F5B-B8C9-585DD8766B9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.DomainDriven.Core", "Library\QualityTools\DomainDriven.Core\QualityTools.DomainDriven.Core.csproj", "{098A660A-7534-4F61-8347-E376C5B939FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.DomainDriven.Core", "..\Library\QualityTools\DomainDriven.Core\QualityTools.DomainDriven.Core.csproj", "{098A660A-7534-4F61-8347-E376C5B939FF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Core.Test", "Services\Events\Core.Test\Events.Core.Test.csproj", "{4978DCCA-17A0-4FB1-B34C-6BA36BFE7CFE}"
 EndProject
@@ -61,25 +61,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Api.IntegrationTest"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.Api.FunctionalTest", "Services\Events\Events.Api.FunctionalTest\Events.Api.FunctionalTest.csproj", "{81D68115-7B49-4A89-A829-21BAA23E4430}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.Web", "Library\QualityTools\QualityTools.Web\QualityTools.Web.csproj", "{906E4134-9C1D-4482-B188-B50CF16AE03C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.Web", "..\Library\QualityTools\QualityTools.Web\QualityTools.Web.csproj", "{906E4134-9C1D-4482-B188-B50CF16AE03C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{E69EF8A5-09AC-495A-992E-F64FACA18ED2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Server", "Services\Authentication\Identity.Server\Identity.Server.csproj", "{8823674D-F069-4716-BD3C-F16AC3A0C42A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.DomainDriven.Infrastructure", "Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj", "{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QualityTools.DomainDriven.Infrastructure", "..\Library\QualityTools\QualityTools.DomainDriven.Infrastructure\QualityTools.DomainDriven.Infrastructure.csproj", "{5BA98B06-6CB6-4C57-9252-5A6CCA3E767F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{E880E516-FD50-4B27-969C-B2BAF88C9D7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Tests", "Library\EventBus\EventBus.Tests\EventBus.Tests.csproj", "{D619DC2F-6BFF-4D38-AFA3-97F48937926E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Tests", "..\Library\EventBus\EventBus.Tests\EventBus.Tests.csproj", "{D619DC2F-6BFF-4D38-AFA3-97F48937926E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.RabbitMQ", "Library\EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{B528A2B7-A26F-4A71-A67C-AD889671BEB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.RabbitMQ", "..\Library\EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj", "{B528A2B7-A26F-4A71-A67C-AD889671BEB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.AzureServiceBus", "Library\EventBus\EventBus.AzureServiceBus\EventBus.AzureServiceBus.csproj", "{9A66D0CB-CF3A-4F90-8A10-0516A5924431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.AzureServiceBus", "..\Library\EventBus\EventBus.AzureServiceBus\EventBus.AzureServiceBus.csproj", "{9A66D0CB-CF3A-4F90-8A10-0516A5924431}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus", "Library\EventBus\EventBus\EventBus.csproj", "{8D972F76-09B8-42EC-B1A9-EC9F482CBECC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus", "..\Library\EventBus\EventBus\EventBus.csproj", "{8D972F76-09B8-42EC-B1A9-EC9F482CBECC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore", "Library\EntityFrameworkCore\EntityFrameworkCore.csproj", "{27D7D199-BAC0-4274-B3FC-9A072CB00B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore", "..\Library\EntityFrameworkCore\EntityFrameworkCore.csproj", "{27D7D199-BAC0-4274-B3FC-9A072CB00B97}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{5DCBD62D-6839-4097-B4BE-F176E8EF2398}"
 EndProject
@@ -97,7 +97,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events.BackgroundTasks", "Services\Events\Events.BackgroundTasks\Events.BackgroundTasks.csproj", "{A8E3B227-9106-4E9D-8194-AD61CF6B5D6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.AspNetCore", "Library\EventBus\EventBus.AspNetCore\EventBus.AspNetCore.csproj", "{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.AspNetCore", "..\Library\EventBus\EventBus.AspNetCore\EventBus.AspNetCore.csproj", "{FB36F28C-B4CA-4F2F-A2B3-6846EBA30531}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{252F9B21-D0C6-4D55-8DA6-1795DC79120D}"
 	ProjectSection(SolutionItems) = preProject

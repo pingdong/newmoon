@@ -84,8 +84,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Library\Shared\Shared.csproj" />
-    <ProjectReference Include="..\..\..\Library\Web\Web.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\Shared\Shared.csproj" />
+    <ProjectReference Include="..\..\..\..\Library\Web\Web.csproj" />
   </ItemGroup>
 
 </Project>

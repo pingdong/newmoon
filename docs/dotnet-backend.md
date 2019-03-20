@@ -5,26 +5,26 @@
 The current version borrowed some codes and idea from Microsoft [eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers) project, Thanks.
  
 The below image suggests the high-level data flow, and an idea of the connection between concepts: CQRS, Mediator, Domain Event, Integration Event, Event Source.
-![](./backend/CQRS.png)
+![](./backend/general/CQRS.png)
  
 In this project, a few advance technology, e.g. Reflection, was used to comply with CoS concept. It may bring some difficulty to understand.
 
 
 ### The following libraries are used:
-* [Microsoft ASP.Net Core 2.2.1](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
+* [Microsoft ASP.Net Core 2.2.3](https://docs.microsoft.com/en-nz/aspnet/#pivot=core)
 * [Microsoft OData 7.1.0](http://odata.github.io/)
 * [GraphQL .Net 2.4.0](https://graphql-dotnet.github.io/)
 * [GraphiQL 1.2.0](https://github.com/JosephWoodward/graphiql-dotnet)
 * [StackExchange.Redis 1.2.6](https://github.com/StackExchange/StackExchange.Redis)
-* [Dapper 1.50.5](https://github.com/StackExchange/Dapper) ([Tutorial](http://dapper-tutorial.net/dapper))
-* [Microsoft Entity Framework Core 2.2.1](https://docs.microsoft.com/en-us/ef/#pivot=efcore)
-* [Autofac 4.8.1](https://autofac.org/)
+* [Dapper 1.60.1](https://github.com/StackExchange/Dapper) ([Tutorial](http://dapper-tutorial.net/dapper))
+* [Microsoft Entity Framework Core 2.2.3](https://docs.microsoft.com/en-us/ef/#pivot=efcore)
+* [Autofac 4.9.1](https://autofac.org/)
 * [AutoMapper 8.0.0](https://automapper.org/)
 * [FluentValidation 8.1.3](https://fluentvalidation.net/)
 * [MediatR 6.0.0](https://github.com/jbogard/MediatR)
 * [Serilog.AspNetCore 2.1.1](https://serilog.net/)
-* [Polly 6.1.2](http://www.thepollyproject.org/)
-* [NCrontab 3.3.0](https://github.com/atifaziz/NCrontab)
+* [Polly 7.1.0](http://www.thepollyproject.org/)
+* [NCrontab 3.3.1](https://github.com/atifaziz/NCrontab)
 * [Swashbuckle.AspNetCore 4.0.1](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 * [xUnit.net 2.4.1](https://xunit.github.io/)
 * [Moq 4.10.1](https://github.com/moq/moq4)
@@ -73,7 +73,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 * WebAPI
   * [x] RESTful  
   * [x] OData  
-  * [x] [GraphQL](./backend/graphql.md)
+  * [x] [GraphQL](./backend/general/graphql.md)
 * Testing
   * [x] Unit Testing
   * [x] Integration Testing
@@ -85,19 +85,19 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
   
 
 ### Asp.Net Core   
-[Dependency Injection](./backend/IoC.md)  
-[Configuration](./backend/Configuration.md)  
-[Data Validation](./backend/DataValidation.md)   
-[Identity](./backend/Identity.md)    
-[HttpClient](./backend/HttpClient.md)  
-[Integration Event](./backend/IntegrationEvent.md)  
-[Background Tasks](./backend/BackgroundTask.md)
-[OData](./backend/odata.md)
+[Dependency Injection](./backend/general/IoC.md)  
+[Configuration](./backend/general/Configuration.md)  
+[Data Validation](./backend/general/DataValidation.md)   
+[Identity](./backend/general/Identity.md)    
+[HttpClient](./backend/general/HttpClient.md)  
+[Integration Event](./backend/general/IntegrationEvent.md)  
+[Background Tasks](./backend/general/BackgroundTask.md)
+[OData](./backend/general/odata.md)
 
 ### Data Management  
-[Cache](./backend/Cache.md)  
-[Mapping](./backend/Mapping.md)  
-[EF Core](./backend/EFCore.md)  
+[Cache](./backend/general/Cache.md)  
+[Mapping](./backend/general/Mapping.md)  
+[EF Core](./backend/general/EFCore.md)  
 
 ### Testing  
-[Testing](./backend/Testing.md)
+[Testing](./backend/general/Testing.md)
