@@ -5,7 +5,7 @@
 The current version borrowed some codes and idea from Microsoft [eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers) project, Thanks.
  
 The below image suggests the high-level data flow, and an idea of the connection between concepts: CQRS, Mediator, Domain Event, Integration Event, Event Source.
-![](./backend/general/CQRS.png)
+![](./dotnet_core/CQRS.png)
  
 In this project, a few advance technology, e.g. Reflection, was used to comply with CoS concept. It may bring some difficulty to understand.
 
@@ -73,7 +73,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 * WebAPI
   * [x] RESTful  
   * [x] OData  
-  * [x] [GraphQL](./backend/general/graphql.md)
+  * [x] [GraphQL](./backend/dotnet_core/graphql.md)
 * Testing
   * [x] Unit Testing
   * [x] Integration Testing
@@ -85,19 +85,19 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
   
 
 ### Asp.Net Core   
-[Dependency Injection](./backend/general/IoC.md)  
-[Configuration](./backend/general/Configuration.md)  
-[Data Validation](./backend/general/DataValidation.md)   
-[Identity](./backend/general/Identity.md)    
-[HttpClient](./backend/general/HttpClient.md)  
-[Integration Event](./backend/general/IntegrationEvent.md)  
-[Background Tasks](./backend/general/BackgroundTask.md)
-[OData](./backend/general/odata.md)
+[Dependency Injection](./backend/dotnet_core/IoC.md)  
+[Configuration](./backend/dotnet_core/Configuration.md)  
+[Data Validation](./backend/dotnet_core/DataValidation.md)   
+[Identity](./backend/dotnet_core/Identity.md)    
+[HttpClient](./backend/dotnet_core/HttpClient.md)  
+[Integration Event](./backend/dotnet_core/IntegrationEvent.md)  
+[Background Tasks](./backend/dotnet_core/BackgroundTask.md)
+[OData](./backend/dotnet_core/odata.md)
 
 ### Data Management  
-[Cache](./backend/general/Cache.md)  
-[Mapping](./backend/general/Mapping.md)  
-[EF Core](./backend/general/EFCore.md)  
+[Cache](./backend/dotnet_core/Cache.md)  
+[Mapping](./backend/dotnet_core/Mapping.md)  
+[EF Core](./backend/dotnet_core/EFCore.md)  
 
 ### Testing  
-[Testing](./backend/general/Testing.md)
+[Testing](./backend/dotnet_core/Testing.md)
