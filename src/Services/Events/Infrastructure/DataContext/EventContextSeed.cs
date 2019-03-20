@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Polly;
+using Polly.Retry;
 
 namespace PingDong.Newmoon.Events.Infrastructure
 {
@@ -26,7 +27,7 @@ namespace PingDong.Newmoon.Events.Infrastructure
                 });
         }
         
-        private Policy CreatePolicy(ILogger<EventContextSeed> logger, string prefix, int retries = 3)
+        private AsyncRetryPolicy CreatePolicy(ILogger<EventContextSeed> logger, string prefix, int retries = 3)
         {
             return Policy.Handle<SqlException>().
                 WaitAndRetryAsync(
