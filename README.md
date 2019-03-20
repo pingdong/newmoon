@@ -8,10 +8,11 @@ This is a technology proven project that is updated frequently and constantly to
 
 ## Back-end
  ### [.Net Core](./docs/backend/dotnet_core.md)  
- ### [Azure](./docs/backend/azure.md)
 
 The below image demostrats the high level structure for each service.
 ![High-level structure](./docs/backend/dotnet_core/CQRS.png)
+
+ ### [Azure](./docs/backend/azure.md)
 
 ## Notes:
 
