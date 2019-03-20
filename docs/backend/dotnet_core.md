@@ -73,7 +73,7 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
 * WebAPI
   * [x] RESTful  
   * [x] OData  
-  * [x] [GraphQL](./backend/dotnet_core/graphql.md)
+  * [x] [GraphQL](./dotnet_core/graphql.md)
 * Testing
   * [x] Unit Testing
   * [x] Integration Testing
@@ -85,19 +85,19 @@ In this project, a few advance technology, e.g. Reflection, was used to comply w
   
 
 ### Asp.Net Core   
-[Dependency Injection](./backend/dotnet_core/IoC.md)  
-[Configuration](./backend/dotnet_core/Configuration.md)  
-[Data Validation](./backend/dotnet_core/DataValidation.md)   
-[Identity](./backend/dotnet_core/Identity.md)    
-[HttpClient](./backend/dotnet_core/HttpClient.md)  
-[Integration Event](./backend/dotnet_core/IntegrationEvent.md)  
-[Background Tasks](./backend/dotnet_core/BackgroundTask.md)
-[OData](./backend/dotnet_core/odata.md)
+[Dependency Injection](./dotnet_core/IoC.md)  
+[Configuration](./dotnet_core/Configuration.md)  
+[Data Validation](./dotnet_core/DataValidation.md)   
+[Identity](./dotnet_core/Identity.md)    
+[HttpClient](./dotnet_core/HttpClient.md)  
+[Integration Event](./dotnet_core/IntegrationEvent.md)  
+[Background Tasks](./dotnet_core/BackgroundTask.md)
+[OData](./dotnet_core/odata.md)
 
 ### Data Management  
-[Cache](./backend/dotnet_core/Cache.md)  
-[Mapping](./backend/dotnet_core/Mapping.md)  
-[EF Core](./backend/dotnet_core/EFCore.md)  
+[Cache](./dotnet_core/Cache.md)  
+[Mapping](./dotnet_core/Mapping.md)  
+[EF Core](./dotnet_core/EFCore.md)  
 
 ### Testing  
-[Testing](./backend/dotnet_core/Testing.md)
+[Testing](./dotnet_core/Testing.md)

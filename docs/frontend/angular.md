@@ -12,28 +12,28 @@ Chinese version: ng serve --configuration=zh
 * Module: Lazy loading vs Eager-loading
  
 ### Practices
-* [Structure and Best Practices] (./frontend/angular/module.md)
+* [Structure and Best Practices] (./angular/module.md)
 * [Localisation](https://angular.io/guide/i18n)
-* [Debugging from VS Code](./frontend/general/vscode_debug.md)
-* [Build](./frontend/angular/build.md)
+* [Debugging from VS Code](./general/vscode_debug.md)
+* [Build](./angular/build.md)
 
 ### Roadmap  
 * Angular
   * [x] React Style Form
-  * [x] [Dynamic Form](./frontend/angular/dynamic-forms.md)
-  * [x] ngrx/store(./frontend/angular/ngrx.md)
+  * [x] [Dynamic Form](./angular/dynamic-forms.md)
+  * [x] ngrx/store(./angular/ngrx.md)
   * [ ] Elements
   * [ ] Service Works
   * [ ] Server-side Rendering
 * Style
-  * [x] [Material UI](./frontend/angular/material.md)
-  * [ ] [CSS 3](./frontend/general/css3.md)
+  * [x] [Material UI](./angular/material.md)
+  * [ ] [CSS 3](./general/css3.md)
 * Module
   * [x] Lazy Loading 
   * [x] Pre-loading
-  * [x] [i18n](./frontend/angular/i18n.md)
+  * [x] [i18n](./angular/i18n.md)
 * Http
   * [x] Http Inerceptor for dev
 * Testing
-  * [x] [Jasmine](./frontend/angular/jasmine.md)
+  * [x] [Jasmine](./angular/jasmine.md)
   * [ ] Protractor
