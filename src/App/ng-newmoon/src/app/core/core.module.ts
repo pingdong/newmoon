@@ -15,7 +15,6 @@ import { AppFooterComponent } from './console/components/app-footer/app-footer.c
 import { AppHeaderComponent } from './console/components/app-header/app-header.component';
 import { AppHeaderSearchComponent } from './console/components/app-header/app-header-search/app-header-search.component';
 import { AppSideNavComponent } from './console/components/app-sidenav/app-sidenav.component';
-import { AppSideNavItemComponent } from './console/components/app-sidenav/app-sidenav-item/app-sidenav-item.component';
 
 import { LoginComponent } from './auth/components/login.component';
 import { PageNotFoundComponent } from './router/components/page-not-found.component';
@@ -44,7 +43,6 @@ import { DevCoreModule } from './dev.core.module';
       AppHeaderSearchComponent,
       AppFooterComponent,
       AppSideNavComponent,
-      AppSideNavItemComponent,
     ],
     imports: [
       CommonModule,

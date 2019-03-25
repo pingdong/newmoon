@@ -1,3 +1,21 @@
-<nav>
-  <app-sidenav-item *ngFor='let module of modules; trackBy:trackByTitle' [module]="module"></app-sidenav-item>
-</nav>
+<mat-accordion multi="true">
+
+  <mat-expansion-panel *ngFor='let module of modules; trackBy:trackByTitle'>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{module.title}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <a mat-list-item
+        *ngFor='let submodule of module.modules; trackBy:trackByTitle'
+        routerLink="{{submodule?.uri}}">
+        {{submodule?.title}}
+      </a>
+    </mat-list>
+
+  </mat-expansion-panel>
+
+</mat-accordion>
