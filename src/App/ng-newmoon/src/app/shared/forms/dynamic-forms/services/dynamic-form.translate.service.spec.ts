@@ -3,7 +3,6 @@ import { TestBed, async } from '@angular/core/testing';
 import { DyanmicFormTranslateService } from './dynamic-form.translate.service';
 import { SelectionItem } from '../models/selection.item';
 import { TextItem } from '../models/text.item';
-import { DynamicItemBase } from '../models/dynamic-item.base';
 
 describe('DyanmicFormTranslateService', () => {
 

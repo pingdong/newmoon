@@ -1,6 +1,11 @@
-import { All, ActionTypes, LoginSuccessAction,
-        LoginFailureAction, LogoutSuccessAction,
-        GetStatusSuccessAction } from '../actions/auth.actions';
+import {
+  All,
+  ActionTypes,
+  LoginSuccessAction,
+  LoginFailureAction,
+  LogoutSuccessAction,
+  GetStatusSuccessAction
+} from '../actions/auth.actions';
 
 export interface State {
   isAuthenticated: boolean;

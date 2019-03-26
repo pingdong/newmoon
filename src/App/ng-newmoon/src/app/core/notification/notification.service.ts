@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 
 import { NotificationMessage } from './notification.message.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class NotificationService {
 
   private message$ = new Subject<NotificationMessage>();

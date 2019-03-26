@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { UserProfileService } from './user-profile.service';
 import { UserProfile } from './user-profile.model';
 

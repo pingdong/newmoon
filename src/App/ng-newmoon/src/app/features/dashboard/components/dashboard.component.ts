@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SelectivePreloadingStrategy } from '@app/core/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { SelectivePreloadingStrategy } from '@app/core/router';
 
 @Component({
   selector: 'app-dashboard',

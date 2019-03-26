@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
   private loginUrl = '/login';

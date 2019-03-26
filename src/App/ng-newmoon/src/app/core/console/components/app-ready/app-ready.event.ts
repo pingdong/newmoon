@@ -5,7 +5,7 @@ import { DOCUMENT } from '@angular/common';
 // https://www.bennadel.com/blog/3151-revisited-creating-an-event-driven-pre-bootstrap-loading-screen-in-angular-2-0-0.htm
 // To provide pre-bootstrap loading state
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AppReadyEvent {
 
   private isAppReady = false;

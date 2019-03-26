@@ -8,7 +8,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SharedModule } from '@app/shared';
-import { environment } from '@env/environment.prod';
+
+import { environment } from '../../environments/environment.prod';
 
 import { AppComponent } from './console/components/app.component';
 import { AppFooterComponent } from './console/components/app-footer/app-footer.component';
@@ -51,6 +52,7 @@ import { DevCoreModule } from './dev.core.module';
 
       SharedModule,
 
+      // NgRX setup
       StoreModule.forRoot(reducers, { }),
       EffectsModule.forRoot([AuthEffects]),
 

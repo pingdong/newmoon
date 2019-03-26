@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '../../shared';
+import { SharedModule } from '@app/shared';
+
 import { UserProfileRoutingModule } from './user-profile.routing';
-
 import { UserProfileComponent } from './components/user-profile.component';
-
 import { UserProfileControlService } from './services/user-profile.control.service';
 
 @NgModule({
