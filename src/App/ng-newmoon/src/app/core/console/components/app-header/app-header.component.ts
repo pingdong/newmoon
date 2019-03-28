@@ -59,7 +59,10 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
 
-    this.config$ = this.configService.getConfig();
+    this.config$ = this.configService.getConfig()
+                        .pipe(
+                          takeUntil(this.destoryed$)
+                        );
 
     this.store.pipe(
                 select('auth'),
