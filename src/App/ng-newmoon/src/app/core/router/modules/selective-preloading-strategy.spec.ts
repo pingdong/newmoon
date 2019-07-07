@@ -1,6 +1,7 @@
 import { async } from '@angular/core/testing';
-import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
 import { Observable, of } from 'rxjs';
+
+import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
 
 describe('Selective Preloading Strategy', () => {
   const load = function () {

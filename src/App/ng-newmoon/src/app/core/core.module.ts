@@ -8,14 +8,14 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SharedModule } from '@app/shared';
-import { environment } from '@env/environment.prod';
+
+import { environment } from '../../environments/environment.prod';
 
 import { AppComponent } from './console/components/app.component';
 import { AppFooterComponent } from './console/components/app-footer/app-footer.component';
 import { AppHeaderComponent } from './console/components/app-header/app-header.component';
 import { AppHeaderSearchComponent } from './console/components/app-header/app-header-search/app-header-search.component';
 import { AppSideNavComponent } from './console/components/app-sidenav/app-sidenav.component';
-import { AppSideNavItemComponent } from './console/components/app-sidenav/app-sidenav-item/app-sidenav-item.component';
 
 import { LoginComponent } from './auth/components/login.component';
 import { PageNotFoundComponent } from './router/components/page-not-found.component';
@@ -44,7 +44,6 @@ import { DevCoreModule } from './dev.core.module';
       AppHeaderSearchComponent,
       AppFooterComponent,
       AppSideNavComponent,
-      AppSideNavItemComponent,
     ],
     imports: [
       CommonModule,
@@ -53,6 +52,7 @@ import { DevCoreModule } from './dev.core.module';
 
       SharedModule,
 
+      // NgRX setup
       StoreModule.forRoot(reducers, { }),
       EffectsModule.forRoot([AuthEffects]),
 

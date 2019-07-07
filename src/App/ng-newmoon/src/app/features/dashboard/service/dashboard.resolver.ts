@@ -4,6 +4,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
+
 import { SelectivePreloadingStrategy } from '@app/core/router';
 
 @Injectable({ providedIn: 'root' })

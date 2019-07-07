@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnDestroy
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
@@ -6,9 +14,9 @@ import { takeUntil } from 'rxjs/operators';
 
 import { ConfigService, AppConfig } from '@app/core/config';
 import { NotificationService } from '@app/core/notification';
-import * as fromStore from '@app/core/store/app.states';
 
-import { LogoutAction, GetStatusAction } from '../../../auth/store/actions/auth.actions';
+import * as fromStore from '@app/core/store/app.states';
+import { LogoutAction, GetStatusAction } from '@app/core/auth/store/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -51,7 +59,10 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
 
-    this.config$ = this.configService.getConfig();
+    this.config$ = this.configService.getConfig()
+                        .pipe(
+                          takeUntil(this.destoryed$)
+                        );
 
     this.store.pipe(
                 select('auth'),

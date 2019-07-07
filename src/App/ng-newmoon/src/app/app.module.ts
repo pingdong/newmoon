@@ -3,9 +3,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreModule } from '@app/core';
 
-import { AppComponent } from './core/console/components/app.component';
+import { CoreModule, AppComponent } from '@app/core';
+
 import { AppRoutingModule } from './app-routing.module';
 
 // Loading extensions
