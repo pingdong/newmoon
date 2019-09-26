@@ -1,6 +1,10 @@
 # **Newmoon**
 
 This is a technology proven project that is updated frequently and constantly to catch up all cutting-edge technology. The project not only covers all cutting-edge dev, but also includes testing and DevOp concepts, practices. 
+
+# The Azure Implementation
+[Authentication](https://github.com/pingdong/newmoon.authentication)   
+[Place.Service](https://github.com/pingdong/newmoon.places)  
  
 ## Front-end
 ### [General](./docs/frontend/general.md)  
