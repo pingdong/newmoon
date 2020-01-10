@@ -27,4 +27,4 @@ Place Service<br />
 Booking Service<br />
 [repo](https://github.com/pingdong/newmoon.bookings)<br />
 
-Note: If You're looking for the old container version, please check the dev branch.
+Note: If You're looking for the old container version, please check the [container_2019](https://github.com/pingdong/newmoon/tree/container_2019) branch.
