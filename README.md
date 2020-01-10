@@ -12,7 +12,7 @@ It covers the following concept, technology and practice
 Instead of using container, I chose serverless as it contains less moving part and lower TCO.
 
 ### **Architect**<br />
-<img src="images/architect.png" width="400">
+<img src="images/architect.png" width="500">
 
 ### **Repos**<br />
 Shared Resources<br />
