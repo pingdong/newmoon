@@ -18,7 +18,7 @@ Instead of using container, I chose serverless as it contains less moving part a
 Shared Resources<br />
 [repo](https://github.com/pingdong/newmoon.shared) <br />
 
-Authentication<br />
+Authentication Service<br />
 [repo](https://github.com/pingdong/newmoon.authentication)<br />
 
 Place Service<br />
