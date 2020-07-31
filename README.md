@@ -7,11 +7,10 @@ It covers the following concept, technology and practice
 3) Infrastructure as Code
 4) DevOps
 
----
+
 ## **Architecture**<br />
 <img src="images/architecture.svg" width="500">
 
----
 ## **Repos**<br />
 * ### ***Infrastructure***
     The [repo](https://github.com/pingdong/newmoon.infrastructure) contains scripts that build infrastructure resources on Azure. <br />
