@@ -1,30 +1,50 @@
-### **Summary**<br />
-Newmoon is an ongoing repeatly rebuilding project with the latest technology and best practices. The idea of the app is simple, a service provides events booking.
-
-The current version focuses on high scalability and high availability on Azure platform. 
+## **Overview**<br />
+Newmoon is an evoluting project with the latest technology and best practices. The idea of the project is a simple service provides event booking.
 
 It covers the following concept, technology and practice
-1) Infrastructure as Code
-2) DevOps
-3) Serverless
-4) Microservice
+1) Microservice by both Serverless and Docker
+2) Test Automation
+3) Infrastructure as Code
+4) DevOps
 
-Instead of using container, I chose serverless as it contains less moving part and lower TCO.
+---
+## **Architecture**<br />
+<img src="images/architecture.svg" width="500">
 
-### **Architect**<br />
-<img src="images/architect.png" width="500">
+---
+## **Repos**<br />
+* ### ***Infrastructure***
+    The [repo](https://github.com/pingdong/newmoon.infrastructure) contains scripts that build infrastructure resources on Azure. <br />
 
-### **Repos**<br />
-Shared Resources<br />
-[repo](https://github.com/pingdong/newmoon.shared) <br />
+    **Key Technology:** <br />
+    Terraform, ARM<br />
+<br />
 
-Authentication Service<br />
-[repo](https://github.com/pingdong/newmoon.authentication)<br />
+* ### ***Shared Libary***<br />
+    The [repo](https://github.com/pingdong/newmoon.shared) contains sharing models, abstractions, extensions and helpers.<br />
+<br />
 
-Place Service<br />
-[repo](https://github.com/pingdong/newmoon.places)<br />
+* ### ***Authentication Service***<br />
+    The [repo](https://github.com/pingdong/newmoon.authentication) provides authentication service.<br />
 
-Booking Service<br />
-[repo](https://github.com/pingdong/newmoon.bookings)<br />
+    **Key Technology:** <br />
+    IdentityServer4<br />
+<br />
 
-Note: If You're looking for the old container version, please check the [container_2019](https://github.com/pingdong/newmoon/tree/container_2019) branch.
+* ### ***Venues Service***<br />
+    The [repo](https://github.com/pingdong/newmoon.venues) provides venues management service, implemented by both docker and serverless. <br />
+
+    **Key Technology:** <br />
+    Azure Storage Blob, Azure Storage Table<br />
+    Restful Api, gRpc<br />
+    Azure Service Bus Queue, Azure Storage Queue<br />
+<br />
+
+* #### ***Events Service***<br />
+    The [repo](https://github.com/pingdong/newmoon.events) provides events management service, implement by both docker and serverless.
+
+    **Key Technology:**  
+    Azure Sql Server, Azure Cosmos Db, Azure Redis<br />
+    GraphQL, SignalR<br />
+    Azure Service Bus Topic/Subscription, Azure Event Hub<br />
+<br />
